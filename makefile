@@ -27,11 +27,11 @@ $(OUTPUT_DIR)/%.o: %.hpp
 SRC = $(SRC_MAIN) $(filter-out $(wildcard $(SRC_DIR)/*/*_test.cpp), $(wildcard $(SRC_DIR)/*/*.cpp))
 OBJS = $(patsubst %.cpp,$(OUTPUT_DIR)/%.o,$(filter-out $(SRC_MAIN), $(SRC))) $(patsubst %.hpp,$(OUTPUT_DIR)/%.o,$(wildcard $(SRC_HPP_DIR)/*/*.hpp))
 
-.PHONY: all clean run test debug test
+.PHONY: all clean runcli test debug test
 
-all: build run
+all: buildcli runcli
 
-build: $(OUTPUT_DIR)/$(OBJ_MAIN) $(OBJS)
+buildcli: $(OUTPUT_DIR)/$(OBJ_MAIN) $(OBJS)
 	$(info )
 	$(info [Build Program])
 	@echo -n ">> "
@@ -43,7 +43,7 @@ clean:
 	@echo -n ">> "
 	rm -f $(OUTPUT_DIR)/$(OBJ_MAIN) $(OUTPUT_DIR)/$(MAIN) $(OBJS)
 
-run:
+runcli:
 	$(info )
 	$(info [Run Program])
 	@echo -n ">> "

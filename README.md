@@ -15,16 +15,16 @@ make
 ```
 ### Build Executable
 ```
-make build
+make buildcli
 ```
 ### Run Executable
 ```
-make run
+make runcli
 ```
-### Initialize test
+### Initialize GUI and Unit Test
 Execute this only once
 ```
-make inittest
+make initbuild
 ```
 ### Build test
 Execute this everytime a file has modification
@@ -33,5 +33,14 @@ make buildtest
 ```
 ### Run test
 ```
-make test
+make runtest
+```
+### Build GUI
+Execute this everytime a file has modification
+```
+make buildgui
+```
+### Run GUI
+```
+make rungui
 ```
