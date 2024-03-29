@@ -2,6 +2,22 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         "functional": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "format": "cpp",
+        "xstring": "cpp",
+        "chrono": "cpp",
+        "thread": "cpp",
+        "string": "cpp",
+        "stdexcept": "cpp",
+        "fstream": "cpp",
+        "vector": "cpp",
+        "*.tpp": "c",
+        "user.hpp": "c",
+        "algorithm": "cpp",
+        "xiosbase": "cpp",
+        "xlocale": "cpp",
+        "xutility": "cpp",
+        "iosfwd": "cpp",
+        "ostream": "cpp"
     }
 }

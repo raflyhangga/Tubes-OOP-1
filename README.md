@@ -2,6 +2,13 @@
 
 
 ## How to Run
+
+### Install Dependencies
+Make sure wsl is installed, then run this with wsl.
+```
+sudo apt install gcc make cmake qtbase5-dev
+```
+
 ### Build and Run Executable
 ```
 make

@@ -18,15 +18,23 @@ enable_testing()
 
 include_directories(include)
 set(SOURCES
-  src/something1/class1.cpp
-  src/something2/class2.cpp
-  src/something1/class1_test.cpp
-  src/something2/class2_test.cpp
+  src/animal/animal.cpp
+  src/plant/plant.cpp
+  src/animal/animal_test.cpp
+  src/plant/plant_test.cpp
 )
 
-add_executable(test_exe ${SOURCES})
-
-target_link_libraries(test_exe GTest::gtest_main)
-
+add_executable(unit_test ${SOURCES})
+target_link_libraries(unit_test GTest::gtest_main)
 include(GoogleTest)
-gtest_discover_tests(test_exe)
+gtest_discover_tests(unit_test)
+
+
+
+find_package(Qt5Widgets REQUIRED)
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
+set(GUISOURCES 
+  srcgui/main.cpp
+)
+add_executable(gui ${GUISOURCES})
+target_link_libraries(gui Qt5::Widgets)
