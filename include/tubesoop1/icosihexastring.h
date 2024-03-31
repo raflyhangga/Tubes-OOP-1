@@ -15,9 +15,5 @@ class IcosiHexaString {
         friend ostream& operator<<(ostream &os, const IcosiHexaString& str);
 };
 
-ostream& operator<<(ostream& os, const IcosiHexaString& string) {
-    os << string.str;
-    return os;
-}
 
 #endif
