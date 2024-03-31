@@ -1,18 +1,16 @@
 #ifndef PETANI_H
 #define PETANI_H
 
-#include "resource/resource.h"
-#include "player/player.h"
-#include "plant/tanamanladang.h"
-#include <vector>
+#include <string>
+#include "player.h"
+using namespace std;
 
-
-class Petani: public Player{
-    private:
-        vector<Resource&> listInventory;
-        vector<TanamanLadang> ladang;
-    public:
-        Petani(string,int,int);
+class Petani : Player
+{
+private:
+public:
+    friend ostream &operator<<(ostream &os, const Petani &a);
+    friend istream &operator>>(istream &is, Petani &a);
 };
 
 #endif

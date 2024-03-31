@@ -1,15 +1,17 @@
-#ifndef WALIKOTA_H
-#define WALIKOTA_H
+#ifndef PETANI_H
+#define PETANI_H
 
+#include <string>
 #include "player.h"
-#include "resource/resource.h"
-#include <vector>
+using namespace std;
 
-class Walikota: public Player{
-    private:
-        vector<Resource> listInventory;
-    public:
-        Walikota(string,int,int);
+class Walikota : Player
+{
+private:
+public:
+    void pungutPajak();
+    friend ostream &operator<<(ostream &os, const Walikota &a);
+    friend istream &operator>>(istream &is, Walikota &a);
 };
 
 #endif

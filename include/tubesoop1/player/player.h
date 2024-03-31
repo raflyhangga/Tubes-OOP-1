@@ -1,25 +1,22 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include <string>
 
+#include <string>
+#include <iostream>
 using namespace std;
 
-#define DEFAULT_USERNAME "steve"
-#define DEFAULT_BERAT_BADAN 0
-#define DEFAULT_UANG 0
-
-/*
-* Abstract class yang menangani jenis class seperti `Petani`, `Peternak`, `Walikota`
-*/
-class Player{
-    private:
-        string username;
-        int beratBadan;
-        int uang;
-    public:
-        Player(string,int,int);
+class Player
+{
+protected:
+    string username;
+    int beratBadan;
+    int uang;
+    // grid<Resource> inventory;
+public:
+    static int playerCount;
+    Player();
+    virtual friend ostream &operator<<(ostream &os, const Player &a) = 0;
+    virtual friend istream &operator>>(istream &is, Player &a) = 0;
 };
-
-
 
 #endif

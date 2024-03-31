@@ -1,17 +1,16 @@
-#ifndef PETERNAK_H
-#define PETERNAK_H
+#ifndef PETANI_H
+#define PETANI_H
 
-#include "resource/resource.h"
-#include "player/player.h"
-#include "animal/hewanpeternakan.h"
-#include <vector>
+#include <string>
+#include "player.h"
+using namespace std;
 
-class Peternak: public Player{
-    private:
-        vector<Resource> listInventory;
-        vector<HewanPeternakan> peternakan;
-    public:
-        Peternak(string,int,int);
+class Peternak : Player
+{
+private:
+public:
+    friend ostream &operator<<(ostream &os, const Peternak &a);
+    friend istream &operator>>(istream &is, Peternak &a);
 };
 
 #endif
