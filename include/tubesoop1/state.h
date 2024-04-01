@@ -20,8 +20,7 @@ class State {
         static vector<Player> playerList;
         static Toko toko;
     public:
-
-
+        friend istream& operator>>(istream&, const State&); 
 };
 
 #endif
