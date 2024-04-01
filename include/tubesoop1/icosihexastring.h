@@ -6,6 +6,10 @@
 
 using namespace std;
 
+/**
+ * Used for typecasting from int:
+ *  usage: (IcosiHexaString) 12;
+*/
 class IcosiHexaString {
     private:
         string str;
