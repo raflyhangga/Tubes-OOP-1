@@ -2,6 +2,11 @@
 
 Walikota::Walikota(string _username) : Player(_username){};
 
+void Walikota::pungutPajak()
+{
+    uang += 1000;
+}
+
 istream & operator>>(istream &in, Walikota &a)
 {
     int jumlahItemInventory;

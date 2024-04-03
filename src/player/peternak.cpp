@@ -2,6 +2,16 @@
 
 Peternak::Peternak(string _username) : Player(_username) {}
 
+Peternak::putPeternakan(Animal h)
+{
+    // peternakanHewan.put(h);
+}
+
+Peternak::putPeternakanAt(Animal h, Location l)
+{
+    // peternakanHewan.put(h, l);
+}
+
 istream & operator>>(istream &in, Peternak &a)
 {
     int jumlahItemInventory;

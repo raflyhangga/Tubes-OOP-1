@@ -2,6 +2,16 @@
 
 Petani::Petani(string _username) : Player(_username) {}
 
+Petani::putLadang(Plant p)
+{
+    // ladangTanaman.put(p);
+}
+
+Petani::putLadangAt(Plant p, Location l)
+{
+    // ladangTanaman.put(p, l);
+}
+
 istream & operator>>(istream &in, Petani &a)
 {
     int jumlahItemInventory;
