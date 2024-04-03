@@ -1,16 +1,23 @@
-#include "tubesoop1/icosihexastring.h"
+#include "../include/tubesoop1/icosihexastring.h"
 
 using namespace std;
 
-class IcosiHexaStringException: public exception {
+class MustNonnegativeException: public exception {
     public:
         string what() {
             return "value parameter must be a nonegative integer.";
         }
 };
 
+class MustUppercaseAlphabetException: public exception {
+    public:
+        string what() {
+            return "value parameter must be a sting consist of uppercase alphabet only.";
+        }
+};
+
 IcosiHexaString::IcosiHexaString(int val) {
-    if(val < 0) throw IcosiHexaStringException();
+    if(val < 0) throw MustNonnegativeException();
     
     string reversed;
     reversed += (val % 26) + 'A';
@@ -25,8 +32,32 @@ IcosiHexaString::IcosiHexaString(int val) {
     }
 }
 
-ostream& operator<<(ostream& os, const IcosiHexaString& string) {
-    os << string.str;
+IcosiHexaString::IcosiHexaString(string s) {
+    for (auto &c: s) {
+        if (c < 'A' || c > 'Z') {
+            throw MustUppercaseAlphabetException();
+        }
+    }
+
+
+    str = s;
+}
+
+
+IcosiHexaString::operator int() const {
+    int val = 0;
+    for (int i = 0; i < str.size() - 1; i++) {
+        val += (str[i] - 'A' + 1);
+        val *= 26;
+    }
+    val += str[str.size() - 1] - 'A';
+    return val;
+}
+
+
+ostream& operator<<(ostream& os, const IcosiHexaString& icosi) {
+    os << icosi.str;
+    
     return os;
 }
 
