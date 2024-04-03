@@ -6,9 +6,24 @@
 
 using namespace std;
 
+void handleCommand(const string &command) {
+
+}
+
 int main()
 {
     cout << "[Welcome to TUBES-OOP-1]" << endl;
+
+    string command;
+    while (true) {
+        cout << "> ";
+        cin >> command;
+        try {
+            handleCommand(command);
+        } catch(const exception &e) {
+            cout << e.what() << endl;
+        }
+    }
 
     // vector<Plant> plantList = TxtParser::fromtxt<Plant>("config/plant.txt");
 

@@ -1,7 +1,7 @@
 #ifndef HEWANPETERNAKAN_H
 #define HEWANPETERNAKAN_H
 
-#include "animal/animal.h"
+#include "tubesoop1/animal/animal.h"
 #include <tuple>
 using namespace std;
 
