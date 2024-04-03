@@ -21,7 +21,11 @@ template <class T>
 void GridDrawerCLI<T>::drawContents(int row) {
     cout << '|';
     for (int i = 0; i < grid.getCol(); i++) {
-        cout << ' ' << grid.getElement(row, i) << " |";
+        try {
+            cout << ' ' << grid.getElement(row, i) << " |";
+        } catch (const exception& e) {
+            cout << "     |";
+        }
     }
     cout << '\n';
 }

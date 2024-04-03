@@ -24,7 +24,7 @@ int Grid<T>::getCountNotAvailable(){
 }
 
 template <class T>
-int Grid<T>::getElement(int row, int col){
+T Grid<T>::getElement(int row, int col){
     if (row < 0 || row >= element.size() || col < 0 || col >= element[0].size()) {
         throw out_of_range("Row or column is out of range.");
     }

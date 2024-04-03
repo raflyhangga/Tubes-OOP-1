@@ -32,7 +32,7 @@ class Grid {
         int getCountNotAvailable();
         
         // getter element at a certain row and column.
-        int getElement(int row, int col);
+        T getElement(int row, int col);
 
         // element setter at a certain row and column.
         void setElement(int row, int col, T val);
