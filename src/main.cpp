@@ -27,6 +27,7 @@ int main()
     Location loc;
     cin >> loc;
     cout << loc.getCol() << ' ' << loc.getRow() << endl;
+    
     // vector<Plant> plantList = TxtParser::fromtxt<Plant>("config/plant.txt");
 
     // for (int i = 0; i < 10; i++)
