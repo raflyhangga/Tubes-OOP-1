@@ -13,8 +13,15 @@ using namespace std;
 class IcosiHexaString {
     private:
         string str;
+
     public:
         IcosiHexaString(int val);
+
+        IcosiHexaString(string s);
+        
+        operator int() const;
+
+
 
         friend ostream& operator<<(ostream &os, const IcosiHexaString& str);
 };
