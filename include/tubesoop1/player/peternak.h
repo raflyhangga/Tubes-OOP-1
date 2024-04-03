@@ -9,6 +9,7 @@ class Peternak : Player
 {
 private:
 public:
+    Peternak(string username,int beratBadan,int uang);
     friend ostream &operator<<(ostream &os, const Peternak &a);
     friend istream &operator>>(istream &is, Peternak &a);
 };

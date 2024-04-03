@@ -15,8 +15,9 @@ protected:
 public:
     static int playerCount;
     Player();
-    virtual friend ostream &operator<<(ostream &os, const Player &a) = 0;
-    virtual friend istream &operator>>(istream &is, Player &a) = 0;
+    Player(string username, int beratBadan, int uang);
+    friend ostream &operator<<(ostream &os, const Player &a);
+    friend istream &operator>>(istream &is, Player &a);
 };
 
 #endif
