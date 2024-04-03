@@ -3,20 +3,23 @@
 
 #include <string>
 #include <iostream>
+#include "tubesoop1/grid.hpp"
+#include "tubesoop1/resource/resource.h"
 using namespace std;
 
 class Player
 {
 protected:
-    string username;
+    const string username;
     int beratBadan;
     int uang;
-    // grid<Resource> inventory;
+    Grid<Resource> inventory;
 public:
     static int playerCount;
-    Player();
-    virtual friend ostream &operator<<(ostream &os, const Player &a) = 0;
-    virtual friend istream &operator>>(istream &is, Player &a) = 0;
+    Player(string username);
+
+    void putInventory(Resource r);
+    void putInventoryAt(Resource r, Location location);
 };
 
 #endif

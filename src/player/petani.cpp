@@ -1,5 +1,7 @@
 #include "tubesoop1/player/petani.h"
 
+Petani::Petani(string _username) : Player(_username) {}
+
 istream & operator>>(istream &in, Petani &a)
 {
     int jumlahItemInventory;
