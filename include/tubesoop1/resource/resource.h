@@ -10,6 +10,8 @@ class Resource{
         int anAttribute;
     public:
         void anMethod();
+        Resource();
+        virtual friend bool operator==(Resource&,Resource&);
 };
 
 #endif
