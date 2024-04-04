@@ -4,6 +4,7 @@
 #include <optional>
 #include <iostream>
 #include <vector>
+#include <location.hpp>
 
 using namespace std;
 
@@ -32,12 +33,24 @@ class Grid {
         int getCountNotAvailable();
         
         // getter element at a certain row and column.
-        T getElement(int row, int col);
+        T getElement(Location l);
 
         // element setter at a certain row and column.
-        void setElement(int row, int col, T val);
+        void setElement(Location l, T val);
 
-        T pop(int row, int col);
+        // Pop element at a specified location, return the element at the specified location.
+        T pop(Location l);
+
+        /**
+         * Insert Element at the Top most, left most grid. 
+         * Higher priority: top > left.
+        */
+       void insert(T val);
+
+       bool isAvailable(Location l);
+
+       bool isFull();
+
 
 };
 
