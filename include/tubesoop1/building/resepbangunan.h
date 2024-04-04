@@ -1,27 +1,30 @@
 #ifndef RESEP_BANGUNAN_H
 #define RESEP_BANGUNAN_H
+
 #include <iostream>
-using namespace std;
+#include <vector>
 #include "material.h"
+using namespace std;
 
 class ResepBangunan
 {
 private:
     string kodeHuruf;
     string name;
-    Material &materials;
+    vector<Material> materials; 
     int price;
 
 public:
-    // Allocation of memory for the material array
-    ResepBangunan();
     // User defined constructor
-    ResepBangunan(string kodeHuruf, string name, Material &material, int price);
-    // Destructor for array of material
-    ~ResepBangunan();
+    ResepBangunan(string kodeHuruf, string name, const vector<Material>& materials, int price);
 
     void printMaterialInfo();
-    
+
+    // Operator +=
+    ResepBangunan& operator+=(const Material& material);
+
+    // Copy constructor
+    ResepBangunan(const ResepBangunan& other);
 };
 
 #endif

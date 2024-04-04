@@ -3,15 +3,16 @@
 #include <iostream>
 using namespace std;
 #include "../product/product.h"
+using namespace std;
 
 class Material
 {
 private:
+    // Todo: Change product to type material product, pending: rayhan
     Product name;
     int quantity;
 
 public:
-    // Allocation of memory for the name object User defined constructor
     Material(Product &name, int quantity);
     friend ostream &operator<<(ostream &os, const Material &a);
     // Setter to insert material
