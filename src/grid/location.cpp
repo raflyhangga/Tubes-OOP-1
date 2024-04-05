@@ -1,26 +1,26 @@
-#include "../../include/tubesoop1/grid/location.hpp"
-#include "../../include/tubesoop1/icosihexastring.h"
+#include <tubesoop1/grid/location.hpp>
+#include <tubesoop1/icosihexastring.h>
 
 using namespace std;
 
-Location::Location(){
+inline Location::Location(){
 
 }
 
-Location::Location(int row, int col) {
+inline Location::Location(int row, int col) {
     first = row;
     second = col;
 }
 
-int Location::getRow() const {
+inline int Location::getRow() const {
     return first;
 }
 
-int Location::getCol() const {
+inline int Location::getCol() const {
     return second;
 }
 
-istream &operator>> (istream &is, Location &location) {
+inline istream &operator>> (istream &is, Location &location) {
     string str; is >> str;
     // handles input like "A01"
     

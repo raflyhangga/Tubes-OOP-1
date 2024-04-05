@@ -6,7 +6,7 @@
 
 template <class T>
 class GridDrawer {
-    private:
+    protected:
         Grid<T> grid;
     public:
         virtual void draw() = 0;

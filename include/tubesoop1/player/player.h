@@ -3,8 +3,8 @@
 
 #include <string>
 #include <iostream>
-#include "tubesoop1/grid.hpp"
-#include "tubesoop1/resource/resource.h"
+#include <tubesoop1/grid/grid.hpp>
+#include <tubesoop1/resource/resource.h>
 using namespace std;
 
 class Player
