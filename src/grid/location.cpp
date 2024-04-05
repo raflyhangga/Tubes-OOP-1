@@ -3,24 +3,24 @@
 
 using namespace std;
 
-inline Location::Location(){
+Location::Location(){
 
 }
 
-inline Location::Location(int row, int col) {
+Location::Location(int row, int col) {
     first = row;
     second = col;
 }
 
-inline int Location::getRow() const {
+int Location::getRow() const {
     return first;
 }
 
-inline int Location::getCol() const {
+int Location::getCol() const {
     return second;
 }
 
-inline istream &operator>> (istream &is, Location &location) {
+istream &operator>> (istream &is, Location &location) {
     string str; is >> str;
     // handles input like "A01"
     

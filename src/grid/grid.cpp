@@ -9,7 +9,8 @@ inline Grid<T>::Grid(int row, int col) {
         throw invalid_argument("Row and column must be greater than 0.");
     }
 
-    element = vector<vector<optional<T>>>(row, vector<optional<T>>(col));
+    element = vector<vector<T>>(row, vector<T>(col));
+    isAvailable = vector<vector<bool>>(row, vector<bool>(col, true));
     countAvailable = row * col;
     countNotAvailable = 0;
 }
@@ -31,7 +32,8 @@ inline T Grid<T>::getElement(Location l){
         throw out_of_range("Row or column is out of range.");
     }
 
-    if (element[row][col].has_value()) {
+    // If it is not available means that it havent been set.
+    if (!isAvailable[row][col]) {
         return *element[row][col];
     } else {
         throw logic_error("Element at specified position is not available.");
@@ -45,9 +47,10 @@ inline void Grid<T>::setElement(Location l, T val) {
         throw out_of_range("Row or column is out of range.");
     }
 
-    if (!element[row][col].has_value()) {
+    if (isAvailable[row][col]) {
         countAvailable--;
         countNotAvailable++;
+        isAvailable[row][col] = false;
     }
 
     element[row][col] = val;
@@ -66,17 +69,12 @@ inline T Grid<T>::pop(Location l) {
     }
 
     T val = *element[row][col];
-    element[row][col].reset();
+    isAvailable[row][col] = false;
+
     countAvailable++;
     countNotAvailable--;
 
     return val;
-}
-
-template <class T>
-inline bool Grid<T>::isAvailable(Location l) {
-    int row = l.getRow(), col = l.getCol();
-    return !element[row][col].has_value();
 }
 
 template <class T>
@@ -90,12 +88,15 @@ inline void Grid<T>::insert(T val) {
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < col; ++j) {
             Location check(i, j);
-            if (isAvailable(check)) {
+            if (isAvailable[i][j]) {
                 loc = check;
                 break;
             } 
         }
     }
+
+
+    setElement(loc, val);
 }
 
 template<class T>

@@ -13,7 +13,8 @@ using namespace std;
 template <class T> 
 class Grid {
     private:
-        vector<vector<optional<T>>> element;
+        vector<vector<T>> element;
+        vector<vector<bool>> isAvailable;
         int countAvailable;
         int countNotAvailable;
     public:
@@ -47,11 +48,7 @@ class Grid {
         */
        void insert(T val);
 
-       bool isAvailable(Location l);
-
        bool isFull();
-
-
 };
 
 #endif

@@ -8,10 +8,10 @@ using namespace std;
 
 class Location: pair<int, int> {
     public:
-        Location();
-        Location(int row, int col);
-        int getRow() const;
-        int getCol() const;
+        inline Location();
+        inline Location(int row, int col);
+        inline int getRow() const;
+        inline int getCol() const;
 
         friend istream& operator>>(istream& is, Location& location);
 };
