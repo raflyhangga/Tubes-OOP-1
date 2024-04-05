@@ -1,26 +1,4 @@
-#ifndef GRIDDRAWER_HPP
-#define GRIDDRAWER_HPP
-
-#include "grid.hpp"
-
-
-template <class T>
-class GridDrawer {
-    protected:
-        Grid<T> grid;
-    public:
-        virtual void draw() = 0;
-};
-
-template <class T>
-class GridDrawerCLI: public GridDrawer<T> {
-    private:
-        void drawRowLine();
-        void drawContents(int row);
-    public:
-        GridDrawerCLI(Grid<T> grid);
-        void draw();
-};
-
-
+#ifndef GRID_DRAWER_HPP
+#define GRID_DRAWER_HPP
+#include "../src/grid/griddrawer.cpp"
 #endif

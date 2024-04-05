@@ -3,6 +3,8 @@
 
 #include <tubesoop1/icosihexastring.h>
 #include <tubesoop1/grid/location.hpp>
+#include <tubesoop1/grid/griddrawer.hpp>
+
 using namespace std;
 
 void handleCommand(const string &command) {

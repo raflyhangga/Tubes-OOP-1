@@ -1,12 +1,12 @@
-#include "tubesoop1/grid/grid.hpp"
+#include "tubesoop1/grid/grid.h"
 #include "tubesoop1/grid/location.hpp"
 
 using namespace std;
 
 template <class T>
 inline Grid<T>::Grid(int row, int col) {
-    if (row <= 0 || col <= 0) {
-        throw invalid_argument("Row and column must be greater than 0.");
+    if (row < 0 || col < 0) {
+        throw invalid_argument("Row and column must be nonnegative.");
     }
 
     element = vector<vector<T>>(row, vector<T>(col));
