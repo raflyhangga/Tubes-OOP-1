@@ -8,8 +8,8 @@ class Temp
 {
 private:
 public:
-    virtual friend ostream &operator<<(ostream &os, const Temp &a);
-    virtual friend istream &operator>>(istream &is, Temp &a);
+    friend ostream &operator<<(ostream &os, const Temp &a);
+    friend istream &operator>>(istream &is, Temp &a);
 };
 
 #endif

@@ -3,18 +3,18 @@
 int Player::moneyToWin;
 int Player::weightToWin;
 
-Player::Player(string _username) : username(_username) {
+Player::Player(string &_username) : username(_username) {
     beratBadan = 0;
     uang = 0;
-    inventory = Grid<Resource>(1, 1);
+    inventory = Inventory();
 }
 
 
-void Player::putInventory(Resource r){
+void Player::putInventory(Resource &r){
     inventory.insert(r);
 
 }
-void Player::putInventoryAt(Resource r, Location location){
+void Player::putInventoryAt(Resource &r, Location &location){
     inventory.setElement(location, r);
 }
 

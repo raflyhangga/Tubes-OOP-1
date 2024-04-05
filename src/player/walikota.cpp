@@ -1,6 +1,6 @@
 #include "tubesoop1/player/walikota.h"
 
-Walikota::Walikota(string _username) : Player(_username){};
+Walikota::Walikota(string &_username) : Player(_username){};
 
 void Walikota::pungutPajak()
 {

@@ -1,20 +1,21 @@
-#ifndef PETANI_H
-#define PETANI_H
+#ifndef PETERNAK_H
+#define PETERNAK_H
 
 #include <string>
 #include "player.h"
 #include "tubesoop1/animal/animal.h"
+#include "tubesoop1/player/peternakan.h"
 using namespace std;
 
 class Peternak : Player
 {
 private:
-    Grid<Animal> peternakanHewan;
+    Peternakan peternakan;
 public:
-    Peternak(string username);
+    Peternak(string &username);
 
-    void putPeternakan(Animal h);
-    void putPeternakanAt(Hewan h, Location l);
+    void putPeternakan(Animal &h);
+    void putPeternakanAt(Animal &h, Location &l);
 
     /**
      * @brief Username must be from constructor. Format:

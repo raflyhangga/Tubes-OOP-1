@@ -9,7 +9,7 @@ class Walikota : Player
 {
 private:
 public:
-    Walikota(string username);
+    Walikota(string &username);
     void pungutPajak();
 
 
