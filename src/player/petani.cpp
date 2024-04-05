@@ -1,15 +1,15 @@
 #include "tubesoop1/player/petani.h"
 
-Petani::Petani(string _username) : Player(_username) {}
+Petani::Petani(string &_username) : Player(_username) {}
 
-Petani::putLadang(Plant p)
+void Petani::putLadang(Plant &p)
 {
-    // ladangTanaman.put(p);
+    ladang.insert(p);
 }
 
-Petani::putLadangAt(Plant p, Location l)
+void Petani::putLadangAt(Plant &p, Location &l)
 {
-    // ladangTanaman.put(p, l);
+    ladang.setElement(l, p);
 }
 
 istream & operator>>(istream &in, Petani &a)

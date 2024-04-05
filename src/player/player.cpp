@@ -1,15 +1,23 @@
 #include "tubesoop1/player/player.h"
 
-Player::Player(string _username) : username(_username) {
+int Player::moneyToWin;
+int Player::weightToWin;
+
+Player::Player(string &_username) : username(_username) {
     beratBadan = 0;
     uang = 0;
-    inventory = Grid<Resource>(1, 1);
+    inventory = Inventory();
 }
 
 
-void Player::putInventory(Resource r){
-    // inventory.put(r);
+void Player::putInventory(Resource &r){
+    inventory.insert(r);
+
 }
-void Player::putInventoryAt(Resource r, Location location){
-    // inventory.put(r, location);
+void Player::putInventoryAt(Resource &r, Location &location){
+    inventory.setElement(location, r);
+}
+
+bool Player::isWin(){
+    return beratBadan >= weightToWin && uang >= moneyToWin;
 }

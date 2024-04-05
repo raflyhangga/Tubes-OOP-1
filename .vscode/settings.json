@@ -24,6 +24,12 @@
         "istream": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "typeinfo": "cpp",
+        "any": "cpp",
+        "limits": "cpp",
+        "optional": "cpp",
+        "exception": "cpp",
+        "new": "cpp"
     }
 }
