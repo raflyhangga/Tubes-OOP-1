@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include "tubesoop1/grid.hpp"
+#include "tubesoop1/grid/grid.hpp"
 #include "tubesoop1/resource/resource.h"
 using namespace std;
 
@@ -16,10 +16,14 @@ protected:
     Grid<Resource> inventory;
 public:
     static int playerCount;
+    static int weightToWin;
+    static int moneyToWin;
     Player(string username);
 
     void putInventory(Resource r);
     void putInventoryAt(Resource r, Location location);
+
+    bool isWin();
 };
 
 #endif
