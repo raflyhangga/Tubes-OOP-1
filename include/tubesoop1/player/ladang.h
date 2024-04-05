@@ -8,7 +8,7 @@
 #include "tubesoop1/plant/plant.h"
 using namespace std;
 
-class Ladang : Grid<Plant>
+class Ladang : public Grid<Plant>
 {
 public:
     static int width;

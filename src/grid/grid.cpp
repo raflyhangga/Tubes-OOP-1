@@ -79,7 +79,7 @@ inline T Grid<T>::pop(Location l) {
 
 template <class T>
 inline void Grid<T>::insert(T val) {
-    if (isFull)
+    if (isFull())
         throw logic_error("Grid is full, cannot insert.");
 
     int row = (int) element.size(), col = (int) element[0].size();

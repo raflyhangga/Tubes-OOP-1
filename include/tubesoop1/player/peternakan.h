@@ -8,7 +8,7 @@
 #include "tubesoop1/animal/animal.h"
 using namespace std;
 
-class Peternakan : Grid<Animal>
+class Peternakan : public Grid<Animal>
 {
 public:
     static int width;

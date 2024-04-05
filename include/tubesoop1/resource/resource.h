@@ -11,7 +11,7 @@ class Resource{
     public:
         void anMethod();
         Resource();
-        virtual friend bool operator==(Resource&,Resource&);
+        friend bool operator==(Resource&,Resource&);
 };
 
 #endif

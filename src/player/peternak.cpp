@@ -1,6 +1,6 @@
 #include "tubesoop1/player/peternak.h"
 
-Peternak::Peternak(string _username) : Player(_username) {}
+Peternak::Peternak(string &_username) : Player(_username) {}
 
 void Peternak::putPeternakan(Animal &h)
 {

@@ -8,7 +8,7 @@
 #include "tubesoop1/plant/plant.h"
 using namespace std;
 
-class Inventory : Grid<Plant>
+class Inventory : public Grid<Resource>
 {
 public:
     static int width;

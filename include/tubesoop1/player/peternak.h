@@ -7,7 +7,7 @@
 #include "tubesoop1/player/peternakan.h"
 using namespace std;
 
-class Peternak : Player
+class Peternak : public Player
 {
 private:
     Peternakan peternakan;

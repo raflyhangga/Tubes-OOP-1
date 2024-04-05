@@ -3,4 +3,4 @@
 int Inventory::width;
 int Inventory::height;
 
-Inventory::Inventory() : Grid<Resource>(width, height){}
+Inventory::Inventory() : Grid<Plant>(width, height){}

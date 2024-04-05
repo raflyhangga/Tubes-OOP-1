@@ -1,4 +1,5 @@
-#include "../include/tubesoop1/icosihexastring.h"
+#include <tubesoop1/icosihexastring/icosihexastring.h>
+#include <exception>
 
 using namespace std;
 
