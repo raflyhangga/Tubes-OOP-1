@@ -4,17 +4,19 @@
 #include <string>
 #include "player.h"
 #include "tubesoop1/plant/plant.h"
+#include "tubesoop1/player/petani.h"
+#include "tubesoop1/player/ladang.h"
 using namespace std;
 
 class Petani : Player
 {
 private:
-    Grid<Plant> ladangTanaman;
+    Ladang ladang;
 public:
-    Petani(string username);
+    Petani(string &username);
 
-    void putLadang(Plant p);
-    void putLadangAt(Plant p, Location l);
+    void putLadang(Plant &p);
+    void putLadangAt(Plant &p, Location &l);
 
 
     /**
