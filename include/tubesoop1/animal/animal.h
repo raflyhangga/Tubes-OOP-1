@@ -39,55 +39,76 @@ class Omnivora: public Animal {
 };
 
 class Cow:public Herbivora{
-    private:
+    public:
         static string kode_huruf;
         static string name;
         static int price;
         static vector<Resource&> hasil_panen;
+        Cow();
+        Cow(int);
+        Cow(Cow&);
 };
 class Sheep:public Herbivora{
-    private:
+    public:
         static string kode_huruf;
         static string name;
         static int price;
         static vector<Resource&> hasil_panen;
+        Sheep();
+        Sheep(int);
+        Sheep(Sheep&);
 };
 class Horse:public Herbivora{
-    private:
+    public:
         static string kode_huruf;
         static string name;
         static int price;
         static vector<Resource&> hasil_panen;
+        Horse();
+        Horse(int);
+        Horse(Horse&);
 };
 class Rabbit:public Herbivora{
-    private:
+    public:
         static string kode_huruf;
         static string name;
         static int price;
         static vector<Resource&> hasil_panen;
+        Rabbit();
+        Rabbit(int);
+        Rabbit(Rabbit&);
 };
 
 class Snake:public Karnivora{
-    private:
+    public:
         static string kode_huruf;
         static string name;
         static int price;
         static vector<Resource&> hasil_panen;
+        Snake();
+        Snake(int);
+        Snake(Snake&);
 };
 
 class Chicken:public Omnivora{
-    private:
+    public:
         static string kode_huruf;
         static string name;
         static int price;
         static vector<Resource&> hasil_panen;
+        Chicken();
+        Chicken(int);
+        Chicken(Chicken&);
 };
 class Duck:public Omnivora{
-    private:
+    public:
         static string kode_huruf;
         static string name;
         static int price;
         static vector<Resource&> hasil_panen;
+        Duck();
+        Duck(int);
+        Duck(Duck&);
 };
 
 #endif
