@@ -30,18 +30,11 @@ using namespace std;
 // global variable
 int turn = 0;
 vector<Player*> players;
-map<string, function<void(Player*)>> commands;
+map<string, Command*> commands;
 
 void initializeCommand() {
-    commands["NEXT"] = [](Player* player) {
-        Next next(player);
-        next.execute();
-    };
-
-    commands["CETAK_PENYIMPANAN"] = [](Player* player) {
-        CetakPenyimpanan cetakPenyimpanan(player);
-        cetakPenyimpanan.execute();
-    };
+    commands["NEXT"] = new Next();
+    commands["CETAK_PENYIMPANAN"] = new CetakPenyimpanan();
 }
 
 void initializeGame() {
@@ -106,7 +99,7 @@ int main()
         cout << "> ";
         cin >> command;
         try {
-            commands[command](players[turn]);
+            commands[command]->execute(players[turn]);
         } catch(const bad_function_call &e) {
             cout << "Tidak ada command \"" << command << "\"\n";
         } catch (exception &e) {

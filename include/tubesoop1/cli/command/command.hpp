@@ -6,10 +6,8 @@
 using namespace std;
 
 class Command {
-    private:
-        Player *player;
     public:
-        virtual void execute() = 0;
+        virtual void execute(Player *player) = 0;
 };
 
 
