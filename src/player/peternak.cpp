@@ -4,12 +4,12 @@ Peternak::Peternak(string &_username) : Player(_username) {}
 
 void Peternak::putPeternakan(Animal &h)
 {
-    peternakan.insert(h);
+    peternakan.insert(&h);
 }
 
 void Peternak::putPeternakanAt(Animal &h, Location &l)
 {
-    peternakan.setElement(l, h);
+    peternakan.setElement(l, &h);
 }
 
 istream & operator>>(istream &in, Peternak &a)

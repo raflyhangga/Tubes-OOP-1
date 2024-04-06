@@ -6,11 +6,11 @@
 #include <string>
 using namespace std;
 
-class FileNotFoundError : exception{
+class FileNotFoundException : exception{
     private:
         const string path;
     public:
-        FileNotFoundError(const string& _path);
+        FileNotFoundException(const string& _path);
         const char* what() const throw();
 };
 

@@ -71,6 +71,8 @@
         "qtextedit": "cpp",
         "charconv": "cpp",
         "xmemory": "cpp",
-        "xtr1common": "cpp"
+        "xtr1common": "cpp",
+        "qpushbutton": "cpp",
+        "qsizepolicy": "cpp"
     }
 }

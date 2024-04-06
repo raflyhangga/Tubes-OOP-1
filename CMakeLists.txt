@@ -35,6 +35,7 @@ find_package(Qt5Widgets REQUIRED)
 include_directories(${Qt5Widgets_INCLUDE_DIRS})
 set(GUISOURCES 
   src/gui/main.cpp
+  src/gui/components/nicebutton.cpp
 )
 add_executable(gui ${GUISOURCES})
 target_link_libraries(gui Qt5::Widgets)

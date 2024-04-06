@@ -4,13 +4,12 @@
 #include <string>
 #include "player.h"
 #include "tubesoop1/animal/animal.h"
-#include "tubesoop1/player/peternakan.h"
 using namespace std;
 
 class Peternak : public Player
 {
 private:
-    Peternakan peternakan;
+    Grid<Animal*> peternakan;
 public:
     Peternak(string &username);
 

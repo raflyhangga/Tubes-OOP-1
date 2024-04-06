@@ -3,6 +3,12 @@
 
 using namespace std;
 
+template <class T> inline int Grid<T>::defaultWidth = 10;
+template <class T> inline int Grid<T>::defaultHeight = 10;
+
+template <class T>
+inline Grid<T>::Grid() : Grid<T>(Grid<T>::defaultHeight, Grid<T>::defaultWidth) {}
+
 template <class T>
 inline Grid<T>::Grid(int row, int col) {
     if (row < 0 || col < 0) {

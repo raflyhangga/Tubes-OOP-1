@@ -4,12 +4,12 @@ Petani::Petani(string &_username) : Player(_username) {}
 
 void Petani::putLadang(Plant &p)
 {
-    ladang.insert(p);
+    ladang.insert(&p);
 }
 
 void Petani::putLadangAt(Plant &p, Location &l)
 {
-    ladang.setElement(l, p);
+    ladang.setElement(l, &p);
 }
 
 istream & operator>>(istream &in, Petani &a)

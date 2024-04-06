@@ -16,6 +16,10 @@ class Grid {
         int countAvailable;
         int countNotAvailable;
     public:
+        static int defaultWidth;
+        static int defaultHeight;
+
+        Grid();
 
         /**
          * Make a grid that has a well defined row and column.

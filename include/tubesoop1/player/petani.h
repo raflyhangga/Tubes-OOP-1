@@ -5,13 +5,12 @@
 #include "player.h"
 #include "tubesoop1/plant/plant.h"
 #include "tubesoop1/player/petani.h"
-#include "tubesoop1/player/ladang.h"
 using namespace std;
 
 class Petani : public Player
 {
 private:
-    Ladang ladang;
+    Grid<Plant*> ladang;
 public:
     Petani(string &username);
 
