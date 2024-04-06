@@ -34,7 +34,7 @@ gtest_discover_tests(unit_test)
 find_package(Qt5Widgets REQUIRED)
 include_directories(${Qt5Widgets_INCLUDE_DIRS})
 set(GUISOURCES 
-  srcgui/main.cpp
+  src/gui/main.cpp
 )
 add_executable(gui ${GUISOURCES})
 target_link_libraries(gui Qt5::Widgets)

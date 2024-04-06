@@ -8,7 +8,7 @@ SRC_DIR = src
 SRC_HPP_DIR = include/tubesoop1
 
 MAIN = main
-SRC_MAIN = src/$(MAIN).cpp
+SRC_MAIN = src/cli/$(MAIN).cpp
 OBJ_MAIN = $(SRC_MAIN:.cpp=.o)
 
 
@@ -24,24 +24,26 @@ $(OUTPUT_DIR)/%.o: %.hpp
 	@echo -n ">> "
 	$(CC) $(CFLAGS) -x c++ -c -o $@ $<
 
-SRC = $(SRC_MAIN) $(filter-out $(wildcard $(SRC_DIR)/*/*_test.cpp), $(wildcard $(SRC_DIR)/*/*.cpp))
+SRC = $(SRC_MAIN) $(filter-out $(wildcard $(SRC_DIR)/*/*_test.cpp) $(wildcard $(SRC_DIR)/gui/*), $(wildcard $(SRC_DIR)/*/*.cpp))
 OBJS = $(patsubst %.cpp,$(OUTPUT_DIR)/%.o,$(filter-out $(SRC_MAIN), $(SRC))) $(patsubst %.hpp,$(OUTPUT_DIR)/%.o,$(wildcard $(SRC_HPP_DIR)/*/*.hpp))
 
 .PHONY: all clean runcli test debug test
 
 all: buildcli runcli
 
+# rm -f $(OUTPUT_DIR)/$(OBJ_MAIN) $(OUTPUT_DIR)/$(MAIN) $(OBJS)
+clean:
+	$(info )
+	$(info [Clean Program])
+	@echo -n ">> "
+	rm -rf $(OUTPUT_DIR)/include $(OUTPUT_DIR)/src
+
+
 buildcli: $(OUTPUT_DIR)/$(OBJ_MAIN) $(OBJS)
 	$(info )
 	$(info [Build Program])
 	@echo -n ">> "
 	$(CC) $(CFLAGS) -o $(OUTPUT_DIR)/$(MAIN) $^
-
-clean:
-	$(info )
-	$(info [Clean Program])
-	@echo -n ">> "
-	rm -f $(OUTPUT_DIR)/$(OBJ_MAIN) $(OUTPUT_DIR)/$(MAIN) $(OBJS)
 
 runcli:
 	$(info )

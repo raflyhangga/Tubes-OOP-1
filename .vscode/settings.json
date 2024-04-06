@@ -65,6 +65,9 @@
         "sstream": "cpp",
         "stop_token": "cpp",
         "streambuf": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "qmainwindow": "cpp",
+        "qapplication": "cpp",
+        "qtextedit": "cpp"
     }
 }
