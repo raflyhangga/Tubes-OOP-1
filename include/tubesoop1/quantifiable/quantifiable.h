@@ -67,6 +67,13 @@ public:
     void operator+=(int qty);
 
     /**
+     * @brief Operator += to increment the quantity by a given value
+     * 
+     * @param qty Value to add to the quantity
+     */
+    void operator+=(Quantifiable<T> other);
+
+    /**
      * @brief Operator -= to decrement the quantity by a given value
      * 
      * @param qty Value to subtract from the quantity
@@ -88,6 +95,14 @@ public:
      * @return Quantifiable<T> Object before decrementing
      */
     Quantifiable<T> operator--(int);
+
+    /**
+     * @brief Check if both Quantifiable has the same value
+     * 
+     * @param other 
+     * @return true if same
+     */
+    bool operator==(Quantifiable<T> other);
 };
 
 #endif

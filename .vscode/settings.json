@@ -68,6 +68,9 @@
         "typeinfo": "cpp",
         "qmainwindow": "cpp",
         "qapplication": "cpp",
-        "qtextedit": "cpp"
+        "qtextedit": "cpp",
+        "charconv": "cpp",
+        "xmemory": "cpp",
+        "xtr1common": "cpp"
     }
 }

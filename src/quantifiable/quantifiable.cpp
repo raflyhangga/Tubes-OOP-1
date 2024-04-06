@@ -28,6 +28,16 @@ inline void Quantifiable<T>::operator+=(int qty) {
     quantity += qty;
 }
 
+/**
+     * @brief Operator += to increment the quantity by a given value
+     * 
+     * @param qty Value to add to the quantity
+     */
+template <class T>
+inline void Quantifiable<T>::operator+=(Quantifiable<T> other){
+    quantity += other.quantity;
+}
+
 // Operator -= implementation with validation
 template <class T>
 inline void Quantifiable<T>::operator-=(int qty) {
@@ -56,6 +66,17 @@ inline Quantifiable<T> Quantifiable<T>::operator--(int) {
     } else {
         throw invalid_argument("Quantity cannot be negative.");
     }
+}
+
+/**
+ * @brief Check if both Quantifiable has the same value
+ * 
+ * @param other 
+ * @return true if same
+ */
+template <class T>
+inline bool Quantifiable<T>::operator==(Quantifiable<T> other){
+    return value == other.value && quantity == other.quantity;
 }
 
 // Todo: Delete this main function if not needed (only for testing purpose)
