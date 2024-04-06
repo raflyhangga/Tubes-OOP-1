@@ -3,7 +3,15 @@
 Plant::Plant(string code, string name, int price, int durationToHarvest, vector<Product*> drops):
     Creature(code,name,price,drops)
 {
+    age = 0;
     this->durationToHarvest = durationToHarvest;
+}
+
+void Plant::setAge(int age){
+    this->age = age;
+}
+int Plant::getAge(){
+    return age;
 }
 
 Plant::~Plant(){

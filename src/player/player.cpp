@@ -4,8 +4,8 @@ int Player::moneyToWin;
 int Player::weightToWin;
 
 Player::Player(string &_username) : username(_username) {
-    beratBadan = 0;
-    uang = 0;
+    weight = 0;
+    money = 0;
 }
 
 
@@ -20,7 +20,13 @@ void Player::putInventoryAt(Resource &r, Location &location){
 string Player::getUsername(){
     return username;
 }
+int Player::getMoney(){
+    return money;
+}
+int Player::getWeight(){
+    return weight;
+}
 
 bool Player::isWin(){
-    return beratBadan >= weightToWin && uang >= moneyToWin;
+    return weight >= weightToWin && money >= moneyToWin;
 }

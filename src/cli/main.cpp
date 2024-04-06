@@ -5,7 +5,7 @@
 #include <functional>
 
 #include <tubesoop1/icosihexastring/icosihexastring.h>
-#include <tubesoop1/grid/location.hpp>
+#include <tubesoop1/grid/location.h>
 #include <tubesoop1/grid/griddrawer.hpp>
 #include <tubesoop1/resource/resource.h>
 #include <tubesoop1/animal/animal.h>

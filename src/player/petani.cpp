@@ -15,7 +15,7 @@ void Petani::putLadangAt(Plant &p, Location &l)
 istream & operator>>(istream &in, Petani &a)
 {
     int jumlahItemInventory;
-    in >> a.beratBadan >> a.uang >> jumlahItemInventory;
+    in >> a.weight >> a.money >> jumlahItemInventory;
 
     for (int i = 0; i < jumlahItemInventory; i++)
     {

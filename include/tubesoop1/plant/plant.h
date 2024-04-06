@@ -12,11 +12,12 @@ class Plant:public Creature
 {
 protected:
     int durationToHarvest;
-    string type;
-
+    int age;
 public:
     Plant() = default;
     Plant(string code, string name, int price, int durationToHarvest, vector<Product*> drops);
+    void setAge(int age);
+    int getAge();
     virtual ~Plant();
     friend ostream &operator<<(ostream &os, const Plant &a);
     friend istream &operator>>(istream &is, Plant &a);

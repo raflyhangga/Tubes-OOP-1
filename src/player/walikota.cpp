@@ -4,13 +4,13 @@ Walikota::Walikota(string &_username) : Player(_username){};
 
 void Walikota::pungutPajak()
 {
-    uang += 1000;
+    money += 1000;
 }
 
 istream & operator>>(istream &in, Walikota &a)
 {
     int jumlahItemInventory;
-    in >> a.beratBadan >> a.uang >> jumlahItemInventory;
+    in >> a.weight >> a.money >> jumlahItemInventory;
 
     for (int i = 0; i < jumlahItemInventory; i++)
     {

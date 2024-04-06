@@ -6,6 +6,11 @@ Animal::Animal(string code, string name, int price, int weightToHarvest, vector<
     this->weightToHarvest = weightToHarvest;
 }
 
+void Animal::setWeight(int weight)
+{
+    this->weight = weight;
+}
+
 bool Animal::isHarvestable() const
 {
     return weight >= weightToHarvest;
