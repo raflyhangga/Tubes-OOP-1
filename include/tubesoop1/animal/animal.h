@@ -29,23 +29,23 @@ public:
     friend istream &operator>>(istream &is, Animal &a);
 };
 
-class Herbivora: public Animal {
+class Herbivore: public Animal {
     public:
-        Herbivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops);
+        Herbivore(string code, string name, int price, int weightToHarvest, vector<Product*> drops);
        
         int makan(Product&);
 };
 
-class Karnivora: public Animal {
+class Carnivore: public Animal {
     public:
-        Karnivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops);
+        Carnivore(string code, string name, int price, int weightToHarvest, vector<Product*> drops);
 
         int makan(Product&);
 };
 
-class Omnivora: public Animal {
+class Omnivore: public Animal {
     public:
-        Omnivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops);
+        Omnivore(string code, string name, int price, int weightToHarvest, vector<Product*> drops);
         virtual int makan(Product&);
 };
 

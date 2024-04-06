@@ -12,12 +12,13 @@
 #include "tubesoop1/player/player.h"
 #include "tubesoop1/animal/animal.h"
 #include "tubesoop1/plant/plant.h"
+#include "tubesoop1/building/building.h"
 using namespace std;
 
 /**
  * Factory class for all Resource. It's like translator to translate from string to Resource instance
 */
-class ResourceFactory : map<string, function<Resource()>>{
+class ResourceFactory : map<string, function<Resource*()>>{
     public:
 
         /**
@@ -25,15 +26,15 @@ class ResourceFactory : map<string, function<Resource()>>{
         */
         ResourceFactory(string configPath);
 
+        ~ResourceFactory();
+
         /**
          * Translate the key to the Resource instance
         */
-        Resource& translate(string key);
+        Resource* translate(string key);
+
+        friend ostream& operator<<(ostream& os, const ResourceFactory& factory);
 };
 
-class ResourceCreator{
-    public:
-        Resource virtual Instantiate();
-};
 
 #endif

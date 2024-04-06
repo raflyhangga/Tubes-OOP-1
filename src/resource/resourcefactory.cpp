@@ -2,15 +2,17 @@
 #include "tubesoop1/resource/resourcefactory_exception.h"
 
 ResourceFactory::ResourceFactory(string configPath){
+
     string plantPath = configPath + "/plant.txt";
     string animalPath = configPath + "/animal.txt";
     string productPath = configPath + "/product.txt";
     string recipePath = configPath + "/recipe.txt";
     string miscPath = configPath + "/misc.txt";
-    
-    void* _;
+
+    string _;
     ifstream file;
-    // map<string, vector<Product*>> dropsMap;
+    map<string, vector<Product*>> dropsMap;
+
          
     // ============= product =============
     // 1 TAW TEAK_WOOD PRODUCT_MATERIAL_PLANT TEAK_TREE 0 9
@@ -20,22 +22,22 @@ ResourceFactory::ResourceFactory(string configPath){
         string kode, name, origin;
         int addedWeight, price;
         file >> _ >> kode >> name >> _ >> origin >> addedWeight >> price;
-        // insert({name, [](){return ProductMaterial(kode, name, addedWeight, price);}});
-        // dropsMap[origin].push_back(new ProductMaterial(kode, name, addedWeight, price));
+        insert({name, [=](){return new ProductMaterial(kode, name, addedWeight, price);}});
+        dropsMap[origin].push_back(new ProductMaterial(kode, name, addedWeight, price));
     }
     for(int i = 0; i < 4; i++) {
-        string kode, name;
+        string kode, name, origin;
         int addedWeight, price;
-        file >> _ >> kode >> name >> _ >> _ >> addedWeight >> price;
-        // insert({name, [](){return ProductFood(kode, name, addedWeight, price);}});
-        // dropsMap[origin].push_back(new ProductFood(kode, name, addedWeight, price));
+        file >> _ >> kode >> name >> _ >> origin >> addedWeight >> price;
+        insert({name, [=](){return new ProductFruit(kode, name, addedWeight, price);}});
+        dropsMap[origin].push_back(new ProductFruit(kode, name, addedWeight, price));
     }
     for(int i = 0; i < 4; i++) {
-        string kode, name;
+        string kode, name, origin;
         int addedWeight, price;
-        file >> _ >> kode >> name >> _ >> _ >> addedWeight >> price;
-        // insert({name, [](){return ProductAnimal(kode, name, addedWeight, price);}});
-        // dropsMap[origin].push_back(new ProductAnimal(kode, name, addedWeight, price));
+        file >> _ >> kode >> name >> _ >> origin >> addedWeight >> price;
+        insert({name, [=](){return new ProductAnimal(kode, name, addedWeight, price);}});
+        dropsMap[origin].push_back(new ProductAnimal(kode, name, addedWeight, price));
     }
     file.close();
 
@@ -46,13 +48,15 @@ ResourceFactory::ResourceFactory(string configPath){
         string kode, name;
         int ageToHarvest, price;
         file >> _ >> kode >> name >> _ >> ageToHarvest >> price;
-        // insert({name, [](){return MaterialPlant(kode, name, ageToHarvest, price, dropsMap[name]);}});
+        vector<Product*> dropsMapValue = dropsMap[name];
+        insert({name, [=](){return new Plant(kode, name, ageToHarvest, price, dropsMapValue);}});
     }
     for(int i = 0; i < 4; i++) {
         string kode, name;
         int ageToHarvest, price;
         file >> _ >> kode >> name >> _ >> ageToHarvest >> price;
-        // insert({name, [](){return FruitPlant(kode, name, ageToHarvest, price, dropsMap[name]);}});
+        vector<Product*> dropsMapValue = dropsMap[name];
+        insert({name, [=](){return new Plant(kode, name, ageToHarvest, price, dropsMapValue);}});
     }
     file.close();
 
@@ -63,19 +67,22 @@ ResourceFactory::ResourceFactory(string configPath){
         string kode, name;
         int weightToHarvest, price;
         file >> _ >> kode >> name >> _ >> weightToHarvest >> price;
-        // insert({name, [](){return Herbivore(kode, name, ageToHarvest, price, dropsMap[name]);}});
+        vector<Product*> dropsMapValue = dropsMap[name];
+        insert({name, [=](){return new Herbivore(kode, name, weightToHarvest, price, dropsMapValue);}});
     }
     for(int i = 0; i < 1; i++) {
         string kode, name;
         int weightToHarvest, price;
         file >> _ >> kode >> name >> _ >> weightToHarvest >> price;
-        // insert({name, [](){return Carnivore(kode, name, ageToHarvest, price, dropsMap[name]);}});
+        vector<Product*> dropsMapValue = dropsMap[name];
+        insert({name, [=](){return new Carnivore(kode, name, weightToHarvest, price, dropsMapValue);}});
     }
     for(int i = 0; i < 2; i++) {
         string kode, name;
         int weightToHarvest, price;
         file >> _ >> kode >> name >> _ >> weightToHarvest >> price;
-        // insert({name, [](){return Omnivore(kode, name, ageToHarvest, price);}});
+        vector<Product*> dropsMapValue = dropsMap[name];
+        insert({name, [=](){return new Omnivore(kode, name, weightToHarvest, price, dropsMapValue);}});
     }
     file.close();
 
@@ -86,22 +93,23 @@ ResourceFactory::ResourceFactory(string configPath){
     for(int i = 0; i < 4; i++) {
         string kode, name;
         int price;
-        vector<Quantifiable<Product>> recipe;
+        vector<Quantifiable<Product*>> recipe;
         file >> _ >> kode >> name >> price; 
 
         string line;
-        while(getline(file, line)){
-            if(line == "") break;
-            istringstream iss(line);
-            string material;
-            int quantity;
-
-            iss >> material >> quantity;
-            Quantifiable<Product> qp = Quantifiable<Product>(dynamic_cast<Product&>(translate(material)), quantity);
+        getline(file, line);
+        istringstream iss(line);
+        string material;
+        int quantity;
+        while(iss >> material >> quantity){
+            Resource* r = (translate(material));
+            Product* p = dynamic_cast<Product*>(r);
+            Quantifiable<Product*> qp = Quantifiable<Product*>(p, quantity);
             recipe.push_back(qp);
         }
 
-        // insert({name, [](){return Building(kode, name, price, recipe);}});
+
+        insert({name, [=](){return new Building(kode, name, price, recipe);}});
     }
     file.close();
 
@@ -121,8 +129,23 @@ ResourceFactory::ResourceFactory(string configPath){
     
 }
 
-Resource& ResourceFactory::translate(string key){
-    Resource r = this->at(key)();
+Resource* ResourceFactory::translate(string key){
+    Resource *r = this->at(key)();
     return r;
 }
 
+
+ostream& operator<<(ostream& os, const ResourceFactory& factory){
+    for(auto it = factory.begin(); it != factory.end(); it++){
+        string key = it->first;
+        auto value = it->second();
+        os << key << ": " << value->getCode() << endl;
+    }
+    return os;
+}
+
+ResourceFactory::~ResourceFactory() {
+    for (auto& pair : *this) {
+        // delete pair.second;
+    }
+}

@@ -10,25 +10,22 @@ using namespace std;
 
 class Product : public Resource{
     protected:
-        string origin;
         int addedWeight;
 
     public:
         Product() = default;
         Product(string code, string name, int price, int addedWeight);
         virtual ~Product();
-        string getOrigin() const;
         int getAddedWeight() const;
-        void setOrigin(string origin);
         void setAddedWeight(int addedWeight);
-        friend bool operator==(const Product &p1, const Product &p2);
+    
 };
 
 
 class ProductAnimal:public Product{
     public:
         ProductAnimal() = default;
-        ProductAnimal(string id, string code, string name, int price, string origin, int addedWeight);
+        ProductAnimal(string code, string name, int price,  int addedWeight);
 
 
 };
@@ -36,14 +33,14 @@ class ProductAnimal:public Product{
 class ProductFruit:public Product{
     public:
         ProductFruit() = default;
-        ProductFruit(string id, string code, string name, int price, string origin, int addedWeight);
+        ProductFruit(string code, string name, int price, int addedWeight);
 
 };
 
 class ProductMaterial:public Product{
     public:
         ProductMaterial() = default;
-        ProductMaterial(string id, string code, string name, int price, string origin, int addedWeight);
+        ProductMaterial(string code, string name, int price, int addedWeight);
 
 };
 
