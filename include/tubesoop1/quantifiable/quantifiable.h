@@ -2,6 +2,7 @@
 #define QUANTIFIABLE_H
 #include <iostream>
 using namespace std;
+
 /**
  * @brief Header guard for Quantifiable class template
  */
