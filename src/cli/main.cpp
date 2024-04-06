@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <map>
+#include <functional>
 
 #include <tubesoop1/icosihexastring/icosihexastring.h>
 #include <tubesoop1/grid/location.hpp>
@@ -8,39 +10,32 @@
 #include <tubesoop1/animal/animal.h>
 #include <tubesoop1/plant/plant.h>
 #include <tubesoop1/grid/grid.h>
+#include <tubesoop1/player/player.h>
+#include <tubesoop1/cli/command/command.hpp>
 
 using namespace std;
 
-void handleCommand(const string &command) {
+int turn = 0;
+vector<Player*> players;
 
-}
+
 
 int main()
 {
     cout << "[Welcome to TUBES-OOP-1]" << endl;
 
-    // string command;
-    // while (true) {
-    //     cout << "> ";
-    //     cin >> command;
-    //     try {
-    //         handleCommand(command);
-    //     } catch(const exception &e) {
-    //         cout << e.what() << endl;
-    //     }
-    // }
+    map<string, function<void(Player*)>> commands;
 
-    Location loc;
-    cin >> loc;
-    cout << loc.getCol() << ' ' << loc.getRow() << endl;
-    
-    // vector<Plant> plantList = TxtParser::fromtxt<Plant>("config/plant.txt");
-
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     cout << plantList[i] << endl;
-    // }
-    // TxtParser::totxt("config/plant.txt", plantList);
+    string command;
+    while (true) {
+        cout << "> ";
+        cin >> command;
+        try {
+            commands[command](players[turn]);
+        } catch(const exception &e) {
+            cout << e.what() << endl;
+        }
+    }
 
     return 0;
 }
