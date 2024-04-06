@@ -2,7 +2,9 @@
 #include <QMainWindow>
 #include <QTextEdit>
 #include <QPushButton>
+#include "tubesoop1/resource/resource.h"
 #include "tubesoop1/gui/components/nicebutton.h"
+#include "tubesoop1/gui/components/gridbutton.h"
 
 int main(int argc, char *argv[])
 {
@@ -35,6 +37,10 @@ int main(int argc, char *argv[])
         counter++;
         textEdit.setText("Button Pressed " + QString::number(counter) + " times");
     });
+    
+    Grid<Resource*> gr(3,3);
+    GridButton<Resource*> gb(gr);
+    window.setCentralWidget(&gb);
 
     return app.exec();
 }

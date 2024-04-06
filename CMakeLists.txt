@@ -36,6 +36,9 @@ include_directories(${Qt5Widgets_INCLUDE_DIRS})
 set(GUISOURCES 
   src/gui/main.cpp
   src/gui/components/nicebutton.cpp
+  src/resource/resource.cpp
+  src/grid/grid.cpp
+  include/tubesoop1/grid/grid.hpp
 )
 add_executable(gui ${GUISOURCES})
 target_link_libraries(gui Qt5::Widgets)

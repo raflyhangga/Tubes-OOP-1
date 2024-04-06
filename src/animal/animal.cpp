@@ -20,14 +20,14 @@ int Animal::getWeightToHarvest() const
     return weightToHarvest;
 }
 
-Herbivora::Herbivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops) : Animal(code,name,price,weightToHarvest,drops)
+Herbivore::Herbivore(string code, string name, int price, int weightToHarvest, vector<Product*> drops) : Animal(code,name,price,weightToHarvest,drops)
 {
 
 }
 
 
 // return 1 if success, 0 if failed
-int Herbivora::makan(Product &p)
+int Herbivore::makan(Product &p)
 {
     ProductFruit* plant = dynamic_cast<ProductFruit*>(&p);
     if(plant != nullptr){
@@ -38,12 +38,12 @@ int Herbivora::makan(Product &p)
     }
 }
 
-Karnivora::Karnivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops) : Animal(code,name,price,weightToHarvest,drops)
+Carnivore::Carnivore(string code, string name, int price, int weightToHarvest, vector<Product*> drops) : Animal(code,name,price,weightToHarvest,drops)
 {
 
 }
 
-int Karnivora::makan(Product &p)
+int Carnivore::makan(Product &p)
 {
     ProductAnimal* Panimal = dynamic_cast<ProductAnimal*>(&p);
     if(Panimal != nullptr){
@@ -55,12 +55,12 @@ int Karnivora::makan(Product &p)
     }
 }
 
-Omnivora::Omnivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops) : Animal(code,name,price,weightToHarvest,drops)
+Omnivore::Omnivore(string code, string name, int price, int weightToHarvest, vector<Product*> drops) : Animal(code,name,price,weightToHarvest,drops)
 {
 
 }
 
-int Omnivora::makan(Product &p)
+int Omnivore::makan(Product &p)
 {
     ProductMaterial* material = dynamic_cast<ProductMaterial*>(&p);
     
