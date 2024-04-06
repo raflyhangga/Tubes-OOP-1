@@ -8,6 +8,6 @@ CetakPenyimpanan::CetakPenyimpanan(Player *player) {
 }
 
 void CetakPenyimpanan::execute() {
-    
+    cerr << "CetakPenyimpanan command executed" << endl;
 }
 

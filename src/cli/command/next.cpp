@@ -8,6 +8,6 @@ Next::Next(Player *player) {
 }
 
 void Next::execute() {
-    
+    cout << "Next command executed" << endl;
 }
 

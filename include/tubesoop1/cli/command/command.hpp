@@ -2,6 +2,7 @@
 #define COMMAND_HPP
 
 #include <iostream>
+#include <tubesoop1/player/player.h>
 using namespace std;
 
 class Command {
