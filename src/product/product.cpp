@@ -1,6 +1,6 @@
 #include "tubesoop1/product/product.h"
 
-Product::Product(string id, string code, string name, int price,string origin, int addedWeight) : Resource(id, code, name, price)
+Product::Product(string code, string name, int price, int addedWeight) : Resource(code, name, price)
 {
     this->origin = origin;
     this->addedWeight = addedWeight;
@@ -30,19 +30,14 @@ void Product::setAddedWeight(int addedWeight)
     this->addedWeight = addedWeight;
 }
 
-bool operator==(const Product &p1, const Product &p2)
-{
-    return p1.getId() == p2.getId();
-}
-
-ProductAnimal::ProductAnimal(string id, string code, string name, int price, string origin, int addedWeight) : Product(id, code, name, price, origin, addedWeight){
+ProductAnimal::ProductAnimal(string id, string code, string name, int price, string origin, int addedWeight) : Product(code, name, price, addedWeight){
     
 }
 
-ProductFruit::ProductFruit(string id, string code, string name, int price, string origin, int addedWeight) : Product(id, code, name, price, origin, addedWeight){
+ProductFruit::ProductFruit(string id, string code, string name, int price, string origin, int addedWeight) : Product(code, name, price, addedWeight){
     
 }
 
-ProductMaterial::ProductMaterial(string id, string code, string name, int price, string origin, int addedWeight) : Product(id, code, name, price, origin, addedWeight){
+ProductMaterial::ProductMaterial(string id, string code, string name, int price, string origin, int addedWeight) : Product(code, name, price, addedWeight){
     
 }

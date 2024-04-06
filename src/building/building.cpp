@@ -3,7 +3,7 @@
 
 // Constructor implementation
 Building::Building(string id, string code, string name, int price, const vector<Quantifiable<Product>>& recipe)
-    : Resource(id, code, name, price), recipe(recipe) {}
+    : Resource(code, name, price), recipe(recipe) {}
 
 void Building::printBuildingInfo() const {
     cout << "Resep bangunan yang ada adalah sebagai berikut." << endl;

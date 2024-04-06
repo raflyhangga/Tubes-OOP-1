@@ -73,6 +73,11 @@
         "xmemory": "cpp",
         "xtr1common": "cpp",
         "qpushbutton": "cpp",
-        "qsizepolicy": "cpp"
+        "qsizepolicy": "cpp",
+        "locale": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xlocnum": "cpp",
+        "xloctime": "cpp"
     }
 }

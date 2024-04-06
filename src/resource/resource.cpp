@@ -1,14 +1,11 @@
 #include <tubesoop1/resource/resource.h>
 // #include "../../include/tubesoop1/resource/resource.h"
 
-Resource::Resource(string id, string code, string name, int price)
-    : id(id), code(code), name(name), price(price) {}
+Resource::Resource(string code, string name, int price)
+    : code(code), name(name), price(price) {}
 
 Resource::~Resource() {}
 
-string Resource::getId() const {
-    return id;
-}
 
 string Resource::getCode() const {
     return code;
