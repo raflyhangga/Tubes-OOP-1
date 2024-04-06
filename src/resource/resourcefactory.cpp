@@ -114,9 +114,9 @@ ResourceFactory::ResourceFactory(string configPath){
     // 8 9 // Besaran peternakan
     file.open(miscPath); if(!file.is_open()) throw FileNotFoundException(miscPath);
     file >> Player::moneyToWin >> Player::weightToWin;
-    file >> Grid<Resource>::defaultWidth >> Grid<Resource>::defaultHeight;
-    file >> Grid<Plant>::defaultWidth >> Grid<Plant>::defaultHeight;
-    file >> Grid<Animal>::defaultWidth >> Grid<Animal>::defaultHeight;
+    file >> Grid<Resource*>::defaultWidth >> Grid<Resource*>::defaultHeight;
+    file >> Grid<Plant*>::defaultWidth >> Grid<Plant*>::defaultHeight;
+    file >> Grid<Animal*>::defaultWidth >> Grid<Animal*>::defaultHeight;
     file.close();
     
 }
