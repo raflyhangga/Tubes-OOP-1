@@ -9,3 +9,7 @@ void Carnivore::eat(ProductFruit &p)
 {
     throw CannotEatException(*this, p);
 }
+void Carnivore::eat(ProductMaterial &p)
+{
+    throw CannotEatException(*this, p);
+}

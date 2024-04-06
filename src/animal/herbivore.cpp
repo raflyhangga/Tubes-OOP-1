@@ -12,3 +12,7 @@ void Herbivore::eat(ProductFruit &p)
 {
     weight += p.getAddedWeight();
 }
+void Herbivore::eat(ProductMaterial &p)
+{
+    throw CannotEatException(*this, p);
+}

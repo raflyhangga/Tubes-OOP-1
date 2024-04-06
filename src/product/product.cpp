@@ -1,4 +1,5 @@
 #include "tubesoop1/product/product.h"
+#include "tubesoop1/animal/animal_exception.h"
 
 Product::Product(string code, string name, int price, int addedWeight) : Resource(code, name, price)
 {
@@ -45,5 +46,5 @@ ProductMaterial::ProductMaterial(string code, string name, int price, int addedW
 }
 void ProductMaterial::eaten(EaterVisitor &a)
 {
-    cout << "Cannot eat material!" << endl;
+    a.eat(*this);
 }

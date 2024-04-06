@@ -26,6 +26,7 @@ public:
     void eat(Product&);
     virtual void eat(ProductAnimal&) = 0;
     virtual void eat(ProductFruit&) = 0;
+    virtual void eat(ProductMaterial&) = 0;
 
     bool isHarvestable() const;
     friend ostream &operator<<(ostream &os, const Animal &a);

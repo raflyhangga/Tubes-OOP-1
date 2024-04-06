@@ -4,7 +4,7 @@
 #include <exception>
 #include <string>
 #include "tubesoop1/animal/animal.h"
-#include "tubesoop1/product/product.h"
+#include "tubesoop1/product/visitorpattern.h"
 
 using namespace std;
 

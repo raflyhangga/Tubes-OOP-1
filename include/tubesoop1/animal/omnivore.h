@@ -15,6 +15,7 @@ class Omnivore: public Animal {
         Omnivore(string code, string name, int price, int weightToHarvest, vector<Product*> drops);
         void eat(ProductAnimal&);
         void eat(ProductFruit&);
+        void eat(ProductMaterial&);
 };
 
 #endif

@@ -12,3 +12,7 @@ void Omnivore::eat(ProductFruit &p)
 {
     weight += p.getAddedWeight();
 }
+void Omnivore::eat(ProductMaterial &p)
+{
+    throw CannotEatException(*this, p);
+}
