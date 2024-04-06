@@ -1,22 +1,30 @@
 #include <tubesoop1/building/building.h>
 #include <tubesoop1/building/bangunan_exception.h>
 
-// Constructor implementation
-Building::Building(string id, string code, string name, int price, const vector<Quantifiable<Product>>& recipe)
-    : Resource(code, name, price), recipe(recipe) {}
 
-void Building::printBuildingInfo() const {
-    cout << "Resep bangunan yang ada adalah sebagai berikut." << endl;
-    int recipeNumber = 1; // Auto-incrementing number for the recipe
-    for (const auto& quantifiableProduct : recipe) {
-        const Product& product = quantifiableProduct.getValue();
-        const int quantity = quantifiableProduct.getQuantity();
-        // Todo: Pending on rayhan class product material implementation
-        // cout << recipeNumber << ". " << product.getName() << " (" << product.getPrice() << " gulden, ";
-        // cout << product.getMaterial() << " " << product.getMaterialQuantity() << ", ";
-        recipeNumber++;
-    }
+Building::Building(string code, string name, int price, const vector<Quantifiable<Product*>> &recipe):
+    Resource(code,name,price),
+    recipe(recipe)
+{
+
 }
+
+// Constructor implementation
+// Building::Building(string id, string code, string name, int price, const vector<Quantifiable<Product>>& recipe)
+//     : Resource(code, name, price), recipe(recipe) {}
+
+// void Building::printBuildingInfo() const {
+//     cout << "Resep bangunan yang ada adalah sebagai berikut." << endl;
+//     int recipeNumber = 1; // Auto-incrementing number for the recipe
+//     for (const auto& quantifiableProduct : recipe) {
+//         const Product& product = quantifiableProduct.getValue();
+//         const int quantity = quantifiableProduct.getQuantity();
+//         // Todo: Pending on rayhan class product material implementation
+//         // cout << recipeNumber << ". " << product.getName() << " (" << product.getPrice() << " gulden, ";
+//         // cout << product.getMaterial() << " " << product.getMaterialQuantity() << ", ";
+//         recipeNumber++;
+//     }
+// }
 
 // Method to add a building material to the recipe
 // void Building::addMaterial(const Product& material, int quantity) {
