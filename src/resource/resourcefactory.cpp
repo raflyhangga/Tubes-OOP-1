@@ -63,7 +63,7 @@ ResourceFactory::ResourceFactory(string configPath){
     // ============= animal =============
     // 1 COW COW HERBIVORE 20 6
     file.open(animalPath); if(!file.is_open()) throw FileNotFoundException(animalPath);
-    for(int i = 0; i < 3; i++) {
+    for(int i = 0; i < 4; i++) {
         string kode, name;
         int weightToHarvest, price;
         file >> _ >> kode >> name >> _ >> weightToHarvest >> price;

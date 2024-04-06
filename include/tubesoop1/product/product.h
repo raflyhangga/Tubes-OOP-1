@@ -3,12 +3,13 @@
 #include <string>
 #include <iostream>
 #include "tubesoop1/resource/resource.h"
-// #define DEFAULT_ORIGIN "Unknown"
-// #define DEFAULT_ADDED_WEIGHT 0
+#include "tubesoop1/product/visitorpattern.h"
 
 using namespace std;
 
-class Product : public Resource{
+
+class Product : public Resource, public EatenElement
+{
     protected:
         int addedWeight;
 
@@ -18,6 +19,9 @@ class Product : public Resource{
         virtual ~Product();
         int getAddedWeight() const;
         void setAddedWeight(int addedWeight);
+        
+        // Visitor pattern
+        virtual void eaten(EaterVisitor &a) = 0;
     
 };
 
@@ -26,7 +30,8 @@ class ProductAnimal:public Product{
     public:
         ProductAnimal() = default;
         ProductAnimal(string code, string name, int price,  int addedWeight);
-
+        // Visitor pattern
+        void eaten(EaterVisitor &a);
 
 };
 
@@ -34,6 +39,8 @@ class ProductFruit:public Product{
     public:
         ProductFruit() = default;
         ProductFruit(string code, string name, int price, int addedWeight);
+        // Visitor pattern
+        void eaten(EaterVisitor &a);
 
 };
 
@@ -41,7 +48,8 @@ class ProductMaterial:public Product{
     public:
         ProductMaterial() = default;
         ProductMaterial(string code, string name, int price, int addedWeight);
-
+        // Visitor pattern
+        void eaten(EaterVisitor &a);
 };
 
 #endif

@@ -14,6 +14,7 @@ class Creature: public Resource {
         Creature() = default;
         Creature(string code, string name, int price, vector<Product*> drops);
         Creature(Creature&);
+        ~Creature();
         Creature& operator=(const Creature &);
         Creature& operator<<(Product&);
 };

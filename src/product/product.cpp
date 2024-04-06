@@ -24,15 +24,26 @@ void Product::setAddedWeight(int addedWeight)
 }
 
 
-
 ProductAnimal::ProductAnimal(string code, string name, int price, int addedWeight) : Product(code, name, price, addedWeight){
     
+}
+void ProductAnimal::eaten(EaterVisitor &a)
+{
+    a.eat(*this);
 }
 
 ProductFruit::ProductFruit(string code, string name, int price, int addedWeight) : Product(code, name, price, addedWeight){
     
 }
+void ProductFruit::eaten(EaterVisitor &a)
+{
+    a.eat(*this);
+}
 
 ProductMaterial::ProductMaterial(string code, string name, int price, int addedWeight) : Product(code, name, price, addedWeight){
     
+}
+void ProductMaterial::eaten(EaterVisitor &a)
+{
+    cout << "Cannot eat material!" << endl;
 }
