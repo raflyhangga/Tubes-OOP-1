@@ -1,17 +1,55 @@
 #ifndef RESOURCE_H
 #define RESOURCE_H
 
+#include <iostream>
+using namespace std;
+
 /**
  * Suatu abstract class untuk semua item yang bisa disimpan dalam
  * suatu inventory
-*/
-class Resource{
-    private:
-        int anAttribute;
-    public:
-        void anMethod();
-        Resource();
-        friend bool operator==(Resource&,Resource&);
+ */
+
+class Resource
+{
+protected:
+    string id;
+    string code;
+    string name;
+    int price;
+
+public:
+   Resource() = default;
+    virtual ~Resource();
+    Resource(string id, string code, string name, int price);
+
+    /**
+     * @brief Mengembalikan id dari resource
+     * 
+     * @return string id dari resource
+     */
+    string getId() const;
+
+    /**
+     * @brief Mengembalikan code dari resource
+     * 
+     * @return string code dari resource
+     */
+    string getCode() const;
+    /**
+     * @brief Mengembalikan nama dari resource
+     * 
+     * @return string nama dari resource
+     */
+    string getName() const;
+
+    /**
+     * @brief Mengembalikan harga dari resource
+     * 
+     * @return int harga dari resource
+     */
+    int getPrice() const;
+
+
 };
 
 #endif

@@ -2,22 +2,25 @@
 #define BUILDING_H
 
 #include <iostream>
-#include "resepbangunan.h"
-#include "../resource/resource.h"
+#include <vector>
+
+#include <tubesoop1/player/player.h>
+#include <tubesoop1/quantifiable/quantifiable.h>
+#include <tubesoop1/product/product.h>
+#include <tubesoop1/resource/resource.h>
+
 using namespace std;
 
-class Building : public Resource {
+class Building : public Resource
+{
 private:
-    string name;
-    ResepBangunan resep;
-    int quantity; 
+    vector<Quantifiable<Product>> recipe;
 
 public:
-    Building(string name, ResepBangunan &resep, int quantity = 0);
-    void printBuildingInfo();
-    void bangun(int uang, int);
-    void tambahBangunan(int jumlah);
-    void kurangiBangunan(int jumlah);
+    Building(string id, string code, string name, int price, const vector<Quantifiable<Product>> &recipe);
+    void printBuildingInfo() const;
+    void build(Player &p);
+    void addMaterial(const Product &material, int quantity);
 };
 
 #endif

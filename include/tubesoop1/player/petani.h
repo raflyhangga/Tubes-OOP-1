@@ -8,7 +8,7 @@
 #include "tubesoop1/player/ladang.h"
 using namespace std;
 
-class Petani : Player
+class Petani : public Player
 {
 private:
     Ladang ladang;
