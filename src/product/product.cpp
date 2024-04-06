@@ -23,6 +23,8 @@ void Product::setAddedWeight(int addedWeight)
     this->addedWeight = addedWeight;
 }
 
+
+
 ProductAnimal::ProductAnimal(string code, string name, int price, int addedWeight) : Product(code, name, price, addedWeight){
     
 }

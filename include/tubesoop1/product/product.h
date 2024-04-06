@@ -18,7 +18,7 @@ class Product : public Resource{
         virtual ~Product();
         int getAddedWeight() const;
         void setAddedWeight(int addedWeight);
-        friend bool operator==(const Product &p1, const Product &p2);
+    
 };
 
 
