@@ -2,7 +2,7 @@
 #define ANIMAL_H
 
 #include <string>
-#include "tubesoop1/animal/creature.h"
+#include "tubesoop1/resource/creature.h"
 #include "tubesoop1/product/product.h"
 #include "tubesoop1/plant/plant.h"
 #include <vector>

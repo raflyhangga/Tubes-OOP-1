@@ -1,4 +1,4 @@
-#include "tubesoop1/animal/creature.h"
+#include "tubesoop1/resource/creature.h"
 
 
 Creature::Creature(string code, string name, int price, vector<Product*> drops):
