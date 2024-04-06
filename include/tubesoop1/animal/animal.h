@@ -2,14 +2,14 @@
 #define ANIMAL_H
 
 #include <string>
-#include "tubesoop1/resource/resource.h"
+#include "tubesoop1/animal/creature.h"
 #include "tubesoop1/product/product.h"
 #include "tubesoop1/plant/plant.h"
 #include <vector>
 using namespace std;
 
 // <ID> <KODE_HURUF> <NAME> <TYPE> <WEIGHT_TO_HARVEST> <PRICE>
-class Animal: public Resource
+class Animal: public Creature
 {
 private:
     int weightToHarvest;
@@ -17,7 +17,7 @@ private:
 public:
     Animal() = default;
 
-    Animal(string id, string code, string name, int price, int weightToHarvest);
+    Animal(string code, string name, int price, int weightToHarvest,vector<Product*> drops);
 
     virtual ~Animal();
 
@@ -31,21 +31,21 @@ public:
 
 class Herbivora: public Animal {
     public:
-        Herbivora(string id, string code, string name, int price, int weightToHarvest);
+        Herbivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops);
        
         int makan(Product&);
 };
 
 class Karnivora: public Animal {
     public:
-        Karnivora(string id, string code, string name, int price, int weightToHarvest);
+        Karnivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops);
 
         int makan(Product&);
 };
 
 class Omnivora: public Animal {
     public:
-        Omnivora(string id, string code, string name, int price, int weightToHarvest);
+        Omnivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops);
         virtual int makan(Product&);
 };
 
@@ -54,7 +54,7 @@ class Omnivora: public Animal {
 //         static string kode_huruf;
 //         static string name;
 //         static int price;
-//         static vector<Resource&> hasil_panen;
+//         static vector<Product*> hasil_panen;
 //         Cow();
 //         Cow(int);
 //         Cow(Cow&);
@@ -64,7 +64,7 @@ class Omnivora: public Animal {
 //         static string kode_huruf;
 //         static string name;
 //         static int price;
-//         static vector<Resource&> hasil_panen;
+//         static vector<Product*> hasil_panen;
 //         Sheep();
 //         Sheep(int);
 //         Sheep(Sheep&);
@@ -74,7 +74,7 @@ class Omnivora: public Animal {
 //         static string kode_huruf;
 //         static string name;
 //         static int price;
-//         static vector<Resource&> hasil_panen;
+//         static vector<Product*> hasil_panen;
 //         Horse();
 //         Horse(int);
 //         Horse(Horse&);
@@ -84,7 +84,7 @@ class Omnivora: public Animal {
 //         static string kode_huruf;
 //         static string name;
 //         static int price;
-//         static vector<Resource&> hasil_panen;
+//         static vector<Product*> hasil_panen;
 //         Rabbit();
 //         Rabbit(int);
 //         Rabbit(Rabbit&);
@@ -95,7 +95,7 @@ class Omnivora: public Animal {
 //         static string kode_huruf;
 //         static string name;
 //         static int price;
-//         static vector<Resource&> hasil_panen;
+//         static vector<Product*> hasil_panen;
 //         Snake();
 //         Snake(int);
 //         Snake(Snake&);
@@ -106,7 +106,7 @@ class Omnivora: public Animal {
 //         static string kode_huruf;
 //         static string name;
 //         static int price;
-//         static vector<Resource&> hasil_panen;
+//         static vector<Product*> hasil_panen;
 //         Chicken();
 //         Chicken(int);
 //         Chicken(Chicken&);
@@ -116,7 +116,7 @@ class Omnivora: public Animal {
 //         static string kode_huruf;
 //         static string name;
 //         static int price;
-//         static vector<Resource&> hasil_panen;
+//         static vector<Product*> hasil_panen;
 //         Duck();
 //         Duck(int);
 //         Duck(Duck&);

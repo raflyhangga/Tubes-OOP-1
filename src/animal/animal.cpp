@@ -1,6 +1,6 @@
 #include "tubesoop1/animal/animal.h"
 
-Animal::Animal(string id, string code, string name, int price, int weightToHarvest) : Resource(id, code, name, price)
+Animal::Animal(string code, string name, int price, int weightToHarvest, vector<Product*> drops): Creature(code,name,price,drops)
 {
     this->weightToHarvest = weightToHarvest;
 }
@@ -20,7 +20,7 @@ int Animal::getWeightToHarvest() const
     return weightToHarvest;
 }
 
-Herbivora::Herbivora(string id, string code, string name, int price, int weightToHarvest) : Animal(id, code, name, price, weightToHarvest)
+Herbivora::Herbivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops) : Animal(code,name,price,weightToHarvest,drops)
 {
 
 }
@@ -38,7 +38,7 @@ int Herbivora::makan(Product &p)
     }
 }
 
-Karnivora::Karnivora(string id, string code, string name, int price, int weightToHarvest) : Animal(id, code, name, price, weightToHarvest)
+Karnivora::Karnivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops) : Animal(code,name,price,weightToHarvest,drops)
 {
 
 }
@@ -55,7 +55,7 @@ int Karnivora::makan(Product &p)
     }
 }
 
-Omnivora::Omnivora(string id, string code, string name, int price, int weightToHarvest) : Animal(id, code, name, price, weightToHarvest)
+Omnivora::Omnivora(string code, string name, int price, int weightToHarvest, vector<Product*> drops) : Animal(code,name,price,weightToHarvest,drops)
 {
 
 }

@@ -12,7 +12,6 @@ using namespace std;
 class Resource
 {
 protected:
-    string id;
     string code;
     string name;
     int price;
@@ -20,14 +19,7 @@ protected:
 public:
    Resource() = default;
     virtual ~Resource();
-    Resource(string id, string code, string name, int price);
-
-    /**
-     * @brief Mengembalikan id dari resource
-     * 
-     * @return string id dari resource
-     */
-    string getId() const;
+    Resource(string code, string name, int price);
 
     /**
      * @brief Mengembalikan code dari resource
@@ -48,7 +40,6 @@ public:
      * @return int harga dari resource
      */
     int getPrice() const;
-
 
 };
 
