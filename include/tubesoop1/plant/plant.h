@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include "tubesoop1/resource/resource.h"
 using namespace std;
 

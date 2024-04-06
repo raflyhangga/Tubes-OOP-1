@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include <tubesoop1/icosihexastring.h>
+#include <tubesoop1/icosihexastring/icosihexastring.h>
 #include <tubesoop1/grid/location.hpp>
 #include <tubesoop1/grid/griddrawer.hpp>
 
