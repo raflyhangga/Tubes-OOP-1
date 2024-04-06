@@ -6,6 +6,10 @@ Product::Product(string id, string code, string name, int price,string origin, i
     this->addedWeight = addedWeight;
 }
 
+Product::~Product()
+{
+}
+
 string Product::getOrigin() const
 {
     return origin;

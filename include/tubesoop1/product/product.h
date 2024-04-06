@@ -16,7 +16,7 @@ class Product : public Resource{
     public:
         Product() = default;
         Product(string id, string code, string name, int price, string origin, int addedWeight);
-        
+        virtual ~Product();
         string getOrigin() const;
         int getAddedWeight() const;
         void setOrigin(string origin);
