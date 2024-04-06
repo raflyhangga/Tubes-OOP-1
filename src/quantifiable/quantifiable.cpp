@@ -4,7 +4,7 @@
 
 // Constructor implementation with validation
 template <class T>
-Quantifiable<T>::Quantifiable(T& val, int qty) : value(val) {
+inline Quantifiable<T>::Quantifiable(T& val, int qty) : value(val) {
     if (qty >= 0) {
         quantity = qty;
     } else {
@@ -14,7 +14,7 @@ Quantifiable<T>::Quantifiable(T& val, int qty) : value(val) {
 
 // Set quantity implementation with validation
 template <class T>
-void Quantifiable<T>::setQuantity(int qty) {
+inline void Quantifiable<T>::setQuantity(int qty) {
     if (qty >= 0) {
         quantity = qty;
     } else {
@@ -24,13 +24,13 @@ void Quantifiable<T>::setQuantity(int qty) {
 
 // Operator += implementation
 template <class T>
-void Quantifiable<T>::operator+=(int qty) {
+inline void Quantifiable<T>::operator+=(int qty) {
     quantity += qty;
 }
 
 // Operator -= implementation with validation
 template <class T>
-void Quantifiable<T>::operator-=(int qty) {
+inline void Quantifiable<T>::operator-=(int qty) {
     if (quantity - qty >= 0) {
         quantity -= qty;
     } else {
@@ -40,7 +40,7 @@ void Quantifiable<T>::operator-=(int qty) {
 
 // Operator ++ (postfix) implementation
 template <class T>
-Quantifiable<T> Quantifiable<T>::operator++(int) {
+inline Quantifiable<T> Quantifiable<T>::operator++(int) {
     Quantifiable<T> temp = *this;
     ++quantity;
     return temp;
@@ -48,7 +48,7 @@ Quantifiable<T> Quantifiable<T>::operator++(int) {
 
 // Operator -- (postfix) implementation with validation
 template <class T>
-Quantifiable<T> Quantifiable<T>::operator--(int) {
+inline Quantifiable<T> Quantifiable<T>::operator--(int) {
     if (quantity - 1 >= 0) {
         Quantifiable<T> temp = *this;
         --quantity;
