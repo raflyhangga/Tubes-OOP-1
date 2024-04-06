@@ -1,11 +1,11 @@
-#ifndef PETANI_H
-#define PETANI_H
+#ifndef WALIKOTA_H
+#define WALIKOTA_H
 
 #include <string>
 #include "player.h"
 using namespace std;
 
-class Walikota : Player
+class Walikota : public Player
 {
 private:
 public:

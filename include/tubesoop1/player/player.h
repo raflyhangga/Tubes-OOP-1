@@ -24,6 +24,8 @@ public:
     void putInventory(Resource &r);
     void putInventoryAt(Resource &r, Location &location);
 
+    string getUsername();
+
     bool isWin();
 };
 

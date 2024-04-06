@@ -17,6 +17,10 @@ void Player::putInventoryAt(Resource &r, Location &location){
     inventory.setElement(location, &r);
 }
 
+string Player::getUsername(){
+    return username;
+}
+
 bool Player::isWin(){
     return beratBadan >= weightToWin && uang >= moneyToWin;
 }

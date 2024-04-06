@@ -1,14 +1,14 @@
-#ifndef NEXT_HPP
-#define NEXT_HPP
+#ifndef CETAKPENYIMPANAN_HPP
+#define CETAKPENYIMPANAN_HPP
 
 #include <tubesoop1/cli/command/command.hpp>
 #include <tubesoop1/player/player.h>
 
-class Next: public Command {
+class CetakPenyimpanan: public Command {
     private:
         Player *player;
     public:
-        Next(Player *player);
+        CetakPenyimpanan(Player *player);
         void execute();
 };
 
