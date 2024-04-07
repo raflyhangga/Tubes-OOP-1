@@ -25,9 +25,6 @@ Grid<Resource*> &Player::getInventory() {
 string Player::getUsername(){
     return username;
 }
-Grid<Resource*> &Player::getInventory() {
-    return inventory;
-}
 void Player::setWeight(int weight){
     this->weight = weight;
 }
@@ -43,20 +40,11 @@ int Player::getWeight()
     return weight;
 }
 
-Grid<Resource *>& Player::getInventory()
-{
-    return inventory;
-}
-
 bool Player::isWin()
 {
     return weight >= weightToWin && money >= moneyToWin;
 }
 
-void Player::setMoney(int money)
-{
-    this->money = money;
-}
 
 void Player::removeInventory(Resource &r, int quantity) {
     if (quantity <= 0) {

@@ -62,13 +62,13 @@ bool Location::operator==(const Location &location) const {
 ostream &operator<<(ostream &os, Location &location) {
     IcosiHexaString icosiHexaString(location.getCol());
     os << icosiHexaString;
-    os << setfill('0') << setw(2) << location.getRow() + 1 << '\n';
+    os << setfill('0') << setw(2) << location.getRow() + 1;
     return os;
 }
 
 ostream &operator<<(ostream &os, const Location &location) {
     IcosiHexaString icosiHexaString(location.getCol());
     os << icosiHexaString;
-    os << setfill('0') << setw(2) << location.getRow() + 1 << '\n';
+    os << setfill('0') << setw(2) << location.getRow() + 1;
     return os;
 }

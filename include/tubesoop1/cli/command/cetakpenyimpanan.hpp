@@ -6,6 +6,7 @@
 
 class CetakPenyimpanan: public Command {
     public:
+        void printInventory(Player *player);
         void execute(Player *player);
 };
 

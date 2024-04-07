@@ -17,7 +17,7 @@ class Shop {
     public:
         Shop() = default;
         Shop(vector<Quantifiable<Resource*>> stock);        
-        Shop(Shop&);
+        Shop(const Shop&);
         Shop& operator=(Shop&);
         friend ostream& operator<<(ostream&,Shop&);
         Quantifiable<Resource*>& operator[](int idx);

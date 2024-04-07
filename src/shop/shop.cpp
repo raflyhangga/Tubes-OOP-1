@@ -8,7 +8,7 @@ Shop::Shop(vector<Quantifiable<Resource*>> stock):
 }
 
 // Copy Constructor
-Shop::Shop(Shop& other):
+Shop::Shop(const Shop& other):
     stock(other.stock)
 {
 

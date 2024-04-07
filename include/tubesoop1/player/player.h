@@ -28,11 +28,8 @@ public:
 
     void setWeight(int weight);
     void setMoney(int money);
-    void printInventory();
 
     string getUsername();
-    Grid<Resource *> &getInventory(); // Mengembalikan referensi ke Grid<Resource *>
-    void setMoney(int money);
     void removeInventory(Resource &r, int quantity);
     int getWeight();
     int getMoney();

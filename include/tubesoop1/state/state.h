@@ -16,11 +16,6 @@
 
 using namespace std;
 
-// Temporary class;
-// class Shop {
-
-// };
-
 class State {
     private:
         vector<Player*> playerList;

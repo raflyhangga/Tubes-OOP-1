@@ -96,12 +96,13 @@ void State::save(string statePath){
 
         file << name << " " << type << " " << weight << " " << money << " " << endl << inventoryCount << endl;
         
-        // for(Location location : inventory){
-        //     cout << location << endl;
-        //     // Resource *r = inventory.getElement(location);
-        //     // string itemName = r->getName();
-        //     // file << itemName << endl;
-        // }return;
+        for(Location location : inventory){
+            cout << location << " ";
+            // Resource *r = inventory.getElement(location);
+            // string itemName = r->getName();
+            // file << itemName << endl;
+        }
+        return;
         for(Grid<Resource*>::Iterator it = inventory.begin(); it != inventory.end(); ++it){
             Location location = *it;
             Resource *r = inventory.getElement(location);
