@@ -19,11 +19,11 @@ int Resource::getPrice() const {
     return price;
 }
 
-bool operator==(Resource& a,Resource& b){
+bool Resource::operator==(Resource& a){
     return
-        a.getCode() == b.getCode() &&
-        a.getName() == b.getName() &&
-        a.getPrice() == b.getPrice();
+        this->code == a.code &&
+        this->name == a.name &&
+        this->price == a.price;
 }
 
 // TOdo: Delete this main function if not needed (only for testing purpose)

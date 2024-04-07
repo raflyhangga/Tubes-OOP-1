@@ -1,8 +1,8 @@
 #ifndef TOKO_H
 #define TOKO_H
-#include "tubesoop1/quantifiable/quantifiable.h"
+#include "tubesoop1/quantifiable/quantifiable.hpp"
 #include "tubesoop1/player/player.h"
-#include "tubesoop1/resource/resource.h"
+#include "tubesoop1/resource/resource.hpp"
 #include "tubesoop1/toko/Exception.h"
 #include "tubesoop1/grid/location.h"
 #include <vector>

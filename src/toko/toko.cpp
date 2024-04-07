@@ -60,12 +60,10 @@ int Toko::getItem(Quantifiable<Resource*> otherquant){
 }
 int Toko::getItem(Resource otherrsc){
     int len = inventory.size();
-    int i = 0;
-    for(Quantifiable<Resource*> quant:inventory){
-        if (*quant.getValue() == otherrsc){
+    for(int i=0;i<len;i++){
+        if (*inventory[i].getValue() == otherrsc){
             return i;
         }
-        i++;
     }
     throw (ItemTokoNotFoundException());
 }

@@ -25,7 +25,7 @@ inline void Quantifiable<T>::setQuantity(int qty) {
 // Operator += implementation
 template <class T>
 inline void Quantifiable<T>::operator+=(int qty) {
-    if(quantity != INFINITE){
+    if(quantity != -1){
         quantity += qty;
     }
 }
@@ -43,7 +43,7 @@ inline void Quantifiable<T>::operator+=(Quantifiable<T> other){
 // Operator -= implementation with validation
 template <class T>
 inline void Quantifiable<T>::operator-=(int qty) {
-    if(quantity != INFINITE){
+    if(quantity != -1){
         if (quantity - qty >= 0) {
             quantity -= qty;
         } else {
@@ -63,7 +63,7 @@ inline Quantifiable<T> Quantifiable<T>::operator++(int) {
 // Operator -- (postfix) implementation with validation
 template <class T>
 inline Quantifiable<T> Quantifiable<T>::operator--(int) {
-    if(quantity != INFINITE){
+    if(quantity != -1){
         if (quantity - 1 >= 0) {
             Quantifiable<T> temp = *this;
             --quantity;
