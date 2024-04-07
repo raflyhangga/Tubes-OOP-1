@@ -110,6 +110,11 @@ inline bool Grid<T>::isFull() {
     return countAvailable == 0;
 }
 
+template<class T>
+inline T Grid<T>::operator[](Location l) {
+    return getElement(l);
+}
+
 
 template<class T>
 inline vector<Location> Grid<T>::getAllAvaiable() {

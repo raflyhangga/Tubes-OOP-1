@@ -52,7 +52,8 @@ class Grid {
 
         bool isFull();
 
-        
+        T operator[](Location l);
+
         vector<Location> getAllAvaiable();
 
         class Iterator {
