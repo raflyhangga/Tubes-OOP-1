@@ -1,6 +1,8 @@
 #include <tubesoop1/grid/griddrawer.h>
 #include <tubesoop1/grid/grid.h>
 #include <iostream>
+#include <iomanip>
+#include <tubesoop1/icosihexastring/icosihexastring.h>
 
 using namespace std;
 
@@ -35,9 +37,18 @@ inline void GridDrawerCLI<T>::drawContents(int row) {
 
 template <class T>
 inline void GridDrawerCLI<T>::draw() {
+    cout << "\n    ";
+    for (int i = 0; i < (this->grid).getCol(); i++) {
+        cout << "  "; cout << (IcosiHexaString) i << "   ";
+    }
+    cout << '\n';
+
     for (int i = 0; i < (this->grid).getRow(); i++) {
-        drawRowLine();
+        cout << "   "; drawRowLine();
+
+        // draw contents with padding 1 -> 01 
+        cout << setfill('0') << setw(2) << i + 1 << ' ';
         drawContents(i);
     }
-    drawRowLine();
+    cout << "   "; drawRowLine();
 }
