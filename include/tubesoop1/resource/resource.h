@@ -41,6 +41,8 @@ public:
      */
     int getPrice() const;
 
+    friend bool operator==(Resource,Resource);
+
 };
 
 #endif

@@ -5,27 +5,29 @@
 // Constructor implementation with validation
 template <class T>
 inline Quantifiable<T>::Quantifiable(T& val, int qty) : value(val) {
-    if (qty >= 0) {
-        quantity = qty;
-    } else {
-        throw invalid_argument("Quantity cannot be negative.");
-    }
+    // if (qty >= 0) {
+    //     quantity = qty;
+    // } else {
+    //     throw invalid_argument("Quantity cannot be negative.");
+    // }
 }
 
 // Set quantity implementation with validation
 template <class T>
 inline void Quantifiable<T>::setQuantity(int qty) {
-    if (qty >= 0) {
-        quantity = qty;
-    } else {
-        throw invalid_argument("Quantity cannot be negative.");
-    }
+    // if (qty >= 0) {
+    //     quantity = qty;
+    // } else {
+    //     throw invalid_argument("Quantity cannot be negative.");
+    // }
 }
 
 // Operator += implementation
 template <class T>
 inline void Quantifiable<T>::operator+=(int qty) {
-    quantity += qty;
+    if(quantity != INFINITE){
+        quantity += qty;
+    }
 }
 
 /**
@@ -41,10 +43,12 @@ inline void Quantifiable<T>::operator+=(Quantifiable<T> other){
 // Operator -= implementation with validation
 template <class T>
 inline void Quantifiable<T>::operator-=(int qty) {
-    if (quantity - qty >= 0) {
-        quantity -= qty;
-    } else {
-        throw invalid_argument("Quantity cannot be negative.");
+    if(quantity != INFINITE){
+        if (quantity - qty >= 0) {
+            quantity -= qty;
+        } else {
+            throw invalid_argument("Quantity cannot be negative.");
+        }
     }
 }
 
@@ -59,12 +63,14 @@ inline Quantifiable<T> Quantifiable<T>::operator++(int) {
 // Operator -- (postfix) implementation with validation
 template <class T>
 inline Quantifiable<T> Quantifiable<T>::operator--(int) {
-    if (quantity - 1 >= 0) {
-        Quantifiable<T> temp = *this;
-        --quantity;
-        return temp;
-    } else {
-        throw invalid_argument("Quantity cannot be negative.");
+    if(quantity != INFINITE){
+        if (quantity - 1 >= 0) {
+            Quantifiable<T> temp = *this;
+            --quantity;
+            return temp;
+        } else {
+            throw invalid_argument("Quantity cannot be negative.");
+        }
     }
 }
 

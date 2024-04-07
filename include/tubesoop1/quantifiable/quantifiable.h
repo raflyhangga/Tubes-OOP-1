@@ -3,6 +3,8 @@
 #include <iostream>
 using namespace std;
 
+#define INFINITE (int)-1;
+
 /**
  * @brief Header guard for Quantifiable class template
  */
