@@ -66,6 +66,12 @@ int main()
 
     // return 0;
 
+    Grid<int> g(5, 5);
+    g.insert(1);
+    for(const auto &loc: g) {
+        cout << loc << endl;
+    }
+
     CLIGame game;
     try {
         game.init();

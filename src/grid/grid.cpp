@@ -16,7 +16,9 @@ inline Grid<T>::Grid(int row, int col) {
     }
 
     element = vector<vector<T>>(row, vector<T>(col));
-    isAvailable = vector<vector<bool>>(row, vector<bool>(col, true));
+    isAvailable = vector<vector<bool>>(row, vector<bool>(col, 1));
+
+
     countAvailable = row * col;
     countNotAvailable = 0;
 }
@@ -70,12 +72,12 @@ inline T Grid<T>::pop(Location l) {
         throw out_of_range("Row or column is out of range.");
     }
 
-    if (!element[row][col].has_value()) {
+    if (!isAvailable[row][col]) {
         throw logic_error("Element at specified position is not available.");
     }
 
     T val = *element[row][col];
-    isAvailable[row][col] = false;
+    isAvailable[row][col] = true;
 
     countAvailable++;
     countNotAvailable--;
@@ -88,19 +90,21 @@ inline void Grid<T>::insert(T val) {
     if (isFull())
         throw logic_error("Grid is full, cannot insert.");
 
+
     int row = (int) element.size(), col = (int) element[0].size();
 
     Location loc(-1, -1);
-    for (int i = 0; i < row; ++i) {
-        for (int j = 0; j < col; ++j) {
+    int i, j;
+    bool found = false;
+    for (i = 0; i < row && !found; ++i) {
+        for (j = 0; j < col && !found; ++j) {
             Location check(i, j);
             if (isAvailable[i][j]) {
                 loc = check;
-                break;
+                found = true;
             } 
         }
     }
-
 
     setElement(loc, val);
 }
@@ -154,28 +158,39 @@ inline bool Grid<T>::Iterator::operator!=(const Iterator& other) const {
 
 template<class T>
 inline void Grid<T>::Iterator::skipToNextAvailable() {
-    int row = grid->element.size(), col = grid->element[0].size();
+    if (row >= grid->element.size()) {
+        return;
+    }
 
-    while (row < grid->element.size() && col < grid->element[0].size() && !grid->isAvailable[row][col]) {
+    if (grid->isAvailable[row][col]) {
+        return;
+    }
+
+    do {
         col++;
-        if (col == grid->element[0].size()) {
+        if (col >= grid->element[0].size()) {
             col = 0;
             row++;
         }
-    }
+    } while (row < grid->element.size() && !grid->isAvailable[row][col]);
 }
 
 template<class T>
 inline typename Grid<T>::Iterator& Grid<T>::Iterator::operator++() {
+    // Move to the next column
     col++;
-    if (col == grid->element[0].size()) {
+
+    // If we're past the last column, move to the next row
+    if (col >= grid->element[0].size()) {
         col = 0;
         row++;
     }
 
     skipToNextAvailable();
+
     return *this;
 }
+
 
 template<class T>
 inline Location Grid<T>::Iterator::operator*() const {

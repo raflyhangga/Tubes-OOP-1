@@ -55,7 +55,18 @@ istream &operator>> (istream &is, Location &location) {
     return is;
 }
 
+bool Location::operator==(const Location &location) const {
+    return first == location.first && second == location.second;
+}
+
 ostream &operator<<(ostream &os, Location &location) {
+    IcosiHexaString icosiHexaString(location.getCol());
+    os << icosiHexaString;
+    os << setfill('0') << setw(2) << location.getRow() + 1 << '\n';
+    return os;
+}
+
+ostream &operator<<(ostream &os, const Location &location) {
     IcosiHexaString icosiHexaString(location.getCol());
     os << icosiHexaString;
     os << setfill('0') << setw(2) << location.getRow() + 1 << '\n';

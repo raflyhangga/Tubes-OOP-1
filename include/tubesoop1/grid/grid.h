@@ -58,6 +58,7 @@ class Grid {
 
         T operator[](Location l);
 
+
         vector<Location> getAllAvaiable();
 
         class Iterator {
