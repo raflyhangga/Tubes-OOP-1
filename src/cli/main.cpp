@@ -71,6 +71,10 @@ int main()
     // cout << r->getName() << endl;
 
 
+    Location loc;
+    cin >> loc;
+    cout << loc << endl;
+
 
     // Main program
     cout << "[Welcome to TUBES-OOP-1]" << endl;
