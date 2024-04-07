@@ -60,7 +60,7 @@ void Building::build(Player &p)
 
         int availableQuantity = 0;
         Grid<Resource *> playerInventory = p.getInventory();
-        for (const auto &location : playerInventory.getAllAvaiable())
+        for (const auto &location : playerInventory.getAllFilled())
         {
             Resource *res = playerInventory.getElement(location);
             if (res && res == &product)

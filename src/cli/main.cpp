@@ -34,14 +34,14 @@ int main()
     ResourceFactory factory = ResourceFactory("config");
     cout << factory << endl;
 
-    try{
-        State state = State("config/state.txt", factory);
-        state.save("config/state2.txt");
-    } catch (exception &e) {
-        cout << e.what() << endl;
-    }
+    // try{
+    //     State state = State("config/state.txt", factory);
+    //     state.save("config/state2.txt");
+    // } catch (exception &e) {
+    //     cout << e.what() << endl;
+    // }
 
-    return 0;
+    // return 0;
 
     // Resource *r = factory.translate("HORSE");
     // cout << r->getCode() << ": " << r->getPrice() << endl;
@@ -75,8 +75,10 @@ int main()
 
     // return 0;
 
-    Grid<int> g(5, 5);
-    g.insert(1);
+    Grid<int> g;
+    g.setElement(Location(0, 0), 1); // A01
+    g.setElement(Location(1, 4), 1); // E02
+    g.setElement(Location(0, 2), 1); // C01
     for(const auto &loc: g) {
         cout << loc << endl;
     }

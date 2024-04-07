@@ -56,7 +56,7 @@ void Player::removeInventory(Resource &r, int quantity) {
 
     // Find all locations in the inventory that have the same resource as r
     int removedCount = 0;
-    for (const auto &location : playerInventory.getAllAvaiable()) {
+    for (const auto &location : playerInventory.getAllFilled()) {
         Resource *res = playerInventory.getElement(location);
         if (res && *res == r) {
             locationsToRemove.push_back(location);

@@ -12,9 +12,9 @@ template <class T>
 class Grid {
     private:
         vector<vector<T>> element;
-        vector<vector<bool>> isAvailable;
-        int countAvailable;
-        int countNotAvailable;
+        vector<vector<bool>> isFilled;
+        int countFilled;
+        int countNotFilled;
     public:
         static int defaultWidth;
         static int defaultHeight;
@@ -30,10 +30,10 @@ class Grid {
         Grid(int row, int col);
 
         // getter countAvailable, no setter to prevent bugs
-        int getCountAvailable();
+        int getCountFilled();
 
         // getter countNotAvailable, no setter to prevent bugs
-        int getCountNotAvailable();
+        int getCountNotFilled();
         
         // getter element at a certain row and column.
         T getElement(Location l);
@@ -59,14 +59,14 @@ class Grid {
         T operator[](Location l);
 
 
-        vector<Location> getAllAvaiable();
+        vector<Location> getAllFilled();
 
         class Iterator {
             private:
                 const Grid<T>* grid;
                 int row, col;
 
-                void skipToNextAvailable();
+                void skipToNextFilled();
 
             public:
                 Iterator(const Grid<T>* grid, int startRow, int startCol);

@@ -92,7 +92,7 @@ void State::save(string statePath){
         money = currentPlayer->getMoney();
         type = getClassName(*currentPlayer);
         Grid<Resource*>& inventory = currentPlayer->getInventory();
-        inventoryCount = inventory.getCountAvailable();
+        inventoryCount = inventory.getCountFilled();
 
         file << name << " " << type << " " << weight << " " << money << " " << endl << inventoryCount << endl;
         
@@ -111,7 +111,7 @@ void State::save(string statePath){
         
         if(type == "Petani"){
             Grid<Plant*>& ladang = ((Petani*)currentPlayer)->getLadang();
-            int plantCount = ladang.getCountAvailable();
+            int plantCount = ladang.getCountFilled();
             file << plantCount << endl;
             for(Location location : ladang){
                 Plant *plant = ladang.getElement(location);
@@ -122,9 +122,14 @@ void State::save(string statePath){
         }
         else if(type == "Peternak"){
             Grid<Animal*>& peternakan = ((Peternak*)currentPlayer)->getPeternakan();
-            int animalCount = peternakan.getCountAvailable();
+            int animalCount = peternakan.getCountFilled();
             file << animalCount << endl;
+            for (Location loc: peternakan) {
+                cout << loc << '\n';
+            }
+
             for(Location location : peternakan){
+                cout << location << endl;
                 Animal *animal = peternakan.getElement(location);
                 string name = animal->getName();
                 int weight = animal->getWeight();

@@ -1,4 +1,13 @@
 4
 Budi Peternak  d 
-95
-69
+5
+3
+A01 CHICKEN 1C01 SHEEP 2E02 DUCK 1Jongrang Peternak 
+ d 
+2
+0
+Roro Petani  è 
+5
+2
+B01 ORANGE_TREE 0F02 BANANA_TREE 2Bondowoso Walikota F d 
+3

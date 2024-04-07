@@ -16,21 +16,21 @@ inline Grid<T>::Grid(int row, int col) {
     }
 
     element = vector<vector<T>>(row, vector<T>(col));
-    isAvailable = vector<vector<bool>>(row, vector<bool>(col, 1));
+    isFilled = vector<vector<bool>>(row, vector<bool>(col, 0));
 
 
-    countAvailable = row * col;
-    countNotAvailable = 0;
+    countFilled = 0;
+    countNotFilled = row * col;
 }
 
 template <class T>
-inline int Grid<T>::getCountAvailable(){
-    return countAvailable;
+inline int Grid<T>::getCountFilled(){
+    return countFilled;
 }
 
 template <class T>
-inline int Grid<T>::getCountNotAvailable(){
-    return countNotAvailable;
+inline int Grid<T>::getCountNotFilled(){
+    return countNotFilled;
 }
 
 template <class T>
@@ -40,8 +40,8 @@ inline T Grid<T>::getElement(Location l){
         throw out_of_range("Row or column is out of range.");
     }
 
-    // If it is not available means that it havent been set.
-    if (!isAvailable[row][col]) {
+    // If it's not filled, then throw an exception.
+    if (isFilled[row][col]) {
         return element[row][col];
     } else {
         throw logic_error("Element at specified position is not available.");
@@ -58,10 +58,10 @@ inline void Grid<T>::setElement(Location l, T val) {
         throw out_of_range(message);
     }
 
-    if (isAvailable[row][col]) {
-        countAvailable--;
-        countNotAvailable++;
-        isAvailable[row][col] = false;
+    if (!isFilled[row][col]) {
+        countFilled++;
+        countNotFilled--;
+        isFilled[row][col] = true;
     }
 
     element[row][col] = val;
@@ -75,15 +75,15 @@ inline T Grid<T>::pop(Location l) {
         throw out_of_range("Row or column is out of range.");
     }
 
-    if (!isAvailable[row][col]) {
+    if (!isFilled[row][col]) {
         throw logic_error("Element at specified position is not available.");
     }
 
     T val = *element[row][col];
-    isAvailable[row][col] = true;
+    isFilled[row][col] = false;
 
-    countAvailable++;
-    countNotAvailable--;
+    countFilled--;
+    countNotFilled++;
 
     return val;
 }
@@ -102,7 +102,7 @@ inline void Grid<T>::insert(T val) {
     for (i = 0; i < row && !found; ++i) {
         for (j = 0; j < col && !found; ++j) {
             Location check(i, j);
-            if (isAvailable[i][j]) {
+            if (!isFilled[i][j]) {
                 loc = check;
                 found = true;
             } 
@@ -114,7 +114,7 @@ inline void Grid<T>::insert(T val) {
 
 template<class T>
 inline bool Grid<T>::isFull() {
-    return countAvailable == 0;
+    return countNotFilled == 0;
 }
 
 template<class T>
@@ -134,13 +134,13 @@ inline T Grid<T>::operator[](Location l) {
 
 
 template<class T>
-inline vector<Location> Grid<T>::getAllAvaiable() {
+inline vector<Location> Grid<T>::getAllFilled() {
     vector<Location> locations;
     int row = (int) element.size(), col = (int) element[0].size();
 
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < col; ++j) {
-            if (isAvailable[i][j]) {
+            if (isFilled[i][j]) {
                 locations.push_back(Location(i, j));
             }
         }
@@ -151,7 +151,7 @@ inline vector<Location> Grid<T>::getAllAvaiable() {
 
 template<class T>
 inline Grid<T>::Iterator::Iterator(const Grid<T>* grid, int startRow, int startCol) : grid(grid), row(startRow), col(startCol) {
-    skipToNextAvailable();
+    skipToNextFilled();
 }
 
 template<class T>
@@ -160,12 +160,12 @@ inline bool Grid<T>::Iterator::operator!=(const Iterator& other) const {
 }
 
 template<class T>
-inline void Grid<T>::Iterator::skipToNextAvailable() {
+inline void Grid<T>::Iterator::skipToNextFilled() {
     if (row >= grid->element.size()) {
         return;
     }
 
-    if (grid->isAvailable[row][col]) {
+    if (grid->isFilled[row][col]) {
         return;
     }
 
@@ -175,7 +175,7 @@ inline void Grid<T>::Iterator::skipToNextAvailable() {
             col = 0;
             row++;
         }
-    } while (row < grid->element.size() && !grid->isAvailable[row][col]);
+    } while (row < grid->element.size() && !grid->isFilled[row][col]);
 }
 
 template<class T>
@@ -189,7 +189,7 @@ inline typename Grid<T>::Iterator& Grid<T>::Iterator::operator++() {
         row++;
     }
 
-    skipToNextAvailable();
+    skipToNextFilled();
 
     return *this;
 }
