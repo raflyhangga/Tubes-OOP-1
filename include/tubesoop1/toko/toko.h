@@ -35,6 +35,7 @@ class Toko {
          * @return Index pada inventory toko, apabila tidak ada melakukan throw ``ItemTokoNotFoundException()``
         */
         int getItem(Quantifiable<Resource*> otherquant);
+        
         /**
          * Mengembalikan indeks lokasi resource pada inventory
          * 

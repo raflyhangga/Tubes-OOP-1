@@ -47,7 +47,6 @@ vector<Quantifiable<Resource*>> Toko::getInventory(){
     return inventory;
 }
 
-// Mengembalikan indeks lokasi Quantifiable<Resource&> pada inventory
 int Toko::getItem(Quantifiable<Resource*> otherquant){
     int len = inventory.size();
     int i = 0;
@@ -71,7 +70,6 @@ int Toko::getItem(Resource otherrsc){
     throw (ItemTokoNotFoundException());
 }
 
-// Menghapus suatu Quantifiable<Resource&> dari inventory
 void Toko::removeItem(Quantifiable<Resource*> otherquant){
     try{
         int placeToErase = getItem(otherquant)+1;
@@ -81,7 +79,6 @@ void Toko::removeItem(Quantifiable<Resource*> otherquant){
     }
 }
 
-// Menambahkan suatu Quantifiable<Resource&> dari inventory
 void Toko::addItem(Quantifiable<Resource*> otherquant){
     try{
         // If already inside, sum the quantity
