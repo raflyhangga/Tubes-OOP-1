@@ -14,13 +14,13 @@ using namespace std;
 class Building : public Resource
 {
 private:
-    vector<Quantifiable<Product*>> recipe;
+    vector<Quantifiable<ProductMaterial*>> recipe;
 
 public:
-    Building(string code, string name, int price, const vector<Quantifiable<Product*>> &recipe);
+    Building(string code, string name, int price, const vector<Quantifiable<ProductMaterial*>> &recipe);
     void printBuildingInfo() const;
     void build(Player &p);
-    void addMaterial(const Product &material, int quantity);
+    void addMaterial(const ProductMaterial &material, int quantity);
 };
 
 #endif
