@@ -4,18 +4,18 @@
 using namespace std;
 #include <exception>
 
-struct ItemTokoNotFoundException: public exception{
+struct ItemShopNotFoundException: public exception{
     const char* what() const throw() {
-		return "Item pada toko tidak ditemukan";
+		return "Item pada Shop tidak ditemukan";
 	}
 
 };
-struct ItemTokoNotEqualException: public exception{
+struct ItemShopNotEqualException: public exception{
     const char* what() const throw() {
 		return "Kedua item tidak sama";
 	}
 };
-struct ItemTokoEmptyException: public exception{
+struct ItemShopEmptyException: public exception{
     const char* what() const throw() {
 		return "Stok Habis";
 	}

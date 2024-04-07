@@ -67,7 +67,7 @@ void State::load(string statePath, ResourceFactory &factory){
         file >> itemName >> itemAmount;
         Resource *r = factory.translate(itemName);
         Quantifiable<Resource*> qr = Quantifiable<Resource*>(r, itemAmount);
-        // toko.addItem(*r);
+        // Shop.addItem(*r);
     }
 
     file.close();

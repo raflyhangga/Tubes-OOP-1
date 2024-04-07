@@ -11,19 +11,20 @@
 #include "tubesoop1/resource/resourcefactory_exception.h"
 #include "tubesoop1/grid/location.h"
 #include "tubesoop1/state/state_exception.h"
+#include "tubesoop1/shop/shop.h"
 #include <algorithm>
 
 using namespace std;
 
 // Temporary class;
-class Toko {
+// class Shop {
 
-};
+// };
 
 class State {
     private:
         vector<Player*> playerList;
-        Toko toko;
+        Shop shop;
         const char* getClassName(Player &player);
     public:
         State(string statePath, ResourceFactory &factory);
