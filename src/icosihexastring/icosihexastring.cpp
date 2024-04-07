@@ -44,6 +44,10 @@ IcosiHexaString::IcosiHexaString(string s) {
     str = s;
 }
 
+string IcosiHexaString::getString() const {
+    return str;
+}
+
 
 IcosiHexaString::operator int() const {
     int val = 0;

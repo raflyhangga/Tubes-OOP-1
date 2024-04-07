@@ -3,8 +3,9 @@
 #include <QTextEdit>
 #include <QPushButton>
 #include "tubesoop1/resource/resource.h"
+#include "tubesoop1/grid/grid.hpp"
 #include "tubesoop1/gui/components/nicebutton.h"
-#include "tubesoop1/gui/components/gridbutton.h"
+#include "tubesoop1/gui/components/gridbutton.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -23,11 +24,11 @@ int main(int argc, char *argv[])
     window.setGeometry(100, 100, 400, 200);
     window.show();
 
-    QTextEdit textEdit;
-    textEdit.setText("Hello, World!");
-    textEdit.setLineWrapMode(QTextEdit::NoWrap);
-    textEdit.show();
-    window.setCentralWidget(&textEdit);
+    // QTextEdit textEdit;
+    // textEdit.setText("Hello, World!");
+    // textEdit.setLineWrapMode(QTextEdit::NoWrap);
+    // textEdit.show();
+    // window.setCentralWidget(&textEdit);
 
     NiceButton button("Press");
     window.setMenuWidget(&button);
@@ -35,12 +36,12 @@ int main(int argc, char *argv[])
     int counter = 0;
     button.connect(&button, &QPushButton::clicked, [&](){
         counter++;
-        textEdit.setText("Button Pressed " + QString::number(counter) + " times");
+        // textEdit.setText("Button Pressed " + QString::number(counter) + " times");
     });
     
     Grid<Resource*> gr(3,3);
-    GridButton<Resource*> gb(gr);
-    window.setCentralWidget(&gb);
+    GridButton<Resource*>* gb = new GridButton<Resource*>(gr);;
+    window.setCentralWidget(gb);
 
     return app.exec();
 }

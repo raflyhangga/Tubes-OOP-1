@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.14)
 project(tubesoop1)
 
-# GoogleTest requires at least C++14
-set(CMAKE_CXX_STANDARD 14)
+# GoogleTest requires at least C++14, 17 to support inline
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FetchContent)
@@ -30,13 +30,19 @@ include(GoogleTest)
 gtest_discover_tests(unit_test)
 
 
-
 find_package(Qt5Widgets REQUIRED)
 include_directories(${Qt5Widgets_INCLUDE_DIRS})
 set(GUISOURCES 
   src/gui/main.cpp
   src/gui/components/nicebutton.cpp
+  src/gui/components/gridbutton.cpp
+  include/tubesoop1/gui/components/gridbutton.hpp
+  src/gui/components/locationlabel.cpp
+
   src/resource/resource.cpp
+  src/icosihexastring/icosihexastring.cpp
+  src/grid/location.cpp
+  src/grid/location_exception.cpp
   src/grid/grid.cpp
   include/tubesoop1/grid/grid.hpp
 )

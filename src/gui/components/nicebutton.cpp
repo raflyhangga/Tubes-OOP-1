@@ -17,6 +17,10 @@ NiceButton::NiceButton() : QPushButton() {
         QPushButton:pressed {
             background-color: rgb(91, 33, 182);
         }
+        QPushButton:disabled {
+            background-color: rgb(76, 29, 149);
+            color: rgb(167, 139, 250);
+        }
     )");
     setCursor(QCursor(Qt::PointingHandCursor));
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);

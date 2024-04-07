@@ -18,6 +18,8 @@ class IcosiHexaString {
         IcosiHexaString(int val);
 
         IcosiHexaString(string s);
+
+        string getString() const;
         
         operator int() const;
 
