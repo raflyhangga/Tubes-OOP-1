@@ -23,40 +23,10 @@
 #include <tubesoop1/cli/command/next.hpp>
 #include <tubesoop1/cli/command/cetakpenyimpanan.hpp>
 
+#include <tubesoop1/cli/globals.hpp>
+#include <tubesoop1/cli/game.hpp>
+
 using namespace std;
-
-
-
-// global variable
-int turn = 0;
-vector<Player*> players;
-map<string, Command*> commands;
-
-void initializeCommand() {
-    commands["NEXT"] = new Next();
-    commands["CETAK_PENYIMPANAN"] = new CetakPenyimpanan();
-}
-
-void initializeGame() {
-    string name1 = "Petani1";
-    Petani *petani1 = new Petani(name1);
-
-    string name2 = "Peternak1";
-    Peternak *peternak1 = new Peternak(name2);
-
-    string name3 = "Walikota";
-    Walikota *walikota = new Walikota(name3);
-
-    players.push_back(walikota);
-    players.push_back(petani1);
-    players.push_back(peternak1);
-
-    sort(players.begin(), players.end(), [](Player* a, Player* b) {
-        return a->getUsername() < b->getUsername();
-    });
-
-    cout << "Giliran " << players[turn]->getUsername() << " yang bermain." << endl;
-}
 
 int main()
 {
@@ -71,48 +41,40 @@ int main()
     // cout << r->getName() << endl;
 
 
-    Location loc;
-    cin >> loc;
-    cout << loc << endl;
+    // Location loc;
+    // cin >> loc;
+    // cout << loc << endl;
 
 
     // Main program
-    cout << "[Welcome to TUBES-OOP-1]" << endl;
-    Animal *horse = (Animal*)factory.translate("HORSE");
-    Animal *rabbit = (Animal*)factory.translate("RABBIT");
-    Product *apple = (Product*)factory.translate("APPLE");
-    Product *cowMeat = (Product*)factory.translate("COW_MEAT");
+    // cout << "[Welcome to TUBES-OOP-1]" << endl;
+    // Animal *horse = (Animal*)factory.translate("HORSE");
+    // Animal *rabbit = (Animal*)factory.translate("RABBIT");
+    // Product *apple = (Product*)factory.translate("APPLE");
+    // Product *cowMeat = (Product*)factory.translate("COW_MEAT");
 
-    cout << horse->getName() << rabbit->getName() << apple->getName() << cowMeat->getName() << endl;
+    // cout << horse->getName() << rabbit->getName() << apple->getName() << cowMeat->getName() << endl;
     
-    try{
-        horse->eat(*apple);
-        rabbit->eat(*apple);
-        horse->eat(*cowMeat);
-        rabbit->eat(*cowMeat);
-    } catch (CannotEatException &e) {
-        cout << e.what() << endl;
+    // try{
+    //     horse->eat(*apple);
+    //     rabbit->eat(*apple);
+    //     horse->eat(*cowMeat);
+    //     rabbit->eat(*cowMeat);
+    // } catch (CannotEatException &e) {
+    //     cout << e.what() << endl;
+    // }
+
+    // return 0;
+
+    CLIGame game;
+    try {
+        game.init();
+    } catch (const exception &e) {
+        cout << "Error: " << e.what() << endl;
+        cout << "Gagal memulai permainan\n";
+        return 1;
     }
-
-    return 0;
-
-    initializeGame();
-    initializeCommand();
-
-    string command;
-    while (true) {
-        cout << "> ";
-        cin >> command;
-        try {
-            commands[command]->execute(players[turn]);
-        } catch(const bad_function_call &e) {
-            cout << "Tidak ada command \"" << command << "\"\n";
-        } catch (exception &e) {
-            cout << e.what() << endl;
-        }
-    }
-
-
+    game.run();
 
     return 0;
 }

@@ -4,6 +4,6 @@
 using namespace std;
 
 void CetakPenyimpanan::execute(Player *player) {
-    cerr << "CetakPenyimpanan command executed" << endl;
+    player->printInventory();
 }
 

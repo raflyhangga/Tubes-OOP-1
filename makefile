@@ -1,7 +1,7 @@
 CC = g++
 
 HEADER_DIR = include
-CFLAGS = -Wall -Werror -std=c11 -w -I $(HEADER_DIR)
+CFLAGS = -Wall -Werror -std=c++11 -w -I $(HEADER_DIR)
 
 OUTPUT_DIR = bin
 SRC_DIR = src
@@ -11,18 +11,25 @@ MAIN = main
 SRC_MAIN = src/cli/$(MAIN).cpp
 OBJ_MAIN = $(SRC_MAIN:.cpp=.o)
 
+DEPFLAGS = -MMD -MP  # flags to generate dependency files
+
+# Dependency files
+DEPS = $(OBJS:.o=.d)
+
+-include $(DEPS)
+
 
 $(OUTPUT_DIR)/%.o: %.cpp 
 	@echo -n ">> "
 	mkdir -p $(@D)
 	@echo -n ">> "
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(DEPFLAGS) -c -o  $@ $<
 
 $(OUTPUT_DIR)/%.o: %.hpp
 	@echo -n ">> "
 	mkdir -p $(@D)
 	@echo -n ">> "
-	$(CC) $(CFLAGS) -x c++ -c -o $@ $<
+	$(CC) $(CFLAGS) $(DEPFLAGS) -x c++ -c -o $@ $<
 
 SRC_CLI = $(wildcard $(SRC_DIR)/cli/*.cpp) $(wildcard $(SRC_DIR)/cli/*/*.cpp)
 
@@ -95,3 +102,7 @@ rungui:
 	$(info [Run GUI])
 	@echo -n ">> "
 	./$(BUILD_DIR)/$(GUI_TARGET)
+
+
+# Include the dependency files
+-include $(OBJS:.o=.d)

@@ -23,12 +23,14 @@ public:
 
     void putInventory(Resource &r);
     void putInventoryAt(Resource &r, Location &location);
+    void printInventory();
 
     string getUsername();
     int getWeight();
     int getMoney();
 
     bool isWin();
+
 };
 
 #endif

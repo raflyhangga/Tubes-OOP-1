@@ -52,6 +52,10 @@ class Grid {
 
         bool isFull();
 
+        int getRow();
+
+        int getCol();
+
         T operator[](Location l);
 
         vector<Location> getAllAvaiable();

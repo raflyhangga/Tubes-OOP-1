@@ -15,6 +15,7 @@ class GridDrawer {
 template <class T>
 class GridDrawerCLI: public GridDrawer<T> {
     private:
+        Grid<T> grid;
         void drawRowLine();
         void drawContents(int row);
     public:

@@ -24,7 +24,8 @@ inline void GridDrawerCLI<T>::drawContents(int row) {
     cout << '|';
     for (int i = 0; i < (this->grid).getCol(); i++) {
         try {
-            cout << ' ' << (this->grid).getElement(row, i) << " |";
+            T el = (this->grid).getElement(Location(row, i));
+            cout << ' ' << el << " |";
         } catch (const exception& e) {
             cout << "     |";
         }

@@ -3,7 +3,7 @@
 #include "tubesoop1/quantifiable/quantifiable.hpp"
 #include "tubesoop1/player/player.h"
 #include "tubesoop1/resource/resource.h"
-#include "tubesoop1/Shop/Exception.h"
+#include "tubesoop1/shop/Exception.h"
 #include "tubesoop1/grid/location.h"
 #include <vector>
 #include <iostream>

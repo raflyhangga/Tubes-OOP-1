@@ -1,4 +1,5 @@
 #include "tubesoop1/player/player.h"
+#include <tubesoop1/grid/griddrawer.hpp>
 
 int Player::moneyToWin;
 int Player::weightToWin;
@@ -15,6 +16,11 @@ void Player::putInventory(Resource &r){
 }
 void Player::putInventoryAt(Resource &r, Location &location){
     inventory.setElement(location, &r);
+}
+
+void Player::printInventory(){
+    GridDrawerCLI<Resource*> drawer = GridDrawerCLI<Resource*>(inventory);
+    drawer.draw();
 }
 
 string Player::getUsername(){

@@ -40,7 +40,7 @@ inline T Grid<T>::getElement(Location l){
 
     // If it is not available means that it havent been set.
     if (!isAvailable[row][col]) {
-        return *element[row][col];
+        return element[row][col];
     } else {
         throw logic_error("Element at specified position is not available.");
     }
@@ -108,6 +108,16 @@ inline void Grid<T>::insert(T val) {
 template<class T>
 inline bool Grid<T>::isFull() {
     return countAvailable == 0;
+}
+
+template<class T>
+inline int Grid<T>::getRow() {
+    return (int) element.size();
+}
+
+template<class T>
+inline int Grid<T>::getCol() {
+    return (int) element[0].size();
 }
 
 template<class T>
