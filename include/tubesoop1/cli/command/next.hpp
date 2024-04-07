@@ -5,11 +5,8 @@
 #include <tubesoop1/player/player.h>
 
 class Next: public Command {
-    private:
-        Player *player;
     public:
-        Next(Player *player);
-        void execute();
+        void execute(Player *player);
 };
 
 #endif

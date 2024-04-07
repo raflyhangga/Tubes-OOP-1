@@ -1,13 +1,15 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include <map>
 #include <functional>
 
 #include <tubesoop1/icosihexastring/icosihexastring.h>
-#include <tubesoop1/grid/location.hpp>
+#include <tubesoop1/grid/location.h>
 #include <tubesoop1/grid/griddrawer.hpp>
 #include <tubesoop1/resource/resource.h>
 #include <tubesoop1/animal/animal.h>
+#include <tubesoop1/animal/animal_exception.h>
 #include <tubesoop1/plant/plant.h>
 #include <tubesoop1/grid/grid.h>
 #include <tubesoop1/resource/resourcefactory.h>
@@ -28,18 +30,11 @@ using namespace std;
 // global variable
 int turn = 0;
 vector<Player*> players;
-map<string, function<void(Player*)>> commands;
+map<string, Command*> commands;
 
 void initializeCommand() {
-    commands["NEXT"] = [](Player* player) {
-        Next next(player);
-        next.execute();
-    };
-
-    commands["CETAK_PENYIMPANAN"] = [](Player* player) {
-        CetakPenyimpanan cetakPenyimpanan(player);
-        cetakPenyimpanan.execute();
-    };
+    commands["NEXT"] = new Next();
+    commands["CETAK_PENYIMPANAN"] = new CetakPenyimpanan();
 }
 
 void initializeGame() {
@@ -69,8 +64,8 @@ int main()
     ResourceFactory factory = ResourceFactory("config");
     cout << factory << endl;
 
-    Resource *r = factory.translate("HORSE");
-    cout << r->getCode() << ": " << r->getPrice() << endl;
+    // Resource *r = factory.translate("HORSE");
+    // cout << r->getCode() << ": " << r->getPrice() << endl;
     
     // Resource* r = factory.translate("SANDALWOOD_WOOD");
     // cout << r->getName() << endl;
@@ -79,6 +74,23 @@ int main()
 
     // Main program
     cout << "[Welcome to TUBES-OOP-1]" << endl;
+    Animal *horse = (Animal*)factory.translate("HORSE");
+    Animal *rabbit = (Animal*)factory.translate("RABBIT");
+    Product *apple = (Product*)factory.translate("APPLE");
+    Product *cowMeat = (Product*)factory.translate("COW_MEAT");
+
+    cout << horse->getName() << rabbit->getName() << apple->getName() << cowMeat->getName() << endl;
+    
+    try{
+        horse->eat(*apple);
+        rabbit->eat(*apple);
+        horse->eat(*cowMeat);
+        rabbit->eat(*cowMeat);
+    } catch (CannotEatException &e) {
+        cout << e.what() << endl;
+    }
+
+    return 0;
 
     initializeGame();
     initializeCommand();
@@ -88,7 +100,7 @@ int main()
         cout << "> ";
         cin >> command;
         try {
-            commands[command](players[turn]);
+            commands[command]->execute(players[turn]);
         } catch(const bad_function_call &e) {
             cout << "Tidak ada command \"" << command << "\"\n";
         } catch (exception &e) {

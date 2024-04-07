@@ -3,11 +3,7 @@
 
 using namespace std;
 
-Next::Next(Player *player) {
-    this->player = player;
-}
-
-void Next::execute() {
+void Next::execute(Player *player) {
     cout << "Next command executed" << endl;
 }
 

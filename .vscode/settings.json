@@ -81,6 +81,16 @@
         "xloctime": "cpp",
         "forward_list": "cpp",
         "xhash": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "any": "cpp",
+        "cstring": "cpp",
+        "iomanip": "cpp",
+        "ios": "cpp",
+        "set": "cpp",
+        "unordered_set": "cpp",
+        "xfacet": "cpp",
+        "xlocbuf": "cpp",
+        "xlocinfo": "cpp",
+        "*.rh": "cpp"
     }
 }

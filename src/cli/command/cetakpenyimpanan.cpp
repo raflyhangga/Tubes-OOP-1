@@ -3,11 +3,7 @@
 
 using namespace std;
 
-CetakPenyimpanan::CetakPenyimpanan(Player *player) {
-    this->player = player;
-}
-
-void CetakPenyimpanan::execute() {
+void CetakPenyimpanan::execute(Player *player) {
     cerr << "CetakPenyimpanan command executed" << endl;
 }
 

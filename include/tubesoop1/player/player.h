@@ -12,8 +12,8 @@ class Player
 {
 protected:
     const string username;
-    int beratBadan;
-    int uang;
+    int weight;
+    int money;
     Grid<Resource*> inventory;
 public:
     static int playerCount;
@@ -25,6 +25,8 @@ public:
     void putInventoryAt(Resource &r, Location &location);
 
     string getUsername();
+    int getWeight();
+    int getMoney();
 
     bool isWin();
 };

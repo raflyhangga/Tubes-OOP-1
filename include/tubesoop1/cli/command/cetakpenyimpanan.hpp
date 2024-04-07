@@ -5,11 +5,8 @@
 #include <tubesoop1/player/player.h>
 
 class CetakPenyimpanan: public Command {
-    private:
-        Player *player;
     public:
-        CetakPenyimpanan(Player *player);
-        void execute();
+        void execute(Player *player);
 };
 
 #endif

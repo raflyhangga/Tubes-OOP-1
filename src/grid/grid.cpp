@@ -1,5 +1,5 @@
 #include "tubesoop1/grid/grid.h"
-#include "tubesoop1/grid/location.hpp"
+#include "tubesoop1/grid/location.h"
 
 using namespace std;
 
