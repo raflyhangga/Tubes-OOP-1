@@ -40,7 +40,7 @@ inline T Grid<T>::getElement(Location l){
 
     // If it is not available means that it havent been set.
     if (!isAvailable[row][col]) {
-        return *element[row][col];
+        return element[row][col];
     } else {
         throw logic_error("Element at specified position is not available.");
     }

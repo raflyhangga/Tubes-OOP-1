@@ -93,7 +93,7 @@ ResourceFactory::ResourceFactory(string configPath){
     for(int i = 0; i < 4; i++) {
         string kode, name;
         int price;
-        vector<Quantifiable<Product*>> recipe;
+        vector<Quantifiable<ProductMaterial*>> recipe;
         file >> _ >> kode >> name >> price; 
 
         string line;
@@ -103,8 +103,8 @@ ResourceFactory::ResourceFactory(string configPath){
         int quantity;
         while(iss >> material >> quantity){
             Resource* r = (translate(material));
-            Product* p = dynamic_cast<Product*>(r);
-            Quantifiable<Product*> qp = Quantifiable<Product*>(p, quantity);
+            ProductMaterial* p = dynamic_cast<ProductMaterial*>(r);
+            Quantifiable<ProductMaterial*> qp = Quantifiable<ProductMaterial*>(p, quantity);
             recipe.push_back(qp);
         }
 
