@@ -14,6 +14,7 @@ class Location: pair<int, int> {
         int getCol() const;
 
         friend istream& operator>>(istream& is, Location& location);
+        friend ostream& operator>>(ostream& os, Location& location);
 };
 
 #endif

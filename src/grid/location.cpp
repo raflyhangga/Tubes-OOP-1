@@ -1,5 +1,6 @@
 #include <tubesoop1/grid/location.hpp>
 #include <tubesoop1/icosihexastring/icosihexastring.h>
+#include <tubesoop1/grid/location_exception.hpp>
 
 using namespace std;
 
@@ -35,9 +36,25 @@ istream &operator>> (istream &is, Location &location) {
         }
     }
 
-    IcosiHexaString icosiHexaString(icosi);
+    try {
+        IcosiHexaString icosiHexaString(icosi);
+        
+        for (auto &c: str.substr(icosi.size())) {
+            if (isalpha(c)) throw LocationException();
+        }
 
-    location.first = (int) icosiHexaString; 
-    location.second = stoi(str.substr(icosi.size()));
+
+        location.first = stoi(str.substr(icosi.size())) - 1;
+        location.second = (int) icosiHexaString; 
+    } catch (const exception &e){
+        throw LocationException();
+    }
+
     return is;
+}
+
+ostream &operator<< (ostream &os, Location &location) {
+    IcosiHexaString icosiHexaString(location.getCol());
+    os << icosiHexaString << location.getRow();
+    return os;
 }

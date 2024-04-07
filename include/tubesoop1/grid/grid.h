@@ -48,9 +48,33 @@ class Grid {
          * Insert Element at the Top most, left most grid. 
          * Higher priority: top > left.
         */
-       void insert(T val);
+        void insert(T val);
 
-       bool isFull();
+        bool isFull();
+
+        
+        vector<Location> getAllAvaiable();
+
+        class Iterator {
+            private:
+                const Grid<T>* grid;
+                int row, col;
+
+                void skipToNextAvailable();
+
+            public:
+                Iterator(const Grid<T>* grid, int startRow, int startCol);
+
+                bool operator!=(const Iterator& other) const;
+
+                Iterator& operator++();
+
+                Location operator*() const;
+        };
+    
+        Iterator begin() const;
+
+        Iterator end() const;
 };
 
 #endif

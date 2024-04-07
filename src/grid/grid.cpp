@@ -109,3 +109,70 @@ template<class T>
 inline bool Grid<T>::isFull() {
     return countAvailable == 0;
 }
+
+
+template<class T>
+inline vector<Location> Grid<T>::getAllAvaiable() {
+    vector<Location> locations;
+    int row = (int) element.size(), col = (int) element[0].size();
+
+    for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < col; ++j) {
+            if (isAvailable[i][j]) {
+                locations.push_back(Location(i, j));
+            }
+        }
+    }
+
+    return locations;
+}
+
+template<class T>
+inline Grid<T>::Iterator::Iterator(const Grid<T>* grid, int startRow, int startCol) : grid(grid), row(startRow), col(startCol) {
+    skipToNextAvailable();
+}
+
+template<class T>
+inline bool Grid<T>::Iterator::operator!=(const Iterator& other) const {
+    return row != other.row || col != other.col;
+}
+
+template<class T>
+inline void Grid<T>::Iterator::skipToNextAvailable() {
+    int row = grid->element.size(), col = grid->element[0].size();
+
+    while (row < grid->element.size() && col < grid->element[0].size() && !grid->isAvailable[row][col]) {
+        col++;
+        if (col == grid->element[0].size()) {
+            col = 0;
+            row++;
+        }
+    }
+}
+
+template<class T>
+inline typename Grid<T>::Iterator& Grid<T>::Iterator::operator++() {
+    col++;
+    if (col == grid->element[0].size()) {
+        col = 0;
+        row++;
+    }
+
+    skipToNextAvailable();
+    return *this;
+}
+
+template<class T>
+inline Location Grid<T>::Iterator::operator*() const {
+    return Location(row, col);
+}
+
+template<class T>
+inline typename Grid<T>::Iterator Grid<T>::begin() const {
+    return Iterator(this, 0, 0);
+}
+
+template<class T>
+inline typename Grid<T>::Iterator Grid<T>::end() const {
+    return Iterator(this, element.size(), 0);
+}
