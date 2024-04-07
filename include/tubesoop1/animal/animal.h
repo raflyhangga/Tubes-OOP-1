@@ -21,6 +21,7 @@ public:
     Animal(string code, string name, int price, int weightToHarvest,vector<Product*> drops);
 
     void setWeight(int weight);
+    int getWeight() const;
 
     // Visitor pattern
     void eat(Product&);

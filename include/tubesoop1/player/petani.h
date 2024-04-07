@@ -16,6 +16,7 @@ public:
 
     void putLadang(Plant &p);
     void putLadangAt(Plant &p, Location &l);
+    Grid<Plant*>& getLadang();
 
 
     /**

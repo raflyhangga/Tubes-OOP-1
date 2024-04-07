@@ -12,6 +12,11 @@ void Peternak::putPeternakanAt(Animal &h, Location &l)
     peternakan.setElement(l, &h);
 }
 
+Grid<Animal*>& Peternak::getPeternakan()
+{
+    return peternakan;
+}
+
 istream & operator>>(istream &in, Peternak &a)
 {
     int jumlahItemInventory;

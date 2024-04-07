@@ -52,7 +52,10 @@ template <class T>
 inline void Grid<T>::setElement(Location l, T val) {
     int row = l.getRow(), col = l.getCol();
     if (row < 0 || row >= element.size() || col < 0 || col >= element[0].size()) {
-        throw out_of_range("Row or column is out of range.");
+        string message = "Row or column is out of range.\n";
+        message += "Row: " + to_string(row) + ", Column: " + to_string(col) + "\n";
+        message += "Grid size: " + to_string(element.size()) + "x" + to_string(element[0].size());
+        throw out_of_range(message);
     }
 
     if (isAvailable[row][col]) {

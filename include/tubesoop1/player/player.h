@@ -24,6 +24,10 @@ public:
 
     void putInventory(Resource &r);
     void putInventoryAt(Resource &r, Location &location);
+    Grid<Resource*>& getInventory();
+
+    void setWeight(int weight);
+    void setMoney(int money);
     void printInventory();
 
     string getUsername();

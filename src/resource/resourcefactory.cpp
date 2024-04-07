@@ -32,7 +32,7 @@ ResourceFactory::ResourceFactory(string configPath){
         insert({name, [=](){return new ProductFruit(kode, name, addedWeight, price);}});
         dropsMap[origin].push_back(new ProductFruit(kode, name, addedWeight, price));
     }
-    for(int i = 0; i < 4; i++) {
+    for(int i = 0; i < 9; i++) {
         string kode, name, origin;
         int addedWeight, price;
         file >> _ >> kode >> name >> _ >> origin >> addedWeight >> price;
@@ -107,8 +107,6 @@ ResourceFactory::ResourceFactory(string configPath){
             Quantifiable<ProductMaterial*> qp = Quantifiable<ProductMaterial*>(p, quantity);
             recipe.push_back(qp);
         }
-
-
         insert({name, [=](){return new Building(kode, name, price, recipe);}});
     }
     file.close();
@@ -122,9 +120,9 @@ ResourceFactory::ResourceFactory(string configPath){
     // 8 9 // Besaran peternakan
     file.open(miscPath); if(!file.is_open()) throw FileNotFoundException(miscPath);
     file >> Player::moneyToWin >> Player::weightToWin;
-    file >> Grid<Resource*>::defaultWidth >> Grid<Resource*>::defaultHeight;
-    file >> Grid<Plant*>::defaultWidth >> Grid<Plant*>::defaultHeight;
-    file >> Grid<Animal*>::defaultWidth >> Grid<Animal*>::defaultHeight;
+    file >> Grid<Resource*>::defaultHeight >> Grid<Resource*>::defaultWidth;
+    file >> Grid<Plant*>::defaultHeight >> Grid<Plant*>::defaultWidth;
+    file >> Grid<Animal*>::defaultHeight >> Grid<Animal*>::defaultWidth;
     file.close();
     
 }
@@ -136,10 +134,11 @@ Resource* ResourceFactory::translate(string key){
 
 
 ostream& operator<<(ostream& os, const ResourceFactory& factory){
+    int i = 0;
     for(auto it = factory.begin(); it != factory.end(); it++){
         string key = it->first;
         auto value = it->second();
-        os << key << ": " << value->getCode() << endl;
+        os << i++ << ". " << key << ": " << value->getCode() << endl;
     }
     return os;
 }

@@ -12,6 +12,11 @@ void Petani::putLadangAt(Plant &p, Location &l)
     ladang.setElement(l, &p);
 }
 
+Grid<Plant*>& Petani::getLadang()
+{
+    return ladang;
+}
+
 istream & operator>>(istream &in, Petani &a)
 {
     int jumlahItemInventory;

@@ -18,22 +18,21 @@ void Player::putInventoryAt(Resource &r, Location &location)
 {
     inventory.setElement(location, &r);
 }
-
-void Player::printInventory(){
-    int total_length =inventory.getCol()*6 + 1;
-    string message = " Penyimpanan ";
-    string pad = string((total_length - message.length()) / 2 - 1, '=');
-    cout << "   " <<  pad << '[' << message << ']' <<pad << endl;
-
-    GridDrawerCLI<Resource*> drawer = GridDrawerCLI<Resource*>(inventory);
-    drawer.draw();
-
-    cout << "\nTotal slot kosong: " << inventory.getCountAvailable() << "\n\n";
+Grid<Resource*> &Player::getInventory() {
+    return inventory;
 }
 
-string Player::getUsername()
-{
+string Player::getUsername(){
     return username;
+}
+Grid<Resource*> &Player::getInventory() {
+    return inventory;
+}
+void Player::setWeight(int weight){
+    this->weight = weight;
+}
+void Player::setMoney(int money){
+    this->money = money;
 }
 int Player::getMoney()
 {

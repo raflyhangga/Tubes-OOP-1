@@ -4,7 +4,6 @@
 #include <map>
 #include <functional>
 
-#include <tubesoop1/icosihexastring/icosihexastring.h>
 #include <tubesoop1/grid/location.h>
 #include <tubesoop1/grid/griddrawer.hpp>
 #include <tubesoop1/resource/resource.h>
@@ -22,6 +21,7 @@
 
 #include <tubesoop1/cli/command/next.hpp>
 #include <tubesoop1/cli/command/cetakpenyimpanan.hpp>
+#include <tubesoop1/state/state.h>
 
 #include <tubesoop1/cli/globals.hpp>
 #include <tubesoop1/cli/game.hpp>
@@ -33,6 +33,15 @@ int main()
 
     ResourceFactory factory = ResourceFactory("config");
     cout << factory << endl;
+
+    try{
+        State state = State("config/state.txt", factory);
+        state.save("config/state2.txt");
+    } catch (exception &e) {
+        cout << e.what() << endl;
+    }
+
+    return 0;
 
     // Resource *r = factory.translate("HORSE");
     // cout << r->getCode() << ": " << r->getPrice() << endl;

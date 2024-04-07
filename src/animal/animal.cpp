@@ -10,6 +10,10 @@ void Animal::setWeight(int weight)
 {
     this->weight = weight;
 }
+int Animal::getWeight() const
+{
+    return weight;
+}
 
 bool Animal::isHarvestable() const
 {

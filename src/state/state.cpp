@@ -11,7 +11,8 @@ void State::load(string statePath, ResourceFactory &factory){
     int playerCount;
     file >> playerCount;
 
-    string name, type, weight, money;
+    string name, type;
+    int weight, money;
     int inventoryCount;
     for(int i = 0; i < playerCount; i++) {
         file >> name >> type >> weight >> money >> inventoryCount;
@@ -20,6 +21,8 @@ void State::load(string statePath, ResourceFactory &factory){
         else if(type == "Peternak") currentPlayer = new Peternak(name);
         else if(type == "Walikota") currentPlayer = new Walikota(name);
         else throw InvalidPlayerTypeException(type);
+        currentPlayer->setWeight(weight);
+        currentPlayer->setMoney(money);
 
         for(int i = 0; i < inventoryCount; i++) {
             string itemName;
@@ -27,7 +30,6 @@ void State::load(string statePath, ResourceFactory &factory){
             Resource *r = factory.translate(itemName);
             currentPlayer->putInventory(*r);
         }
-
         
         if(type == "Petani"){
             int plantCount;
@@ -67,7 +69,7 @@ void State::load(string statePath, ResourceFactory &factory){
         file >> itemName >> itemAmount;
         Resource *r = factory.translate(itemName);
         Quantifiable<Resource*> qr = Quantifiable<Resource*>(r, itemAmount);
-        // Shop.addItem(*r);
+        // toko.addItem(*r);
     }
 
     file.close();
@@ -81,7 +83,7 @@ void State::save(string statePath){
 
     string name, type, weight, money;
     int inventoryCount;
-    file << inventoryCount << endl;
+    file << playerCount << endl;
 
     for(int i = 0; i < playerCount; i++) {
         Player *currentPlayer = playerList[i];
@@ -89,41 +91,44 @@ void State::save(string statePath){
         weight = currentPlayer->getWeight();
         money = currentPlayer->getMoney();
         type = getClassName(*currentPlayer);
-        // inventoryCount = currentPlayer->getInventoryCount();
-        // vector<Resource*> inventoryList = currentPlayer->getInventoryAsVector();
-        inventoryCount = 2;
-        vector<Resource*> inventoryList;
+        Grid<Resource*>& inventory = currentPlayer->getInventory();
+        inventoryCount = inventory.getCountAvailable();
 
         file << name << " " << type << " " << weight << " " << money << " " << endl << inventoryCount << endl;
-
-        for(int i = 0; i < inventoryCount; i++) {
-            string itemName = inventoryList[i]->getName();
+        
+        // for(Location location : inventory){
+        //     cout << location << endl;
+        //     // Resource *r = inventory.getElement(location);
+        //     // string itemName = r->getName();
+        //     // file << itemName << endl;
+        // }return;
+        for(Grid<Resource*>::Iterator it = inventory.begin(); it != inventory.end(); ++it){
+            Location location = *it;
+            Resource *r = inventory.getElement(location);
+            string itemName = r->getName();
             file << itemName << endl;
         }
-
         
         if(type == "Petani"){
-            int plantCount; // = ((Petani*)currentPlayer)->getLadangCount();
+            Grid<Plant*>& ladang = ((Petani*)currentPlayer)->getLadang();
+            int plantCount = ladang.getCountAvailable();
             file << plantCount << endl;
-            for(int i = 0; i < plantCount; i++) { // grid iteration
-                // Plant *plant = ((Petani*)currentPlayer)->getLadangAt(i);
-                Plant *plant;
-                Location location;
+            for(Location location : ladang){
+                Plant *plant = ladang.getElement(location);
                 string name = plant->getName();
                 int age = plant->getAge();
-                // file << location << " " << name << " " << age;
+                file << location << " " << name << " " << age;
             }
         }
         else if(type == "Peternak"){
-            int animalCount; // = ((Peternak*)currentPlayer)->getLadangCount();
+            Grid<Animal*>& peternakan = ((Peternak*)currentPlayer)->getPeternakan();
+            int animalCount = peternakan.getCountAvailable();
             file << animalCount << endl;
-            for(int i = 0; i < animalCount; i++) { // grid iteration
-                // Plant *plant = ((Peternak*)currentPlayer)->getLadangAt(i);
-                Plant *plant;
-                Location location;
-                string name = plant->getName();
-                int age = plant->getAge();
-                // file << location << " " << name << " " << age;
+            for(Location location : peternakan){
+                Animal *animal = peternakan.getElement(location);
+                string name = animal->getName();
+                int weight = animal->getWeight();
+                file << location << " " << name << " " << weight;
             }
         }
 

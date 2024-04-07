@@ -15,6 +15,7 @@ public:
 
     void putPeternakan(Animal &h);
     void putPeternakanAt(Animal &h, Location &l);
+    Grid<Animal*> &getPeternakan();
 
     /**
      * @brief Username must be from constructor. Format:
