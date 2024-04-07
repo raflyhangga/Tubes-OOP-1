@@ -6,33 +6,33 @@ using namespace std;
 
 struct ItemShopNotFoundException: public exception{
     const char* what() const throw() {
-		return "Item pada Shop tidak ditemukan";
+		return "Item is not available in shop";
 	}
 
 };
 struct ItemShopNotEqualException: public exception{
     const char* what() const throw() {
-		return "Kedua item tidak sama";
+		return "Both Item is not equal";
 	}
 };
 struct ItemShopEmptyException: public exception{
     const char* what() const throw() {
-		return "Stok Habis";
+		return "Stock is empty";
 	}
 };
 struct UangTidakCukupException: public exception{
     const char* what() const throw() {
-		return "Uang yang dimiliki tidak cukup";
+		return "Insufficient balance";
 	}
 };
 struct PetaniException: public exception{
     const char* what() const throw() {
-		return "Petani tidak bisa membeli barang ini";
+		return "Farmer Role can't buy this item";
 	}
 };
 struct PeternakException: public exception{
     const char* what() const throw() {
-		return "Peternak tidak bisa membeli barang ini";
+		return "Rancher Role can't buy this item";
 	}
 };
 
