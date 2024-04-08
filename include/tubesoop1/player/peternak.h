@@ -16,44 +16,10 @@ public:
     void putPeternakan(Animal &h);
     void putPeternakanAt(Animal &h, Location &l);
     Grid<Animal*> &getPeternakan();
-
+    TaxReport bayarPajak(Walikota &walikota);
 
     // visitor pattern
     void executed(CommanderVisitor&);
-
-    /**
-     * @brief Username must be from constructor. Format:
-     * <USERNAME> Peternak <BERAT_BADAN> <UANG>
-     * <JUMLAH_ITEM_INVENTORY_(M)>
-     * <INVENTORY_1>
-     * …
-     * <INVENTORY M>
-     * <JUMLAH_HEWAN_DI_PETERNAKAN_(K)>
-     * <LOKASI_HEWAN_1> <NAMA_HEWAN_1> <BERAT_HEWAN_1>
-     * …
-     * <LOKASI_HEWAN_K> <NAMA_HEWAN_K> <BERAT_HEWAN_K>
-     * @param is 
-     * @param a 
-     * @return ostream& 
-     */
-    friend ostream &operator<<(ostream &os, const Peternak &p);
-
-    /**
-     * @brief Username must be from constructor. Format:
-     * <BERAT_BADAN> <UANG>
-     * <JUMLAH_ITEM_INVENTORY_(M)>
-     * <INVENTORY_1>
-     * …
-     * <INVENTORY M>
-     * <JUMLAH_HEWAN_DI_PETERNAKAN_(K)>
-     * <LOKASI_HEWAN_1> <NAMA_HEWAN_1> <BERAT_HEWAN_1>
-     * …
-     * <LOKASI_HEWAN_K> <NAMA_HEWAN_K> <BERAT_HEWAN_K>
-     * @param is 
-     * @param a 
-     * @return istream& 
-     */
-    friend istream &operator>>(istream &is, Peternak &p);
 };
 
 #endif

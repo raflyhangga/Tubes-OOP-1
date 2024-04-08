@@ -6,15 +6,16 @@ using namespace std;
 Next::Next(State &state) : Command(state) {}
 
 void Next::execute(Petani *petani) {
-    cout << petani->getUsername() << endl;
+    petani->incrementAllPlantAge();
+    cout << "Giliran dilanjut ke pemain berikutnya." << endl;
     state.nextTurn();
 }
 void Next::execute(Peternak *peternak) {
-    cout << peternak->getUsername() << endl;
+    cout << "Giliran dilanjut ke pemain berikutnya." << endl;
     state.nextTurn();
 }
 void Next::execute(Walikota *walikota) {
-    cout << walikota->getUsername() << endl;
+    cout << "Giliran dilanjut ke pemain berikutnya." << endl;
     state.nextTurn();
 }
 

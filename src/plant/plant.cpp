@@ -10,6 +10,9 @@ Plant::Plant(string code, string name, int price, int durationToHarvest, vector<
 void Plant::setAge(int age){
     this->age = age;
 }
+void Plant::incrementAge(){
+    this->age++;
+}
 int Plant::getAge(){
     return age;
 }

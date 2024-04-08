@@ -6,6 +6,7 @@
 #include "tubesoop1/grid/grid.hpp"
 #include "tubesoop1/resource/resource.h"
 #include "tubesoop1/player/playervisitorpattern.h"
+#include "tubesoop1/player/taxreport.h"
 
 using namespace std;
 class Player : public PlayerElement // visitor pattern
@@ -36,6 +37,8 @@ public:
     int getMoney();
 
     bool isWin();
+
+    virtual TaxReport bayarPajak(Walikota &walikota) = 0;
 
     // Visitor pattern
     virtual void executed(CommanderVisitor&) = 0;

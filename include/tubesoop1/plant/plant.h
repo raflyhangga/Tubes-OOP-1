@@ -16,6 +16,7 @@ protected:
 public:
     Plant() = default;
     Plant(string code, string name, int price, int durationToHarvest, vector<Product*> drops);
+    void incrementAge();
     void setAge(int age);
     int getAge();
     virtual ~Plant();

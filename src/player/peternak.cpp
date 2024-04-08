@@ -17,53 +17,14 @@ Grid<Animal*>& Peternak::getPeternakan()
     return peternakan;
 }
 
+TaxReport Peternak::bayarPajak(Walikota &walikota)
+{
+    int totalTax = 0;
+    return TaxReport(username, "Peternak", 0);
+}
 
 // visitor pattern
 void Peternak::executed(CommanderVisitor &visitor)
 {
     visitor.execute(this);
-}
-
-istream & operator>>(istream &in, Peternak &a)
-{
-    int jumlahItemInventory;
-    in >> a.weight >> a.money >> jumlahItemInventory;
-
-    for (int i = 0; i < jumlahItemInventory; i++)
-    {
-        // Resource r;
-    }
-
-    int jumlahTanaman;
-    in >> jumlahTanaman;
-    for(int i = 0; i < jumlahTanaman; i++)
-    {
-        string position, name;
-        int amount;
-        in >> position >> name >> amount;
-        // Animal p(name, amount);
-        // inventory.setElement(position, p);
-    }
-
-    return in;
-}
-
-ostream &operator<<(ostream &out, const Peternak &a)
-{
-    // vector<Resource> inventory = a.getAllAsList();
-    // int jumlahItemInventory = inventory.size();
-    // out << a.beratBadan << a.uang << endl;
-    // out << jumlahItemInventory << endl;
-    // for (int i = 0; i < jumlahItemInventory; i++)
-    // {
-            // out << a[i];
-    // }
-
-    int jumlahTanaman;
-    // out << jumlahItemInventory << endl;
-    // for (int i = 0; i < jumlahItemInventory; i++)
-    // {
-            // out << a[i];
-    // }
-    return out;
 }
