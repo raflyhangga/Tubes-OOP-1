@@ -1,4 +1,4 @@
-#ifndef RESOURCE_TRANSLATOR_ERRORH
+#ifndef RESOURCE_TRANSLATOR_ERROR_H
 #define RESOURCE_TRANSLATOR_ERROR_H
 
 #include <exception>
@@ -11,6 +11,14 @@ class FileNotFoundException : exception{
         const string path;
     public:
         FileNotFoundException(const string& _path);
+        const char* what() const throw();
+};
+
+class FolderNotFoundException : exception{
+    private:
+        const string path;
+    public:
+        FolderNotFoundException(const string& _path);
         const char* what() const throw();
 };
 

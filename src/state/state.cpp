@@ -106,7 +106,7 @@ void State::load(string statePath, ResourceFactory &factory){
 
 void State::save(string statePath){
     ofstream file(statePath);
-    if(!file.is_open()) throw FileNotFoundException(statePath);
+    if(!file.is_open()) throw FolderNotFoundException(statePath);
 
     int playerCount = playerList.size();
 
