@@ -17,6 +17,13 @@ Grid<Animal*>& Peternak::getPeternakan()
     return peternakan;
 }
 
+
+// visitor pattern
+void Peternak::executed(CommanderVisitor &visitor)
+{
+    visitor.execute(this);
+}
+
 istream & operator>>(istream &in, Peternak &a)
 {
     int jumlahItemInventory;

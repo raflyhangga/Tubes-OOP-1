@@ -4,7 +4,7 @@
 #include <string>
 #include "tubesoop1/resource/creature.h"
 #include "tubesoop1/product/product.h"
-#include "tubesoop1/product/visitorpattern.h"
+#include "tubesoop1/product/productvisitorpattern.h"
 #include <vector>
 using namespace std;
 
@@ -24,10 +24,7 @@ public:
     int getWeight() const;
 
     // Visitor pattern
-    void eat(Product&);
-    virtual void eat(ProductAnimal&) = 0;
-    virtual void eat(ProductFruit&) = 0;
-    virtual void eat(ProductMaterial&) = 0;
+    void eat(EatenElement&);
 
     bool isHarvestable() const;
     friend ostream &operator<<(ostream &os, const Animal &a);

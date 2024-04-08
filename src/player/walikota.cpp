@@ -7,6 +7,12 @@ void Walikota::pungutPajak()
     money += 1000;
 }
 
+// visitor pattern
+void Walikota::executed(CommanderVisitor &visitor)
+{
+    visitor.execute(this);
+}
+
 istream & operator>>(istream &in, Walikota &a)
 {
     int jumlahItemInventory;

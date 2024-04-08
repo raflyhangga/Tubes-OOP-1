@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include "tubesoop1/resource/resource.h"
-#include "tubesoop1/product/visitorpattern.h"
+#include "tubesoop1/product/productvisitorpattern.h"
 
 using namespace std;
 

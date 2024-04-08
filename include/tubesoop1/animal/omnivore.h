@@ -4,7 +4,7 @@
 #include <string>
 #include "tubesoop1/resource/creature.h"
 #include "tubesoop1/product/product.h"
-#include "tubesoop1/product/visitorpattern.h"
+#include "tubesoop1/product/productvisitorpattern.h"
 #include "tubesoop1/animal/animal.h"
 #include "tubesoop1/animal/animal_exception.h"
 #include <vector>

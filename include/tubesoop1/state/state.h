@@ -21,11 +21,34 @@ class State {
         vector<Player*> playerList;
         Shop shop;
         const char* getClassName(Player &player);
+        int turn;
     public:
+        /**
+         * @brief For lazy loaded state
+         */
+        State();
+
+
         State(string statePath, ResourceFactory &factory);
+        
+        /**
+         * @brief Creating new state without loading from file
+         * 
+         * @param factory 
+         */
+        State(ResourceFactory &factory);
+        ~State();
         void save(string statePath);
+        void loadNew(ResourceFactory &factory);
         void load(string statePath, ResourceFactory &factory);
         void addPlayer(string type, string name);
+
+        Player* getCurrentPlayer();
+
+        /**
+         * @brief Increment turn by 1
+         */
+        void nextTurn();
 };
 
 #endif

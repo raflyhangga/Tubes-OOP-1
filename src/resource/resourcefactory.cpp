@@ -1,6 +1,8 @@
 #include "tubesoop1/resource/resourcefactory.h"
 #include "tubesoop1/resource/resourcefactory_exception.h"
 
+ResourceFactory::ResourceFactory(){}
+
 ResourceFactory::ResourceFactory(string configPath){
 
     string plantPath = configPath + "/plant.txt";

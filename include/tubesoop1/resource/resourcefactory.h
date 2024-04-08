@@ -28,6 +28,10 @@ using namespace std;
 */
 class ResourceFactory : map<string, function<Resource*()>>{
     public:
+        /**
+         * @brief For lazy loaded factory
+         */
+        ResourceFactory();
 
         /**
          * Load the content of the file in the configPath to the translator

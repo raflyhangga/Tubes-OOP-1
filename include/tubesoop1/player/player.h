@@ -5,9 +5,10 @@
 #include <iostream>
 #include "tubesoop1/grid/grid.hpp"
 #include "tubesoop1/resource/resource.h"
+#include "tubesoop1/player/playervisitorpattern.h"
 
 using namespace std;
-class Player
+class Player : public PlayerElement // visitor pattern
 {
 protected:
     const string username;
@@ -36,6 +37,8 @@ public:
 
     bool isWin();
 
+    // Visitor pattern
+    virtual void executed(CommanderVisitor&) = 0;
 };
 
 #endif

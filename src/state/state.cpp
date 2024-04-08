@@ -1,10 +1,39 @@
 #include "tubesoop1/state/state.h"
 
-State::State(string statePath, ResourceFactory &factory){
+State::State(){}
+
+State::State(string statePath, ResourceFactory &factory) {
     load(statePath, factory);
 }
 
+State::State(ResourceFactory &factory){
+    loadNew(factory);
+}
+
+void State::loadNew(ResourceFactory &factory){
+    turn = 0;
+
+    string name1 = "Petani1";
+    Petani *petani1 = new Petani(name1);
+
+    string name2 = "Peternak1";
+    Peternak *peternak1 = new Peternak(name2);
+
+    string name3 = "Walikota";
+    Walikota *walikota = new Walikota(name3);
+
+    playerList.push_back(petani1);
+    playerList.push_back(peternak1);
+    playerList.push_back(walikota);
+
+    sort(playerList.begin(), playerList.end(), [](Player* a, Player* b) {
+        return a->getUsername() < b->getUsername();
+    });
+}
+
 void State::load(string statePath, ResourceFactory &factory){
+    turn = 0;
+
     ifstream file(statePath);
     if(!file.is_open()) throw FileNotFoundException(statePath);
 
@@ -81,7 +110,8 @@ void State::save(string statePath){
 
     int playerCount = playerList.size();
 
-    string name, type, weight, money;
+    string name, type;
+    int weight, money;
     int inventoryCount;
     file << playerCount << endl;
 
@@ -97,43 +127,33 @@ void State::save(string statePath){
         file << name << " " << type << " " << weight << " " << money << " " << endl << inventoryCount << endl;
         
         for(Location location : inventory){
-            cout << location << " ";
-            // Resource *r = inventory.getElement(location);
-            // string itemName = r->getName();
-            // file << itemName << endl;
+            Resource *r = inventory.getElement(location);
+            string itemName = r->getName();
+            file << itemName << endl;
         }
-        // for(Grid<Resource*>::Iterator it = inventory.begin(); it != inventory.end(); ++it){
-        //     Location location = *it;
-        //     Resource *r = inventory.getElement(location);
-        //     string itemName = r->getName();
-        //     file << itemName << endl;
-        // }
         
         if(type == "Petani"){
             Grid<Plant*>& ladang = ((Petani*)currentPlayer)->getLadang();
             int plantCount = ladang.getCountFilled();
             file << plantCount << endl;
+
             for(Location location : ladang){
                 Plant *plant = ladang.getElement(location);
                 string name = plant->getName();
                 int age = plant->getAge();
-                file << location << " " << name << " " << age;
+                file << location << " " << name << " " << age << endl;
             }
         }
         else if(type == "Peternak"){
             Grid<Animal*>& peternakan = ((Peternak*)currentPlayer)->getPeternakan();
             int animalCount = peternakan.getCountFilled();
             file << animalCount << endl;
-            for (Location loc: peternakan) {
-                cout << loc << '\n';
-            }
 
             for(Location location : peternakan){
-                cout << location << endl;
                 Animal *animal = peternakan.getElement(location);
                 string name = animal->getName();
                 int weight = animal->getWeight();
-                file << location << " " << name << " " << weight;
+                file << location << " " << name << " " << weight << endl;
             }
         }
 
@@ -162,4 +182,18 @@ const char* State::getClassName(Player &player){
     }
     const char* className = mangledName + prefixLength;
     return className;
+}
+
+State::~State(){
+    for(Player *player : playerList){
+        delete player;
+    }
+}
+
+Player* State::getCurrentPlayer(){
+    return playerList[turn % playerList.size()];
+}
+
+void State::nextTurn(){
+    turn++;
 }

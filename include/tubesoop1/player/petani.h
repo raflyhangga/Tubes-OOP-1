@@ -18,6 +18,8 @@ public:
     void putLadangAt(Plant &p, Location &l);
     Grid<Plant*>& getLadang();
 
+    // visitor pattern
+    void executed(CommanderVisitor&);
 
     /**
      * @brief Username must be from constructor. Format:

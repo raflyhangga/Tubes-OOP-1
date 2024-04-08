@@ -1,14 +1,17 @@
-#include <tubesoop1/cli/globals.hpp>
-#include <tubesoop1/cli/command/next.hpp>
-#include <tubesoop1/cli/command/cetakpenyimpanan.hpp>
+#include <tubesoop1/cli/command/next.h>
+#include <tubesoop1/cli/command/cetakpenyimpanan.h>
 #include <tubesoop1/player/petani.h>
 #include <tubesoop1/player/peternak.h>
 #include <tubesoop1/player/walikota.h>
 #include <algorithm>
 
 #include <iostream>
-#include <tubesoop1/cli/game.hpp>
+#include <tubesoop1/cli/game.h>
 using namespace std;
+
+CLIGame::CLIGame(){
+
+}
 
 void CLIGame::init() {
         cout <<
@@ -42,13 +45,18 @@ void CLIGame::init() {
 
     cout << "[Welcome to TUBES-OOP-1]" << endl;
     
+    factory = ResourceFactory("config");
+    
     cout << "Apakah ingin memuat data state sebelumnya? (Y/n) ";
     string ans; cin >> ans;
-    if (ans == "Y") {
+    transform(ans.begin(), ans.end(), ans.begin(), ::tolower); // lowercase
+    if (ans == "y") {
+        state.load("config/state.txt", factory);
         cout << "Data state berhasil dimuat\n";
     } else {
+        state.loadNew(factory);
         cout << "Membuat state baru...\n";
-        initializeGame();
+        cout << "Giliran " << state.getCurrentPlayer()->getUsername() << " yang bermain." << endl;
     }
 
     initializeCommand();
@@ -60,7 +68,7 @@ void CLIGame::run() {
         cout << "> ";
         cin >> command;
         try {
-            Globals::commands[command]->execute(Globals::players[Globals::turn]);
+            commands[command]->execute(state.getCurrentPlayer());
         } catch (exception &e) {
             cout << e.what() << endl;
         }
@@ -69,27 +77,6 @@ void CLIGame::run() {
 
 
 void CLIGame::initializeCommand() {
-    Globals::commands["NEXT"] = new Next();
-    Globals::commands["CETAK_PENYIMPANAN"] = new CetakPenyimpanan();
-}
-
-void CLIGame::initializeGame() {
-    string name1 = "Petani1";
-    Petani *petani1 = new Petani(name1);
-
-    string name2 = "Peternak1";
-    Peternak *peternak1 = new Peternak(name2);
-
-    string name3 = "Walikota";
-    Walikota *walikota = new Walikota(name3);
-
-    Globals::players.push_back(walikota);
-    Globals::players.push_back(petani1);
-    Globals::players.push_back(peternak1);
-
-    sort(Globals::players.begin(), Globals::players.end(), [](Player* a, Player* b) {
-        return a->getUsername() < b->getUsername();
-    });
-
-    cout << "Giliran " << Globals::players[Globals::turn]->getUsername() << " yang bermain." << endl;
+    commands["NEXT"] = new Next(state);
+    commands["CETAK_PENYIMPANAN"] = new CetakPenyimpanan(state);
 }

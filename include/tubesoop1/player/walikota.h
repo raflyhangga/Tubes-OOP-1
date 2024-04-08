@@ -12,6 +12,8 @@ public:
     Walikota(string &username);
     void pungutPajak();
 
+    // visitor pattern
+    void executed(CommanderVisitor&);
 
     /**
      * @brief Username must be from constructor. format:

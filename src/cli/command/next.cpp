@@ -1,14 +1,20 @@
-#include <tubesoop1/cli/command/next.hpp>
-#include <tubesoop1/cli/globals.hpp>
+#include <tubesoop1/cli/command/next.h>
 #include <iostream>
 
 using namespace std;
 
-void Next::execute(Player *player) {
-    // TODO: Umur tanamah bertambah 1.
+Next::Next(State &state) : Command(state) {}
 
-
-    Globals::turn = (Globals::turn + 1) % Globals::players.size();
-    cout << "Giliran " << Globals::players[Globals::turn]->getUsername() << " yang bermain.\n";
+void Next::execute(Petani *petani) {
+    cout << petani->getUsername() << endl;
+    state.nextTurn();
+}
+void Next::execute(Peternak *peternak) {
+    cout << peternak->getUsername() << endl;
+    state.nextTurn();
+}
+void Next::execute(Walikota *walikota) {
+    cout << walikota->getUsername() << endl;
+    state.nextTurn();
 }
 

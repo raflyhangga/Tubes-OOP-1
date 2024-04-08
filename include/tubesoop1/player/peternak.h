@@ -17,6 +17,10 @@ public:
     void putPeternakanAt(Animal &h, Location &l);
     Grid<Animal*> &getPeternakan();
 
+
+    // visitor pattern
+    void executed(CommanderVisitor&);
+
     /**
      * @brief Username must be from constructor. Format:
      * <USERNAME> Peternak <BERAT_BADAN> <UANG>

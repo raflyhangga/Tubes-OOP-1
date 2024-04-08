@@ -17,6 +17,12 @@ Grid<Plant*>& Petani::getLadang()
     return ladang;
 }
 
+// visitor pattern
+void Petani::executed(CommanderVisitor &visitor)
+{
+    visitor.execute(this);
+}
+
 istream & operator>>(istream &in, Petani &a)
 {
     int jumlahItemInventory;

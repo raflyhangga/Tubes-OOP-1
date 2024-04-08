@@ -20,7 +20,7 @@ bool Animal::isHarvestable() const
     return weight >= weightToHarvest;
 }
 
-void Animal::eat(Product &p)
+void Animal::eat(EatenElement &p)
 {
     p.eaten(*this);
 }

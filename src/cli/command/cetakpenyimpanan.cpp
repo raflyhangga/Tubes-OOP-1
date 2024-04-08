@@ -1,8 +1,20 @@
-#include <tubesoop1/cli/command/cetakpenyimpanan.hpp>
+#include <tubesoop1/cli/command/cetakpenyimpanan.h>
 #include <tubesoop1/grid/griddrawer.hpp>
 #include <iostream>
 
 using namespace std;
+CetakPenyimpanan::CetakPenyimpanan(State &state) : Command(state) {}
+
+void CetakPenyimpanan::execute(Petani *petani) {
+    printInventory(petani); 
+}
+void CetakPenyimpanan::execute(Peternak *peternak) {
+    printInventory(peternak); 
+}
+void CetakPenyimpanan::execute(Walikota *walikota) {
+    printInventory(walikota); 
+}
+
 
 void CetakPenyimpanan::printInventory(Player *player){
     Grid<Resource*> inventory = player->getInventory();
@@ -17,7 +29,4 @@ void CetakPenyimpanan::printInventory(Player *player){
     cout << "\nTotal slot kosong: " << inventory.getCountFilled() << "\n\n";
 }
 
-void CetakPenyimpanan::execute(Player *player) {
-    printInventory(player); 
-}
 
