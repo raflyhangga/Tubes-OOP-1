@@ -36,7 +36,7 @@ int main()
     }
     game.run();
 
-    return 0;
+    // return 0;
 
     // Resource *r = factory.translate("HORSE");
     // cout << r->getCode() << ": " << r->getPrice() << endl;

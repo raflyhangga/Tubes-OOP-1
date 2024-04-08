@@ -98,7 +98,7 @@ void State::load(string statePath, ResourceFactory &factory){
         file >> itemName >> itemAmount;
         Resource *r = factory.translate(itemName);
         Quantifiable<Resource*> qr = Quantifiable<Resource*>(r, itemAmount);
-        // toko.addItem(*r);
+        shop.addItem(qr);
     }
 
     file.close();
@@ -157,6 +157,15 @@ void State::save(string statePath){
             }
         }
 
+    }
+
+    int shopStockCount = shop.getstock().size();
+    file << shopStockCount << endl;
+    vector<Quantifiable<Resource*>> stock = shop.getstock();
+    for(int i = 0; i < shopStockCount; i++) {
+        string itemName = stock[i].getValue()->getName();
+        int itemAmount = stock[i].getQuantity();
+        file << itemName << " " << itemAmount << endl;
     }
 
     file.close();

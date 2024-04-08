@@ -15,7 +15,7 @@ void CetakPenyimpanan::execute(Player *player) {
     GridDrawerCLI<Resource*> drawer = GridDrawerCLI<Resource*>(inventory);
     drawer.draw();
 
-    cout << "\nTotal slot kosong: " << inventory.getCountFilled() << "\n\n";
+    cout << "\nTotal slot kosong: " << inventory.getCountNotFilled() << "\n\n";
 }
 
 

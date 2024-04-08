@@ -50,22 +50,23 @@ void CLIGame::init() {
 
     if(promptYesNo("Apakah ingin memuat data state sebelumnya?")){
         state.load("config/state.txt", factory);
-        cout << "Data state berhasil dimuat\n";
+        cout << "Data state berhasil dimuat\n\n";
     } else {
         state.loadNew(factory);
         cout << "Membuat state baru...\n";
-        cout << "Giliran " << state.getCurrentPlayer()->getUsername() << " yang bermain." << endl;
+        cout << "Giliran " << state.getCurrentPlayer()->getUsername() << " yang bermain.\n\n";
     }
     
     initializeCommand();
 }
 
-void CLIGame::run() {
+void CLIGame::run() { state.save("config/state3.txt");
     string command;
     while (true) {
         cout << ">> ";
         cin >> command;
         try {
+            transform(command.begin(), command.end(), command.begin(), ::toupper); // uppercase
             Command *c = commands.at(command);
             c->execute(state.getCurrentPlayer());
         } catch (out_of_range &e) {

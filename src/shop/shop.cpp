@@ -43,7 +43,7 @@ ostream& operator<<(ostream& os,Shop& Shop){
     return os;
 }
 
-vector<Quantifiable<Resource*>> Shop::getstock(){
+vector<Quantifiable<Resource*>>& Shop::getstock(){
     return stock;
 }
 

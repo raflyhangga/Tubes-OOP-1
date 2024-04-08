@@ -26,7 +26,7 @@ class Shop {
         /**
          * Mengambilkan stock dari Shop
         */
-        vector<Quantifiable<Resource*>> getstock();
+        vector<Quantifiable<Resource*>>& getstock();
 
         /**
          * Mengembalikan indeks lokasi Quantifiable<Resource&> pada stock
