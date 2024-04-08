@@ -1,5 +1,6 @@
 #include <tubesoop1/cli/command/next.h>
 #include <tubesoop1/cli/command/cetakpenyimpanan.h>
+#include <tubesoop1/cli/command/help.h>
 #include <tubesoop1/player/petani.h>
 #include <tubesoop1/player/peternak.h>
 #include <tubesoop1/player/walikota.h>
@@ -46,11 +47,8 @@ void CLIGame::init() {
     cout << "[Welcome to TUBES-OOP-1]" << endl;
     
     factory = ResourceFactory("config");
-    
-    cout << "Apakah ingin memuat data state sebelumnya? (Y/n) ";
-    string ans; cin >> ans;
-    transform(ans.begin(), ans.end(), ans.begin(), ::tolower); // lowercase
-    if (ans == "y") {
+
+    if(promptYesNo("Apakah ingin memuat data state sebelumnya?")){
         state.load("config/state.txt", factory);
         cout << "Data state berhasil dimuat\n";
     } else {
@@ -58,17 +56,20 @@ void CLIGame::init() {
         cout << "Membuat state baru...\n";
         cout << "Giliran " << state.getCurrentPlayer()->getUsername() << " yang bermain." << endl;
     }
-
+    
     initializeCommand();
 }
 
 void CLIGame::run() {
     string command;
     while (true) {
-        cout << "> ";
+        cout << ">> ";
         cin >> command;
         try {
-            commands[command]->execute(state.getCurrentPlayer());
+            Command *c = commands.at(command);
+            c->execute(state.getCurrentPlayer());
+        } catch (out_of_range &e) {
+            cout << "Peritah '" << command << "' tidak tersedia! Gunakan perintah 'HELP' untuk melihat daftar perintah." << endl;
         } catch (exception &e) {
             cout << e.what() << endl;
         }
@@ -77,6 +78,23 @@ void CLIGame::run() {
 
 
 void CLIGame::initializeCommand() {
+    commands["HELP"] = new Help(state);
     commands["NEXT"] = new Next(state);
     commands["CETAK_PENYIMPANAN"] = new CetakPenyimpanan(state);
+}
+
+bool CLIGame::promptYesNo(string message){
+    cout << message << " (Y/n): ";
+    string ans; cin >> ans;
+    transform(ans.begin(), ans.end(), ans.begin(), ::tolower); // lowercase
+    bool valid = false;
+    while (!valid) {
+        if (ans == "y" || ans == "n") valid = true;
+        else {
+            cout << "Masukkan tidak valid. Masukkan Y atau n: ";
+            cin >> ans;
+            transform(ans.begin(), ans.end(), ans.begin(), ::tolower); // lowercase
+        }
+    }
+    return ans == "y";
 }

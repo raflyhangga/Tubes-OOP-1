@@ -7,12 +7,9 @@
 class CetakPenyimpanan: public Command {
     public:
         CetakPenyimpanan(State&);
-        void printInventory(Player*);
 
         // visitor pattern
-        void execute(Petani*);
-        void execute(Peternak*);
-        void execute(Walikota*);
+        void execute(Player*);
 };
 
 #endif

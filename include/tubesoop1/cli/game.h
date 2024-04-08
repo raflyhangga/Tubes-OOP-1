@@ -13,6 +13,7 @@ class CLIGame {
         CLIGame();
         void run();
         void init();
+        bool promptYesNo(string message);
 };
 
 #endif

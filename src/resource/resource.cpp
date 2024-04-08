@@ -1,5 +1,4 @@
-#include <tubesoop1/resource/resource.h>
-// #include "../../include/tubesoop1/resource/resource.h"
+#include "tubesoop1/resource/resource.h"
 
 Resource::Resource(string code, string name, int price)
     : code(code), name(name), price(price) {}
@@ -24,6 +23,11 @@ bool Resource::operator==(Resource& a){
         this->code == a.code &&
         this->name == a.name &&
         this->price == a.price;
+}
+
+ostream &operator<<(ostream &os, const Resource &res) {
+    os << res.code;
+    return os;
 }
 
 // TOdo: Delete this main function if not needed (only for testing purpose)

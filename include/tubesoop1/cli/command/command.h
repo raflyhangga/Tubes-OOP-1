@@ -15,8 +15,13 @@ class Command : public CommanderVisitor { // visitor pattern
         State& state;
     public:
         Command(State&);
+
         // visitor pattern
-        void execute(PlayerElement*);
+        virtual void execute(Player*);
+        virtual void execute(Petani*);
+        virtual void execute(Peternak*);
+        virtual void execute(Walikota*);
+
 };
 
 

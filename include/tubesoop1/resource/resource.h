@@ -43,6 +43,7 @@ public:
 
     bool operator==(Resource&);
 
+    friend ostream &operator<<(ostream &os, const Resource &res);
 };
 
 #endif
