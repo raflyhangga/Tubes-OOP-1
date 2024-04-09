@@ -27,11 +27,9 @@ using namespace std;
  * we use map that maps from string to the constructor of the class with lambda to create the Resource.
 */
 class ResourceFactory : map<string, function<Resource*()>>{
+    private:
     public:
-        /**
-         * @brief For lazy loaded factory
-         */
-        ResourceFactory();
+        map<string, vector<Product*>> dropsMap;
 
         /**
          * Load the content of the file in the configPath to the translator

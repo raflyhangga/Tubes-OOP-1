@@ -4,6 +4,7 @@
 #include <string>
 #include "tubesoop1/player/player.h"
 #include "tubesoop1/animal/animal.h"
+#include "tubesoop1/quantifiable/quantifiable.hpp"
 using namespace std;
 
 class Peternak : public Player
@@ -20,6 +21,7 @@ public:
     Grid<Animal*> &getPeternakan();
     TaxReport *bayarPajak(Walikota &walikota);
 
+    vector<Quantifiable<Animal *>>* getAllHarvestableAnimal();
 
     // visitor pattern
     void executed(CommanderVisitor&);

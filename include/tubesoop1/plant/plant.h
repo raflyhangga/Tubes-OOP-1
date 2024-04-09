@@ -11,8 +11,8 @@ using namespace std;
 class Plant:public Creature
 {
 protected:
-    int durationToHarvest;
     int age;
+    int durationToHarvest;
 public:
     Plant() = default;
     Plant(string code, string name, int price, int durationToHarvest, vector<Product*> drops);
@@ -23,8 +23,6 @@ public:
     virtual ~Plant();
     friend ostream &operator<<(ostream &os, const Plant &a);
     friend istream &operator>>(istream &is, Plant &a);
-    // Plant(Plant&);
-    // Plant& operator==(Plant&);
 };
 
 

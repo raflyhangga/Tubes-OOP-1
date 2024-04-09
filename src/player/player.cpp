@@ -7,8 +7,8 @@ int Player::weightToWin;
 
 Player::Player(string &_username) : username(_username)
 {
-    weight = 0;
-    money = 0;
+    weight = 40;
+    money = 50;
 }
 
 void Player::putInventory(Resource &r)

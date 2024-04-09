@@ -7,6 +7,13 @@ const char* CommandNotAllowedException::what() const throw()  {
     return message.c_str();
 }
 
+CommandNotExistException::CommandNotExistException(string command)
+        : message("Perintah '" + command + "' tidak tersedia! Gunakan perintah 'HELP' untuk melihat daftar perintah.") {}
+
+const char* CommandNotExistException::what() const throw()  {
+    return message.c_str();
+}
+
 InvalidInputLocationListException::InvalidInputLocationListException(){}
 const char* InvalidInputLocationListException::what() const throw()  {
     return "Input lokasi tidak valid.";

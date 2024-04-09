@@ -1,5 +1,5 @@
-#ifndef RESOURCE_TRANSLATOR_ERROR_H
-#define RESOURCE_TRANSLATOR_ERROR_H
+#ifndef RESOURCE_TRANSLATOR_EXCEPTION_H
+#define RESOURCE_TRANSLATOR_EXCEPTION_H
 
 #include <exception>
 #include <iostream>
@@ -8,17 +8,17 @@ using namespace std;
 
 class FileNotFoundException : exception{
     private:
-        const string path;
+        const string message;
     public:
-        FileNotFoundException(const string& _path);
+        FileNotFoundException(const string& path);
         const char* what() const throw();
 };
 
 class FolderNotFoundException : exception{
     private:
-        const string path;
+        const string message;
     public:
-        FolderNotFoundException(const string& _path);
+        FolderNotFoundException(const string& path);
         const char* what() const throw();
 };
 

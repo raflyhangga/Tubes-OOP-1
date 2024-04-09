@@ -14,17 +14,12 @@ void CetakLadang::execute(Petani *petani) {
 
     Grid<Plant *> ladang = petani->getLadang();
 
-    printLabelAndGrid(petani, ladang);
+    // print grid
+    printGrid(ladang);
 
-    set<pair<string, string>> codesAndNames;
-    for (const auto &loc: ladang) {
-        Plant *plant = ladang.getElement(loc);
-        codesAndNames.insert({plant->getCode(), plant->getName()});
-    }
+    // print info
+    printInfo(ladang);
 
-    for (auto &[code, name]: codesAndNames) {
-        cout << "- " << code << ": " << name << '\n';
-    }
     cout << '\n';
 }
 void CetakLadang::execute(Peternak *peternak) {
@@ -34,11 +29,22 @@ void CetakLadang::execute(Walikota *walikota) {
     throw CommandNotAllowedException("CETAK_LADANG");
 }
 
-void CetakLadang::printLabelAndGrid(Petani *petani, Grid<Plant *> &ladang) {
-    GridDrawerCLI<Plant*> drawer = GridDrawerCLI<Plant*>(petani->getLadang());
+void CetakLadang::printGrid(Grid<Plant *> &ladang) {
+    GridDrawerCLI<Plant*> drawer = GridDrawerCLI<Plant*>(ladang);
     int total_length = ladang.getCol()*6 + 1;
     string message = " Ladang ";
     string pad = string((total_length - message.length()) / 2 - 1, '=');
     cout << "   " <<  pad << '[' << message << ']' << pad << endl;
     drawer.draw();
+}
+void CetakLadang::printInfo(Grid<Plant *> &ladang) {
+    set<pair<string, string>> codesAndNames;
+    for (const auto &loc: ladang) {
+        Plant *plant = ladang.getElement(loc);
+        codesAndNames.insert({plant->getCode(), plant->getName()});
+    }
+
+    for (auto &[code, name]: codesAndNames) {
+        cout << "- " << code << ": " << name << '\n';
+    }
 }

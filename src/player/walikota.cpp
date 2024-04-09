@@ -16,7 +16,7 @@ Walikota::Walikota(string &_username) : Player(_username){};
  * 
  * @return vector<TaxReport> : List of TaxReport from all player excluding the walikota itself
 */
-vector<TaxReport *> Walikota::pungutPajak(vector<Player*> player, int numberOfPlayer)
+vector<TaxReport *> Walikota::pungutPajak(vector<Player*> &player, int numberOfPlayer)
 {
     vector<TaxReport *> taxReports;
     for (int i = 0; i < numberOfPlayer; i++) {

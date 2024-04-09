@@ -1,8 +1,12 @@
+#include <tubesoop1/cli/command/command_exception.h>
+
 #include <tubesoop1/cli/command/next.h>
 #include <tubesoop1/cli/command/cetakpenyimpanan.h>
 #include <tubesoop1/cli/command/help.h>
 #include <tubesoop1/cli/command/jual.h>
 #include <tubesoop1/cli/command/simpan.h>
+#include <tubesoop1/cli/command/tambahpemain.h>
+#include <tubesoop1/cli/command/panen.h>
 #include <tubesoop1/cli/command/pungutpajak.h>
 #include <tubesoop1/cli/command/cetakladang.h>
 #include <tubesoop1/cli/command/cetakpeternakan.h>
@@ -10,13 +14,15 @@
 #include <tubesoop1/player/petani.h>
 #include <tubesoop1/player/peternak.h>
 #include <tubesoop1/player/walikota.h>
+#include <tubesoop1/product/product.h>
 #include <algorithm>
+#include <vector>
 
 #include <iostream>
 #include <tubesoop1/cli/game.h>
 using namespace std;
 
-CLIGame::CLIGame(){
+CLIGame::CLIGame() : factory("config") {
 
 }
 
@@ -52,10 +58,22 @@ void CLIGame::init() {
 
     cout << "[Welcome to TUBES-OOP-1]" << endl;
     
-    factory = ResourceFactory("config");
-
-    if(promptYesNo("Apakah ingin memuat data state sebelumnya?")){
-        state.load("config/state.txt", factory);
+    if(promptYesNo("Apakah Anda ingin memuat state?")){
+        bool loadSuccess = false;
+        while(!loadSuccess){
+            cout << "Masukkan lokasi berkas state : ";
+            string path; cin >> path; 
+            // path = "config/state.txt" // uncomment for quick testing
+            try{
+                state.load(path, factory);
+                loadSuccess = true;
+            } catch(FileNotFoundException &e){
+                cout << "Berkas tidak ditemukan!" << endl;
+            } catch(exception &e){
+                cout << e.what() << endl;
+            }
+        }
+        
         cout << "Data state berhasil dimuat\n\n";
     } else {
         state.loadNew(factory);
@@ -67,22 +85,24 @@ void CLIGame::init() {
 }
 
 void CLIGame::run() {
+
     string command;
     while (true) {
         cout << ">> ";
         cin >> command;
         try {
             transform(command.begin(), command.end(), command.begin(), ::toupper); // uppercase
-            Command *c = commands.at(command);
-            c->execute(state.getCurrentPlayer());
-        } catch (out_of_range &e) {
-            cout << "Perintah '" << command << "' tidak tersedia! Gunakan perintah 'HELP' untuk melihat daftar perintah." << endl;
+            Command *c = choose(command);
+            Player* player = state.getCurrentPlayer();
+            c->execute(player);
+            if(player->isWin()){
+                win(player);
+            }
         } catch (exception &e) {
             cout << e.what() << endl;
         }
     }
 }
-
 
 void CLIGame::initializeCommand() {
     commands["HELP"] = new Help(state);
@@ -93,6 +113,16 @@ void CLIGame::initializeCommand() {
     commands["CETAK_PETERNAKAN"] = new CetakPeternakan(state);
     commands["SIMPAN"] = new Simpan(state);
     commands["JUAL"] = new Jual(state);
+    commands["PANEN"] = new Panen(state);
+    commands["TAMBAH_PEMAIN"] = new TambahPemain(state);
+}
+
+Command* CLIGame::choose(string command) {
+    try{
+        return commands.at(command);
+    }catch(out_of_range &e){
+        throw CommandNotExistException(command);
+    }
 }
 
 bool CLIGame::promptYesNo(string message){
@@ -119,4 +149,9 @@ void CLIGame::turnInfo() {
         if (state.getTurn() == i) cout << " (giliranmu)";
         cout << endl;
     }
+}
+
+void CLIGame::win(Player* player){
+    cout << "Selamat " << player->getUsername() << " kamu menang!" << endl;
+    exit(0);
 }

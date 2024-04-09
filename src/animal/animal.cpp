@@ -27,8 +27,8 @@ void Animal::eat(EatenElement &p)
 
 ostream &operator<<(ostream &os, const Animal &a)
 {
-    if(a.isHarvestable()) os << "\033[1;31m";
-    else os << "\033[1;32m";
+    if(a.isHarvestable()) os << "\033[1;32m";
+    else os << "\033[1;31m";
     os << a.getCode() << "\033[0m";
     return os;
 }

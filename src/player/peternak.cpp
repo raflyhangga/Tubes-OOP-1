@@ -1,5 +1,6 @@
 #include "tubesoop1/player/peternak.h"
 #include "tubesoop1/player/walikota.h"
+#include "tubesoop1/animal/herbivore.h"
 
 
 
@@ -45,6 +46,27 @@ int Peternak::getKTKP(){
     return 11;
 }
 
+vector<Quantifiable<Animal *>>* Peternak::getAllHarvestableAnimal(){
+    vector<Quantifiable<Animal *>> *harvestableAnimal = new vector<Quantifiable<Animal *>>();
+    for(Location l : peternakan){
+        Animal *p = peternakan[l];
+        if(p->isHarvestable()){
+            // Find the Animal in the vector, increment if found
+            bool found = false;
+            for(auto &q : *harvestableAnimal){
+                if(q.getValue()->getCode() == p->getCode()){
+                    q++;
+                    found = true;
+                    break;
+                }
+            }
+
+            // If not found, add it to the vector
+            if(!found) harvestableAnimal->push_back(Quantifiable<Animal *>(p, 1));
+        }
+    }
+    return harvestableAnimal;
+}
 int Peternak::countAnimalInventory(){
     int count = 0;
     
