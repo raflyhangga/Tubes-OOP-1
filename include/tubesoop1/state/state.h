@@ -22,6 +22,7 @@ class State {
         Shop shop;
         const char* getClassName(Player &player);
         int turn;
+        ResourceFactory* factory;
     public:
         /**
          * @brief For lazy loaded state
@@ -50,9 +51,6 @@ class State {
          * @brief Increment turn by 1
          */
         void nextTurn();
-
-        Player *getPlayer(int index);
-        vector<Player *> getPlayerList();
 };
 
 #endif

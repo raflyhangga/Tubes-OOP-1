@@ -11,6 +11,7 @@ State::State(ResourceFactory &factory){
 }
 
 void State::loadNew(ResourceFactory &factory){
+    this->factory = &factory;
     turn = 0;
 
     string name1 = "Petani1";
@@ -32,6 +33,7 @@ void State::loadNew(ResourceFactory &factory){
 }
 
 void State::load(string statePath, ResourceFactory &factory){
+    this->factory = &factory;
     turn = 0;
 
     ifstream file(statePath);
@@ -216,4 +218,9 @@ Player* State::getPlayer(int index){
 
 vector<Player*> State::getPlayerList(){
     return playerList;
+}
+
+Resource* State::translate(string itemName){
+    Resource *r = factory->translate(itemName);
+    return r;
 }
