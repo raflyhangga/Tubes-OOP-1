@@ -8,17 +8,17 @@ using namespace std;
 
 class FileNotFoundException : exception{
     private:
-        const string path;
+        const string message;
     public:
-        FileNotFoundException(const string& _path);
+        FileNotFoundException(const string& path);
         const char* what() const throw();
 };
 
 class FolderNotFoundException : exception{
     private:
-        const string path;
+        const string message;
     public:
-        FolderNotFoundException(const string& _path);
+        FolderNotFoundException(const string& path);
         const char* what() const throw();
 };
 

@@ -57,8 +57,22 @@ void CLIGame::init() {
 
     cout << "[Welcome to TUBES-OOP-1]" << endl;
     
-    if(promptYesNo("Apakah ingin memuat data state sebelumnya?")){
-        state.load("config/state.txt", factory);
+    if(promptYesNo("Apakah Anda ingin memuat state?")){
+        bool loadSuccess = false;
+        while(!loadSuccess){
+            cout << "Masukkan lokasi berkas state : ";
+            string path; cin >> path; 
+            // path = "config/state.txt" // uncomment for quick testing
+            try{
+                state.load(path, factory);
+                loadSuccess = true;
+            } catch(FileNotFoundException &e){
+                cout << "Berkas tidak ditemukan!" << endl;
+            } catch(exception &e){
+                cout << e.what() << endl;
+            }
+        }
+        
         cout << "Data state berhasil dimuat\n\n";
     } else {
         state.loadNew(factory);
