@@ -54,7 +54,6 @@ class State {
 
         Player *getPlayer(int index);
         vector<Player *> getPlayerList();
-
         /**
          * @brief Call factory to translate itemName to Resource
          * 

@@ -3,7 +3,6 @@
 
 #include "grid.h"
 
-
 template <class T>
 class GridDrawer {
     protected:
