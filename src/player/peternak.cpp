@@ -19,12 +19,23 @@ Grid<Animal*>& Peternak::getPeternakan()
 
 TaxReport Peternak::bayarPajak(Walikota &walikota)
 {
-    int totalTax = 0;
-    return TaxReport(username, "Peternak", 0);
+    return TaxReport(username, "Peternak", calculateTax());
 }
 
 // visitor pattern
 void Peternak::executed(CommanderVisitor &visitor)
 {
     visitor.execute(this);
+}
+
+
+int Peternak::getNetWealth(){
+    int totalMoney = Player::getNetWealth();
+    for(Location l : peternakan){
+        totalMoney += peternakan[l]->getPrice();
+    }
+    return totalMoney;
+}
+int Peternak::getKTKP(){
+    return 11;
 }

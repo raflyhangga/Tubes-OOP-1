@@ -12,6 +12,7 @@ public:
     Walikota(string &username);
     void pungutPajak();
     TaxReport bayarPajak(Walikota &walikota);
+    int getKTKP();
 
     // visitor pattern
     void executed(CommanderVisitor&);

@@ -13,6 +13,10 @@ void Walikota::executed(CommanderVisitor &visitor)
     visitor.execute(this);
 }
 
-TaxReport Player::bayarPajak(Walikota &walikota){
+TaxReport Walikota::bayarPajak(Walikota &walikota){
     return TaxReport("", "", 0);
+}
+
+int Walikota::getKTKP(){
+    return 0;
 }

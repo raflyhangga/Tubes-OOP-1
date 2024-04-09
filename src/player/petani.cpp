@@ -26,12 +26,22 @@ void Petani::incrementAllPlantAge(){
 
 TaxReport Petani::bayarPajak(Walikota &walikota)
 {
-    int totalTax = 0;
-    return TaxReport(username, "Petani", totalTax);
+    return TaxReport(username, "Petani", calculateTax());
 }
 
 // visitor pattern
 void Petani::executed(CommanderVisitor &visitor)
 {
     visitor.execute(this);
+}
+
+int Petani::getNetWealth(){
+    int totalMoney = Player::getNetWealth();
+    for(Location l : ladang){
+        totalMoney += ladang[l]->getPrice();
+    }
+    return totalMoney;
+}
+int Petani::getKTKP(){
+    return 13;
 }

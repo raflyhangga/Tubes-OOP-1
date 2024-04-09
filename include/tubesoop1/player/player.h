@@ -39,6 +39,11 @@ public:
     bool isWin();
 
     virtual TaxReport bayarPajak(Walikota &walikota) = 0;
+    
+    virtual int getNetWealth();
+    int getKKPRate();
+    virtual int getKTKP() = 0;
+    int calculateTax();
 
     // Visitor pattern
     virtual void executed(CommanderVisitor&) = 0;
