@@ -38,6 +38,8 @@ public:
 
     string getUsername();
     void removeInventory(Resource &r, int quantity);
+
+    void removeInvetoryAt(Location &location);
     int getWeight();
     int getMoney();
 

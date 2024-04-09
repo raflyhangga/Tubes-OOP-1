@@ -1,6 +1,8 @@
 #include "tubesoop1/player/peternak.h"
 #include "tubesoop1/player/walikota.h"
 
+
+
 Peternak::Peternak(string &_username) : Player(_username) {}
 
 void Peternak::putPeternakan(Animal &h)
@@ -42,3 +44,5 @@ int Peternak::getNetWealth(){
 int Peternak::getKTKP(){
     return 11;
 }
+
+

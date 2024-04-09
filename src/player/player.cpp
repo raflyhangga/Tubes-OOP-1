@@ -72,12 +72,16 @@ void Player::removeInventory(Resource &r, int quantity) {
 
     if (removedCount < quantity) {
         throw invalid_argument("Quantity resource yang di remove terlalu banyak");
-    }
+    }   
 
     // Delete the resources from the inventory
     for (const auto &location : locationsToRemove) {
         playerInventory.setElement(location, nullptr);
     }
+}
+
+void Player::removeInvetoryAt(Location &location){
+    inventory.setElement(location, nullptr);
 }
 Player::~Player() {
 }
