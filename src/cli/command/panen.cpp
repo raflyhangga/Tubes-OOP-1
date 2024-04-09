@@ -13,9 +13,13 @@ void Panen::execute(Petani *petani) {
     Grid<Plant*> &ladang = petani->getLadang();
     CetakLadang(state).print(ladang);
     vector<Quantifiable<Plant *>>* allHarvestablePlant = petani->getAllHarvestablePlant();
-    for(Quantifiable<Plant *> &v : *allHarvestablePlant) {
-        cout << " - " << v.getValue()->getCode()
-        << ": " << v.getValue()->getName() << endl;
+    // for(Quantifiable<Plant *> &v : *allHarvestablePlant) {
+    //     cout << " - " << v.getValue()->getCode()
+    //     << ": " << v.getValue()->getName() << endl;
+    // }
+    if(allHarvestablePlant->size() == 0) {
+        cout << "Tidak ada tanaman yang siap dipanen." << endl;
+        return;
     }
 
     cout << "Pilih tanaman siap panen yang kamu miliki" << endl;

@@ -32,8 +32,8 @@ Creature& Creature::operator<<(Product& prod){
 }
 
 ostream& operator<<(ostream& os, Creature& c){
-    if(c.isHarvestable()) os << "\033[1;31m";
-    else os << "\033[1;32m";
+    if(c.isHarvestable()) os << "\033[1;32m";
+    else os << "\033[1;31m";
     os << c.getCode() << "\033[0m\n";
     return os;
 }

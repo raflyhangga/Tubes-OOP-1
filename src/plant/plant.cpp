@@ -40,8 +40,8 @@ istream &operator>>(istream &is, Plant &p)
 
 ostream &operator<<(ostream &os, const Plant &p)
 {
-    if(p.isHarvestable()) os << "\033[1;31m";
-    else os << "\033[1;32m";
+    if(p.isHarvestable()) os << "\033[1;32m";
+    else os << "\033[1;31m";
     os << p.getCode() << "\033[0m";
     return os;
 }

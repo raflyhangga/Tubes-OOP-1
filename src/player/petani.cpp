@@ -54,8 +54,6 @@ vector<Quantifiable<Plant *>>* Petani::getAllHarvestablePlant(){
     for(Location l : ladang){
         Plant *p = ladang[l];
         if(p->isHarvestable()){
-            cout << p->getName() << endl;
-            
             // Find the plant in the vector, increment if found
             bool found = false;
             for(auto &q : *harvestablePlant){
