@@ -2,8 +2,7 @@
 #define PETERNAK_H
 
 #include <string>
-#include <set>
-#include "player.h"
+#include "tubesoop1/player/player.h"
 #include "tubesoop1/animal/animal.h"
 #include "tubesoop1/quantifiable/quantifiable.hpp"
 using namespace std;
@@ -26,6 +25,8 @@ public:
 
     // visitor pattern
     void executed(CommanderVisitor&);
+
+    int countAnimalInventory();
 };
 
 #endif

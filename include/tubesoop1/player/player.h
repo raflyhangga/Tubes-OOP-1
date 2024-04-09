@@ -51,6 +51,8 @@ public:
 
     // Visitor pattern
     virtual void executed(CommanderVisitor&) = 0;
+
+    void eat(Product &p);
 };
 
 #endif

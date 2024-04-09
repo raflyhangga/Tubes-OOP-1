@@ -5,6 +5,7 @@
 #include "tubesoop1/player/player.h"
 #include "tubesoop1/cli/command/command_exception.h"
 #include "tubesoop1/cli/command/cetakpenyimpanan.h"
+#include "tubesoop1/cli/command/cetakpeternakan.h"
 class Ternak : public Command {
     public:
         Ternak(State&);
