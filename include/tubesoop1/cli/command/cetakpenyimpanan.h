@@ -7,7 +7,7 @@
 class CetakPenyimpanan: public Command {
     public:
         CetakPenyimpanan(State&);
-
+        void print(Grid<Resource*>&); // Will also be used by other commands
         // visitor pattern
         void execute(Player*);
 };

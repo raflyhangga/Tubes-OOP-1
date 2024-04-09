@@ -1,6 +1,7 @@
 #include <tubesoop1/cli/command/next.h>
 #include <tubesoop1/cli/command/cetakpenyimpanan.h>
 #include <tubesoop1/cli/command/help.h>
+#include <tubesoop1/cli/command/jual.h>
 #include <tubesoop1/cli/command/simpan.h>
 #include <tubesoop1/player/petani.h>
 #include <tubesoop1/player/peternak.h>
@@ -84,6 +85,7 @@ void CLIGame::initializeCommand() {
     commands["NEXT"] = new Next(state);
     commands["CETAK_PENYIMPANAN"] = new CetakPenyimpanan(state);
     commands["SIMPAN"] = new Simpan(state);
+    commands["JUAL"] = new Jual(state);
 }
 
 bool CLIGame::promptYesNo(string message){
