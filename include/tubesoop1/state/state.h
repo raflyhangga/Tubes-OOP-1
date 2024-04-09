@@ -51,6 +51,17 @@ class State {
          * @brief Increment turn by 1
          */
         void nextTurn();
+
+        Player *getPlayer(int index);
+        vector<Player *> getPlayerList();
+
+        /**
+         * @brief Call factory to translate itemName to Resource
+         * 
+         * @param itemName 
+         * @return Resource* 
+         */
+        Resource* translate(string itemName);
 };
 
 #endif
