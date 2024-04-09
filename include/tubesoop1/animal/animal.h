@@ -27,6 +27,8 @@ public:
     void eat(EatenElement&);
 
     bool isHarvestable();
+
+    friend ostream &operator<<(ostream &os, const Animal &a);
 };
 
 #endif
