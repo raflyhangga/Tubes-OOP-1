@@ -25,10 +25,10 @@ void Petani::addAllPlantAge(int age){
     }
 }
 
-TaxReport Petani::bayarPajak(Walikota &walikota)
+TaxReport* Petani::bayarPajak(Walikota &walikota)
 {
     int tax = calculateTax();
-    return TaxReport(username, "Petani", tax);
+    return new TaxReport(username, "Petani", tax);
 }
 
 // visitor pattern

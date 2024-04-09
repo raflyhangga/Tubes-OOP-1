@@ -21,7 +21,7 @@ public:
     Grid<Plant*>& getLadang();
 
     void addAllPlantAge(int age);
-    TaxReport bayarPajak(Walikota &walikota);
+    TaxReport *bayarPajak(Walikota &walikota);
     
 
     // visitor pattern

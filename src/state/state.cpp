@@ -209,3 +209,11 @@ int State::getTotalPlayer(){
 void State::nextTurn(){
     turn++;
 }
+
+Player* State::getPlayer(int index){
+    return playerList[index];
+}
+
+vector<Player*> State::getPlayerList(){
+    return playerList;
+}

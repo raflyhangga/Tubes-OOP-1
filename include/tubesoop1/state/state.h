@@ -50,6 +50,9 @@ class State {
          * @brief Increment turn by 1
          */
         void nextTurn();
+
+        Player *getPlayer(int index);
+        vector<Player *> getPlayerList();
 };
 
 #endif

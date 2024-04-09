@@ -43,7 +43,7 @@ public:
 
     bool isWin();
 
-    virtual TaxReport bayarPajak(Walikota &walikota) = 0;
+    virtual TaxReport* bayarPajak(Walikota &walikota) = 0;
     
     int calculateTax();
 

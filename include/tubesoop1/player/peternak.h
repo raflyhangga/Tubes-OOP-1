@@ -18,7 +18,7 @@ public:
     void putPeternakan(Animal &h);
     void putPeternakanAt(Animal &h, Location &l);
     Grid<Animal*> &getPeternakan();
-    TaxReport bayarPajak(Walikota &walikota);
+    TaxReport *bayarPajak(Walikota &walikota);
 
 
     // visitor pattern
