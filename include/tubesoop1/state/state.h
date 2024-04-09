@@ -63,6 +63,8 @@ class State {
         Resource* translate(string itemName);
 
         int getTurn();
+
+        void addShopItem(Quantifiable<Resource*> item);
 };
 
 #endif

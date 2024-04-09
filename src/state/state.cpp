@@ -232,3 +232,8 @@ Resource* State::translate(string itemName){
 int State::getTurn(){
     return turn;
 }
+
+
+void State::addShopItem(Quantifiable<Resource*> item){
+    shop.addItem(item);
+}

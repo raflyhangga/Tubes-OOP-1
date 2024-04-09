@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "tubesoop1/plant/plant.h"
-#include "tubesoop1/plant/materialplant.h"
+
 
 TEST(Plant, aaa)
 {

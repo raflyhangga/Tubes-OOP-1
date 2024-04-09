@@ -12,7 +12,8 @@ Jual::Jual(State &state) : Command(state) {}
 
 void Jual::execute(Player *player) {
     cout << "Berikut merupakan penyimpanan Anda" << endl;
-    Grid<Resource*> inventory = player->getInventory();
+    Grid<Resource*> &inventory = player->getInventory(); // DO
+
     CetakPenyimpanan(state).print(player->getInventory());
 
     cout << "Silahkan pilih petak yang ingin Anda jual!" << endl;
@@ -22,9 +23,26 @@ void Jual::execute(Player *player) {
 
     string line; cin.ignore(); getline(cin, line); 
     vector<Location> ansLoc = inputListLocation(line);
-    for(Location l : ansLoc){
-        cout << l << endl;
-    }
     int addedMoney = 0;
+
+    // Check any errors
+    for(Location l : ansLoc){
+        try{
+            inventory[l];
+        } catch(logic_error &e){
+            stringstream ss; ss << l;
+            string message = "Petak " + ss.str() + " kosong, tidak bisa dijual.";
+            throw logic_error(message);
+        }
+    }
+
+    // pop the resource and add the price
+    for(Location l : ansLoc){
+        Resource *r = inventory.pop(l);
+        addedMoney += r->getPrice();
+        state.addShopItem(Quantifiable<Resource*>(r, 1));
+    }
+
+    player->addMoney(addedMoney);
     cout << "Barang Anda berhasil dijual! Uang Anda bertambah " << addedMoney << " gulden!\n\n";
 }
