@@ -60,10 +60,10 @@ void CLIGame::init() {
     } else {
         state.loadNew(factory);
         cout << "Membuat state baru...\n";
-        cout << "Giliran " << state.getCurrentPlayer()->getUsername() << " yang bermain.\n\n";
     }
     
     initializeCommand();
+    turnInfo();
 }
 
 void CLIGame::run() {
@@ -109,4 +109,14 @@ bool CLIGame::promptYesNo(string message){
         }
     }
     return ans == "y";
+}
+
+void CLIGame::turnInfo() {
+    int numberOfPlayers = state.getTotalPlayer();
+    for (int i = 0; i < numberOfPlayers; ++i) {
+        Player *player = state.getPlayer(i);
+        cout << i + 1 << ". " << player->getUsername();
+        if (state.getTurn() == i) cout << " (giliranmu)";
+        cout << endl;
+    }
 }

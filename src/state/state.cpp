@@ -103,6 +103,10 @@ void State::load(string statePath, ResourceFactory &factory){
         shop.addItem(qr);
     }
 
+    sort(playerList.begin(), playerList.end(), [](Player* a, Player* b) {
+        return a->getUsername() < b->getUsername();
+    });
+
     file.close();
 }
 
@@ -223,4 +227,8 @@ vector<Player*> State::getPlayerList(){
 Resource* State::translate(string itemName){
     Resource *r = factory->translate(itemName);
     return r;
+}
+
+int State::getTurn(){
+    return turn;
 }

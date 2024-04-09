@@ -61,6 +61,8 @@ class State {
          * @return Resource* 
          */
         Resource* translate(string itemName);
+
+        int getTurn();
 };
 
 #endif

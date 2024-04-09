@@ -5,6 +5,9 @@
 #include <tubesoop1/player/player.h>
 
 class Next: public Command {
+    private:
+        void turnInfo();
+
     public:
         Next(State&);
         // visitor pattern

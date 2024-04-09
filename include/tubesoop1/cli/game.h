@@ -14,6 +14,7 @@ class CLIGame {
         void run();
         void init();
         bool promptYesNo(string message);
+        void turnInfo();
 };
 
 #endif
