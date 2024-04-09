@@ -6,6 +6,7 @@
 #include "tubesoop1/plant/plant.h"
 #include "tubesoop1/player/petani.h"
 #include "tubesoop1/quantifiable/quantifiable.hpp"
+#include <set>
 using namespace std;
 
 class Petani : public Player
@@ -24,6 +25,7 @@ public:
     void addAllPlantAge(int age);
     TaxReport *bayarPajak(Walikota &walikota);
     
+    set<Plant*>* getSetOfPlant();
     vector<Quantifiable<Plant *>>* getAllHarvestablePlant();
 
     // visitor pattern

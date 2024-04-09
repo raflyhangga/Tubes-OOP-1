@@ -1,3 +1,5 @@
+#include <tubesoop1/cli/command/command_exception.h>
+
 #include <tubesoop1/cli/command/next.h>
 #include <tubesoop1/cli/command/cetakpenyimpanan.h>
 #include <tubesoop1/cli/command/help.h>
@@ -74,14 +76,12 @@ void CLIGame::run() {
         cin >> command;
         try {
             transform(command.begin(), command.end(), command.begin(), ::toupper); // uppercase
-            Command *c = commands.at(command);
+            Command *c = choose(command);
             Player* player = state.getCurrentPlayer();
             c->execute(player);
             if(player->isWin()){
                 win(player);
             }
-        } catch (out_of_range &e) {
-            cout << "Perintah '" << command << "' tidak tersedia! Gunakan perintah 'HELP' untuk melihat daftar perintah." << endl;
         } catch (exception &e) {
             cout << e.what() << endl;
         }
@@ -99,6 +99,14 @@ void CLIGame::initializeCommand() {
     commands["SIMPAN"] = new Simpan(state);
     commands["JUAL"] = new Jual(state);
     commands["PANEN"] = new Panen(state);
+}
+
+Command* CLIGame::choose(string command) {
+    try{
+        return commands.at(command);
+    }catch(out_of_range &e){
+        throw CommandNotExistException(command);
+    }
 }
 
 bool CLIGame::promptYesNo(string message){

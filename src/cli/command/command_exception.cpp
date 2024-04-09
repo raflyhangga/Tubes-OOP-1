@@ -7,14 +7,20 @@ const char* CommandNotAllowedException::what() const throw()  {
     return message.c_str();
 }
 
+CommandNotExistException::CommandNotExistException(string command)
+        : message("Perintah '" + command + "' tidak tersedia! Gunakan perintah 'HELP' untuk melihat daftar perintah.") {}
+
+const char* CommandNotExistException::what() const throw()  {
+    return message.c_str();
+}
+
 InvalidInputLocationListException::InvalidInputLocationListException(){}
 const char* InvalidInputLocationListException::what() const throw()  {
     return "Input lokasi tidak valid.";
 }
 
-CannotPanenException::CannotPanenException(Walikota &walikota) : walikota(walikota) {}
+CannotPanenException::CannotPanenException(Player &player) : message((player.getUsername() + " (Walikota) tidak bisa melakukan panen.")) {}
 const char* CannotPanenException::what() const throw()  {
-    string message = walikota.getUsername() + " (Walikota) tidak bisa melakukan panen.";
     return message.c_str();
 }
 
