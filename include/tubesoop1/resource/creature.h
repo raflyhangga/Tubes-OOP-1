@@ -18,6 +18,7 @@ class Creature: public Resource {
         Creature& operator=(const Creature &);
         Creature& operator<<(Product&);
         virtual bool isHarvestable() const = 0;
+        vector<Product*>& harvest();
         friend ostream& operator<<(ostream&, const Creature&);
 };
 

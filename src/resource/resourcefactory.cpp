@@ -1,8 +1,6 @@
 #include "tubesoop1/resource/resourcefactory.h"
 #include "tubesoop1/resource/resourcefactory_exception.h"
 
-ResourceFactory::ResourceFactory(){}
-
 ResourceFactory::ResourceFactory(string configPath){
 
     string plantPath = configPath + "/plant.txt";
@@ -104,8 +102,7 @@ ResourceFactory::ResourceFactory(string configPath){
         string material;
         int quantity;
         while(iss >> material >> quantity){
-            Resource* r = (translate(material));
-            ProductMaterial* p = dynamic_cast<ProductMaterial*>(r);
+            ProductMaterial* p = (ProductMaterial*)(translate(material));
             Quantifiable<ProductMaterial*> qp = Quantifiable<ProductMaterial*>(p, quantity);
             recipe.push_back(qp);
         }
@@ -126,7 +123,8 @@ ResourceFactory::ResourceFactory(string configPath){
     file >> Grid<Plant*>::defaultHeight >> Grid<Plant*>::defaultWidth;
     file >> Grid<Animal*>::defaultHeight >> Grid<Animal*>::defaultWidth;
     file.close();
-    
+
+
 }
 
 Resource* ResourceFactory::translate(string key){
@@ -147,6 +145,11 @@ ostream& operator<<(ostream& os, const ResourceFactory& factory){
 
 ResourceFactory::~ResourceFactory() {
     for (auto& pair : *this) {
-        // delete pair.second;
+        // delete &pair.second;
+    }
+    for(auto& pair : dropsMap){
+        for(auto& product : pair.second){
+            delete product;
+        }
     }
 }

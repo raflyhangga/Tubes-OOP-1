@@ -49,15 +49,6 @@ int Petani::getKTKP(){
     return 13;
 }
 
-    
-set<Plant*>* Petani::getSetOfPlant(){
-    set<Plant*>* plantSet = new set<Plant*>();
-    for (const auto &l: ladang) {
-        Plant *plant = ladang[l];
-        plantSet->insert(plant);
-    }
-    return plantSet;
-}
 
 vector<Quantifiable<Plant *>>* Petani::getAllHarvestablePlant(){
     vector<Quantifiable<Plant *>> *harvestablePlant = new vector<Quantifiable<Plant *>>();

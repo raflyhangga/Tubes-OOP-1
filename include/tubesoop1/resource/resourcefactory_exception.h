@@ -1,5 +1,5 @@
-#ifndef RESOURCE_TRANSLATOR_ERROR_H
-#define RESOURCE_TRANSLATOR_ERROR_H
+#ifndef RESOURCE_TRANSLATOR_EXCEPTION_H
+#define RESOURCE_TRANSLATOR_EXCEPTION_H
 
 #include <exception>
 #include <iostream>

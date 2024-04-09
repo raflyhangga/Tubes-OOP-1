@@ -15,18 +15,10 @@ void CetakPeternakan::execute(Peternak *peternak) {
     Grid<Animal *> peternakan = peternak->getPeternakan();
 
     // print grid
-    print(peternakan);
+    printGrid(peternakan);
 
-
-    set<pair<string, string>> codesAndNames;
-    for (const auto &loc: peternakan) {
-        Animal *animal = peternakan.getElement(loc);
-        codesAndNames.insert({animal->getCode(), animal->getName()});
-    }
-
-    for (auto &[code, name]: codesAndNames) {
-        cout << "- " << code << ": " << name << '\n';
-    }
+    // print info
+    printInfo(peternakan);
     cout << '\n';
 }
 void CetakPeternakan::execute(Petani *petani) {
@@ -36,7 +28,7 @@ void CetakPeternakan::execute(Walikota *walikota) {
     throw CommandNotAllowedException("CETAK_PETERNAKAN");
 }
 
-void CetakPeternakan::print(Grid<Animal *> &peternakan) {
+void CetakPeternakan::printGrid(Grid<Animal *> &peternakan) {
     GridDrawerCLI<Animal*> drawer = GridDrawerCLI<Animal*>(peternakan);
     int total_length = peternakan.getCol()*6 + 1;
     string message = " Peternakan ";
@@ -44,4 +36,14 @@ void CetakPeternakan::print(Grid<Animal *> &peternakan) {
     cout << "   " <<  pad << '[' << message << ']' << pad << endl;
     drawer.draw();
 }
+void CetakPeternakan::printInfo(Grid<Animal *> &peternakan){
+    set<pair<string, string>> codesAndNames;
+    for (const auto &loc: peternakan) {
+        Animal *animal = peternakan.getElement(loc);
+        codesAndNames.insert({animal->getCode(), animal->getName()});
+    }
 
+    for (auto &[code, name]: codesAndNames) {
+        cout << "- " << code << ": " << name << '\n';
+    }
+}

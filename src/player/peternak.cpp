@@ -1,5 +1,6 @@
 #include "tubesoop1/player/peternak.h"
 #include "tubesoop1/player/walikota.h"
+#include "tubesoop1/animal/herbivore.h"
 
 
 
@@ -43,16 +44,6 @@ int Peternak::getNetWealth(){
 }
 int Peternak::getKTKP(){
     return 11;
-}
-
-
-set<Animal*>* Peternak::getSetOfAnimal(){
-    set<Animal*>* animalSet = new set<Animal*>();
-    for (const auto &l: peternakan) {
-        Animal *animal = peternakan[l];
-        animalSet->insert(animal);
-    }
-    return animalSet;
 }
 
 vector<Quantifiable<Animal *>>* Peternak::getAllHarvestableAnimal(){

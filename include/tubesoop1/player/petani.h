@@ -25,7 +25,6 @@ public:
     void addAllPlantAge(int age);
     TaxReport *bayarPajak(Walikota &walikota);
     
-    set<Plant*>* getSetOfPlant();
     vector<Quantifiable<Plant *>>* getAllHarvestablePlant();
 
     // visitor pattern

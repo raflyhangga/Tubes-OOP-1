@@ -1,4 +1,5 @@
 #include "tubesoop1/resource/creature.h"
+#include "tubesoop1/resource/creature_exception.h"
 
 
 Creature::Creature(string code, string name, int price, vector<Product*> drops):
@@ -36,4 +37,9 @@ ostream& operator<<(ostream& os, Creature& c){
     else os << "\033[1;31m";
     os << c.getCode() << "\033[0m\n";
     return os;
+}
+
+vector<Product*>& Creature::harvest(){
+    // if(!isHarvestable()) throw NotHarvestableException(*this); // this wont happen for user, only in development
+    return drops;
 }

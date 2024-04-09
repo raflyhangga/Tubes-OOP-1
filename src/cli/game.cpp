@@ -13,13 +13,15 @@
 #include <tubesoop1/player/petani.h>
 #include <tubesoop1/player/peternak.h>
 #include <tubesoop1/player/walikota.h>
+#include <tubesoop1/product/product.h>
 #include <algorithm>
+#include <vector>
 
 #include <iostream>
 #include <tubesoop1/cli/game.h>
 using namespace std;
 
-CLIGame::CLIGame(){
+CLIGame::CLIGame() : factory("config") {
 
 }
 
@@ -55,8 +57,6 @@ void CLIGame::init() {
 
     cout << "[Welcome to TUBES-OOP-1]" << endl;
     
-    factory = ResourceFactory("config");
-
     if(promptYesNo("Apakah ingin memuat data state sebelumnya?")){
         state.load("config/state.txt", factory);
         cout << "Data state berhasil dimuat\n\n";
@@ -70,6 +70,7 @@ void CLIGame::init() {
 }
 
 void CLIGame::run() {
+
     string command;
     while (true) {
         cout << ">> ";

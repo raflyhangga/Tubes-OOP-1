@@ -12,7 +12,8 @@ class CetakLadang: public Command {
         void execute(Peternak*);
         void execute(Walikota*);
 
-        void print(Grid<Plant *> &ladang);
+        void printGrid(Grid<Plant*>&);
+        void printInfo(Grid<Plant*>&);
 };
 
 #endif

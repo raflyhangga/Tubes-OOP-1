@@ -22,7 +22,6 @@ public:
     Grid<Animal*> &getPeternakan();
     TaxReport *bayarPajak(Walikota &walikota);
 
-    set<Animal*>* getSetOfAnimal();
     vector<Quantifiable<Animal *>>* getAllHarvestableAnimal();
 
     // visitor pattern

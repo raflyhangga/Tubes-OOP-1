@@ -11,44 +11,42 @@ Panen::Panen(State &state) : Command(state) {}
 
 void Panen::execute(Petani *petani) {
     Grid<Plant*> &ladang = petani->getLadang();
-    CetakLadang(state).print(ladang);
-    vector<Quantifiable<Plant *>>* allHarvestablePlant = petani->getAllHarvestablePlant();
+    CetakLadang printer(state);
     
-    set<Plant *>* setOfPlants = petani->getSetOfPlant();
-    for(Plant* s : *setOfPlants) {
-        cout << " - " << s->getCode()
-        << ": " << s->getName() << endl;
-    }
+    printer.printGrid(ladang);
+    printer.printInfo(ladang);
 
+    vector<Quantifiable<Plant *>>* allHarvestablePlant = petani->getAllHarvestablePlant();
     if(allHarvestablePlant->size() == 0) {
         cout << "Tidak ada tanaman yang siap dipanen." << endl;
         return;
     }
 
-    cout << "Pilih tanaman siap panen yang kamu miliki" << endl;
+    cout << "\nPilih tanaman siap panen yang kamu miliki" << endl;
     for(int i = 0; i < allHarvestablePlant->size(); i++) {
         while((*allHarvestablePlant)[i].getQuantity() == 0) {
             // pop the element
             allHarvestablePlant->erase(allHarvestablePlant->begin() + i);
         }
-        cout << " " << i+1 << ". " << (*allHarvestablePlant)[i].getValue()->getCode()
-        << ": " << (*allHarvestablePlant)[i].getValue()->getName() << endl;
+        cout << "  " << i+1 << ". " << (*allHarvestablePlant)[i].getValue()->getCode()
+        << " (" << (*allHarvestablePlant)[i].getQuantity() << " petak siap panen)"
+        << endl;
     }
 
     int chosenPlantIdx;
-    cout << "Nomor tanaman yang ingin dipanen: " << endl << endl;
+    cout << "\nNomor tanaman yang ingin dipanen: ";
     cin >> chosenPlantIdx;
     if(chosenPlantIdx > allHarvestablePlant->size() || chosenPlantIdx < 1) 
         throw out_of_range("Index di luar batas.");
 
     int amountOfSquareToHarvest;
-    cout << "Berapa petak yang ingin dipanen: " << endl << endl;
+    cout << "\nBerapa petak yang ingin dipanen: " << endl << endl;
 
     cin >> amountOfSquareToHarvest;
     if(amountOfSquareToHarvest < 1) 
         throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh kurang dari 1.");
     if(amountOfSquareToHarvest > (*allHarvestablePlant)[chosenPlantIdx-1].getQuantity()){
-        throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki! Jumlah tanaman yang dimiliki: " + to_string((*allHarvestablePlant)[chosenPlantIdx-1].getQuantity()) + "\n");
+        throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki!\nJumlah tanaman yang dimiliki: " + to_string((*allHarvestablePlant)[chosenPlantIdx-1].getQuantity()) + "\n");
     }
 
     int notFilledAmount = ladang.getCountNotFilled();
@@ -64,10 +62,22 @@ void Panen::execute(Petani *petani) {
         cout << "Petak ke-" << i+1 << ": ";
         Location l; cin >> l;
         if(ladang[l]->getCode() != chosenPlant->getCode()) {
-            throw invalid_argument("Tanaman yang dipilih tidak sesuai.\n Seharusnya: " + chosenPlant->getCode() + "\nDitemukan: " + ladang[l]->getCode());
+            throw invalid_argument("Tanaman yang dipilih tidak sesuai.\nSeharusnya: " + chosenPlant->getCode() + "\nDitemukan: " + ladang[l]->getCode());
         }
         chosenPlantLocation.push_back(l);
     }
+
+    // pop the plant and put the result to inventory
+    for(const auto &loc : chosenPlantLocation) {
+        Plant* p = ladang.pop(loc);
+        vector<Product *>& drops = p->harvest();
+        for(Product *product : drops) {
+            cout << product->getName() << endl;
+            petani->putInventory(*product);
+        }
+    }
+
+
     cout << chosenPlantLocation.size() << " petak tanaman " << chosenPlant->getCode() << " pada petak ";
     cout << chosenPlantLocation[0];
     for(int i = 1; i < chosenPlantLocation.size(); i++) {
@@ -79,15 +89,11 @@ void Panen::execute(Petani *petani) {
 }
 void Panen::execute(Peternak *peternak) {
     Grid<Animal*> &peternakan = peternak->getPeternakan();
-    CetakPeternakan(state).print(peternakan);
-    vector<Quantifiable<Animal *>>* allHarvestableAnimal = peternak->getAllHarvestableAnimal();
-    
-    set<Animal *>* setOfAnimals = peternak->getSetOfAnimal();
-    for(Animal* s : *setOfAnimals) {
-        cout << " - " << s->getCode()
-        << ": " << s->getName() << endl;
-    }
+    CetakPeternakan printer(state);
+    printer.printGrid(peternakan);
+    printer.printInfo(peternakan);
 
+    vector<Quantifiable<Animal *>>* allHarvestableAnimal = peternak->getAllHarvestableAnimal();
     if(allHarvestableAnimal->size() == 0) {
         cout << "Tidak ada tanaman yang siap dipanen." << endl;
         return;
@@ -99,24 +105,25 @@ void Panen::execute(Peternak *peternak) {
             // pop the element
             allHarvestableAnimal->erase(allHarvestableAnimal->begin() + i);
         }
-        cout << " " << i+1 << ". " << (*allHarvestableAnimal)[i].getValue()->getCode()
-        << ": " << (*allHarvestableAnimal)[i].getValue()->getName() << endl;
+        cout << "  " << i+1 << ". " << (*allHarvestableAnimal)[i].getValue()->getCode()
+        << " (" << (*allHarvestableAnimal)[i].getQuantity() << " petak siap panen)"
+        << endl;
     }
 
     int chosenAnimalIdx;
-    cout << "Nomor tanaman yang ingin dipanen: " << endl << endl;
+    cout << "\nNomor tanaman yang ingin dipanen: ";
     cin >> chosenAnimalIdx;
     if(chosenAnimalIdx > allHarvestableAnimal->size() || chosenAnimalIdx < 1) 
         throw out_of_range("Index di luar batas.");
 
     int amountOfSquareToHarvest;
-    cout << "Berapa petak yang ingin dipanen: " << endl << endl;
+    cout << "\nBerapa petak yang ingin dipanen: ";
 
     cin >> amountOfSquareToHarvest;
     if(amountOfSquareToHarvest < 1) 
         throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh kurang dari 1.");
     if(amountOfSquareToHarvest > (*allHarvestableAnimal)[chosenAnimalIdx-1].getQuantity()){
-        throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki! Jumlah tanaman yang dimiliki: " + to_string((*allHarvestableAnimal)[chosenAnimalIdx-1].getQuantity()) + "\n");
+        throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki!\nJumlah tanaman yang dimiliki: " + to_string((*allHarvestableAnimal)[chosenAnimalIdx-1].getQuantity()) + "\n");
     }
 
     int notFilledAmount = peternakan.getCountNotFilled();
@@ -136,6 +143,16 @@ void Panen::execute(Peternak *peternak) {
         }
         chosenAnimalLocation.push_back(l);
     }
+    
+    // pop the Animal and put the result to inventory
+    for(const auto &loc : chosenAnimalLocation) {
+        Animal* p = peternakan.pop(loc);
+        vector<Product *>& drops = p->harvest();
+        for(Product *product : drops) {
+            peternak->putInventory(*product);
+        }
+    }
+
     cout << chosenAnimalLocation.size() << " petak tanaman " << chosenAnimal->getCode() << " pada petak ";
     cout << chosenAnimalLocation[0];
     for(int i = 1; i < chosenAnimalLocation.size(); i++) {

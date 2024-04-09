@@ -12,7 +12,8 @@ class CetakPeternakan: public Command {
         void execute(Peternak*);
         void execute(Walikota*);
 
-        void print(Grid<Animal*>&);
+        void printGrid(Grid<Animal*>&);
+        void printInfo(Grid<Animal*>&);
 };
 
 #endif
