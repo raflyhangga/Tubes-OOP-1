@@ -7,14 +7,10 @@ using namespace std;
 
 class CommandNotAllowedException: public exception {
     private:
-        string command;
+        string message;
     public:
-        CommandNotAllowedException(const char* command) {
-            this->command = command;
-        }
-        const char* what() const throw() {
-            return ("Command " + command + " is not allowed for this specific role.").c_str();
-        }
+        CommandNotAllowedException(string command);
+        const char* what() const throw();
 };
 
 #endif
