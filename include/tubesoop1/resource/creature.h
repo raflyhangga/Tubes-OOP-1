@@ -17,7 +17,7 @@ class Creature: public Resource {
         ~Creature();
         Creature& operator=(const Creature &);
         Creature& operator<<(Product&);
-        virtual bool isHarvestable() = 0;
+        virtual bool isHarvestable() const = 0;
         friend ostream& operator<<(ostream&, const Creature&);
 };
 

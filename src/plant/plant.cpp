@@ -16,7 +16,7 @@ void Plant::addAge(int age){
 int Plant::getAge(){
     return age;
 }
-bool Plant::isHarvestable(){
+bool Plant::isHarvestable() const{
     return age >= durationToHarvest;
 }
 
@@ -40,5 +40,8 @@ istream &operator>>(istream &is, Plant &p)
 
 ostream &operator<<(ostream &os, const Plant &p)
 {
+    if(p.isHarvestable()) os << "\033[1;31m";
+    else os << "\033[1;32m";
+    os << p.getCode() << "\033[0m";
     return os;
 }

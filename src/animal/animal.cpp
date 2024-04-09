@@ -15,7 +15,7 @@ int Animal::getWeight() const
     return weight;
 }
 
-bool Animal::isHarvestable()
+bool Animal::isHarvestable() const
 {
     return weight >= weightToHarvest;
 }
@@ -27,5 +27,8 @@ void Animal::eat(EatenElement &p)
 
 ostream &operator<<(ostream &os, const Animal &a)
 {
+    if(a.isHarvestable()) os << "\033[1;31m";
+    else os << "\033[1;32m";
+    os << a.getCode() << "\033[0m";
     return os;
 }
