@@ -18,10 +18,10 @@ Grid<Plant*>& Petani::getLadang()
     return ladang;
 }
 
-void Petani::incrementAllPlantAge(){
+void Petani::addAllPlantAge(int age){
     for(Location l : ladang){
         Plant *p = ladang.getElement(l);
-        p->incrementAge();
+        p->addAge(age);
     }
 }
 

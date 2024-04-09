@@ -44,6 +44,7 @@ class State {
         void addPlayer(string type, string name);
 
         Player* getCurrentPlayer();
+        int getTotalPlayer();
 
         /**
          * @brief Increment turn by 1

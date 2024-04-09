@@ -6,7 +6,7 @@ using namespace std;
 Next::Next(State &state) : Command(state) {}
 
 void Next::execute(Petani *petani) {
-    petani->incrementAllPlantAge();
+    petani->addAllPlantAge(state.getTotalPlayer());
     cout << "Giliran dilanjut ke pemain berikutnya." << endl;
     state.nextTurn();
 }

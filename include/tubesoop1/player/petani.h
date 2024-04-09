@@ -20,7 +20,7 @@ public:
     void putLadangAt(Plant &p, Location &l);
     Grid<Plant*>& getLadang();
 
-    void incrementAllPlantAge();
+    void addAllPlantAge(int age);
     TaxReport bayarPajak(Walikota &walikota);
     
 

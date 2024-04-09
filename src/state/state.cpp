@@ -202,6 +202,9 @@ State::~State(){
 Player* State::getCurrentPlayer(){
     return playerList[turn % playerList.size()];
 }
+int State::getTotalPlayer(){
+    return playerList.size();
+}
 
 void State::nextTurn(){
     turn++;
