@@ -10,7 +10,7 @@ class Walikota : public Player
 private:
 public:
     Walikota(string &username);
-    vector<TaxReport *> pungutPajak(vector<Player*> p, int numberOfPlayer);
+    vector<TaxReport *> pungutPajak(vector<Player*> &p, int numberOfPlayer);
     TaxReport *bayarPajak(Walikota &walikota);
     int getKTKP();
 

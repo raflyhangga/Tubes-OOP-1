@@ -5,6 +5,7 @@
 #include <tubesoop1/cli/command/help.h>
 #include <tubesoop1/cli/command/jual.h>
 #include <tubesoop1/cli/command/simpan.h>
+#include <tubesoop1/cli/command/tambahpemain.h>
 #include <tubesoop1/cli/command/panen.h>
 #include <tubesoop1/cli/command/pungutpajak.h>
 #include <tubesoop1/cli/command/cetakladang.h>
@@ -103,7 +104,6 @@ void CLIGame::run() {
     }
 }
 
-
 void CLIGame::initializeCommand() {
     commands["HELP"] = new Help(state);
     commands["NEXT"] = new Next(state);
@@ -114,6 +114,7 @@ void CLIGame::initializeCommand() {
     commands["SIMPAN"] = new Simpan(state);
     commands["JUAL"] = new Jual(state);
     commands["PANEN"] = new Panen(state);
+    commands["TAMBAH_PEMAIN"] = new TambahPemain(state);
 }
 
 Command* CLIGame::choose(string command) {

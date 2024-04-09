@@ -184,7 +184,18 @@ void State::addPlayer(string type, string name){
     else if(type == "peternak") currentPlayer = new Peternak(name);
     else if(type == "walikota") currentPlayer = new Walikota(name);
     else throw InvalidPlayerTypeException(type);
-    playerList.push_back(currentPlayer);
+    
+    playerList.insert(playerList.begin() + turn + 1, currentPlayer);
+}
+bool State::isAddedTypeValid(string &type){
+    transform(type.begin(), type.end(), type.begin(), ::tolower); // lowercase
+    return type == "petani" || type == "peternak";
+}
+bool State::isPlayerExist(string &name){
+    for(Player *player : playerList){
+        if(player->getUsername() == name) return true;
+    }
+    return false;
 }
 
 const char* State::getClassName(Player &player){
@@ -220,7 +231,7 @@ Player* State::getPlayer(int index){
     return playerList[index];
 }
 
-vector<Player*> State::getPlayerList(){
+vector<Player*>& State::getPlayerList(){
     return playerList;
 }
 

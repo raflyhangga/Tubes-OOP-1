@@ -163,6 +163,6 @@ void Panen::execute(Peternak *peternak) {
     delete allHarvestableAnimal;
 }
 void Panen::execute(Walikota *walikota) {
-    throw CannotPanenException(*walikota);
+    throw CommandNotAllowedException("PANEN");
 }
 

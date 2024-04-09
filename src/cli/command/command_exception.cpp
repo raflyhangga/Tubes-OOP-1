@@ -18,9 +18,3 @@ InvalidInputLocationListException::InvalidInputLocationListException(){}
 const char* InvalidInputLocationListException::what() const throw()  {
     return "Input lokasi tidak valid.";
 }
-
-CannotPanenException::CannotPanenException(Player &player) : message((player.getUsername() + " (Walikota) tidak bisa melakukan panen.")) {}
-const char* CannotPanenException::what() const throw()  {
-    return message.c_str();
-}
-

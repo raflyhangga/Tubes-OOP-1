@@ -28,12 +28,4 @@ class InvalidInputLocationListException: public exception {
         const char* what() const throw();
 };
 
-class CannotPanenException: public exception {
-    private:
-        string message;
-    public:
-        CannotPanenException(Player &walikota);
-        const char* what() const throw();
-};
-
 #endif
