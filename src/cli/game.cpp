@@ -3,6 +3,7 @@
 #include <tubesoop1/cli/command/help.h>
 #include <tubesoop1/cli/command/jual.h>
 #include <tubesoop1/cli/command/simpan.h>
+#include <tubesoop1/cli/command/panen.h>
 #include <tubesoop1/cli/command/pungutpajak.h>
 #include <tubesoop1/cli/command/cetakladang.h>
 #include <tubesoop1/cli/command/cetakpeternakan.h>
@@ -74,7 +75,11 @@ void CLIGame::run() {
         try {
             transform(command.begin(), command.end(), command.begin(), ::toupper); // uppercase
             Command *c = commands.at(command);
-            c->execute(state.getCurrentPlayer());
+            Player* player = state.getCurrentPlayer();
+            c->execute(player);
+            if(player->isWin()){
+                win(player);
+            }
         } catch (out_of_range &e) {
             cout << "Perintah '" << command << "' tidak tersedia! Gunakan perintah 'HELP' untuk melihat daftar perintah." << endl;
         } catch (exception &e) {
@@ -93,6 +98,7 @@ void CLIGame::initializeCommand() {
     commands["CETAK_PETERNAKAN"] = new CetakPeternakan(state);
     commands["SIMPAN"] = new Simpan(state);
     commands["JUAL"] = new Jual(state);
+    commands["PANEN"] = new Panen(state);
 }
 
 bool CLIGame::promptYesNo(string message){
@@ -119,4 +125,9 @@ void CLIGame::turnInfo() {
         if (state.getTurn() == i) cout << " (giliranmu)";
         cout << endl;
     }
+}
+
+void CLIGame::win(Player* player){
+    cout << "Selamat " << player->getUsername() << " kamu menang!" << endl;
+    exit(0);
 }

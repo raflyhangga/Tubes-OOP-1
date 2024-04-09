@@ -15,6 +15,7 @@ class CLIGame {
         void init();
         bool promptYesNo(string message);
         void turnInfo();
+        void win(Player* player);
 };
 
 #endif

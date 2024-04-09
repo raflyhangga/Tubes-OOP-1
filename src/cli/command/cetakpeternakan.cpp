@@ -15,7 +15,7 @@ void CetakPeternakan::execute(Peternak *peternak) {
     Grid<Animal *> peternakan = peternak->getPeternakan();
 
     // print grid
-    printLabelAndGrid(peternak, peternakan);
+    print(peternakan);
 
 
     set<pair<string, string>> codesAndNames;
@@ -36,8 +36,8 @@ void CetakPeternakan::execute(Walikota *walikota) {
     throw CommandNotAllowedException("CETAK_PETERNAKAN");
 }
 
-void CetakPeternakan::printLabelAndGrid(Peternak *peternak, Grid<Animal *> &peternakan) {
-    GridDrawerCLI<Animal*> drawer = GridDrawerCLI<Animal*>(peternak->getPeternakan());
+void CetakPeternakan::print(Grid<Animal *> &peternakan) {
+    GridDrawerCLI<Animal*> drawer = GridDrawerCLI<Animal*>(peternakan);
     int total_length = peternakan.getCol()*6 + 1;
     string message = " Peternakan ";
     string pad = string((total_length - message.length()) / 2 - 1, '=');

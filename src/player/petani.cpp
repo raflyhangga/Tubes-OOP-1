@@ -1,5 +1,6 @@
 #include "tubesoop1/player/petani.h"
 #include "tubesoop1/player/walikota.h"
+#include <algorithm>
 
 Petani::Petani(string &_username) : Player(_username) {}
 
@@ -46,4 +47,28 @@ int Petani::getNetWealth(){
 }
 int Petani::getKTKP(){
     return 13;
+}
+
+vector<Quantifiable<Plant *>>* Petani::getAllHarvestablePlant(){
+    vector<Quantifiable<Plant *>> *harvestablePlant = new vector<Quantifiable<Plant *>>();
+    for(Location l : ladang){
+        Plant *p = ladang[l];
+        if(p->isHarvestable()){
+            cout << p->getName() << endl;
+            
+            // Find the plant in the vector, increment if found
+            bool found = false;
+            for(auto &q : *harvestablePlant){
+                if(q.getValue()->getCode() == p->getCode()){
+                    q++;
+                    found = true;
+                    break;
+                }
+            }
+
+            // If not found, add it to the vector
+            if(!found) harvestablePlant->push_back(Quantifiable<Plant *>(p, 1));
+        }
+    }
+    return harvestablePlant;
 }

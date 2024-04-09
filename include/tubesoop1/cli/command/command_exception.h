@@ -3,6 +3,7 @@
 
 #include <exception>
 #include <iostream>
+#include "tubesoop1/player/walikota.h"
 using namespace std;
 
 class CommandNotAllowedException: public exception {
@@ -16,6 +17,14 @@ class CommandNotAllowedException: public exception {
 class InvalidInputLocationListException: public exception {
     public:
         InvalidInputLocationListException();
+        const char* what() const throw();
+};
+
+class CannotPanenException: public exception {
+    private:
+        Walikota& walikota;
+    public:
+        CannotPanenException(Walikota &walikota);
         const char* what() const throw();
 };
 

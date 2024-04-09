@@ -1,18 +1,16 @@
-#ifndef CETAKLADANG_H
-#define CETAKLADANG_H
+#ifndef PANEN_H
+#define PANEN_H
 
 #include <tubesoop1/cli/command/command.h>
 #include <tubesoop1/player/player.h>
 
-class CetakLadang: public Command {
+class Panen: public Command {
     public:
-        CetakLadang(State&);
+        Panen(State&);
         // visitor pattern
         void execute(Petani*);
         void execute(Peternak*);
         void execute(Walikota*);
-
-        void print(Grid<Plant *> &ladang);
 };
 
 #endif

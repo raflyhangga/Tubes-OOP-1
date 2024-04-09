@@ -12,7 +12,7 @@ class CetakPeternakan: public Command {
         void execute(Peternak*);
         void execute(Walikota*);
 
-        void printLabelAndGrid(Peternak*, Grid<Animal*>&);
+        void print(Grid<Animal*>&);
 };
 
 #endif
