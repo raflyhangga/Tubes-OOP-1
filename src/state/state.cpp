@@ -213,7 +213,7 @@ int State::getTotalPlayer(){
 }
 
 void State::nextTurn(){
-    turn++;
+    turn = (turn + 1) % playerList.size();
 }
 
 Player* State::getPlayer(int index){
