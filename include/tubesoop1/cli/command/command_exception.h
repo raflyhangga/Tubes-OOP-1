@@ -13,4 +13,10 @@ class CommandNotAllowedException: public exception {
         const char* what() const throw();
 };
 
+class InvalidInputLocationListException: public exception {
+    public:
+        InvalidInputLocationListException();
+        const char* what() const throw();
+};
+
 #endif

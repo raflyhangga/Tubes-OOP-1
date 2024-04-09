@@ -24,3 +24,8 @@ void Animal::eat(EatenElement &p)
 {
     p.eaten(*this);
 }
+
+ostream &operator<<(ostream &os, const Animal &a)
+{
+    return os;
+}

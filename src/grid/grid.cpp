@@ -69,7 +69,7 @@ inline void Grid<T>::setElement(Location l, T val) {
 
 template <class T>
 inline T Grid<T>::pop(Location l) {
-    int row = l.getRow(), col = l.getCol;
+    int row = l.getRow(), col = l.getCol();
 
     if (row < 0 || row >= element.size() || col < 0 || col >= element[0].size()) {
         throw out_of_range("Row or column is out of range.");
@@ -79,7 +79,7 @@ inline T Grid<T>::pop(Location l) {
         throw logic_error("Element at specified position is not available.");
     }
 
-    T val = *element[row][col];
+    T val = element[row][col];
     isFilled[row][col] = false;
 
     countFilled--;

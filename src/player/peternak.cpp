@@ -20,11 +20,11 @@ Grid<Animal*>& Peternak::getPeternakan()
     return peternakan;
 }
 
-TaxReport Peternak::bayarPajak(Walikota &walikota)
+TaxReport *Peternak::bayarPajak(Walikota &walikota)
 {
     int tax = calculateTax();
     walikota.addMoney(tax);
-    return TaxReport(username, "Peternak", tax);
+    return new TaxReport(username, "Peternak", tax);
 }
 
 // visitor pattern

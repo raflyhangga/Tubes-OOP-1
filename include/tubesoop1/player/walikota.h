@@ -10,8 +10,8 @@ class Walikota : public Player
 private:
 public:
     Walikota(string &username);
-    void pungutPajak();
-    TaxReport bayarPajak(Walikota &walikota);
+    vector<TaxReport *> pungutPajak(vector<Player*> p, int numberOfPlayer);
+    TaxReport *bayarPajak(Walikota &walikota);
     int getKTKP();
 
     // visitor pattern

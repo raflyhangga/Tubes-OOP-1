@@ -91,6 +91,7 @@
         "xfacet": "cpp",
         "xlocbuf": "cpp",
         "xlocinfo": "cpp",
-        "*.rh": "cpp"
+        "*.rh": "cpp",
+        "regex": "cpp"
     }
 }
