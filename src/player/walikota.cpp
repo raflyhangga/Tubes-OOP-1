@@ -4,7 +4,7 @@ Walikota::Walikota(string &_username) : Player(_username){};
 
 void Walikota::pungutPajak()
 {
-    money += 1000;
+    
 }
 
 // visitor pattern

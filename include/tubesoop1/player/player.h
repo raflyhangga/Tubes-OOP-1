@@ -16,7 +16,11 @@ protected:
     int weight;
     int money;
     Grid<Resource *> inventory;
-
+    
+    virtual int getNetWealth();
+    int getKKPRate();
+    virtual int getKTKP() = 0;
+    int getKKP();
 public:
     static int playerCount;
     static int weightToWin;
@@ -30,6 +34,7 @@ public:
 
     void setWeight(int weight);
     void setMoney(int money);
+    void addMoney(int money);
 
     string getUsername();
     void removeInventory(Resource &r, int quantity);
@@ -40,9 +45,6 @@ public:
 
     virtual TaxReport bayarPajak(Walikota &walikota) = 0;
     
-    virtual int getNetWealth();
-    int getKKPRate();
-    virtual int getKTKP() = 0;
     int calculateTax();
 
     // Visitor pattern

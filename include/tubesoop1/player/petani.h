@@ -11,6 +11,8 @@ class Petani : public Player
 {
 private:
     Grid<Plant*> ladang;
+    int getNetWealth();
+    int getKTKP();
 public:
     Petani(string &username);
 
@@ -21,8 +23,6 @@ public:
     void incrementAllPlantAge();
     TaxReport bayarPajak(Walikota &walikota);
     
-    int getNetWealth();
-    int getKTKP();
 
     // visitor pattern
     void executed(CommanderVisitor&);

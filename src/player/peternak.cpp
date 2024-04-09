@@ -1,4 +1,5 @@
 #include "tubesoop1/player/peternak.h"
+#include "tubesoop1/player/walikota.h"
 
 Peternak::Peternak(string &_username) : Player(_username) {}
 
@@ -19,7 +20,9 @@ Grid<Animal*>& Peternak::getPeternakan()
 
 TaxReport Peternak::bayarPajak(Walikota &walikota)
 {
-    return TaxReport(username, "Peternak", calculateTax());
+    int tax = calculateTax();
+    walikota.addMoney(tax);
+    return TaxReport(username, "Peternak", tax);
 }
 
 // visitor pattern

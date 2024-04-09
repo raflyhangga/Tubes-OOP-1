@@ -1,4 +1,5 @@
 #include "tubesoop1/player/petani.h"
+#include "tubesoop1/player/walikota.h"
 
 Petani::Petani(string &_username) : Player(_username) {}
 
@@ -26,7 +27,8 @@ void Petani::incrementAllPlantAge(){
 
 TaxReport Petani::bayarPajak(Walikota &walikota)
 {
-    return TaxReport(username, "Petani", calculateTax());
+    int tax = calculateTax();
+    return TaxReport(username, "Petani", tax);
 }
 
 // visitor pattern

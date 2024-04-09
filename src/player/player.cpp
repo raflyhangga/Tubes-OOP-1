@@ -31,6 +31,9 @@ void Player::setWeight(int weight){
 void Player::setMoney(int money){
     this->money = money;
 }
+void Player::addMoney(int money){
+    this->money += money;
+}
 int Player::getMoney()
 {
     return money;
@@ -86,18 +89,18 @@ int Player::getNetWealth(){
     }
     return totalMoney;
 }
+int Player::getKKP(){
+    return getNetWealth() - getKTKP();
+}
 int Player::getKKPRate(){
-    int netWealth = getNetWealth();
-    if(netWealth <= 6) return 5;
-    else if(netWealth <= 25) return 15;
-    else if(netWealth <= 50) return 25;
-    else if(netWealth <= 500) return 30;
+    int kkp = getKKP();
+    if(kkp <= 6) return 5;
+    else if(kkp <= 25) return 15;
+    else if(kkp <= 50) return 25;
+    else if(kkp <= 500) return 30;
     else return 35;
 }
 int Player::calculateTax(){
-    int netWealth = getNetWealth();
-    int kkp = netWealth - getKTKP();
-    int kkpRate = getKKPRate();
-    int tax = (float)kkpRate/100.0 * kkp;
+    int tax = (float)getKKPRate()/100.0 * getKKP();
     return tax;
 }

@@ -10,6 +10,8 @@ class Peternak : public Player
 {
 private:
     Grid<Animal*> peternakan;
+    int getNetWealth();
+    int getKTKP();
 public:
     Peternak(string &username);
 
@@ -18,8 +20,6 @@ public:
     Grid<Animal*> &getPeternakan();
     TaxReport bayarPajak(Walikota &walikota);
 
-    int getNetWealth();
-    int getKTKP();
 
     // visitor pattern
     void executed(CommanderVisitor&);
