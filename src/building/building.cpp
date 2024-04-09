@@ -59,7 +59,7 @@ void Building::build(Player &p)
         const int quantity = quantifiableProduct.getQuantity();
 
         int availableQuantity = 0;
-        Grid<Resource *> playerInventory = p.getInventory();
+        Grid<Resource *> &playerInventory = p.getInventory();
         for (const auto &location : playerInventory.getAllFilled())
         {
             Resource *res = playerInventory.getElement(location);

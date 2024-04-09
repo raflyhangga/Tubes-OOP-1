@@ -62,6 +62,8 @@ class State {
          * @return Resource* 
          */
         Resource* translate(string itemName);
+
+        void addShopItem(Quantifiable<Resource*> item);
 };
 
 #endif

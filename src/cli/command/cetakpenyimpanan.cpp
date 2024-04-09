@@ -6,7 +6,7 @@ using namespace std;
 CetakPenyimpanan::CetakPenyimpanan(State &state) : Command(state) {}
 
 void CetakPenyimpanan::execute(Player *player) {
-    Grid<Resource*> inventory = player->getInventory();
+    Grid<Resource*> &inventory = player->getInventory();
     print(inventory);
     cout << "\nTotal slot kosong: " << inventory.getCountNotFilled() << "\n\n";
 }

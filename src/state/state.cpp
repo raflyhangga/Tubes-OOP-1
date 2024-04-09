@@ -224,3 +224,7 @@ Resource* State::translate(string itemName){
     Resource *r = factory->translate(itemName);
     return r;
 }
+
+void State::addShopItem(Quantifiable<Resource*> item){
+    shop.addItem(item);
+}
