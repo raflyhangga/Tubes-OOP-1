@@ -3,6 +3,8 @@
 #include <tubesoop1/cli/command/help.h>
 #include <tubesoop1/cli/command/jual.h>
 #include <tubesoop1/cli/command/simpan.h>
+#include <tubesoop1/cli/command/pungutpajak.h>
+
 #include <tubesoop1/player/petani.h>
 #include <tubesoop1/player/peternak.h>
 #include <tubesoop1/player/walikota.h>
@@ -72,7 +74,7 @@ void CLIGame::run() {
             Command *c = commands.at(command);
             c->execute(state.getCurrentPlayer());
         } catch (out_of_range &e) {
-            cout << "Peritah '" << command << "' tidak tersedia! Gunakan perintah 'HELP' untuk melihat daftar perintah." << endl;
+            cout << "Perintah '" << command << "' tidak tersedia! Gunakan perintah 'HELP' untuk melihat daftar perintah." << endl;
         } catch (exception &e) {
             cout << e.what() << endl;
         }
@@ -84,6 +86,7 @@ void CLIGame::initializeCommand() {
     commands["HELP"] = new Help(state);
     commands["NEXT"] = new Next(state);
     commands["CETAK_PENYIMPANAN"] = new CetakPenyimpanan(state);
+    commands["PUNGUT_PAJAK"] = new PungutPajak(state);
     commands["SIMPAN"] = new Simpan(state);
     commands["JUAL"] = new Jual(state);
 }
