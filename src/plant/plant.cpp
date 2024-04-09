@@ -16,6 +16,9 @@ void Plant::addAge(int age){
 int Plant::getAge(){
     return age;
 }
+bool Plant::isHarvestable(){
+    return age >= durationToHarvest;
+}
 
 Plant::~Plant(){
     

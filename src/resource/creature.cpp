@@ -30,3 +30,10 @@ Creature& Creature::operator<<(Product& prod){
     this->drops.push_back(&prod);
     return *this;
 }
+
+ostream& operator<<(ostream& os, Creature& c){
+    if(c.isHarvestable()) os << "\033[1;31m";
+    else os << "\033[1;32m";
+    os << c.getCode() << "\033[0m\n";
+    return os;
+}

@@ -15,7 +15,7 @@ int Animal::getWeight() const
     return weight;
 }
 
-bool Animal::isHarvestable() const
+bool Animal::isHarvestable()
 {
     return weight >= weightToHarvest;
 }
