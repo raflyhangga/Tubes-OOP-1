@@ -10,6 +10,9 @@ void Ternak::execute(Peternak *peternak) {
 
     Grid<Animal*> &peternakan = peternak->getPeternakan();
 
+    if(peternak->countAnimalInventory()==0){
+        throw("Tidak ada hewan di inventory!");
+    }
     // TODO : CEK DI PENYIMPANAN ADA HEWAN
     if(peternakan.isFull()){
         throw("Peternakan Penuh!");
@@ -22,8 +25,26 @@ void Ternak::execute(Peternak *peternak) {
     cout << "Slot: ";
     Location loc;
     cin >> loc;
+    Animal *animal = dynamic_cast<Animal*>(inventory.getElement(loc));
+    while(animal ==nullptr){
+        cout << "Slot tidak berisi hewan, silahkan pilih slot lain" << endl;
+        cout << "Slot: ";
+        cin >> loc;
+        animal = dynamic_cast<Animal*>(inventory.getElement(loc));
+    }
+    
+    inventory.pop(loc);
+
     // TO DO, CHECK IF LOCATION IS VALID (is animal, is not empty, etc)
 
+    cout << "Pilih petak tanah yang akan ditinggali" << endl;
+    CetakPeternakan(state).printLabelAndGrid(peternak, peternakan);
+
+    cout << "Petak tanah: ";
+    Location loc2;
+    cin >> loc2;
+    peternakan.setElement(loc2, animal);
+    cout << "Success" << endl;
     // rest not yet implemented, waiting for cetak peternakan
 }
 

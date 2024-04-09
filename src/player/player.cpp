@@ -1,5 +1,6 @@
 #include "tubesoop1/player/player.h"
 #include <tubesoop1/grid/griddrawer.hpp>
+#include "tubesoop1/product/product.h"
 
 int Player::moneyToWin;
 int Player::weightToWin;
@@ -107,4 +108,9 @@ int Player::getKKPRate(){
 int Player::calculateTax(){
     int tax = (float)getKKPRate()/100.0 * getKKP();
     return tax;
+}
+
+void Player::eat(Product &p){
+    weight += p.getAddedWeight();
+
 }

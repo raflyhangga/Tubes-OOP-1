@@ -45,4 +45,16 @@ int Peternak::getKTKP(){
     return 11;
 }
 
+int Peternak::countAnimalInventory(){
+    int count = 0;
+    
+    vector<Location> loc = inventory.getAllFilled();
+    for (Location l : loc){
+        if(dynamic_cast<Animal*>(inventory.getElement(l)) != nullptr){
+            count++;
+        }
+    }
+    return count;
+
+}
 
