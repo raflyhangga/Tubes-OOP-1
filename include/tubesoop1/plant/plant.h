@@ -19,6 +19,7 @@ public:
     void addAge(int age);
     void setAge(int age);
     int getAge();
+    bool isHarvestable();
     virtual ~Plant();
     friend ostream &operator<<(ostream &os, const Plant &a);
     friend istream &operator>>(istream &is, Plant &a);

@@ -26,9 +26,7 @@ public:
     // Visitor pattern
     void eat(EatenElement&);
 
-    bool isHarvestable() const;
-    friend ostream &operator<<(ostream &os, const Animal &a);
-    friend istream &operator>>(istream &is, Animal &a);
+    bool isHarvestable();
 };
 
 #endif
