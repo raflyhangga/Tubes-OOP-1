@@ -4,6 +4,7 @@
 #include <tubesoop1/grid/grid.hpp>
 #include <vector>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -15,13 +16,15 @@ void Jual::execute(Player *player) {
     CetakPenyimpanan(state).print(player->getInventory());
 
     cout << "Silahkan pilih petak yang ingin Anda jual!" << endl;
+    cout << "(Format: <Lokasi1>, <Lokasi2>, ...)" << endl;
+    cout << "(Contoh: A01, A02)" << endl;
     cout << "Petak : ";
-    int i = 0;
-    for(Location l : inventory){
-        if(i == 0)cout << l;
-        else cout << ", " << l;
-    }
-    vector<Location> ansLoc;
 
-    cout << "Barang Anda berhasil dijual! Uang Anda bertambah 12 gulden!\n\n";
+    string line; cin.ignore(); getline(cin, line); 
+    vector<Location> ansLoc = inputListLocation(line);
+    for(Location l : ansLoc){
+        cout << l << endl;
+    }
+    int addedMoney = 0;
+    cout << "Barang Anda berhasil dijual! Uang Anda bertambah " << addedMoney << " gulden!\n\n";
 }

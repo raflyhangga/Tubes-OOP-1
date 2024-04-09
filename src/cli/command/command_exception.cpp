@@ -6,3 +6,8 @@ CommandNotAllowedException::CommandNotAllowedException(string command)
 const char* CommandNotAllowedException::what() const throw()  {
     return message.c_str();
 }
+
+InvalidInputLocationListException::InvalidInputLocationListException(){}
+const char* InvalidInputLocationListException::what() const throw()  {
+    return "Input lokasi tidak valid.";
+}

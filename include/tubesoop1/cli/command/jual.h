@@ -7,6 +7,7 @@
 class Jual: public Command {
     public:
         Jual(State&);
+        
         // visitor pattern
         void execute(Player*);
 };

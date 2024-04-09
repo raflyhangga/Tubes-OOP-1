@@ -13,6 +13,7 @@ using namespace std;
 class Command : public CommanderVisitor { // visitor pattern
     protected:
         State& state;
+        vector<Location> inputListLocation(const string &line);
     public:
         Command(State&);
 

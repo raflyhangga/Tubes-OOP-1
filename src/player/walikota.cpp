@@ -22,8 +22,7 @@ vector<TaxReport *> Walikota::pungutPajak(vector<Player*> player, int numberOfPl
     for (int i = 0; i < numberOfPlayer; i++) {
 
         TaxReport *report = player[i]->bayarPajak(*this);
-        if (report->getName() == "")
-            continue;
+        if (report->getName() == getUsername()) continue; // self/skip walkota
         taxReports.push_back(report);
     }
 
@@ -43,7 +42,7 @@ void Walikota::executed(CommanderVisitor &visitor)
 }
 
 TaxReport *Walikota::bayarPajak(Walikota &walikota){
-    return new TaxReport("", "", 0);
+    return new TaxReport(walikota.getUsername(), "Walikota", 0);
 }
 
 int Walikota::getKTKP(){
