@@ -11,11 +11,13 @@ void Ternak::execute(Peternak *peternak) {
     Grid<Animal*> &peternakan = peternak->getPeternakan();
 
     if(peternak->countAnimalInventory()==0){
-        throw("Tidak ada hewan di inventory!");
+        cout << ("Tidak ada hewan di inventory!\n");
+        return;
     }
-    // TODO : CEK DI PENYIMPANAN ADA HEWAN
+    
     if(peternakan.isFull()){
-        throw("Peternakan Penuh!");
+        cout << ("Peternakan Penuh!\n");
+        return;
     }
  
     cout << "Pilih hewan dari penyimpanan" << endl;
@@ -38,14 +40,14 @@ void Ternak::execute(Peternak *peternak) {
     // TO DO, CHECK IF LOCATION IS VALID (is animal, is not empty, etc)
 
     cout << "Pilih petak tanah yang akan ditinggali" << endl;
-    CetakPeternakan(state).printLabelAndGrid(peternak, peternakan);
+    CetakPeternakan(state).printGrid(peternakan);
 
     cout << "Petak tanah: ";
     Location loc2;
     cin >> loc2;
     peternakan.setElement(loc2, animal);
     cout << "Success" << endl;
-    // rest not yet implemented, waiting for cetak peternakan
+    
 }
 
 void Ternak::execute(Petani *petani) {

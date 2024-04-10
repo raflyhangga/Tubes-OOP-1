@@ -10,6 +10,8 @@
 #include <tubesoop1/cli/command/pungutpajak.h>
 #include <tubesoop1/cli/command/cetakladang.h>
 #include <tubesoop1/cli/command/cetakpeternakan.h>
+#include <tubesoop1/cli/command/ternak.h>
+#include <tubesoop1/cli/command/makan.h>
 
 #include <tubesoop1/player/petani.h>
 #include <tubesoop1/player/peternak.h>
@@ -115,6 +117,8 @@ void CLIGame::initializeCommand() {
     commands["JUAL"] = new Jual(state);
     commands["PANEN"] = new Panen(state);
     commands["TAMBAH_PEMAIN"] = new TambahPemain(state);
+    commands["TERNAK"] = new Ternak(state);
+    commands["MAKAN"] = new Makan(state);
 }
 
 Command* CLIGame::choose(string command) {

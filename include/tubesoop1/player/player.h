@@ -7,7 +7,7 @@
 #include "tubesoop1/resource/resource.h"
 #include "tubesoop1/player/playervisitorpattern.h"
 #include "tubesoop1/player/taxreport.h"
-
+#include "tubesoop1/product/product.h"
 using namespace std;
 class Player : public PlayerElement // visitor pattern
 {
