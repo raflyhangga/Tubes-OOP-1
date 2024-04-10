@@ -52,28 +52,35 @@ void Building::build(Player &p)
         throw NotEnoughMoneyException();
     }
 
+    /**
+     * Below is handled by the Bangun command
+     * @ref src/cli/command/bangun.cpp
+     * 
+     * commented out by @ganadipa
+    */
+
     // Check if the player has enough resources and money to build the building
-    for (const auto &quantifiableProduct : recipe)
-    {
-        const ProductMaterial &product = *quantifiableProduct.getValue();
-        const int quantity = quantifiableProduct.getQuantity();
+    // for (const auto &quantifiableProduct : recipe)
+    // {
+    //     const ProductMaterial &product = *quantifiableProduct.getValue();
+    //     const int quantity = quantifiableProduct.getQuantity();
 
-        int availableQuantity = 0;
-        Grid<Resource *> &playerInventory = p.getInventory();
-        for (const auto &location : playerInventory.getAllFilled())
-        {
-            Resource *res = playerInventory.getElement(location);
-            if (res && res == &product)
-            {
-                availableQuantity++;
-            }
-        }
+    //     int availableQuantity = 0;
+    //     Grid<Resource *> &playerInventory = p.getInventory();
+    //     for (const auto &location : playerInventory.getAllFilled())
+    //     {
+    //         Resource *res = playerInventory.getElement(location);
+    //         if (res && res == &product)
+    //         {
+    //             availableQuantity++;
+    //         }
+    //     }
 
-        if (availableQuantity < quantity)
-        {
-            throw NotEnoughMaterialException();
-        }
-    }
+    //     if (availableQuantity < quantity)
+    //     {
+    //         throw NotEnoughMaterialException();
+    //     }
+    // }
 
     // Deduct the player's money
     p.setMoney(p.getMoney() - price);
@@ -97,6 +104,12 @@ void Building::build(Player &p)
 void Building::taken(TakerVisitor* t){
     t->take(this);
 }
+
+vector<Quantifiable<ProductMaterial *>> Building::getRecipe() const
+{
+    return recipe;
+}
+
 
 // int main()
 // {

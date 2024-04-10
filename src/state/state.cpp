@@ -253,3 +253,7 @@ int State::getTurn(){
 void State::addShopItem(Quantifiable<Resource*> item){
     shop.addItem(item);
 }
+
+map<string, Building*>& State::getRecipeMap(){
+    return factory->getRecipeMap();
+}

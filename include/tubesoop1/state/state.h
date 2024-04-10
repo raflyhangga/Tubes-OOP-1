@@ -109,6 +109,11 @@ class State {
          * @brief Add item to the shop
          */
         void addShopItem(Quantifiable<Resource*> item);
+
+        /**
+         * @brief get the recipe for buildings
+         */
+        map<string, Building*>& getRecipeMap();
 };
 
 #endif
