@@ -67,7 +67,11 @@ void MainWindow::initializeMenu(){
     helpButton.connect(&helpButton, &QPushButton::pressed, [](){});
     jualButton.connect(&jualButton, &QPushButton::pressed, [](){});
     makanButton.connect(&makanButton, &QPushButton::pressed, [](){});
-    nextButton.connect(&nextButton, &QPushButton::pressed, [](){});
+    nextButton.connect(&nextButton, &QPushButton::pressed, [this](){
+        state.nextTurn();
+        statusBar.setPlayer(state.getCurrentPlayer());
+        statusBar.refresh();
+    });
     panenButton.connect(&panenButton, &QPushButton::pressed, [](){});
     pungutPajakButton.connect(&pungutPajakButton, &QPushButton::pressed, [](){});
     simpanButton.connect(&simpanButton, &QPushButton::pressed, [](){});
