@@ -1,8 +1,7 @@
 #include "tubesoop1/gui/components/mainwindow.h"
 
-MainWindow::MainWindow(State &state) : 
-    statusBar(state.getCurrentPlayer()),
-
+MainWindow::MainWindow(State &state) :
+    state(state),
     cetakLadangButton("Cetak Ladang"),
     cetakPeternakanButton("Cetak Peternakan"),
     cetakPenyimpananButton("Cetak Penyimpanan"),
@@ -28,6 +27,11 @@ MainWindow::MainWindow(State &state) :
     int margin = 10; setContentsMargins(margin, margin, margin, margin);
     setGeometry(100, 100, 400, 200);
     setMinimumSize(QSize(1280, 720));
+}
+
+void MainWindow::initializeMenu(){
+    statusBar.setPlayer(state.getCurrentPlayer());
+
 
     // Whole
     setCentralWidget(&centralWidget);
@@ -50,6 +54,10 @@ MainWindow::MainWindow(State &state) :
     bodyLayout.addWidget(&simpanButton);
     bodyLayout.addWidget(&tambahPemainButton);
     bodyLayout.addWidget(&ternakButton);
+
+    footerLayout.addStretch();
+    footerLayout.addStretch();
+    footerLayout.addStretch();
     footerLayout.addWidget(&nextButton);
 
 

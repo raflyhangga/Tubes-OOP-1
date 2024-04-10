@@ -17,6 +17,11 @@ private:
     Player* player;
 
     QVBoxLayout vLayout;
+    QHBoxLayout hLayout1;
+    QHBoxLayout hLayout2;
+
+    QWidget widget1;
+    QWidget widget2;
 
     QLabel usernameLabel;
     QLabel typeLabel;
@@ -24,7 +29,7 @@ private:
     QLabel weightLabel;
     const char* getClassName(Player &player);
 public:
-    StatusBar(Player*);
+    StatusBar();
     /**
      * Change the player that this status bar is displaying
     */

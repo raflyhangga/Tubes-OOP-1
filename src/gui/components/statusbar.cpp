@@ -1,17 +1,27 @@
 #include "tubesoop1/gui/components/statusbar.h"
 #include "tubesoop1/player/player.h"
 
-StatusBar::StatusBar(Player* player) {
+StatusBar::StatusBar() {
     setLayout(&vLayout);
 
-    vLayout.addWidget(&usernameLabel);
-    vLayout.addWidget(&typeLabel);
-    vLayout.addWidget(&moneyLabel);
-    vLayout.addWidget(&weightLabel);    
+    hLayout1.addWidget(&usernameLabel);
+    hLayout1.addStretch();
+    hLayout1.addWidget(&moneyLabel);
 
+    hLayout2.addWidget(&typeLabel);
+    hLayout2.addStretch();
+    hLayout2.addWidget(&weightLabel);
+    
+    vLayout.addWidget(&widget1);
+    vLayout.addWidget(&widget2);
+
+    widget1.setLayout(&hLayout1);
+    widget2.setLayout(&hLayout2);
+}
+void StatusBar::setPlayer(Player* player) {
     this->player = player;
     refresh();
-}
+} 
 void StatusBar::refresh() {
     const char* className = getClassName(*player);
     usernameLabel.setText(QString::fromStdString("Username: " + player->getUsername()));

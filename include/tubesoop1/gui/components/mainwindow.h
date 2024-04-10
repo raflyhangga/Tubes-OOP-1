@@ -13,12 +13,13 @@ using namespace std;
 
 class MainWindow : public QMainWindow {
 private:
+    State &state;
     StatusBar statusBar;
 
     QVBoxLayout vLayout;
     QVBoxLayout headerLayout;
     QVBoxLayout bodyLayout;
-    QVBoxLayout footerLayout;
+    QHBoxLayout footerLayout;
 
     QWidget centralWidget;
     QWidget headerWidget;
@@ -39,6 +40,7 @@ private:
     NiceButton ternakButton;
 public:
     MainWindow(State &state);
+    void initializeMenu();
 };
 
 

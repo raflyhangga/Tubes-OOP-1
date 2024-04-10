@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
 
     InitDialog initDialog(&window, state, factory);
     initDialog.exec();
+
+    window.initializeMenu();
     
     return app.exec();
 }
