@@ -6,7 +6,7 @@
 #include <string>
 using namespace std;
 
-class FileNotFoundException : exception{
+class FileNotFoundException : public exception{
     private:
         const string message;
     public:
@@ -14,7 +14,7 @@ class FileNotFoundException : exception{
         const char* what() const throw();
 };
 
-class FolderNotFoundException : exception{
+class FolderNotFoundException : public exception{
     private:
         const string message;
     public:

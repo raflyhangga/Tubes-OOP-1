@@ -20,6 +20,11 @@ bool Animal::isHarvestable() const
     return weight >= weightToHarvest;
 }
 
+bool Animal::operator==(const Animal &a)
+{
+    return getCode() == a.getCode() && getName() == a.getName() && getPrice() == a.getPrice() && weightToHarvest == a.weightToHarvest && weight == a.weight;
+}
+
 void Animal::eat(EatenElement &p)
 {
     p.eaten(*this);

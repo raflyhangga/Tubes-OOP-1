@@ -10,6 +10,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMainWindow>
+#include <QCloseEvent>
 #include "tubesoop1/gui/components/nicebutton.h"
 #include "tubesoop1/state/state.h"
 #include "tubesoop1/resource/resourcefactory.h"
@@ -25,8 +26,12 @@ private:
     QVBoxLayout vLayout;
     QHBoxLayout hLayout;
     QLabel label;
+    bool closable;
 public:
     InitDialog(QMainWindow* window, State &state, ResourceFactory &factory);
+
+    void setClosable(bool closable);
+    void closeEvent(QCloseEvent *event);
 };
 
 

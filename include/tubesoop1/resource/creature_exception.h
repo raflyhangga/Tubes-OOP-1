@@ -7,7 +7,7 @@
 #include "tubesoop1/resource/creature.h"
 using namespace std;
 
-class NotHarvestableException : exception{
+class NotHarvestableException : public exception{
     private:
         const string message;
     public:

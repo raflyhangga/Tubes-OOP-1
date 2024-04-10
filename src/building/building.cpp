@@ -23,10 +23,9 @@ void Building::printBuildingInfo() const
     cout << ")" << endl;
 }
 
-void Building::addMaterial(const ProductMaterial &material, int quantity)
+void Building::addMaterial(ProductMaterial &material, int quantity)
 {
-    ProductMaterial *materialPtr = const_cast<ProductMaterial *>(&material);
-
+    ProductMaterial *materialPtr = &material;
     Quantifiable<ProductMaterial *> quantifiable(materialPtr, quantity);
 
     recipe.push_back(quantifiable);
@@ -34,12 +33,6 @@ void Building::addMaterial(const ProductMaterial &material, int quantity)
 
 void Building::build(Player &p)
 {
-    // Check if the player has the role of walikota
-    if (!dynamic_cast<Walikota *>(&p))
-    {
-        throw RoleWaliKotaException();
-    }
-
     // Check if there is an available slot for building
     if (p.getInventory().isFull())
     {
@@ -52,28 +45,35 @@ void Building::build(Player &p)
         throw NotEnoughMoneyException();
     }
 
+    /**
+     * Below is handled by the Bangun command
+     * @ref src/cli/command/bangun.cpp
+     * 
+     * commented out by @ganadipa
+    */
+
     // Check if the player has enough resources and money to build the building
-    for (const auto &quantifiableProduct : recipe)
-    {
-        const ProductMaterial &product = *quantifiableProduct.getValue();
-        const int quantity = quantifiableProduct.getQuantity();
+    // for (const auto &quantifiableProduct : recipe)
+    // {
+    //     const ProductMaterial &product = *quantifiableProduct.getValue();
+    //     const int quantity = quantifiableProduct.getQuantity();
 
-        int availableQuantity = 0;
-        Grid<Resource *> &playerInventory = p.getInventory();
-        for (const auto &location : playerInventory.getAllFilled())
-        {
-            Resource *res = playerInventory.getElement(location);
-            if (res && res == &product)
-            {
-                availableQuantity++;
-            }
-        }
+    //     int availableQuantity = 0;
+    //     Grid<Resource *> &playerInventory = p.getInventory();
+    //     for (const auto &location : playerInventory.getAllFilled())
+    //     {
+    //         Resource *res = playerInventory.getElement(location);
+    //         if (res && res == &product)
+    //         {
+    //             availableQuantity++;
+    //         }
+    //     }
 
-        if (availableQuantity < quantity)
-        {
-            throw NotEnoughMaterialException();
-        }
-    }
+    //     if (availableQuantity < quantity)
+    //     {
+    //         throw NotEnoughMaterialException();
+    //     }
+    // }
 
     // Deduct the player's money
     p.setMoney(p.getMoney() - price);
@@ -81,11 +81,11 @@ void Building::build(Player &p)
     // Remove resources used for building from player's inventory
     for (const auto &quantifiableProduct : recipe)
     {
-        const ProductMaterial &product = *quantifiableProduct.getValue();
+        ProductMaterial &product = *quantifiableProduct.getValue();
         const int quantity = quantifiableProduct.getQuantity();
 
         // Remove the specified quantity of product from player's inventory
-        p.removeInventory(const_cast<ProductMaterial &>(product), quantity);
+        p.removeInventory(product, quantity);
     }
 
     // Add the building to the player's inventory
@@ -97,6 +97,12 @@ void Building::build(Player &p)
 void Building::taken(TakerVisitor* t){
     t->take(this);
 }
+
+vector<Quantifiable<ProductMaterial *>> Building::getRecipe() const
+{
+    return recipe;
+}
+
 
 // int main()
 // {

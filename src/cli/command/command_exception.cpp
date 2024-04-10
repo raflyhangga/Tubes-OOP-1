@@ -18,3 +18,11 @@ InvalidInputLocationListException::InvalidInputLocationListException(){}
 const char* InvalidInputLocationListException::what() const throw()  {
     return "Input lokasi tidak valid.";
 }
+
+BuildingNotFoundException::BuildingNotFoundException() {
+
+}
+
+const char* BuildingNotFoundException::what() const throw()  {
+    return "Kamu tidak punya resep bangunan tersebut!";
+}

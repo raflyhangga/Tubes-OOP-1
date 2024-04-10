@@ -28,4 +28,10 @@ class InvalidInputLocationListException: public exception {
         const char* what() const throw();
 };
 
+class BuildingNotFoundException: public exception {
+    public:
+        BuildingNotFoundException();
+        const char* what() const throw();
+};
+
 #endif

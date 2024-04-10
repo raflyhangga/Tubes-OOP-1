@@ -2,6 +2,7 @@
 #include <tubesoop1/cli/command/cetakpenyimpanan.h>
 #include <tubesoop1/resource/resource.h>
 #include <tubesoop1/grid/grid.hpp>
+#include <tubesoop1/player/player_partial.hpp>
 #include <vector>
 #include <iostream>
 #include <sstream>
@@ -10,7 +11,60 @@ using namespace std;
 
 Jual::Jual(State &state) : Command(state) {}
 
-void Jual::execute(Player *player) {
+
+void Jual::execute(Petani* p){
+    Grid<Resource*> &inventory = p->getInventory();
+    vector<Location> ansLoc = promptChoosenLocation(p); // Will throw error if the location is not valid
+
+    vector<Building*> buildingList = p->takeAllFromInventory<Building>();
+
+    // throw error if there is any building in ansLoc
+    for(Location l : ansLoc){
+        for(Building* b : buildingList){
+            if(inventory[l] == b) throw invalid_argument("Tidak bisa menjual bangunan!");
+        }
+    }
+    
+    popAndAddMoneyFromInventory(p, ansLoc);
+}
+
+void Jual::execute(Peternak* p){
+    Grid<Resource*> &inventory = p->getInventory();
+    vector<Location> ansLoc = promptChoosenLocation(p); // Will throw error if the location is not valid
+    vector<Building*> buildingList = p->takeAllFromInventory<Building>();
+
+    // throw error if there is any building in ansLoc
+    for(Location l : ansLoc){
+        for(Building* b : buildingList){
+            if(inventory[l] == b) throw invalid_argument("Tidak bisa menjual bangunan!");
+        }
+    }
+
+    popAndAddMoneyFromInventory(p, ansLoc);
+}
+
+void Jual::execute(Walikota* p){
+    Grid<Resource*> &inventory = p->getInventory();
+    vector<Location> ansLoc = promptChoosenLocation(p); // Will throw error if the location is not valid
+    popAndAddMoneyFromInventory(p, ansLoc);
+}
+
+
+void Jual::popAndAddMoneyFromInventory(Player* p, vector<Location>& ansLoc){
+    Grid<Resource*> &inventory = p->getInventory();
+    // pop the resource and add the price
+    int addedMoney = 0;
+    for(Location l : ansLoc){
+        Resource *r = inventory.pop(l);
+        addedMoney += r->getPrice();
+        state.addShopItem(Quantifiable<Resource*>(r, 1));
+    }
+
+    p->addMoney(addedMoney);
+    cout << "Barang Anda berhasil dijual! Uang Anda bertambah " << addedMoney << " gulden!\n\n";
+}
+
+vector<Location> Jual::promptChoosenLocation(Player *player) {
     cout << "Berikut merupakan penyimpanan Anda" << endl;
     Grid<Resource*> &inventory = player->getInventory(); // DO
 
@@ -23,26 +77,11 @@ void Jual::execute(Player *player) {
 
     string line; cin.ignore(); getline(cin, line); 
     vector<Location> ansLoc = inputListLocation(line);
-    int addedMoney = 0;
 
     // Check any errors
     for(Location l : ansLoc){
-        try{
-            inventory[l];
-        } catch(logic_error &e){
-            stringstream ss; ss << l;
-            string message = "Petak " + ss.str() + " kosong, tidak bisa dijual.";
-            throw logic_error(message);
-        }
+        Resource *r = inventory[l];
     }
 
-    // pop the resource and add the price
-    for(Location l : ansLoc){
-        Resource *r = inventory.pop(l);
-        addedMoney += r->getPrice();
-        state.addShopItem(Quantifiable<Resource*>(r, 1));
-    }
-
-    player->addMoney(addedMoney);
-    cout << "Barang Anda berhasil dijual! Uang Anda bertambah " << addedMoney << " gulden!\n\n";
+    return ansLoc;
 }

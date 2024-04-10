@@ -126,7 +126,7 @@ void State::save(string statePath){
         name = currentPlayer->getUsername();
         weight = currentPlayer->getWeight();
         money = currentPlayer->getMoney();
-        type = getClassName(*currentPlayer);
+        ClassVisitor classTranslator; classTranslator.execute(currentPlayer); type = classTranslator.get();
         Grid<Resource*>& inventory = currentPlayer->getInventory();
         inventoryCount = inventory.getCountFilled();
 
@@ -203,18 +203,6 @@ bool State::isPlayerExist(string nameToCheck){
     return false;
 }
 
-const char* State::getClassName(Player &player){
-    const type_info& typeInfo = typeid(player);
-    const char* typeName = typeInfo.name();
-    const char* mangledName = typeInfo.name();
-    int prefixLength = 0;
-    while (std::isdigit(mangledName[prefixLength])) {
-        prefixLength++;
-    }
-    const char* className = mangledName + prefixLength;
-    return className;
-}
-
 State::~State(){
     for(Player *player : playerList){
         delete player;
@@ -252,4 +240,29 @@ int State::getTurn(){
 
 void State::addShopItem(Quantifiable<Resource*> item){
     shop.addItem(item);
+}
+
+map<string, Building*>& State::getRecipeMap(){
+    return factory->getRecipeMap();
+}
+
+Shop& State::getShop() {
+    return shop; 
+}
+
+
+void State::ClassVisitor::execute(Player* player) {
+    player->executed(*this);
+}
+string State::ClassVisitor::get(){
+    return className;
+}
+void State::ClassVisitor::execute(Petani* player) {
+    className = "Petani";
+}
+void State::ClassVisitor::execute(Peternak* player) {
+    className = "Peternak";
+}
+void State::ClassVisitor::execute(Walikota* player) {
+    className = "Walikota";
 }

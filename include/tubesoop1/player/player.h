@@ -50,6 +50,7 @@ public:
     
     int calculateTax();
 
+
     // Visitor pattern
     virtual void executed(CommanderVisitor&) = 0;
 

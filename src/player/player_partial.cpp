@@ -20,8 +20,8 @@ inline vector<T*> Player::takeAllFromInventory()
         Resource* r = inventory[l];
         try{
             v.push_back(taker.take(r)->get());
-        } catch(exception &e) {
         } catch(NotTakableException &e) {
+        } catch(exception &e) {
         }
     }
 

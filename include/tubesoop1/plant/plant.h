@@ -21,6 +21,7 @@ public:
     int getAge();
     bool isHarvestable() const;
     virtual ~Plant();
+    bool operator==(const Plant &a);
     friend ostream &operator<<(ostream &os, const Plant &a);
     friend istream &operator>>(istream &is, Plant &a);
 

@@ -57,7 +57,15 @@ inline void Grid<T>::setElement(Location l, T val) {
         message += "Grid size: " + to_string(element.size()) + "x" + to_string(element[0].size());
         throw out_of_range(message);
     }
+
     if(isFilled[row][col]){
+        if (val == nullptr) {
+            countFilled--;
+            countNotFilled++;
+            isFilled[row][col] = false;
+            return;
+        }
+
         throw logic_error("Element at specified position is already filled.");
     }
     if (!isFilled[row][col]) {
@@ -111,7 +119,6 @@ inline void Grid<T>::insert(T val) {
             } 
         }
     }
-
     setElement(loc, val);
 }
 

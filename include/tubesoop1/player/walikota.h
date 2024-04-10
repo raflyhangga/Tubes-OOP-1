@@ -16,6 +16,7 @@ public:
 
     // visitor pattern
     void executed(CommanderVisitor&);
+
 };
 
 #endif

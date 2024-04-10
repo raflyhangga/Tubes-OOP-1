@@ -12,6 +12,7 @@
 #include "tubesoop1/grid/location.h"
 #include "tubesoop1/state/state_exception.h"
 #include "tubesoop1/shop/shop.h"
+#include "tubesoop1/player/playervisitorpattern.h"
 #include <algorithm>
 
 using namespace std;
@@ -23,6 +24,18 @@ class State {
         const char* getClassName(Player &player);
         int turn;
         ResourceFactory* factory;
+
+        // Visitor pattern to get class string without any typeid/dynamic_cast or player returning a type string
+        class ClassVisitor : public CommanderVisitor{
+            private:
+                string className;
+            public:
+                string get();
+                void execute(Player*);
+                void execute(Petani*);
+                void execute(Peternak*);
+                void execute(Walikota*);
+        };
     public:
         /**
          * @brief For lazy loaded state
@@ -109,6 +122,13 @@ class State {
          * @brief Add item to the shop
          */
         void addShopItem(Quantifiable<Resource*> item);
+
+        /**
+         * @brief get the recipe for buildings
+         */
+        map<string, Building*>& getRecipeMap();
+
+        Shop& getShop();
 };
 
 #endif

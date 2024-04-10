@@ -20,9 +20,10 @@ public:
     Building(string code, string name, int price, const vector<Quantifiable<ProductMaterial*>> &recipe);
     void printBuildingInfo() const;
     void build(Player &p);
-    void addMaterial(const ProductMaterial &material, int quantity);
+    void addMaterial(ProductMaterial &material, int quantity);
 
     void taken(TakerVisitor* t);
+    vector<Quantifiable<ProductMaterial*>> getRecipe() const;
 };
 
 #endif

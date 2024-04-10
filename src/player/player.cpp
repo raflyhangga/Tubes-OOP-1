@@ -76,12 +76,12 @@ void Player::removeInventory(Resource &r, int quantity) {
 
     // Delete the resources from the inventory
     for (const auto &location : locationsToRemove) {
-        playerInventory.setElement(location, nullptr);
+        playerInventory.pop(location);
     }
 }
 
 void Player::removeInvetoryAt(Location &location){
-    inventory.setElement(location, nullptr);
+    inventory.pop(location);
 }
 Player::~Player() {
 }

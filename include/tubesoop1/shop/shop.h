@@ -4,12 +4,16 @@
 #include "tubesoop1/player/player.h"
 #include "tubesoop1/resource/resource.h"
 #include "tubesoop1/shop/Exception.h"
-#include "tubesoop1/grid/location.h"
+// #include "tubesoop1/grid/location.h"
+#include "tubesoop1/resourcevisitorpattern/taker.hpp"
 #include <vector>
 #include <iostream>
+#include <utility>
 using namespace std;
 
 #define UNVALID_IDX -1
+
+
 
 class Shop {
     private:
@@ -83,6 +87,28 @@ class Shop {
          * Mencetak isi produk dengan format ``[IDX]. [NAMA PRODUK] - [HARGA] (OPTIONAL[QUANTITY])``
         */
         void getProducts();
+
+        /**
+         * Mengembalikan stock yang dapat dibeli oleh petani
+         * 
+         * @return ``vector<pair<Quantifiable<Resource*>,bool>>`` stok petani dengan bool apakah item bisa dibeli atau tidak
+        */
+        vector<pair<Quantifiable<Resource*>,bool>> getPetaniStock();
+
+        /**
+         * Mengembalikan stock yang dapat dibeli oleh peternak
+         * 
+         * @return ``vector<pair<Quantifiable<Resource*>,bool>>`` stok peternak dengan bool apakah item bisa dibeli atau tidak
+        */
+        vector<pair<Quantifiable<Resource*>,bool>> getPeternakStock();
+
+        /**
+         * Mengembalikan stock yang dapat dibeli oleh walikota
+         * 
+         * @return ``vector<pair<Quantifiable<Resource*>,bool>>`` stok walikota dengan bool apakah item bisa dibeli atau tidak
+        */
+        vector<pair<Quantifiable<Resource*>,bool>> getWalikotaStock();
+
 };
 
 
