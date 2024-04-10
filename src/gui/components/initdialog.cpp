@@ -3,7 +3,9 @@
 #include <QMessageBox>
 
 InitDialog::InitDialog(QMainWindow* window, State &state, ResourceFactory &factory) : QDialog(window), loadFileStateButton("Load File State"), loadNewStateButton("Load New State"), label(QString::fromStdString("Apakah anda ingin memuat state baru/lama ?")){
+    setWindowFlags(windowFlags() & ~Qt::WindowCloseButtonHint);
     setWindowModality(Qt::ApplicationModal); 
+
     setWindowTitle(QString::fromStdString("Load State"));
     setLayout(&vLayout);
 
