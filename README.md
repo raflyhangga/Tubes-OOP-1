@@ -24,6 +24,7 @@ make runcli
 ### Initialize GUI and Unit Test
 Execute this only once
 ```
+chmod 0700  /run/user/1000/
 make initbuild
 ```
 ### Build test

@@ -1,7 +1,7 @@
 #include "tubesoop1/product/product.h"
 #include "tubesoop1/animal/animal_exception.h"
 
-Product::Product(string code, string name, int price, int addedWeight) : Resource(code, name, price)
+Product::Product(string code, string name, int addedWeight, int price) : Resource(code, name, price)
 {
     this->addedWeight = addedWeight;
 }
@@ -30,7 +30,7 @@ void Product::taken(TakerVisitor* t){
 
 
 
-ProductAnimal::ProductAnimal(string code, string name, int price, int addedWeight) : Product(code, name, price, addedWeight){
+ProductAnimal::ProductAnimal(string code, string name, int addedWeight, int price) : Product(code, name, addedWeight, price){
     
 }
 void ProductAnimal::eaten(EaterVisitor &a)
@@ -38,7 +38,7 @@ void ProductAnimal::eaten(EaterVisitor &a)
     a.eat(*this);
 }
 
-ProductFruit::ProductFruit(string code, string name, int price, int addedWeight) : Product(code, name, price, addedWeight){
+ProductFruit::ProductFruit(string code, string name, int addedWeight, int price) : Product(code, name, addedWeight, price){
     
 }
 void ProductFruit::eaten(EaterVisitor &a)
@@ -46,7 +46,7 @@ void ProductFruit::eaten(EaterVisitor &a)
     a.eat(*this);
 }
 
-ProductMaterial::ProductMaterial(string code, string name, int price, int addedWeight) : Product(code, name, price, addedWeight){
+ProductMaterial::ProductMaterial(string code, string name, int addedWeight, int price) : Product(code, name, addedWeight, price){
     
 }
 void ProductMaterial::eaten(EaterVisitor &a)

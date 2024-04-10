@@ -66,7 +66,7 @@ class State {
         /**
          * @brief true if player with name already exist on the playerList
          */
-        bool isPlayerExist(string &name);
+        bool isPlayerExist(string name);
 
         /**
          * @brief Get the Current Player object based on turn

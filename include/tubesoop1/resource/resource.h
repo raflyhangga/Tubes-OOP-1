@@ -47,6 +47,7 @@ public:
 
     friend ostream &operator<<(ostream &os, const Resource &res);
 
+    // visitor pattern
     virtual void taken(TakerVisitor*) = 0;
 };
 
