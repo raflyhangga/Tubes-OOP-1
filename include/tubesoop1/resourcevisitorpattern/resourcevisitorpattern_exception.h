@@ -7,7 +7,7 @@
 #include "tubesoop1/resource/resource.h"
 using namespace std;
 
-class NotTakableException : exception{
+class NotTakableException : public exception{
     private:
         const string message;
     public:

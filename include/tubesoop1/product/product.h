@@ -15,7 +15,7 @@ class Product : public Resource, public EatenElement
 
     public:
         Product() = default;
-        Product(string code, string name, int price, int addedWeight);
+        Product(string code, string name, int addedWeight, int price);
         virtual ~Product();
         int getAddedWeight() const;
         void setAddedWeight(int addedWeight);
@@ -29,7 +29,7 @@ class Product : public Resource, public EatenElement
 class ProductAnimal:public Product{
     public:
         ProductAnimal() = default;
-        ProductAnimal(string code, string name, int price,  int addedWeight);
+        ProductAnimal(string code, string name, int addedWeight, int price);
         // Visitor pattern
         void eaten(EaterVisitor &a);
         void taken(TakerVisitor* t);
@@ -39,7 +39,7 @@ class ProductAnimal:public Product{
 class ProductFruit:public Product{
     public:
         ProductFruit() = default;
-        ProductFruit(string code, string name, int price, int addedWeight);
+        ProductFruit(string code, string name, int addedWeight, int price);
         // Visitor pattern
         void eaten(EaterVisitor &a);
         void taken(TakerVisitor* t);
@@ -49,7 +49,7 @@ class ProductFruit:public Product{
 class ProductMaterial:public Product{
     public:
         ProductMaterial() = default;
-        ProductMaterial(string code, string name, int price, int addedWeight);
+        ProductMaterial(string code, string name, int addedWeight, int price);
         // Visitor pattern
         void eaten(EaterVisitor &a);
         void taken(TakerVisitor* t);
