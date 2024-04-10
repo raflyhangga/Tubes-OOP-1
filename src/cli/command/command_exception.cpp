@@ -26,3 +26,33 @@ BuildingNotFoundException::BuildingNotFoundException() {
 const char* BuildingNotFoundException::what() const throw()  {
     return "Kamu tidak punya resep bangunan tersebut!";
 }
+
+AnimalNotFoundException::AnimalNotFoundException() : message("Tidak ada hewan di peternakan!"){}
+
+const char* AnimalNotFoundException::what() const throw()  {
+    return message.c_str();
+}
+
+EmptyInventoryException::EmptyInventoryException() : message("Penyimpanan kosong!"){}
+
+const char* EmptyInventoryException::what() const throw()  {
+    return message.c_str();
+}
+
+NoFoodException::NoFoodException() : message("Tidak ada makanan di penyimpanan!"){}
+
+const char* NoFoodException::what() const throw()  {
+    return message.c_str();
+}
+
+NoAnimalInInventoryException::NoAnimalInInventoryException() : message("Tidak ada hewan di penyimpanan!"){}
+
+const char* NoAnimalInInventoryException::what() const throw()  {
+    return message.c_str();
+}
+
+PeternakanPenuhException::PeternakanPenuhException() : message("Peternakan penuh!"){}
+
+const char* PeternakanPenuhException::what() const throw()  {
+    return message.c_str();
+}

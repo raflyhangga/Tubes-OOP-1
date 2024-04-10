@@ -3,7 +3,7 @@
 #include "tubesoop1/player/player_partial.hpp"
 #include "tubesoop1/resourcevisitorpattern/taker.h"
 #include <tubesoop1/resourcevisitorpattern/taker.hpp>
-#include <vector>
+#include "tubesoop1/cli/command/command_exception.h"
 Ternak::Ternak(State &state) : Command(state) {
 
 }   
@@ -18,13 +18,11 @@ void Ternak::execute(Peternak *peternak) {
     vector<Animal*> list = player->takeAllFromInventory<Animal>();
     
     if(list.size()==0){
-        cout << ("Tidak ada hewan di inventory!\n");
-        return;
+        throw(NoAnimalInInventoryException());
     }
     
     if(peternakan.isFull()){
-        cout << ("Peternakan Penuh!\n");
-        return;
+        throw(PeternakanPenuhException());
     }
  
     bool inputNotValid = true;

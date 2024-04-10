@@ -34,4 +34,43 @@ class BuildingNotFoundException: public exception {
         const char* what() const throw();
 };
 
+class AnimalNotFoundException: public exception {
+    private:
+        string message;
+    public:
+        AnimalNotFoundException();
+        const char* what() const throw();
+};
+
+class EmptyInventoryException: public exception {
+    private:
+        string message;
+    public:
+        EmptyInventoryException();
+        const char* what() const throw();
+};
+
+class NoFoodException: public exception {
+    private:
+        string message;
+    public:
+        NoFoodException();
+        const char* what() const throw();
+};
+
+class NoAnimalInInventoryException: public exception {
+    private:
+        string message;
+    public:
+        NoAnimalInInventoryException();
+        const char* what() const throw();
+};
+
+class PeternakanPenuhException: public exception {
+    private:
+        string message;
+    public:
+        PeternakanPenuhException();
+        const char* what() const throw();
+};
 #endif

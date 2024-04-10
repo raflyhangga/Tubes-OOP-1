@@ -7,6 +7,7 @@
 #include "tubesoop1/grid/location_exception.hpp"
 #include "tubesoop1/resourcevisitorpattern/resourcevisitorpattern_exception.h"
 #include "tubesoop1/player/player_partial.hpp"
+#include "tubesoop1/cli/command/command_exception.h"
 
 KasihMakan::KasihMakan(State& state): Command(state) {}
 
@@ -27,8 +28,7 @@ void KasihMakan::execute(Peternak* peternak){
     Player *player = state.getCurrentPlayer();
 
     if(peternakan.getCountFilled() == 0){
-        cout << ("Tidak ada hewan di peternakan!\n");
-        return;
+        throw AnimalNotFoundException(); 
     }
     
     CetakPeternakan(state).printGrid(peternakan);

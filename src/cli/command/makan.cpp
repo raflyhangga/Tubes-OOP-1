@@ -5,6 +5,7 @@
 #include "tubesoop1/player/player_partial.hpp"
 
 #include <tubesoop1/resourcevisitorpattern/taker.hpp>
+#include "tubesoop1/cli/command/command_exception.h"
 Makan::Makan(State &state) : Command(state) {}
 
 void Makan::execute(Player* player){
@@ -14,16 +15,14 @@ void Makan::execute(Player* player){
     Player* currPlayer = state.getCurrentPlayer();
 
     if(inventory.getCountFilled() == 0){
-        cout << "Penyimpanan kosong!" << endl;
-        return;
+       throw(EmptyInventoryException());
     }
     
     vector<ProductFruit*> fruitList = player->takeAllFromInventory<ProductFruit>();
     vector<ProductAnimal*> animalList = player->takeAllFromInventory<ProductAnimal>();
 
     if(fruitList.size() == 0 && animalList.size() == 0){
-        cout << "Tidak ada makanan di inventory!" << endl;
-        return;
+        throw(NoFoodException());
     }
 
 
@@ -35,10 +34,9 @@ void Makan::execute(Player* player){
         cout << "Slot: ";
         try{
             cin >> loc;
-            cout << "BZIR";
+            
             Product *food = player->takeInventory<Product>(loc);
-            cout <<  "tes1" << endl;
-            cout << "tes2\n";
+            
             currPlayer->eat(*food);
             inventory.pop(loc);
             cout << "Kenyang gan, berat badan naik " << food->getAddedWeight() << " kg jadi " << currPlayer->getWeight() <<  endl;
