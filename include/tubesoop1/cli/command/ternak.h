@@ -6,6 +6,9 @@
 #include "tubesoop1/cli/command/command_exception.h"
 #include "tubesoop1/cli/command/cetakpenyimpanan.h"
 #include "tubesoop1/cli/command/cetakpeternakan.h"
+#include "tubesoop1/animal/animal.h"
+using namespace std;
+
 class Ternak : public Command {
     public:
         Ternak(State&);

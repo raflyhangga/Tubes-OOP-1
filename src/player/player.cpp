@@ -1,6 +1,5 @@
 #include "tubesoop1/player/player.h"
 #include <tubesoop1/grid/griddrawer.hpp>
-#include "tubesoop1/product/product.h"
 
 int Player::moneyToWin;
 int Player::weightToWin;
@@ -110,7 +109,19 @@ int Player::calculateTax(){
     return tax;
 }
 
-void Player::eat(Product &p){
-    weight += p.getAddedWeight();
+void Player::eat(EatenElement &p){
+    p.eaten(*this);
 
+}
+
+void Player::eat(ProductAnimal &p){
+    weight += p.getAddedWeight();
+}
+
+void Player::eat(ProductFruit &p){
+    weight += p.getAddedWeight();
+}
+
+void Player::eat(ProductMaterial &p){
+    throw invalid_argument("Keras, makanannya gabisa digigit.");
 }

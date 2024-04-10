@@ -3,6 +3,7 @@
 #include "tubesoop1/player/player_partial.hpp"
 #include "tubesoop1/resourcevisitorpattern/taker.h"
 #include <tubesoop1/resourcevisitorpattern/taker.hpp>
+#include <vector>
 Ternak::Ternak(State &state) : Command(state) {
 
 }   
@@ -13,8 +14,10 @@ void Ternak::execute(Peternak *peternak) {
     Grid<Animal*> &peternakan = peternak->getPeternakan();
 
     Player* player = state.getCurrentPlayer();
-
-    if(peternak->countAnimalInventory()==0){
+    
+    vector<Animal*> list = player->takeAllFromInventory<Animal>();
+    
+    if(list.size()==0){
         cout << ("Tidak ada hewan di inventory!\n");
         return;
     }

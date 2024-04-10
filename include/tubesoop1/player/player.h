@@ -8,8 +8,9 @@
 #include "tubesoop1/player/playervisitorpattern.h"
 #include "tubesoop1/player/taxreport.h"
 #include "tubesoop1/product/product.h"
+#include "tubesoop1/product/productvisitorpattern.h"
 using namespace std;
-class Player : public PlayerElement // visitor pattern
+class Player : public PlayerElement , public EaterVisitor // visitor pattern
 {
 protected:
     const string username;
@@ -52,7 +53,11 @@ public:
     // Visitor pattern
     virtual void executed(CommanderVisitor&) = 0;
 
-    void eat(Product &p);
+    void eat(EatenElement &p);
+
+    void eat(ProductAnimal &p);
+    void eat(ProductFruit &p);
+    void eat(ProductMaterial &p);
 
     template<class T>
     T* takeInventory(Location location);
