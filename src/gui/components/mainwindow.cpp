@@ -1,6 +1,8 @@
 #include "tubesoop1/gui/components/mainwindow.h"
 
-MainWindow::MainWindow() : 
+MainWindow::MainWindow(State &state) : 
+    statusBar(state.getCurrentPlayer()),
+
     cetakLadangButton("Cetak Ladang"),
     cetakPeternakanButton("Cetak Peternakan"),
     cetakPenyimpananButton("Cetak Penyimpanan"),
@@ -36,18 +38,19 @@ MainWindow::MainWindow() :
     vLayout.addWidget(&bodyWidget);   bodyWidget.setLayout(&bodyLayout);
     vLayout.addWidget(&footerWidget); footerWidget.setLayout(&footerLayout);
 
-    headerLayout.addWidget(&cetakLadangButton);
+    headerLayout.addWidget(&statusBar);
+    bodyLayout.addWidget(&cetakLadangButton);
     bodyLayout.addWidget(&cetakPeternakanButton);
     bodyLayout.addWidget(&cetakPenyimpananButton);
     bodyLayout.addWidget(&helpButton);
     bodyLayout.addWidget(&jualButton);
     bodyLayout.addWidget(&makanButton);
-    bodyLayout.addWidget(&nextButton);
     bodyLayout.addWidget(&panenButton);
     bodyLayout.addWidget(&pungutPajakButton);
     bodyLayout.addWidget(&simpanButton);
     bodyLayout.addWidget(&tambahPemainButton);
-    footerLayout.addWidget(&ternakButton);
+    bodyLayout.addWidget(&ternakButton);
+    footerLayout.addWidget(&nextButton);
 
 
     cetakLadangButton.connect(&cetakLadangButton, &QPushButton::pressed, [](){});

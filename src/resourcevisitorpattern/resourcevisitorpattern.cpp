@@ -12,6 +12,15 @@ void TakerVisitor::take(Animal* p) {
 void TakerVisitor::take(Product* p) {
     throw NotTakableException(*p);    
 }
+void TakerVisitor::take(ProductMaterial* p) {
+    throw NotTakableException(*p);    
+}
+void TakerVisitor::take(ProductFruit* p) {
+    throw NotTakableException(*p);    
+}
+void TakerVisitor::take(ProductAnimal* p) {
+    throw NotTakableException(*p);    
+}
 void TakerVisitor::take(Plant* p) {
     throw NotTakableException(*p);    
 }

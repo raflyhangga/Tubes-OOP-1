@@ -7,10 +7,14 @@
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include "tubesoop1/gui/components/nicebutton.h"
+#include "tubesoop1/gui/components/statusbar.h"
+#include "tubesoop1/state/state.h"
 using namespace std;
 
 class MainWindow : public QMainWindow {
 private:
+    StatusBar statusBar;
+
     QVBoxLayout vLayout;
     QVBoxLayout headerLayout;
     QVBoxLayout bodyLayout;
@@ -34,7 +38,7 @@ private:
     NiceButton tambahPemainButton;
     NiceButton ternakButton;
 public:
-    MainWindow();
+    MainWindow(State &state);
 };
 
 

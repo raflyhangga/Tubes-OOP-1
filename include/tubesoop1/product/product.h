@@ -22,7 +22,7 @@ class Product : public Resource, public EatenElement
         
         // Visitor pattern
         virtual void eaten(EaterVisitor &a) = 0;
-        void taken(TakerVisitor* t);
+        virtual void taken(TakerVisitor* t);
 };
 
 
@@ -32,6 +32,7 @@ class ProductAnimal:public Product{
         ProductAnimal(string code, string name, int price,  int addedWeight);
         // Visitor pattern
         void eaten(EaterVisitor &a);
+        void taken(TakerVisitor* t);
 
 };
 
@@ -41,6 +42,7 @@ class ProductFruit:public Product{
         ProductFruit(string code, string name, int price, int addedWeight);
         // Visitor pattern
         void eaten(EaterVisitor &a);
+        void taken(TakerVisitor* t);
 
 };
 
@@ -50,6 +52,7 @@ class ProductMaterial:public Product{
         ProductMaterial(string code, string name, int price, int addedWeight);
         // Visitor pattern
         void eaten(EaterVisitor &a);
+        void taken(TakerVisitor* t);
 };
 
 #endif

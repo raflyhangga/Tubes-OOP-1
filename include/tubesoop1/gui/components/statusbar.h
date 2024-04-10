@@ -6,35 +6,34 @@
 #include <QSizePolicy>
 #include <QMainWindow>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
 #include "tubesoop1/gui/components/nicebutton.h"
+#include "tubesoop1/player/player.h"
 using namespace std;
 
-class MainWindow : public QMainWindow {
+class StatusBar : public QWidget {
 private:
+    Player* player;
+
     QVBoxLayout vLayout;
-    QVBoxLayout headerLayout;
-    QVBoxLayout bodyLayout;
-    QVBoxLayout footerLayout;
 
-    QWidget centralWidget;
-    QWidget headerWidget;
-    QWidget bodyWidget;
-    QWidget footerWidget;
-
-    NiceButton cetakLadangButton;
-    NiceButton cetakPeternakanButton;
-    NiceButton cetakPenyimpananButton;
-    NiceButton helpButton;
-    NiceButton jualButton;
-    NiceButton makanButton;
-    NiceButton nextButton;
-    NiceButton panenButton;
-    NiceButton pungutPajakButton;
-    NiceButton simpanButton;
-    NiceButton tambahPemainButton;
-    NiceButton ternakButton;
+    QLabel usernameLabel;
+    QLabel typeLabel;
+    QLabel moneyLabel;
+    QLabel weightLabel;
+    const char* getClassName(Player &player);
 public:
-    MainWindow();
+    StatusBar(Player*);
+    /**
+     * Change the player that this status bar is displaying
+    */
+    void setPlayer(Player*);
+
+    /**
+     * Refresh the status bar to display the latest player information
+    */
+    void refresh();
 };
 
 
