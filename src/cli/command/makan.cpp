@@ -1,5 +1,6 @@
 #include "tubesoop1/cli/command/makan.h"
 #include "tubesoop1/cli/command/cetakpenyimpanan.h"
+#include "tubesoop1/grid/location_exception.hpp"
 Makan::Makan(State &state) : Command(state) {}
 
 void Makan::execute(Player* player){
@@ -9,15 +10,36 @@ void Makan::execute(Player* player){
     Player* currPlayer = state.getCurrentPlayer();
     cout << "Pilih makanan dari penyimpanan" << endl;
     CetakPenyimpanan(state).print(player->getInventory());
-
-    cout << "Slot: ";
     Location loc;
-    cin >> loc;
-    Product *food = dynamic_cast<Product*>(inventory.getElement(loc));
-    inventory.pop(loc);
-    currPlayer->eat(*food);
+    bool inputNotCorrect = true;
+    do{
+        cout << "Slot: ";
+        try{
+            cin >> loc;
+            Product *food = player->takeInventory<Product>(loc);
+            currPlayer->eat(*food);
+            inventory.pop(loc);
+            cout << "Kenyang gan, berat badan naik " << food->getAddedWeight() << " kg jadi " << currPlayer->getWeight() <<  endl;
+            inputNotCorrect = false;
+        }
+        catch(LocationException& e){
+            cout << e.what() << endl;
+            cout << "Masukkan slot lagi brok." << endl;
+        }
+        catch(exception& e){
+            cout << e.what() << endl;
+            cout << "Masukkan slot lagi brok." << endl;
+        }
+    } while(inputNotCorrect);
+        
+        
+    
+    
+   
+    
 
-    cout << "Kenyang gan, berat badan naik " << food->getAddedWeight() << " kg." <<  endl;
+    
+    
     // validasi dll bloman
 
     // to do, check if location is valid (is food, is not empty, etc)

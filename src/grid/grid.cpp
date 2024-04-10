@@ -57,7 +57,9 @@ inline void Grid<T>::setElement(Location l, T val) {
         message += "Grid size: " + to_string(element.size()) + "x" + to_string(element[0].size());
         throw out_of_range(message);
     }
-
+    if(isFilled[row][col]){
+        throw logic_error("Element at specified position is already filled.");
+    }
     if (!isFilled[row][col]) {
         countFilled++;
         countNotFilled--;
@@ -65,6 +67,7 @@ inline void Grid<T>::setElement(Location l, T val) {
     }
 
     element[row][col] = val;
+
 }
 
 template <class T>
