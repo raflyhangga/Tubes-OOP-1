@@ -1,6 +1,7 @@
 #include "tubesoop1/player/peternak.h"
 #include "tubesoop1/player/walikota.h"
 #include "tubesoop1/player/player_partial.hpp"
+#include "tubesoop1/resourcevisitorpattern/taker.hpp"
 #include "tubesoop1/animal/herbivore.h"
 
 
@@ -74,10 +75,10 @@ int Peternak::countAnimalInventory(){
     for(const auto &l : inventory){
         Resource* r = inventory[l];
         try{
-            taker.take(r);
+            taker.take(r)->get();
             count++;
-        } catch(exception &e) {
         } catch(NotTakableException &e) {
+        } catch(exception &e) {
         }
     }
     return count;
