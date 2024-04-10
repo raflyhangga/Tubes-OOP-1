@@ -94,6 +94,10 @@ void Building::build(Player &p)
     cout << "Bangunan berhasil dibangun dan telah menjadi hak milik walikota!" << endl;
 }
 
+void Building::taken(TakerVisitor* t){
+    t->take(this);
+}
+
 // int main()
 // {
 //     vector<Quantifiable<ProductMaterial *>> recipe;

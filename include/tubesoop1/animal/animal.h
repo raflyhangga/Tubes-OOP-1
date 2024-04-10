@@ -29,6 +29,9 @@ public:
     bool isHarvestable() const;
 
     friend ostream &operator<<(ostream &os, const Animal &a);
+
+    // visitor pattern
+    void taken(TakerVisitor*);
 };
 
 #endif

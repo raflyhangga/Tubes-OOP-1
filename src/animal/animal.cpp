@@ -32,3 +32,7 @@ ostream &operator<<(ostream &os, const Animal &a)
     os << a.getCode() << "\033[0m";
     return os;
 }
+
+void Animal::taken(TakerVisitor* t){
+    t->take(this);
+}

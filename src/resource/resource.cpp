@@ -30,6 +30,14 @@ ostream &operator<<(ostream &os, const Resource &res) {
     return os;
 }
 
+
+// template <class T>
+// T* Resource::taken<T>(TakerVisitor* t){
+//     cout << "resource" << endl;
+//     // return t->take(this);
+//     return this;
+// }
+
 // TOdo: Delete this main function if not needed (only for testing purpose)
 // int main() {
 //     // Create instances of Resource

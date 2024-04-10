@@ -58,7 +58,7 @@ int Shop::getItem(Quantifiable<Resource*> otherquant){
     }
     throw (ItemShopNotFoundException());
 }
-int Shop::getItem(Resource otherrsc){
+int Shop::getItem(Resource &otherrsc){
     int len = stock.size();
     for(int i=0;i<len;i++){
         if (*stock[i].getValue() == otherrsc){

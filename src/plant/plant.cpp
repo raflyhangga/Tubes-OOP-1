@@ -45,3 +45,7 @@ ostream &operator<<(ostream &os, const Plant &p)
     os << p.getCode() << "\033[0m";
     return os;
 }
+
+void Plant::taken(TakerVisitor* t){
+    t->take(this);
+}

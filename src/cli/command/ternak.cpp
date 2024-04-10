@@ -38,7 +38,7 @@ void Ternak::execute(Peternak *peternak) {
     // TO DO, CHECK IF LOCATION IS VALID (is animal, is not empty, etc)
 
     cout << "Pilih petak tanah yang akan ditinggali" << endl;
-    CetakPeternakan(state).printLabelAndGrid(peternak, peternakan);
+    CetakPeternakan(state).printGrid(peternakan);
 
     cout << "Petak tanah: ";
     Location loc2;
