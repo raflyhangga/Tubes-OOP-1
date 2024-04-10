@@ -257,3 +257,7 @@ void State::addShopItem(Quantifiable<Resource*> item){
 map<string, Building*>& State::getRecipeMap(){
     return factory->getRecipeMap();
 }
+
+Shop State::getShop() const {
+    return shop; 
+}

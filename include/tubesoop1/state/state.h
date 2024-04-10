@@ -114,6 +114,8 @@ class State {
          * @brief get the recipe for buildings
          */
         map<string, Building*>& getRecipeMap();
+
+        Shop getShop() const;
 };
 
 #endif

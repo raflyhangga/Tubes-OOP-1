@@ -30,61 +30,7 @@ using namespace std;
 
 int main()
 {
-    ResourceFactory factory("config");
-    State state("config/state.txt", factory);
-    state.nextTurn();
-    Player* p = state.getCurrentPlayer();
-    Grid<Resource*>& inventory = p->getInventory();
-    GridDrawerCLI<Resource*> drawer(inventory);
-    drawer.draw();
-    // vector<Animal*> v;    
-
-    // // Taker<Animal> animalTaker;
-    // // AnimalTaker animalTaker2;
-    // // for(const auto &it : inventory) {
-    // //     Resource* r = inventory[it];
-    // //     try{
-    // //         v.push_back(animalTaker.take(r)->get());
-    // //         // v.push_back(Taker<Animal>().take(r)->get()); // juga one liner
-    // //     } catch(exception &e) {
-    // //         cout << e.what() << endl;
-    // //     } catch(NotTakableException &e) {
-    // //         cout << e.what() << endl;
-    // //     }
-    // // }
-
-
-
-    Taker<Product> animalTaker;
-    Location location; cin >> location;
-    Resource* r = inventory[location];
-    cout << animalTaker.take(r)->get()->getName() << endl;
-
-    // One liner version
-    // Location location; cin >> location;
-    // cout << Taker<Animal>().take(inventory[location])->get()->getName() << endl;
-
-    // intinya animalTaker.take(r)->get() sebenarnya dynamic_cast tapi 
-    // throw exception kalau gagal instead of jadi null.
-
-    // cara lain
-    Player* player = state.getCurrentPlayer();
-    Location location2; cin >> location2;
-    ProductMaterial* a = player->takeInventory<ProductMaterial>(location2);
-    cout << a->getName() << endl;
-
-
-    // for(auto it : v) {
-    //     cout << it->getName() << endl;
-    // }
-
-    // vector<Animal*> list = player->takeAllFromInventory<Animal>();
-    // for(auto it : list) {
-    //     cout << it->getName() << endl;
-    // }
-
-
-    return 0;
+ 
 
     CLIGame game;
     try {
