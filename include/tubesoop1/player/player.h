@@ -53,6 +53,12 @@ public:
     virtual void executed(CommanderVisitor&) = 0;
 
     void eat(Product &p);
+
+    template<class T>
+    T* takeInventory(Location location);
+
+    template<class T>
+    vector<T*> takeAllFromInventory();
 };
 
 #endif

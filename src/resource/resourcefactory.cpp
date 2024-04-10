@@ -107,6 +107,7 @@ ResourceFactory::ResourceFactory(string configPath){
             recipe.push_back(qp);
         }
         insert({name, [=](){return new Building(kode, name, price, recipe);}});
+        recipeMap[name] = new Building(kode, name, price, recipe);
     }
     file.close();
 
@@ -152,4 +153,11 @@ ResourceFactory::~ResourceFactory() {
             delete product;
         }
     }
+    for(auto& pair : recipeMap){
+        delete pair.second;
+    }
+}
+
+map<string, Building*>& ResourceFactory::getRecipeMap(){
+    return recipeMap;
 }

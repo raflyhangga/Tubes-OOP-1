@@ -22,7 +22,7 @@ class Product : public Resource, public EatenElement
         
         // Visitor pattern
         virtual void eaten(EaterVisitor &a) = 0;
-    
+        void taken(TakerVisitor* t);
 };
 
 

@@ -42,7 +42,7 @@ class Shop {
          * @param otherrsc Resource yang ingin dicari
          * @return Index pada stock Shop, apabila tidak ada melakukan throw ``ItemShopNotFoundException()``
         */
-        int getItem(Resource otherrsc);
+        int getItem(Resource &otherrsc);
 
         /**
          * Menghapus suatu Quantifiable<Resource&> dari stock.

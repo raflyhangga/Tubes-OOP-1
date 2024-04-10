@@ -2,6 +2,8 @@
 #define RESOURCE_H
 
 #include <iostream>
+#include "tubesoop1/resource/resource.h"
+#include "tubesoop1/resourcevisitorpattern/resourcevisitorpattern.h"
 using namespace std;
 
 /**
@@ -44,6 +46,8 @@ public:
     bool operator==(Resource&);
 
     friend ostream &operator<<(ostream &os, const Resource &res);
+
+    virtual void taken(TakerVisitor*) = 0;
 };
 
 #endif

@@ -28,8 +28,9 @@ using namespace std;
 */
 class ResourceFactory : map<string, function<Resource*()>>{
     private:
-    public:
         map<string, vector<Product*>> dropsMap;
+        map<string, Building*> recipeMap;
+    public:
 
         /**
          * Load the content of the file in the configPath to the translator
@@ -42,6 +43,11 @@ class ResourceFactory : map<string, function<Resource*()>>{
          * Translate the key to the Resource instance
         */
         Resource* translate(string key);
+
+        /**
+         * get map of recipe
+        */
+        map<string, Building*>& getRecipeMap();
 
         friend ostream& operator<<(ostream& os, const ResourceFactory& factory);
 };

@@ -23,6 +23,8 @@ public:
     virtual ~Plant();
     friend ostream &operator<<(ostream &os, const Plant &a);
     friend istream &operator>>(istream &is, Plant &a);
+
+    void taken(TakerVisitor* t);
 };
 
 
