@@ -15,9 +15,19 @@ private:
     // so we have to resort to this: Taker<Animal>().take(r)->get() to get the Animal*
     T* ptr;
 public:
+
+    // Make all possible type to give exception by default
     using TakerVisitor::take;
+
+    // This is the main function to be called, will call Resource::taken(TakerVisitor &v)
     Taker* take(Resource*);
+
+    // This is the function that will be called by Resource::taken(TakerVisitor &v). 
+    // If the type is wrong, it will throw exception defined by this part: "using TakerVisitor::take;"
+    // also make ptr points to the correct type
     void take(T*);
+
+    // Get the pointer
     T* get();
 };
 

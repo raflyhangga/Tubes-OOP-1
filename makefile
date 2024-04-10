@@ -103,6 +103,15 @@ rungui:
 	@echo -n ">> "
 	./$(BUILD_DIR)/$(GUI_TARGET)
 
+buildrungui: $(OUTPUT_DIR)/$(OBJ_MAIN) $(OBJS)
+	$(info )
+	$(info [Build & Run GUI])
+	@echo -n ">> "
+	cmake --build $(BUILD_DIR) --target $(GUI_TARGET)
+	@echo -n ">> "
+	./$(BUILD_DIR)/$(GUI_TARGET)
+
+
 
 # Include the dependency files
 -include $(OBJS:.o=.d)
