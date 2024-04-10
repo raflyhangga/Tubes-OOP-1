@@ -7,6 +7,6 @@ using namespace std;
 class LocationException : public exception {
     public:
         LocationException();
-        const char* what();;
+        const char* what() const throw();
 };
 #endif
