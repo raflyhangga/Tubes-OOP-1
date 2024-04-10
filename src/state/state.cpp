@@ -191,9 +191,14 @@ bool State::isAddedTypeValid(string &type){
     transform(type.begin(), type.end(), type.begin(), ::tolower); // lowercase
     return type == "petani" || type == "peternak";
 }
-bool State::isPlayerExist(string &name){
+bool State::isPlayerExist(string nameToCheck){
+    transform(nameToCheck.begin(), nameToCheck.end(), nameToCheck.begin(), ::tolower); // lowercase
+
     for(Player *player : playerList){
-        if(player->getUsername() == name) return true;
+        string username = player->getUsername();
+        transform(nameToCheck.begin(), nameToCheck.end(), nameToCheck.begin(), ::tolower); // lowercase
+        transform(username.begin(), username.end(), username.begin(), ::tolower); // lowercase
+        if(username == nameToCheck) return true;
     }
     return false;
 }

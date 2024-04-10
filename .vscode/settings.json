@@ -92,6 +92,10 @@
         "xlocbuf": "cpp",
         "xlocinfo": "cpp",
         "*.rh": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "qfiledialog": "cpp",
+        "bitset": "cpp",
+        "qdialog": "cpp",
+        "qvboxlayout": "cpp"
     }
 }
