@@ -78,6 +78,10 @@ int main()
         cout << it->getName() << endl;
     }
 
+    vector<Animal*> list = player->takeAllFromInventory<Animal>();
+    for(auto it : list) {
+        cout << it->getName() << endl;
+    }
 
 
     return 0;

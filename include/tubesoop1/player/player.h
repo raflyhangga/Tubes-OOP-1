@@ -56,6 +56,9 @@ public:
 
     template<class T>
     T* takeInventory(Location location);
+
+    template<class T>
+    vector<T*> takeAllFromInventory();
 };
 
 #endif

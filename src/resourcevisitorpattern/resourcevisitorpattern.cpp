@@ -6,8 +6,6 @@
 #include "tubesoop1/resourcevisitorpattern/resourcevisitorpattern.h"
 #include "tubesoop1/resourcevisitorpattern/resourcevisitorpattern_exception.h"
 
-// Animal* TakerVisitor::take(Resource*){}
-
 void TakerVisitor::take(Animal* p) {
     throw NotTakableException(*p);    
 }
