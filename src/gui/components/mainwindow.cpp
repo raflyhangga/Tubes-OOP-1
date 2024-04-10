@@ -1,6 +1,7 @@
 #include "tubesoop1/gui/components/mainwindow.h"
 
-MainWindow::MainWindow() : 
+MainWindow::MainWindow(State &state) :
+    state(state),
     cetakLadangButton("Cetak Ladang"),
     cetakPeternakanButton("Cetak Peternakan"),
     cetakPenyimpananButton("Cetak Penyimpanan"),
@@ -26,6 +27,11 @@ MainWindow::MainWindow() :
     int margin = 10; setContentsMargins(margin, margin, margin, margin);
     setGeometry(100, 100, 400, 200);
     setMinimumSize(QSize(1280, 720));
+}
+
+void MainWindow::initializeMenu(){
+    statusBar.setPlayer(state.getCurrentPlayer());
+
 
     // Whole
     setCentralWidget(&centralWidget);
@@ -36,18 +42,23 @@ MainWindow::MainWindow() :
     vLayout.addWidget(&bodyWidget);   bodyWidget.setLayout(&bodyLayout);
     vLayout.addWidget(&footerWidget); footerWidget.setLayout(&footerLayout);
 
-    headerLayout.addWidget(&cetakLadangButton);
+    headerLayout.addWidget(&statusBar);
+    bodyLayout.addWidget(&cetakLadangButton);
     bodyLayout.addWidget(&cetakPeternakanButton);
     bodyLayout.addWidget(&cetakPenyimpananButton);
     bodyLayout.addWidget(&helpButton);
     bodyLayout.addWidget(&jualButton);
     bodyLayout.addWidget(&makanButton);
-    bodyLayout.addWidget(&nextButton);
     bodyLayout.addWidget(&panenButton);
     bodyLayout.addWidget(&pungutPajakButton);
     bodyLayout.addWidget(&simpanButton);
     bodyLayout.addWidget(&tambahPemainButton);
-    footerLayout.addWidget(&ternakButton);
+    bodyLayout.addWidget(&ternakButton);
+
+    footerLayout.addStretch();
+    footerLayout.addStretch();
+    footerLayout.addStretch();
+    footerLayout.addWidget(&nextButton);
 
 
     cetakLadangButton.connect(&cetakLadangButton, &QPushButton::pressed, [](){});
@@ -56,7 +67,11 @@ MainWindow::MainWindow() :
     helpButton.connect(&helpButton, &QPushButton::pressed, [](){});
     jualButton.connect(&jualButton, &QPushButton::pressed, [](){});
     makanButton.connect(&makanButton, &QPushButton::pressed, [](){});
-    nextButton.connect(&nextButton, &QPushButton::pressed, [](){});
+    nextButton.connect(&nextButton, &QPushButton::pressed, [this](){
+        state.nextTurn();
+        statusBar.setPlayer(state.getCurrentPlayer());
+        statusBar.refresh();
+    });
     panenButton.connect(&panenButton, &QPushButton::pressed, [](){});
     pungutPajakButton.connect(&pungutPajakButton, &QPushButton::pressed, [](){});
     simpanButton.connect(&simpanButton, &QPushButton::pressed, [](){});

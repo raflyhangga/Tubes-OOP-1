@@ -23,10 +23,9 @@ void Building::printBuildingInfo() const
     cout << ")" << endl;
 }
 
-void Building::addMaterial(const ProductMaterial &material, int quantity)
+void Building::addMaterial(ProductMaterial &material, int quantity)
 {
-    ProductMaterial *materialPtr = const_cast<ProductMaterial *>(&material);
-
+    ProductMaterial *materialPtr = &material;
     Quantifiable<ProductMaterial *> quantifiable(materialPtr, quantity);
 
     recipe.push_back(quantifiable);
@@ -34,12 +33,6 @@ void Building::addMaterial(const ProductMaterial &material, int quantity)
 
 void Building::build(Player &p)
 {
-    // Check if the player has the role of walikota
-    if (!dynamic_cast<Walikota *>(&p))
-    {
-        throw RoleWaliKotaException();
-    }
-
     // Check if there is an available slot for building
     if (p.getInventory().isFull())
     {
@@ -88,11 +81,11 @@ void Building::build(Player &p)
     // Remove resources used for building from player's inventory
     for (const auto &quantifiableProduct : recipe)
     {
-        const ProductMaterial &product = *quantifiableProduct.getValue();
+        ProductMaterial &product = *quantifiableProduct.getValue();
         const int quantity = quantifiableProduct.getQuantity();
 
         // Remove the specified quantity of product from player's inventory
-        p.removeInventory(const_cast<ProductMaterial &>(product), quantity);
+        p.removeInventory(product, quantity);
     }
 
     // Add the building to the player's inventory

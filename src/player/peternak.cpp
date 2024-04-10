@@ -1,5 +1,7 @@
 #include "tubesoop1/player/peternak.h"
 #include "tubesoop1/player/walikota.h"
+#include "tubesoop1/player/player_partial.hpp"
+#include "tubesoop1/resourcevisitorpattern/taker.hpp"
 #include "tubesoop1/animal/herbivore.h"
 
 
@@ -68,15 +70,17 @@ vector<Quantifiable<Animal *>>* Peternak::getAllHarvestableAnimal(){
     return harvestableAnimal;
 }
 int Peternak::countAnimalInventory(){
+    Taker<Animal> taker;
     int count = 0;
-    
-    vector<Location> loc = inventory.getAllFilled();
-    for (Location l : loc){
-        if(dynamic_cast<Animal*>(inventory.getElement(l)) != nullptr){
+    for(const auto &l : inventory){
+        Resource* r = inventory[l];
+        try{
+            taker.take(r)->get();
             count++;
+        } catch(NotTakableException &e) {
+        } catch(exception &e) {
         }
     }
     return count;
-
 }
 

@@ -6,6 +6,9 @@ class Resource;
 class Animal;
 class Plant;
 class Product;
+class ProductAnimal;
+class ProductFruit;
+class ProductMaterial;
 class Building;
 
 // Visitor pattern to avoid dynamic_cast
@@ -18,6 +21,9 @@ class TakerVisitor
         virtual void take(Animal*);
         virtual void take(Plant*);
         virtual void take(Product*);
+        virtual void take(ProductAnimal*);
+        virtual void take(ProductFruit*);
+        virtual void take(ProductMaterial*);
         virtual void take(Building*);
 };
 

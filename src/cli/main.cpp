@@ -30,13 +30,13 @@ using namespace std;
 
 int main()
 {
-    // ResourceFactory factory("config");
-    // State state("config/state.txt", factory);
-    // state.nextTurn();
-    // Player* p = state.getCurrentPlayer();
-    // Grid<Resource*>& inventory = p->getInventory();
-    // GridDrawerCLI<Resource*> drawer(inventory);
-    // drawer.draw();
+    ResourceFactory factory("config");
+    State state("config/state.txt", factory);
+    state.nextTurn();
+    Player* p = state.getCurrentPlayer();
+    Grid<Resource*>& inventory = p->getInventory();
+    GridDrawerCLI<Resource*> drawer(inventory);
+    drawer.draw();
     // vector<Animal*> v;    
 
     // // Taker<Animal> animalTaker;
@@ -55,23 +55,23 @@ int main()
 
 
 
-    // Taker<Animal> animalTaker;
+    Taker<Product> animalTaker;
+    Location location; cin >> location;
+    Resource* r = inventory[location];
+    cout << animalTaker.take(r)->get()->getName() << endl;
+
+    // One liner version
     // Location location; cin >> location;
-    // Resource* r = inventory[location];
-    // cout << animalTaker.take(r)->get()->getName() << endl;
+    // cout << Taker<Animal>().take(inventory[location])->get()->getName() << endl;
 
-    // // One liner version
-    // // Location location; cin >> location;
-    // // cout << Taker<Animal>().take(inventory[location])->get()->getName() << endl;
+    // intinya animalTaker.take(r)->get() sebenarnya dynamic_cast tapi 
+    // throw exception kalau gagal instead of jadi null.
 
-    // // intinya animalTaker.take(r)->get() sebenarnya dynamic_cast tapi 
-    // // throw exception kalau gagal instead of jadi null.
-
-    // // cara lain
-    // Player* player = state.getCurrentPlayer();
-    // Location location2; cin >> location2;
-    // Animal* a = player->takeInventory<Animal>(location2);
-    // cout << a->getName() << endl;
+    // cara lain
+    Player* player = state.getCurrentPlayer();
+    Location location2; cin >> location2;
+    ProductMaterial* a = player->takeInventory<ProductMaterial>(location2);
+    cout << a->getName() << endl;
 
 
     // for(auto it : v) {
@@ -84,7 +84,7 @@ int main()
     // }
 
 
-    // return 0;
+    return 0;
 
     CLIGame game;
     try {

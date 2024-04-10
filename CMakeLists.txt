@@ -38,6 +38,7 @@ set(GUISOURCES
   src/gui/components/mainwindow.cpp
   src/gui/components/gridbutton.cpp
   src/gui/components/initdialog.cpp
+  src/gui/components/statusbar.cpp
   include/tubesoop1/gui/components/gridbutton.hpp
   src/gui/components/locationlabel.cpp
 

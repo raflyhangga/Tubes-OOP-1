@@ -31,4 +31,25 @@ public:
     T* get();
 };
 
+// Specialization for Product. This is needed because the children of product will automatically override
+// which makes taking Product impossible. So we have to make a specialization for Product
+// Again, this is needed because c++ does not support virtual template
+template <>
+class Taker<Product> : public TakerVisitor
+{
+private:
+    Product* ptr;
+public:
+
+    using TakerVisitor::take;
+    Taker* take(Resource*);
+    void take(Product*);
+    Product* get();
+
+    void populate(Product* t);
+    void take(ProductMaterial* t);
+    void take(ProductFruit* t);
+    void take(ProductAnimal* t);
+};
+
 #endif

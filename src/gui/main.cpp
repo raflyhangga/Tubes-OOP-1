@@ -22,14 +22,17 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    MainWindow window;
-    window.show();
 
     ResourceFactory factory("config");
     State state;
 
+    MainWindow window(state);
+    window.show();
+
     InitDialog initDialog(&window, state, factory);
     initDialog.exec();
+
+    window.initializeMenu();
     
     return app.exec();
 }
