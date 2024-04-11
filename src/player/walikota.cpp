@@ -48,7 +48,3 @@ TaxReport *Walikota::bayarPajak(Walikota &walikota){
 int Walikota::getKTKP(){
     return 0;
 }
-
-bool Walikota::isCanBuy(Resource *){
-    return true;
-}

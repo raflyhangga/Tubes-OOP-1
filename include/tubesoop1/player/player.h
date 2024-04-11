@@ -49,11 +49,6 @@ public:
     
     int calculateTax();
 
-    virtual bool isCanBuy(Resource*) = 0;
-    virtual bool isCanBuy(Building*) = 0;
-    virtual bool isCanBuy(Plant*) = 0;
-    virtual bool isCanBuy(Product*) = 0;
-    virtual bool isCanBuy(Animal*) = 0;
 
     // Visitor pattern
     virtual void executed(CommanderVisitor&) = 0;

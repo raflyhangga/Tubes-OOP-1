@@ -27,12 +27,6 @@ public:
     
     vector<Quantifiable<Plant *>>* getAllHarvestablePlant();
 
-    bool isCanBuy(Resource*) = 0;
-    bool isCanBuy(Building*);
-    bool isCanBuy(Plant*);
-    bool isCanBuy(Product*);
-    bool isCanBuy(Animal*);
-
     // visitor pattern
     void executed(CommanderVisitor&);
 };

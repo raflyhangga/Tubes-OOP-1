@@ -4,9 +4,11 @@
 #include "tubesoop1/player/player.h"
 #include "tubesoop1/resource/resource.h"
 #include "tubesoop1/shop/Exception.h"
-#include "tubesoop1/grid/location.h"
+// #include "tubesoop1/grid/location.h"
+#include "tubesoop1/resourcevisitorpattern/taker.hpp"
 #include <vector>
 #include <iostream>
+#include <utility>
 using namespace std;
 
 #define UNVALID_IDX -1
@@ -89,31 +91,24 @@ class Shop {
         /**
          * Mengembalikan stock yang dapat dibeli oleh petani
          * 
-         * @return ``vector<Quantifiable<Resource*>>`` stok petani
+         * @return ``vector<pair<Quantifiable<Resource*>,bool>>`` stok petani dengan bool apakah item bisa dibeli atau tidak
         */
-        vector<Quantifiable<Resource*>> getPetaniStock();
+        vector<pair<Quantifiable<Resource*>,bool>> getPetaniStock();
 
         /**
          * Mengembalikan stock yang dapat dibeli oleh peternak
          * 
-         * @return ``vector<Quantifiable<Resource*>>`` stok peternak
+         * @return ``vector<pair<Quantifiable<Resource*>,bool>>`` stok peternak dengan bool apakah item bisa dibeli atau tidak
         */
-        vector<Quantifiable<Resource*>> getPeternakStock();
+        vector<pair<Quantifiable<Resource*>,bool>> getPeternakStock();
 
         /**
          * Mengembalikan stock yang dapat dibeli oleh walikota
          * 
-         * @return ``vector<Quantifiable<Resource*>>`` stok walikota
+         * @return ``vector<pair<Quantifiable<Resource*>,bool>>`` stok walikota dengan bool apakah item bisa dibeli atau tidak
         */
-        vector<Quantifiable<Resource*>> getWalikotaStock();
+        vector<pair<Quantifiable<Resource*>,bool>> getWalikotaStock();
 
-        /**
-         * Mengecek apakah suatu ``Quantifiable<Resource*>`` stock berada dalam kumpulan stocks
-         * 
-         * @param stock merupakan stok yang ingin dicek keberadaannya
-         * @param stocks kumpulan stok yang ingin dicek isinya
-        */
-        bool isStockInStocks(Quantifiable<Resource*> stock,vector<Quantifiable<Resource*>> stocks);
 };
 
 
