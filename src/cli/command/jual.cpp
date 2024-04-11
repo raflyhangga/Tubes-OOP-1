@@ -27,13 +27,7 @@ void Jual::execute(Player *player) {
 
     // Check any errors
     for(Location l : ansLoc){
-        try{
-            inventory[l];
-        } catch(logic_error &e){
-            stringstream ss; ss << l;
-            string message = "Petak " + ss.str() + " kosong, tidak bisa dijual.";
-            throw logic_error(message);
-        }
+        Resource *r = inventory[l];
     }
 
     // pop the resource and add the price
