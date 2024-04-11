@@ -56,7 +56,7 @@ vector<Quantifiable<Animal *>>* Peternak::getAllHarvestableAnimal(){
             // Find the Animal in the vector, increment if found
             bool found = false;
             for(auto &q : *harvestableAnimal){
-                if(q.getValue()->getCode() == p->getCode()){
+                if(q.getValue() == p){
                     q++;
                     found = true;
                     break;

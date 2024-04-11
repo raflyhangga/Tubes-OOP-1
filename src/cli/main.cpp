@@ -30,13 +30,13 @@ using namespace std;
 
 int main()
 {
-    ResourceFactory factory("config");
-    State state("config/state.txt", factory);
-    state.nextTurn();
-    Player *p = state.getCurrentPlayer();
-    Grid<Resource *> &inventory = p->getInventory();
-    GridDrawerCLI<Resource *> drawer(inventory);
-    drawer.draw();
+    // ResourceFactory factory("config");
+    // State state("config/state.txt", factory);
+    // state.nextTurn();
+    // Player *p = state.getCurrentPlayer();
+    // Grid<Resource *> &inventory = p->getInventory();
+    // GridDrawerCLI<Resource *> drawer(inventory);
+    // drawer.draw();
     // vector<Animal*> v;
 
     // // Taker<Animal> animalTaker;
@@ -53,11 +53,11 @@ int main()
     // //     }
     // // }
 
-    Taker<Product> animalTaker;
-    Location location;
-    cin >> location;
-    Resource *r = inventory[location];
-    cout << animalTaker.take(r)->get()->getName() << endl;
+    // Taker<Product> animalTaker;
+    // Location location;
+    // cin >> location;
+    // Resource *r = inventory[location];
+    // cout << animalTaker.take(r)->get()->getName() << endl;
 
     // One liner version
     // Location location; cin >> location;
@@ -67,11 +67,11 @@ int main()
     // throw exception kalau gagal instead of jadi null.
 
     // cara lain
-    Player *player = state.getCurrentPlayer();
-    Location location2;
-    cin >> location2;
-    ProductMaterial *a = player->takeInventory<ProductMaterial>(location2);
-    cout << a->getName() << endl;
+    // Player *player = state.getCurrentPlayer();
+    // Location location2;
+    // cin >> location2;
+    // ProductMaterial *a = player->takeInventory<ProductMaterial>(location2);
+    // cout << a->getName() << endl;
 
     // for(auto it : v) {
     //     cout << it->getName() << endl;
@@ -82,7 +82,7 @@ int main()
     //     cout << it->getName() << endl;
     // }
 
-    return 0;
+    // return 0;
 
     CLIGame game;
     try

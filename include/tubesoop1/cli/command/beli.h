@@ -1,5 +1,5 @@
-#ifndef BANGUN_H
-#define BANGUN_H
+#ifndef BELI_H
+#define BELI_H
 
 #include <tubesoop1/cli/command/command.h>
 #include <tubesoop1/player/player.h>

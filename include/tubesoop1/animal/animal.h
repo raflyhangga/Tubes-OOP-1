@@ -28,6 +28,8 @@ public:
 
     bool isHarvestable() const;
 
+    bool operator==(const Animal &a);
+
     friend ostream &operator<<(ostream &os, const Animal &a);
 
     // visitor pattern
