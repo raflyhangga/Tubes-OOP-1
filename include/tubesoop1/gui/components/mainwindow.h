@@ -6,6 +6,9 @@
 #include <QSizePolicy>
 #include <QMainWindow>
 #include <QVBoxLayout>
+#include <QTabWidget>
+#include <QGridLayout>
+#include <QPushButton>
 #include "tubesoop1/gui/components/nicebutton.h"
 #include "tubesoop1/gui/components/statusbar.h"
 #include "tubesoop1/state/state.h"
@@ -15,6 +18,18 @@ class MainWindow : public QMainWindow {
 private:
     State &state;
     StatusBar statusBar;
+
+    // CetakPenyimpanan, CetakPeternakan, CetakLadang
+    QTabWidget tabWidget;
+    QWidget tabPerintah;    QGridLayout tabPerintahLayout;
+    QWidget tabPenyimpanan; QVBoxLayout tabPenyimpananLayout;
+    QWidget tabPeternakan;  QVBoxLayout tabPeternakanLayout;
+    QWidget tabLadang;      QVBoxLayout tabLadangLayout;
+
+    QVBoxLayout vPeternakLayout;
+    QVBoxLayout vPetaniLayout;
+    QVBoxLayout vWalikotaLayout;
+    QVBoxLayout vPlayerLayout;
 
     QVBoxLayout vLayout;
     QVBoxLayout headerLayout;
@@ -42,9 +57,14 @@ private:
     // NiceButton muatButton;
     NiceButton simpanButton;
     NiceButton tambahPemainButton;
-    NiceButton statusButton;
+    // NiceButton statusButton;
     NiceButton helpButton;
     // NiceButton exitButton;
+
+    void addPetaniButton(QPushButton&);
+    void addPeternakButton(QPushButton&);
+    void addWalikotaButton(QPushButton&);
+    void addPlayerButton(QPushButton&);
 public:
     MainWindow(State &state);
     void initializeMenu();

@@ -8,7 +8,7 @@
 
 class Beli: public Command {
     private:
-        Shop shop;
+        Shop &shop;
     public:
         Beli(State&);
         // visitor pattern

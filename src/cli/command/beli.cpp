@@ -4,8 +4,8 @@
 
 using namespace std;
 
-Beli::Beli(State &state) : Command(state) {
-    shop = state.getShop();
+Beli::Beli(State &state) : Command(state), shop(state.getShop()) {
+    
 }
 
 void Beli::checkValidity(Player* pl,int idx){
@@ -13,22 +13,15 @@ void Beli::checkValidity(Player* pl,int idx){
 
 void Beli::checkValidity(Petani* pl,int idx){
     Resource* itemBought = this->shop[idx].getValue();
-    if(pl->isCanBuy(itemBought)){
-        throw(PetaniException());
-    }
 }
 
 void Beli::checkValidity(Peternak* pl,int idx){
     Resource* itemBought = this->shop[idx].getValue();
-    if(pl->isCanBuy(itemBought)){
-        throw(PeternakException());
-    }
+
 }
 void Beli::checkValidity(Walikota* pl,int idx){
     Resource* itemBought = this->shop[idx].getValue();
-    if(pl->isCanBuy(itemBought)){
-        throw(WalikotaException());
-    }
+
 }
 
 void Beli::printStocks(vector<Quantifiable<Resource*>> stock){
