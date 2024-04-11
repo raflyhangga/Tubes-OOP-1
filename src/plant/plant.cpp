@@ -20,6 +20,10 @@ bool Plant::isHarvestable() const{
     return age >= durationToHarvest;
 }
 
+bool Plant::operator==(const Plant &a){
+    return getCode() == a.getCode();
+}
+
 Plant::~Plant(){
     
 }

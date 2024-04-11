@@ -58,7 +58,7 @@ vector<Quantifiable<Plant *>>* Petani::getAllHarvestablePlant(){
             // Find the plant in the vector, increment if found
             bool found = false;
             for(auto &q : *harvestablePlant){
-                if(q.getValue()->getCode() == p->getCode()){
+                if(q.getValue() == p){
                     q++;
                     found = true;
                     break;

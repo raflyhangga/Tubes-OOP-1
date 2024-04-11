@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
     window.show();
 
     InitDialog initDialog(&window, state, factory);
+    initDialog.setClosable(false);
     initDialog.exec();
 
     window.initializeMenu();

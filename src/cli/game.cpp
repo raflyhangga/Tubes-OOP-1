@@ -14,6 +14,7 @@
 #include <tubesoop1/cli/command/ternak.h>
 #include <tubesoop1/cli/command/makan.h>
 #include <tubesoop1/cli/command/beli.h>
+#include <tubesoop1/cli/command/bangun.h>
 #include <tubesoop1/cli/command/kasihmakan.h>
 #include <tubesoop1/cli/command/bangun.h>
 
