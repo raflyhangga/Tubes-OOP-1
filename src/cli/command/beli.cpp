@@ -4,8 +4,8 @@
 
 using namespace std;
 
-Beli::Beli(State &state) : Command(state) {
-    shop = state.getShop();
+Beli::Beli(State &state) : Command(state), shop(state.getShop()) {
+    
 }
 
 void Beli::printStocks(vector<pair<Quantifiable<Resource*>,bool>> stock){

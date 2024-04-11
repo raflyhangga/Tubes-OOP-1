@@ -128,7 +128,7 @@ class State {
          */
         map<string, Building*>& getRecipeMap();
 
-        Shop getShop() const;
+        Shop& getShop();
 };
 
 #endif

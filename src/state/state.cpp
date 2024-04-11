@@ -246,7 +246,7 @@ map<string, Building*>& State::getRecipeMap(){
     return factory->getRecipeMap();
 }
 
-Shop State::getShop() const {
+Shop& State::getShop() {
     return shop; 
 }
 

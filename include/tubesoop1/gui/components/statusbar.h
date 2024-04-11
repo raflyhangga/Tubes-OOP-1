@@ -16,17 +16,18 @@ class StatusBar : public QWidget {
 private:
     Player* player;
 
-    QVBoxLayout vLayout;
-    QHBoxLayout hLayout1;
-    QHBoxLayout hLayout2;
+    QHBoxLayout hLayout;
+    QVBoxLayout vLayout1;
+    QVBoxLayout vLayout2;
 
     QWidget widget1;
     QWidget widget2;
 
-    QLabel usernameLabel;
-    QLabel typeLabel;
-    QLabel moneyLabel;
-    QLabel weightLabel;
+    QLabel usernameLabel;       QLabel moneyLabel;
+    QLabel typeLabel;           QLabel weightLabel;
+                                QLabel moneyToWinLabel;
+                                QLabel weightToWinLabel;
+
     const char* getClassName(Player &player);
 public:
     StatusBar();
