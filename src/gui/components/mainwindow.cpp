@@ -1,5 +1,10 @@
 #include "tubesoop1/gui/components/mainwindow.h"
-#include "tubesoop1/gui/command/help.h"
+#include "tubesoop1/gui/components/statusbar.h"
+#include <tubesoop1/gui/command/command.h>
+#include <tubesoop1/gui/command/help.h>
+#include <tubesoop1/gui/command/next.h>
+
+#include <QSizePolicy>
 
 MainWindow::MainWindow(State &state) :
     state(state),
@@ -49,18 +54,27 @@ void MainWindow::initializeMenu(){
     vLayout.addWidget(&headerWidget); headerWidget.setLayout(&headerLayout);
     vLayout.addWidget(&bodyWidget);   bodyWidget.setLayout(&bodyLayout);
     vLayout.addWidget(&footerWidget); footerWidget.setLayout(&footerLayout);
+    vLayout.setSpacing(0);
 
     // header
     headerLayout.addWidget(&statusBar);
+    headerWidget.setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+    headerWidget.setContentsMargins(0, 0, 0, 0);
 
     // body
+    int m = 15;
     bodyLayout.addWidget(&tabWidget); 
     tabWidget.addTab(&tabPerintah, "Perintah");
     tabWidget.addTab(&tabPenyimpanan, "Penyimpanan");
+    tabPenyimpanan.setContentsMargins(m,m,m,m);
     tabWidget.addTab(&tabPeternakan, "Peternakan");
+    tabPeternakan.setContentsMargins(m,m,m,m);
     tabWidget.addTab(&tabLadang, "Ladang");
+    tabLadang.setContentsMargins(m,m,m,m);
+    tabWidget.setContentsMargins(0, 0, 0, 0);
+    bodyLayout.setContentsMargins(0, 0, 0, 0);
 
-    tabPerintah.setLayout(&tabPerintahLayout);
+    tabPerintah.setLayout(&tabPerintahLayout); tabPerintahLayout.setContentsMargins(0, 0, 0, 0);
     int margin = 5; int spacing = 10;
     tabPerintahLayout.addLayout(&vPendudukLayout, 0, 0);     vPendudukLayout.setContentsMargins(margin, margin, margin, margin); vPendudukLayout.setSpacing(spacing);
     tabPerintahLayout.addLayout(&vWalikotaLayout, 0, 1);     vWalikotaLayout.setContentsMargins(margin, margin, margin, margin); vWalikotaLayout.setSpacing(spacing);
@@ -92,40 +106,19 @@ void MainWindow::initializeMenu(){
     footerLayout.addStretch();
     footerLayout.addStretch();
     footerLayout.addWidget(&nextButton);
-
-
-    nextButton.connect(&nextButton, &QPushButton::pressed, [this](){
-        state.nextTurn();
-        statusBar.setPlayer(state.getCurrentPlayer());
-        statusBar.refresh();
-    });
-    helpButton.connect(&helpButton, &QPushButton::pressed, [this](){
-        Command* help = new Help(*this); 
-        help->execute(state.getCurrentPlayer());
-        // delete help;
-    });
     
-    cetakLadangButton.connect(&cetakLadangButton, &QPushButton::pressed, [](){});
-    cetakPeternakanButton.connect(&cetakPeternakanButton, &QPushButton::pressed, [](){});
-    cetakPenyimpananButton.connect(&cetakPenyimpananButton, &QPushButton::pressed, [](){});
-    jualButton.connect(&jualButton, &QPushButton::pressed, [](){});
-    makanButton.connect(&makanButton, &QPushButton::pressed, [](){});
-    panenButton.connect(&panenButton, &QPushButton::pressed, [](){});
-    pungutPajakButton.connect(&pungutPajakButton, &QPushButton::pressed, [](){});
-    simpanButton.connect(&simpanButton, &QPushButton::pressed, [](){});
-    tambahPemainButton.connect(&tambahPemainButton, &QPushButton::pressed, [](){});
-    ternakButton.connect(&ternakButton, &QPushButton::pressed, [](){});
 }
 
-void MainWindow::addPetaniButton(QPushButton& button){
-    tabPerintahLayout.addWidget(&button, 0, 0);
+StatusBar& MainWindow::getStatusBar(){
+    return statusBar;
 }
-void MainWindow::addPeternakButton(QPushButton& button){
-    tabPerintahLayout.addWidget(&button, 0, 1);
+
+GridView<Resource*>& MainWindow::getTabPenyimpanan(){
+    return tabPenyimpanan;
 }
-void MainWindow::addWalikotaButton(QPushButton& button){
-    tabPerintahLayout.addWidget(&button, 0, 2);
-}
-void MainWindow::addPlayerButton(QPushButton& button){
-    tabPerintahLayout.addWidget(&button, 1, 0, 1, 3);
+GridView<Animal*>& MainWindow::getTabPeternakan(){
+    return tabPeternakan;
+} 
+GridView<Plant*>& MainWindow::getTabLadang(){
+    return tabLadang;
 }

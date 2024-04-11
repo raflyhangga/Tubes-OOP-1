@@ -1,5 +1,5 @@
-#ifndef GRIDBUTTON_H
-#define GRIDBUTTON_H
+#ifndef GRID_VIEW_H
+#define GRID_VIEW_H
 
 #include "tubesoop1/grid/grid.hpp"
 #include "tubesoop1/gui/components/locationlabel.h"
@@ -10,20 +10,26 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QSizePolicy>
+
 using namespace std;
 
-template <class T>
-class GridButton : public QWidget {
+template<class T>
+class GridView : public QWidget {
 private:
-    Grid<T>& grid;
+    Grid<T>* grid;
     QVBoxLayout *vLayout;
     
     // Just to make sure we can free the memory later.
-    vector<NiceButton*> buttonList;
+    vector<QWidget*> buttonList;
     vector<QHBoxLayout*> hLayoutList; 
     vector<LocationLabel*> labelList;
 public:
-    GridButton(Grid<T> &grid);
+    GridView();
+    ~GridView();
+    void setGrid(Grid<T>* grid);
+    void refresh();
+    void clear();
+    QWidget* getWidget(Location location);
 };
 
 

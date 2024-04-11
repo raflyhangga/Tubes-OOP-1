@@ -10,7 +10,10 @@
 #include <QGridLayout>
 #include "tubesoop1/gui/components/nicebutton.h"
 #include "tubesoop1/gui/components/statusbar.h"
+#include "tubesoop1/gui/components/gridview.hpp"
 #include "tubesoop1/state/state.h"
+#include "tubesoop1/animal/animal.h"
+#include "tubesoop1/plant/plant.h"
 using namespace std;
 
 class MainWindow : public QMainWindow {
@@ -21,9 +24,9 @@ private:
     // CetakPenyimpanan, CetakPeternakan, CetakLadang
     QTabWidget tabWidget;
     QWidget tabPerintah;    QGridLayout tabPerintahLayout;
-    QWidget tabPenyimpanan; QVBoxLayout tabPenyimpananLayout;
-    QWidget tabPeternakan;  QVBoxLayout tabPeternakanLayout;
-    QWidget tabLadang;      QVBoxLayout tabLadangLayout;
+    GridView<Resource*> tabPenyimpanan;
+    GridView<Animal*> tabPeternakan; 
+    GridView<Plant*> tabLadang;     
 
     QVBoxLayout vPendudukLayout;
     QVBoxLayout vWalikotaLayout;
@@ -39,6 +42,11 @@ private:
     QWidget bodyWidget;
     QWidget footerWidget;
 
+
+public:
+    MainWindow(State &state);
+    void initializeMenu();
+    
     NiceButton nextButton;
     NiceButton cetakPenyimpananButton;
     NiceButton pungutPajakButton;
@@ -59,13 +67,10 @@ private:
     NiceButton helpButton;
     // NiceButton exitButton;
 
-    void addPetaniButton(QPushButton&);
-    void addPeternakButton(QPushButton&);
-    void addWalikotaButton(QPushButton&);
-    void addPlayerButton(QPushButton&);
-public:
-    MainWindow(State &state);
-    void initializeMenu();
+    GridView<Resource*> &getTabPenyimpanan();
+    GridView<Animal*> &getTabPeternakan(); 
+    GridView<Plant*> &getTabLadang();   
+    StatusBar &getStatusBar();   
 };
 
 

@@ -3,10 +3,13 @@
 
 StatusBar::StatusBar() {
     setLayout(&hLayout);
+    setContentsMargins(0, 0, 0, 0);
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
 
     hLayout.addWidget(&widget1);
     hLayout.addStretch();
     hLayout.addWidget(&widget2);
+    hLayout.setContentsMargins(0, 0, 0, 0);
     
     widget1.setLayout(&vLayout1);
     widget2.setLayout(&vLayout2);
@@ -14,12 +17,14 @@ StatusBar::StatusBar() {
     vLayout1.addWidget(&usernameLabel);
     vLayout1.addWidget(&typeLabel);
     vLayout1.addStretch();
+    vLayout1.setContentsMargins(0, 0, 0, 0);
 
     vLayout2.addWidget(&moneyLabel);
     vLayout2.addWidget(&weightLabel);
     vLayout2.addWidget(&moneyToWinLabel);
     vLayout2.addWidget(&weightToWinLabel);
     vLayout2.addStretch();
+    vLayout2.setContentsMargins(0, 0, 0, 0);
 }
 void StatusBar::setPlayer(Player* player) {
     this->player = player;

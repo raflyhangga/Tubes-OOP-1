@@ -1,25 +1,21 @@
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef CETAK_LADANG_H
+#define CETAK_LADANG_H
 
 #include <iostream>
 #include <tubesoop1/player/player.h>
 #include <tubesoop1/player/petani.h>
 #include <tubesoop1/player/peternak.h>
 #include <tubesoop1/player/walikota.h>
-#include <tubesoop1/player/playervisitorpattern.h>
 #include <tubesoop1/state/state.h>
+#include <tubesoop1/gui/command/command.h>
 #include <tubesoop1/gui/components/mainwindow.h>
 using namespace std;
 
-class Command : public CommanderVisitor { // visitor pattern
-    protected:
-        MainWindow& window;
-        State& state;
+class CetakLadang : public Command { // visitor pattern
     public:
-        Command(State&, MainWindow&);
+        CetakLadang(State&, MainWindow&);
 
         // visitor pattern
-        virtual void execute(Player*);
         virtual void execute(Petani*);
         virtual void execute(Peternak*);
         virtual void execute(Walikota*);

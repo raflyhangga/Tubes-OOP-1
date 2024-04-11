@@ -21,6 +21,11 @@ NiceButton::NiceButton() : QPushButton() {
             background-color: rgb(76, 29, 149);
             color: rgb(167, 139, 250);
         }
+        QPushButton:checked {
+            background-color: rgb(101, 43, 192);
+            color: white;
+            border: 1px solid rgb(149, 102, 250);
+        }
     )");
     setCursor(QCursor(Qt::PointingHandCursor));
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);

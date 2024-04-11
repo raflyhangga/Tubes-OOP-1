@@ -1,4 +1,5 @@
 #include "tubesoop1/gui/components/initdialog.h"
+#include "tubesoop1/gui/components/messagebox.h"
 #include "tubesoop1/resource/resourcefactory_exception.h"
 #include <QMessageBox>
 
@@ -22,16 +23,11 @@ InitDialog::InitDialog(QMainWindow* window, State &state, ResourceFactory &facto
             try{
                 state.load(fileName.toStdString(), factory);
                 accept();
-                QMessageBox messageBox(this); messageBox.setModal(true);
-                messageBox.setText(QString::fromStdString("State baru berhasil dimuat!"));
-                messageBox.exec();
+                MessageBox(this, "Success", "State baru berhasil dimuat!").exec();
             } catch (FileNotFoundException &e){
-                QMessageBox messageBox(this); messageBox.setModal(true);
-                messageBox.setText(QString::fromStdString(e.what()));
+                MessageBox(this, "Failed", e.what()).exec();
             } catch (exception &e){
-                QMessageBox messageBox(this); messageBox.setModal(true);
-                messageBox.setText(QString::fromStdString("Not a valid file!"));
-                messageBox.exec();
+                MessageBox(this, "Failed", "Not a valid file!").exec();
             }
         }
     });
@@ -40,13 +36,9 @@ InitDialog::InitDialog(QMainWindow* window, State &state, ResourceFactory &facto
         try{
             state.loadNew(factory);
             accept();
-            QMessageBox messageBox(this); messageBox.setModal(true);
-            messageBox.setText(QString::fromStdString("State baru berhasil dimuat!"));
-            messageBox.exec();
+            MessageBox(this, "Success", "State baru berhasil dimuat!").exec();
         } catch (exception &e){
-            QMessageBox messageBox(this); messageBox.setModal(true);
-            messageBox.setText(QString::fromStdString(e.what()));
-            messageBox.exec();
+            MessageBox(this, "Success", "State baru berhasil dimuat!").exec();
         }
     });
 

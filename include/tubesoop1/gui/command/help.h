@@ -4,15 +4,15 @@
 #include <tubesoop1/gui/command/command.h>
 #include <tubesoop1/player/player.h>
 #include <QLabel>
-#include <QMessageBox>
+#include <tubesoop1/gui/components/messagebox.h>
 
 class Help: public Command {
     private:
         void dashedCout(string message);
-        QMessageBox messageBox;
+        MessageBox messageBox;
         string message;
     public:
-        Help(MainWindow&);
+        Help(State&, MainWindow&);
 
         // visitor pattern
         void execute(Petani*);

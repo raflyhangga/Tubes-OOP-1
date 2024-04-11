@@ -12,16 +12,27 @@
 #include <QVBoxLayout>
 #include <QString>
 #include <QDialog>
+#include <QFont>
+#include <QFontDatabase>
 
 #include <tubesoop1/gui/components/nicebutton.h>
 #include <tubesoop1/gui/components/mainwindow.h>
 #include <tubesoop1/gui/components/initdialog.h>
+#include <tubesoop1/gui/game.h>
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    int fontId = QFontDatabase::addApplicationFont("assets/font/Outfit-SemiBold.ttf");
+    if(fontId != -1){
+        QString fontName = QFontDatabase::applicationFontFamilies(fontId).at(0);
+        QFont customFont(fontName);
+        QApplication::setFont(customFont);
+    }
+    
 
     ResourceFactory factory("config");
     State state;
@@ -34,6 +45,8 @@ int main(int argc, char *argv[])
     initDialog.exec();
 
     window.initializeMenu();
+
+    Game game(state, window);
     
     return app.exec();
 }

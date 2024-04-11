@@ -1,13 +1,10 @@
 #include <tubesoop1/gui/command/help.h>
 
 using namespace std;
-Help::Help(MainWindow &state) : Command(state), messageBox(&state) {
-    messageBox.setModal(true);
-    messageBox.setTextFormat(Qt::RichText);
-}
+Help::Help(State& State, MainWindow &window) : Command(state, window), messageBox(&window, "Help", "") {}
 
 void Help::execute(Petani *petani) {
-   
+    message += "<html>";
     message +=  "Daftar Perintah Petani:<br>";
     message +=  "1.  NEXT<br>";
     message +=  "2.  CETAK_PENYIMPANAN<br>";
@@ -30,9 +27,10 @@ void Help::execute(Petani *petani) {
     message +=  "17. HELP<br>";
     message +=  "18. KELUAR<br>";
     message +=  "Text yang diberi garis artinya tidak dapat dilakukan oleh role ini.<br>";
+    message += "</html>";
 
 
-    messageBox.setText(QString::fromStdString(message));
+    messageBox.setText(message);
     messageBox.exec();
 }
 void Help::execute(Peternak *peternak) {
@@ -61,10 +59,11 @@ void Help::execute(Peternak *peternak) {
     message +=  "Text yang diberi garis artinya tidak dapat dilakukan oleh role ini.<br>";
 
     message += "</html>";
-    messageBox.setText(QString::fromStdString(message));
+    messageBox.setText(message);
     messageBox.exec();
 }
 void Help::execute(Walikota *walikota) {
+    message += "<html>";
     message +=  "Daftar Perintah Walikota:<br>";
     message +=  "1.  NEXT<br>";
     message +=  "2.  CETAK_PENYIMPANAN<br>";
@@ -87,8 +86,9 @@ void Help::execute(Walikota *walikota) {
     message +=  "17. HELP<br>";
     message +=  "18. KELUAR<br>";
     message +=  "Text yang diberi garis artinya tidak dapat dilakukan oleh role ini.<br>";
+    message += "</html>";
     
-    messageBox.setText(QString::fromStdString(message));
+    messageBox.setText(message);
     messageBox.exec();
 }
 
