@@ -2,6 +2,7 @@
 #include <tubesoop1/cli/command/cetakpenyimpanan.h>
 #include <tubesoop1/resource/resource.h>
 #include <tubesoop1/grid/grid.hpp>
+#include <tubesoop1/player/player_partial.hpp>
 #include <vector>
 #include <iostream>
 #include <sstream>

@@ -22,6 +22,9 @@ void Help::execute(Petani *petani) {
     cout << "14. MUAT" << endl;
     cout << "15. SIMPAN" << endl;
  dashedCout("16. TAMBAH_PEMAIN") << endl;
+    // di luar spek
+    cout << "17. STATUS" << endl;
+    cout << "18. HELP" << endl;
     cout << "Text yang diberi garis artinya tidak dapat dilakukan oleh role ini." << endl;
 }
 void Help::execute(Peternak *peternak) {
@@ -43,6 +46,9 @@ void Help::execute(Peternak *peternak) {
     cout << "14. MUAT" << endl;
     cout << "15. SIMPAN" << endl;
  dashedCout("16. TAMBAH_PEMAIN") << endl;
+    // di luar spek
+    cout << "17. STATUS" << endl;
+    cout << "18. HELP" << endl;
     cout << "Text yang diberi garis artinya tidak dapat dilakukan oleh role ini." << endl;
 }
 void Help::execute(Walikota *walikota) {
@@ -64,6 +70,9 @@ void Help::execute(Walikota *walikota) {
     cout << "14. MUAT" << endl;
     cout << "15. SIMPAN" << endl;
     cout << "16. TAMBAH_PEMAIN" << endl;
+    // di luar spek
+    cout << "17. STATUS" << endl;
+    cout << "18. HELP" << endl;
     cout << "Text yang diberi garis artinya tidak dapat dilakukan oleh role ini." << endl;
 }
 
