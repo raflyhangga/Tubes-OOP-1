@@ -45,4 +45,11 @@ public:
     }
 };
 
+class WalikotaException : public exception {
+public:
+    const char *what() const throw() override {
+        return "Mayor can't buy this item";
+    }
+};
+
 #endif

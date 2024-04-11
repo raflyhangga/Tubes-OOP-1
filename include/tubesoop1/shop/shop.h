@@ -11,6 +11,8 @@ using namespace std;
 
 #define UNVALID_IDX -1
 
+
+
 class Shop {
     private:
         vector<Quantifiable<Resource*>> stock; // Elements must be unique
@@ -83,6 +85,35 @@ class Shop {
          * Mencetak isi produk dengan format ``[IDX]. [NAMA PRODUK] - [HARGA] (OPTIONAL[QUANTITY])``
         */
         void getProducts();
+
+        /**
+         * Mengembalikan stock yang dapat dibeli oleh petani
+         * 
+         * @return ``vector<Quantifiable<Resource*>>`` stok petani
+        */
+        vector<Quantifiable<Resource*>> getPetaniStock();
+
+        /**
+         * Mengembalikan stock yang dapat dibeli oleh peternak
+         * 
+         * @return ``vector<Quantifiable<Resource*>>`` stok peternak
+        */
+        vector<Quantifiable<Resource*>> getPeternakStock();
+
+        /**
+         * Mengembalikan stock yang dapat dibeli oleh walikota
+         * 
+         * @return ``vector<Quantifiable<Resource*>>`` stok walikota
+        */
+        vector<Quantifiable<Resource*>> getWalikotaStock();
+
+        /**
+         * Mengecek apakah suatu ``Quantifiable<Resource*>`` stock berada dalam kumpulan stocks
+         * 
+         * @param stock merupakan stok yang ingin dicek keberadaannya
+         * @param stocks kumpulan stok yang ingin dicek isinya
+        */
+        bool isStockInStocks(Quantifiable<Resource*> stock,vector<Quantifiable<Resource*>> stocks);
 };
 
 

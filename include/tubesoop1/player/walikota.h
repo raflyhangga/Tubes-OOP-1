@@ -14,6 +14,7 @@ public:
     TaxReport *bayarPajak(Walikota &walikota);
     int getKTKP();
 
+    bool isCanBuy(Resource*);
     // visitor pattern
     void executed(CommanderVisitor&);
 

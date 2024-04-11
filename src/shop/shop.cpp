@@ -3,16 +3,13 @@
 // Constructor
 Shop::Shop(vector<Quantifiable<Resource*>> stock):
     stock(stock)
-{
-
-}
+{}
 
 // Copy Constructor
 Shop::Shop(const Shop& other):
     stock(other.stock)
-{
+{}
 
-}
 Shop& Shop::operator=(Shop& other){
     this->stock = other.stock;
     return *this;

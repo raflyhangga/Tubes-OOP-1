@@ -84,3 +84,15 @@ int Peternak::countAnimalInventory(){
     return count;
 }
 
+bool Peternak::isCanBuy(Building*){
+    return false;
+}
+bool Peternak::isCanBuy(Plant*){
+    return false;
+}
+bool isCanBuy(Product*){
+    return true;
+}
+bool isCanBuy(Animal*){
+    return true;
+}

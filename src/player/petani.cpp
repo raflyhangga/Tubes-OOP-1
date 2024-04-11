@@ -71,3 +71,18 @@ vector<Quantifiable<Plant *>>* Petani::getAllHarvestablePlant(){
     }
     return harvestablePlant;
 }
+
+bool Petani::isCanBuy(Building*){
+    return false;
+}
+
+bool Petani::isCanBuy(Plant*){
+    return true;
+}
+bool Petani::isCanBuy(Product*){
+    return true;
+}
+
+bool Petani::isCanBuy(Animal*){
+    return false;
+}
