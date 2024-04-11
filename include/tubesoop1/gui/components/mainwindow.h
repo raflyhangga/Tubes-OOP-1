@@ -26,18 +26,25 @@ private:
     QWidget bodyWidget;
     QWidget footerWidget;
 
+    NiceButton nextButton;
+    NiceButton cetakPenyimpananButton;
+    NiceButton pungutPajakButton;
     NiceButton cetakLadangButton;
     NiceButton cetakPeternakanButton;
-    NiceButton cetakPenyimpananButton;
-    NiceButton helpButton;
-    NiceButton jualButton;
+    NiceButton tanamButton;
+    NiceButton ternakButton;
+    NiceButton bangunButton;
     NiceButton makanButton;
-    NiceButton nextButton;
+    NiceButton kasihMakanButton;
+    NiceButton beliButton;
+    NiceButton jualButton;
     NiceButton panenButton;
-    NiceButton pungutPajakButton;
+    // NiceButton muatButton;
     NiceButton simpanButton;
     NiceButton tambahPemainButton;
-    NiceButton ternakButton;
+    NiceButton statusButton;
+    NiceButton helpButton;
+    // NiceButton exitButton;
 public:
     MainWindow(State &state);
     void initializeMenu();

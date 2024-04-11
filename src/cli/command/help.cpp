@@ -19,12 +19,13 @@ void Help::execute(Petani *petani) {
     cout << "11. BELI" << endl;
     cout << "12. JUAL" << endl;
  dashedCout("13. PANEN") << endl;
-    cout << "14. MUAT" << endl;
-    cout << "15. SIMPAN" << endl;
- dashedCout("16. TAMBAH_PEMAIN") << endl;
+   //  cout << "14. MUAT" << endl;
+    cout << "14. SIMPAN" << endl;
+ dashedCout("15. TAMBAH_PEMAIN") << endl;
     // di luar spek
-    cout << "17. STATUS" << endl;
-    cout << "18. HELP" << endl;
+    cout << "16. STATUS" << endl;
+    cout << "17. HELP" << endl;
+    cout << "18. KELUAR" << endl;
     cout << "Text yang diberi garis artinya tidak dapat dilakukan oleh role ini." << endl;
 }
 void Help::execute(Peternak *peternak) {
@@ -43,12 +44,13 @@ void Help::execute(Peternak *peternak) {
     cout << "11. BELI" << endl;
     cout << "12. JUAL" << endl;
  dashedCout("13. PANEN") << endl;
-    cout << "14. MUAT" << endl;
-    cout << "15. SIMPAN" << endl;
- dashedCout("16. TAMBAH_PEMAIN") << endl;
+   //  cout << "14. MUAT" << endl;
+    cout << "14. SIMPAN" << endl;
+ dashedCout("15. TAMBAH_PEMAIN") << endl;
     // di luar spek
-    cout << "17. STATUS" << endl;
-    cout << "18. HELP" << endl;
+    cout << "16. STATUS" << endl;
+    cout << "17. HELP" << endl;
+    cout << "18. KELUAR" << endl;
     cout << "Text yang diberi garis artinya tidak dapat dilakukan oleh role ini." << endl;
 }
 void Help::execute(Walikota *walikota) {
@@ -67,12 +69,13 @@ void Help::execute(Walikota *walikota) {
     cout << "11. BELI" << endl;
     cout << "12. JUAL" << endl;
     cout << "13. PANEN" << endl;
-    cout << "14. MUAT" << endl;
-    cout << "15. SIMPAN" << endl;
-    cout << "16. TAMBAH_PEMAIN" << endl;
+   //  cout << "14. MUAT" << endl;
+    cout << "14. SIMPAN" << endl;
+    cout << "15. TAMBAH_PEMAIN" << endl;
     // di luar spek
-    cout << "17. STATUS" << endl;
-    cout << "18. HELP" << endl;
+    cout << "16. STATUS" << endl;
+    cout << "17. HELP" << endl;
+    cout << "18. KELUAR" << endl;
     cout << "Text yang diberi garis artinya tidak dapat dilakukan oleh role ini." << endl;
 }
 
