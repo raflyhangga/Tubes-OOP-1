@@ -21,7 +21,7 @@ bool Plant::isHarvestable() const{
 }
 
 bool Plant::operator==(const Plant &a){
-    return getCode() == a.getCode();
+    return getCode() == a.getCode() && getName() == a.getName() && getPrice() == a.getPrice() && durationToHarvest == a.durationToHarvest && age == a.age;
 }
 
 Plant::~Plant(){
