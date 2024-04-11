@@ -38,7 +38,9 @@ inline void Quantifiable<T>::operator+=(int qty) {
      */
 template <class T>
 inline void Quantifiable<T>::operator+=(Quantifiable<T> other){
-    quantity += other.quantity;
+    if(quantity != -1){
+        quantity += other.quantity;
+    }
 }
 
 // Operator -= implementation with validation
@@ -57,7 +59,9 @@ inline void Quantifiable<T>::operator-=(int qty) {
 template <class T>
 inline Quantifiable<T> Quantifiable<T>::operator++(int) {
     Quantifiable<T> temp = *this;
-    ++quantity;
+    if(quantity != -1){
+        ++quantity;
+    }
     return temp;
 }
 
