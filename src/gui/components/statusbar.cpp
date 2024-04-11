@@ -2,21 +2,24 @@
 #include "tubesoop1/player/player.h"
 
 StatusBar::StatusBar() {
-    setLayout(&vLayout);
+    setLayout(&hLayout);
 
-    hLayout1.addWidget(&usernameLabel);
-    hLayout1.addStretch();
-    hLayout1.addWidget(&moneyLabel);
-
-    hLayout2.addWidget(&typeLabel);
-    hLayout2.addStretch();
-    hLayout2.addWidget(&weightLabel);
+    hLayout.addWidget(&widget1);
+    hLayout.addStretch();
+    hLayout.addWidget(&widget2);
     
-    vLayout.addWidget(&widget1);
-    vLayout.addWidget(&widget2);
+    widget1.setLayout(&vLayout1);
+    widget2.setLayout(&vLayout2);
 
-    widget1.setLayout(&hLayout1);
-    widget2.setLayout(&hLayout2);
+    vLayout1.addWidget(&usernameLabel);
+    vLayout1.addWidget(&typeLabel);
+    vLayout1.addStretch();
+
+    vLayout2.addWidget(&moneyLabel);
+    vLayout2.addWidget(&weightLabel);
+    vLayout2.addWidget(&moneyToWinLabel);
+    vLayout2.addWidget(&weightToWinLabel);
+    vLayout2.addStretch();
 }
 void StatusBar::setPlayer(Player* player) {
     this->player = player;
@@ -28,6 +31,8 @@ void StatusBar::refresh() {
     typeLabel.setText(QString::fromStdString("Role: " + string(className)));
     moneyLabel.setText(QString::fromStdString("Money: " + to_string(player->getMoney())));
     weightLabel.setText(QString::fromStdString("Weight: " + to_string(player->getWeight())));
+    moneyToWinLabel.setText(QString::fromStdString("Money To Win: " + to_string(Player::moneyToWin)));
+    weightToWinLabel.setText(QString::fromStdString("Weight To Win: " + to_string(Player::weightToWin)));
 }
 
 const char* StatusBar::getClassName(Player &player){

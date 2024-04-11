@@ -8,7 +8,6 @@
 #include <QVBoxLayout>
 #include <QTabWidget>
 #include <QGridLayout>
-#include <QPushButton>
 #include "tubesoop1/gui/components/nicebutton.h"
 #include "tubesoop1/gui/components/statusbar.h"
 #include "tubesoop1/state/state.h"
@@ -26,8 +25,7 @@ private:
     QWidget tabPeternakan;  QVBoxLayout tabPeternakanLayout;
     QWidget tabLadang;      QVBoxLayout tabLadangLayout;
 
-    QVBoxLayout vPeternakLayout;
-    QVBoxLayout vPetaniLayout;
+    QVBoxLayout vPendudukLayout;
     QVBoxLayout vWalikotaLayout;
     QVBoxLayout vPlayerLayout;
 

@@ -1,4 +1,5 @@
 #include "tubesoop1/gui/components/mainwindow.h"
+#include "tubesoop1/gui/command/help.h"
 
 MainWindow::MainWindow(State &state) :
     state(state),
@@ -60,60 +61,55 @@ void MainWindow::initializeMenu(){
     tabWidget.addTab(&tabLadang, "Ladang");
 
     tabPerintah.setLayout(&tabPerintahLayout);
-    tabPerintahLayout.addLayout(&vPetaniLayout, 0, 1);
-    tabPerintahLayout.addLayout(&vPeternakLayout, 0, 2);
-    tabPerintahLayout.addLayout(&vWalikotaLayout, 0, 3);
-    tabPerintahLayout.addLayout(&vPlayerLayout, 1, 0, 1, 4);
+    int margin = 5; int spacing = 10;
+    tabPerintahLayout.addLayout(&vPendudukLayout, 0, 0);     vPendudukLayout.setContentsMargins(margin, margin, margin, margin); vPendudukLayout.setSpacing(spacing);
+    tabPerintahLayout.addLayout(&vWalikotaLayout, 0, 1);     vWalikotaLayout.setContentsMargins(margin, margin, margin, margin); vWalikotaLayout.setSpacing(spacing);
+    tabPerintahLayout.addLayout(&vPlayerLayout, 1, 0, 1, 3); vPlayerLayout.setContentsMargins(margin, margin, margin, margin);   vPlayerLayout.setSpacing(spacing);
 
     
-    vPetaniLayout.addWidget(&tanamButton);
-    vPetaniLayout.addWidget(&panenButton);
+    vPendudukLayout.addWidget(&tanamButton);
+    
     vWalikotaLayout.addWidget(&pungutPajakButton);
     vWalikotaLayout.addWidget(&bangunButton);
     vWalikotaLayout.addWidget(&tambahPemainButton);
-    vPeternakLayout.addWidget(&ternakButton);
-    vPeternakLayout.addWidget(&kasihMakanButton);
+    vWalikotaLayout.addStretch();
+    
+    vPendudukLayout.addWidget(&ternakButton);
+    vPendudukLayout.addWidget(&kasihMakanButton);
+    vPendudukLayout.addWidget(&panenButton);
+    vPendudukLayout.addWidget(&panenButton);
+    vPendudukLayout.addStretch();
+
     vPlayerLayout.addWidget(&makanButton);
     vPlayerLayout.addWidget(&beliButton);
     vPlayerLayout.addWidget(&jualButton);
     vPlayerLayout.addWidget(&simpanButton);
-    vPlayerLayout.addWidget(&helpButton);
-
-    // tabPerintah.setLayout(&tabPerintahLayout);
-    // // tabPerintahLayout.addWidget(&cetakPenyimpananButton);
-    // tabPerintahLayout.addWidget(&pungutPajakButton);
-    // // tabPerintahLayout.addWidget(&cetakLadangButton);
-    // // tabPerintahLayout.addWidget(&cetakPeternakanButton);
-    // tabPerintahLayout.addWidget(&tanamButton);
-    // tabPerintahLayout.addWidget(&ternakButton);
-    // tabPerintahLayout.addWidget(&bangunButton);
-    // tabPerintahLayout.addWidget(&makanButton);
-    // tabPerintahLayout.addWidget(&kasihMakanButton);
-    // tabPerintahLayout.addWidget(&beliButton);
-    // tabPerintahLayout.addWidget(&jualButton);
-    // tabPerintahLayout.addWidget(&panenButton);
-    // tabPerintahLayout.addWidget(&simpanButton);
-    // tabPerintahLayout.addWidget(&tambahPemainButton);
-    // tabPerintahLayout.addWidget(&helpButton);
+    vPlayerLayout.addStretch();
 
     // footer
+    footerLayout.addWidget(&helpButton);
     footerLayout.addStretch();
     footerLayout.addStretch();
     footerLayout.addStretch();
     footerLayout.addWidget(&nextButton);
 
 
-    cetakLadangButton.connect(&cetakLadangButton, &QPushButton::pressed, [](){});
-    cetakPeternakanButton.connect(&cetakPeternakanButton, &QPushButton::pressed, [](){});
-    cetakPenyimpananButton.connect(&cetakPenyimpananButton, &QPushButton::pressed, [](){});
-    helpButton.connect(&helpButton, &QPushButton::pressed, [](){});
-    jualButton.connect(&jualButton, &QPushButton::pressed, [](){});
-    makanButton.connect(&makanButton, &QPushButton::pressed, [](){});
     nextButton.connect(&nextButton, &QPushButton::pressed, [this](){
         state.nextTurn();
         statusBar.setPlayer(state.getCurrentPlayer());
         statusBar.refresh();
     });
+    helpButton.connect(&helpButton, &QPushButton::pressed, [this](){
+        Command* help = new Help(*this); 
+        help->execute(state.getCurrentPlayer());
+        // delete help;
+    });
+    
+    cetakLadangButton.connect(&cetakLadangButton, &QPushButton::pressed, [](){});
+    cetakPeternakanButton.connect(&cetakPeternakanButton, &QPushButton::pressed, [](){});
+    cetakPenyimpananButton.connect(&cetakPenyimpananButton, &QPushButton::pressed, [](){});
+    jualButton.connect(&jualButton, &QPushButton::pressed, [](){});
+    makanButton.connect(&makanButton, &QPushButton::pressed, [](){});
     panenButton.connect(&panenButton, &QPushButton::pressed, [](){});
     pungutPajakButton.connect(&pungutPajakButton, &QPushButton::pressed, [](){});
     simpanButton.connect(&simpanButton, &QPushButton::pressed, [](){});
