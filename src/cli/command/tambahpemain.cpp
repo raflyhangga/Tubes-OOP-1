@@ -29,6 +29,10 @@ void TambahPemain::execute(Walikota *walikota) {
     }
 
     state.addPlayer(type, name);
+    if(name<walikota->getUsername()){
+        state.nextTurn();
+    }
+    walikota->addMoney(-50);
     cout << "\nPemain baru ditambahkan!";
     cout << "Selamat datang “" << name << "” di kota ini!" << endl << endl;
 }

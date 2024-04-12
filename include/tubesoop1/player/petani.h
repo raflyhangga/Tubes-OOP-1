@@ -15,6 +15,7 @@ private:
     Grid<Plant*> ladang;
     int getNetWealth();
     int getKTKP();
+    static vector <Petani*> listPetani;
 public:
     Petani(string &username);
 
@@ -23,6 +24,7 @@ public:
     Grid<Plant*>& getLadang();
 
     void addAllPlantAge(int age);
+    static void incrementAllPlantAge();
     TaxReport *bayarPajak(Walikota &walikota);
     
     vector<Quantifiable<Plant *>>* getAllHarvestablePlant();
