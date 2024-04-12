@@ -99,6 +99,9 @@
         "qvboxlayout": "cpp",
         "qcoreapplication": "cpp",
         "qinputdialog": "cpp",
-        "qcombobox": "cpp"
+        "qcombobox": "cpp",
+        "qtcore": "cpp",
+        "future": "cpp",
+        "qhboxlayout": "cpp"
     }
 }

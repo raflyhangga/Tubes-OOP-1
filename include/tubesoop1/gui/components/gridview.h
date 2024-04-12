@@ -4,17 +4,19 @@
 #include "tubesoop1/grid/grid.hpp"
 #include "tubesoop1/gui/components/locationlabel.h"
 #include "tubesoop1/gui/components/nicebutton.h"
+#include "tubesoop1/gui/components/gridsignal.h"
 #include <string>
 #include <QWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QSizePolicy>
+#include <QtCore>
 
 using namespace std;
 
 template<class T>
-class GridView : public QWidget {
+class GridView : public GridSignal {
 private:
     Grid<T>* grid;
     QVBoxLayout vLayout;
@@ -30,7 +32,7 @@ public:
     void setGrid(Grid<T>* grid);
     void refresh();
     void clear();
-    QWidget* getWidget(Location location);
+    QPushButton* getWidget(Location location);
 
     void showError(string message);
 

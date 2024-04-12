@@ -1,5 +1,5 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'choicedialog.h'
+** Meta object code from reading C++ file 'gridsignal.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.3)
 **
@@ -7,11 +7,11 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../../include/tubesoop1/gui/components/choicedialog.h"
+#include "../../../include/tubesoop1/gui/components/gridsignal.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'choicedialog.h' doesn't include <QObject>."
+#error "The header file 'gridsignal.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.15.3. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -21,36 +21,36 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_ChoiceDialog_t {
+struct qt_meta_stringdata_GridSignal_t {
     QByteArrayData data[5];
-    char stringdata0[44];
+    char stringdata0[42];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_ChoiceDialog_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_GridSignal_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_ChoiceDialog_t qt_meta_stringdata_ChoiceDialog = {
+static const qt_meta_stringdata_GridSignal_t qt_meta_stringdata_GridSignal = {
     {
-QT_MOC_LITERAL(0, 0, 12), // "ChoiceDialog"
-QT_MOC_LITERAL(1, 13, 10), // "choiceMade"
-QT_MOC_LITERAL(2, 24, 0), // ""
-QT_MOC_LITERAL(3, 25, 5), // "index"
-QT_MOC_LITERAL(4, 31, 12) // "handleChoice"
+QT_MOC_LITERAL(0, 0, 10), // "GridSignal"
+QT_MOC_LITERAL(1, 11, 11), // "cellClicked"
+QT_MOC_LITERAL(2, 23, 0), // ""
+QT_MOC_LITERAL(3, 24, 8), // "Location"
+QT_MOC_LITERAL(4, 33, 8) // "location"
 
     },
-    "ChoiceDialog\0choiceMade\0\0index\0"
-    "handleChoice"
+    "GridSignal\0cellClicked\0\0Location\0"
+    "location"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_ChoiceDialog[] = {
+static const uint qt_meta_data_GridSignal[] = {
 
  // content:
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       1,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -58,35 +58,28 @@ static const uint qt_meta_data_ChoiceDialog[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   24,    2, 0x06 /* Public */,
-
- // slots: name, argc, parameters, tag, flags
-       4,    0,   27,    2, 0x08 /* Private */,
+       1,    1,   19,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::Int,    3,
-
- // slots: parameters
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
 };
 
-void ChoiceDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void GridSignal::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<ChoiceDialog *>(_o);
+        auto *_t = static_cast<GridSignal *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->choiceMade((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 1: _t->handleChoice(); break;
+        case 0: _t->cellClicked((*reinterpret_cast< Location(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (ChoiceDialog::*)(int );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ChoiceDialog::choiceMade)) {
+            using _t = void (GridSignal::*)(Location );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GridSignal::cellClicked)) {
                 *result = 0;
                 return;
             }
@@ -94,48 +87,48 @@ void ChoiceDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject ChoiceDialog::staticMetaObject = { {
-    QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
-    qt_meta_stringdata_ChoiceDialog.data,
-    qt_meta_data_ChoiceDialog,
+QT_INIT_METAOBJECT const QMetaObject GridSignal::staticMetaObject = { {
+    QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
+    qt_meta_stringdata_GridSignal.data,
+    qt_meta_data_GridSignal,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *ChoiceDialog::metaObject() const
+const QMetaObject *GridSignal::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *ChoiceDialog::qt_metacast(const char *_clname)
+void *GridSignal::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_ChoiceDialog.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_GridSignal.stringdata0))
         return static_cast<void*>(this);
-    return QDialog::qt_metacast(_clname);
+    return QWidget::qt_metacast(_clname);
 }
 
-int ChoiceDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int GridSignal::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QDialog::qt_metacall(_c, _id, _a);
+    _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 1)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 1;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 1)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 2;
+        _id -= 1;
     }
     return _id;
 }
 
 // SIGNAL 0
-void ChoiceDialog::choiceMade(int _t1)
+void GridSignal::cellClicked(Location _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

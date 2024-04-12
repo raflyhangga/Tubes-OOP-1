@@ -7,7 +7,7 @@
 #include <QPushButton>
 
 template <class T>
-inline GridView<T>::GridView() : QWidget() {
+inline GridView<T>::GridView() : GridSignal() {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
     vLayout.setSpacing(5);
@@ -83,7 +83,11 @@ inline void GridView<T>::refresh(){
 
         // Actual grid
         for (int j = 0; j < grid->getCol(); j++) {
-            QWidget *widget = getWidget(Location(i, j));
+            QPushButton *widget = getWidget(Location(i, j));
+            connect(widget, &QPushButton::clicked, this, [this, i, j](){
+                Location location(i, j);
+                emit cellClicked(location);
+            });
             buttonList.push_back(widget);
             hLayout->addWidget(widget);
         }
@@ -94,7 +98,7 @@ inline void GridView<T>::refresh(){
 
 
 template <class T>
-inline QWidget* GridView<T>::getWidget(Location location){
+inline QPushButton* GridView<T>::getWidget(Location location){
     string labelStr;
     try{
         T data = grid->getElement(location);
@@ -110,7 +114,7 @@ inline QWidget* GridView<T>::getWidget(Location location){
 }
 
 template <>
-inline QWidget* GridView<Animal*>::getWidget(Location location){
+inline QPushButton* GridView<Animal*>::getWidget(Location location){
     string labelStr;
     NiceButton *button;
     try{
@@ -131,7 +135,7 @@ inline QWidget* GridView<Animal*>::getWidget(Location location){
     return button;
 }
 template <>
-inline QWidget* GridView<Plant*>::getWidget(Location location){
+inline QPushButton* GridView<Plant*>::getWidget(Location location){
     string labelStr;
     NiceButton *button;
     try{

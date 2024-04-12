@@ -7,6 +7,7 @@
 #include "tubesoop1/gui/command/pungutpajak.h"
 #include "tubesoop1/gui/command/bangun.h"
 #include "tubesoop1/gui/command/tambahpemain.h"
+#include "tubesoop1/gui/command/tanam.h"
 
 Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(gameWindow) {
     CetakPenyimpanan c2(state, window); execute(&c2);
@@ -30,6 +31,9 @@ Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(
     });
     window.tambahPemainButton.connect(&window.tambahPemainButton, &QPushButton::pressed, [this](){
         TambahPemain c(state, window); execute(&c);
+    });
+    window.tanamButton.connect(&window.tanamButton, &QPushButton::pressed, [this](){
+        Tanam c(state, window); execute(&c);
     });
 
 }
