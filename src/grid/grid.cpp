@@ -188,6 +188,16 @@ inline void Grid<T>::Iterator::skipToNextFilled() {
     } while (row < grid->element.size() && !grid->isFilled[row][col]);
 }
 
+template<class T> 
+inline Grid<T>& Grid<T>::operator+(const T &val) {
+    insert(val);
+}
+
+template<class T> 
+inline Grid<T>& Grid<T>::operator+=(const T &val) {
+    insert(val);
+}
+
 template<class T>
 inline typename Grid<T>::Iterator& Grid<T>::Iterator::operator++() {
     // Move to the next column

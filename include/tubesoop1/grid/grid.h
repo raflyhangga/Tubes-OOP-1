@@ -58,6 +58,8 @@ class Grid {
 
         T operator[](Location l);
 
+        Grid<T>& operator+(const T &val);
+        Grid<T>& operator+=(const T &val);
 
         vector<Location> getAllFilled();
 
