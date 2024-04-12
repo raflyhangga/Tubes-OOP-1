@@ -96,6 +96,7 @@
         "qfiledialog": "cpp",
         "bitset": "cpp",
         "qdialog": "cpp",
-        "qvboxlayout": "cpp"
+        "qvboxlayout": "cpp",
+        "qcoreapplication": "cpp"
     }
 }

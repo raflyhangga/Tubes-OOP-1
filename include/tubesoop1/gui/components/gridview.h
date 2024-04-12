@@ -17,7 +17,8 @@ template<class T>
 class GridView : public QWidget {
 private:
     Grid<T>* grid;
-    QVBoxLayout *vLayout;
+    QVBoxLayout vLayout;
+    QLabel errorLabel;
     
     // Just to make sure we can free the memory later.
     vector<QWidget*> buttonList;
@@ -30,6 +31,11 @@ public:
     void refresh();
     void clear();
     QWidget* getWidget(Location location);
+
+    void showError(string message);
+
+    void setEnabled(bool enabled);
+    void setCheckable(bool checkable);
 };
 
 

@@ -9,9 +9,9 @@ void CetakPeternakan::execute(Peternak *player) {
 }
 
 void CetakPeternakan::execute(Petani *player) {
-    window.getTabPeternakan().clear();
+    window.getTabPeternakan().showError("Hanya peternak yang bisa melihat peternakan!");
 }
 
 void CetakPeternakan::execute(Walikota *player) {
-    window.getTabPeternakan().clear();
+    window.getTabPeternakan().showError("Hanya peternak yang bisa melihat peternakan!");
 }

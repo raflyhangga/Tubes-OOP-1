@@ -10,6 +10,12 @@ class NiceButton : public QPushButton {
 public:
     NiceButton();
     NiceButton(string text);
+
+    void setStyleEmpty();
+    void setStyleNormal();
+    void setStyleSuccess();
+    void setStyleFailed();
+    void setStyleNormalCheckable();
 };
 
 

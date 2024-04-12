@@ -23,7 +23,7 @@ void PungutPajak::execute(Walikota *walikota) {
     int total = 0;
     for (int i = 0; i < taxReports.size(); i++) {
         total += taxReports[i]->getTax();
-        cout << '\t' << i + 1 << ". " << taxReports[i]->getName() << " - " << taxReports[i]->getType() << ' ' << taxReports[i]->getTax() << '\n';
+        cout << '\t' << i + 1 << ". " << taxReports[i]->getName() << " - " << taxReports[i]->getRole() << ' ' << taxReports[i]->getTax() << '\n';
     }
 
     cout << "\nNegara mendapatkan pemasukan sebesar " << total << " gulden.\n";

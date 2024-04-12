@@ -22,6 +22,8 @@ public:
     void build(Player &p);
     void addMaterial(ProductMaterial &material, int quantity);
 
+    string getFormattedBuildingInfo();
+
     void taken(TakerVisitor* t);
     vector<Quantifiable<ProductMaterial*>> getRecipe() const;
 };

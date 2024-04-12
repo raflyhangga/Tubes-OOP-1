@@ -4,21 +4,20 @@
 #include "tubesoop1/animal/animal.h"
 #include "tubesoop1/plant/plant.h"
 #include <sstream>
+#include <QPushButton>
 
 template <class T>
 inline GridView<T>::GridView() : QWidget() {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
-    vLayout = new QVBoxLayout();
-    vLayout->setSpacing(5);
-    vLayout->setContentsMargins(0, 0, 0, 0);
-    setLayout(vLayout);
+    vLayout.setSpacing(5);
+    vLayout.setContentsMargins(0, 0, 0, 0);
+    setLayout(&vLayout);
 
 }
 
 template <class T>
 inline GridView<T>::~GridView(){
-
 }
 
 template <class T>
@@ -29,6 +28,12 @@ inline void GridView<T>::setGrid(Grid<T>* grid){
 
 template <class T>
 inline void GridView<T>::clear(){
+    // remove errorLabel
+    errorLabel.hide();
+    if (errorLabel.parent() != nullptr) {
+        vLayout.removeWidget(&errorLabel);
+    }
+
     for (auto hLayout : hLayoutList) {
         qDeleteAll(hLayout->children()); // Delete children widgets
         delete hLayout; // Delete the layout itself
@@ -63,7 +68,7 @@ inline void GridView<T>::refresh(){
         labelList.push_back(label);
         hLayout->addWidget(label);
     }
-    vLayout->addLayout(hLayout);
+    vLayout.addLayout(hLayout);
 
     // Main grid
     for (int i = 0; i < grid->getRow(); i++) {
@@ -82,7 +87,7 @@ inline void GridView<T>::refresh(){
             buttonList.push_back(widget);
             hLayout->addWidget(widget);
         }
-        vLayout->addLayout(hLayout);
+        vLayout.addLayout(hLayout);
         hLayoutList.push_back(hLayout);
     }
 }
@@ -112,8 +117,13 @@ inline QWidget* GridView<Animal*>::getWidget(Location location){
         Animal* data = grid->getElement(location);
         labelStr = data->getCode();
         button = new NiceButton(labelStr);
-        if(data->isHarvestable()) button->setEnabled(true);
-        else button->setEnabled(false);
+        button->setEnabled(false);
+        if(data->isHarvestable()) {
+            button->setStyleSuccess();
+        }
+        else {
+            button->setStyleFailed();
+        }
     } catch (const exception& e) {
         button = new NiceButton("");
         button->setEnabled(false);
@@ -128,11 +138,38 @@ inline QWidget* GridView<Plant*>::getWidget(Location location){
         Plant* data = grid->getElement(location);
         labelStr = data->getCode();
         button = new NiceButton(labelStr);
-        if(data->isHarvestable()) button->setEnabled(true);
-        else button->setEnabled(false);
+        button->setEnabled(false);
+        if(data->isHarvestable()) {
+            button->setStyleSuccess();
+        }
+        else {
+            button->setStyleFailed();
+        }
     } catch (const exception& e) {
         button = new NiceButton("");
         button->setEnabled(false);
     }
     return button;
+}
+
+template <class T>
+void GridView<T>::showError(string message){
+    clear();
+    errorLabel.setText(QString::fromStdString(message));
+    vLayout.addWidget(&errorLabel);
+    errorLabel.show();
+}
+
+template <class T>
+void GridView<T>::setEnabled(bool enabled){
+    for (auto button : buttonList) {
+        button->setEnabled(enabled);
+    }
+}
+
+template <class T>
+void GridView<T>::setCheckable(bool checkable){
+    for (auto button : buttonList) {
+        ((QPushButton*)button)->setCheckable(checkable);
+    }
 }

@@ -14,13 +14,45 @@ void Building::printBuildingInfo() const
     {
         const ProductMaterial &product = *quantifiableProduct.getValue();
         const int quantity = quantifiableProduct.getQuantity();
-        cout << product.getName() << " " << quantity;
+
+        string formattedName = product.getName();
+        // lowercase all characters. change _ to space
+        for (char &c : formattedName){
+            if (c == '_') c = ' ';
+            else c = tolower(c);
+        }
+
+        cout << formattedName << " " << quantity;
         if (&quantifiableProduct != &recipe.back())
         {
             cout << ", ";
         }
     }
     cout << ")" << endl;
+}
+
+string Building::getFormattedBuildingInfo(){
+    string info = name + " (" + to_string(price) + " gulden, ";
+    for (const auto &quantifiableProduct : recipe)
+    {
+        const ProductMaterial &product = *quantifiableProduct.getValue();
+        const int quantity = quantifiableProduct.getQuantity();
+        string formattedName = product.getName();
+
+        // lowercase all characters. change _ to space
+        for (char &c : formattedName){
+            if (c == '_') c = ' ';
+            else c = tolower(c);
+        }
+
+        info += formattedName + " " + to_string(quantity);
+        if (&quantifiableProduct != &recipe.back())
+        {
+            info += ", ";
+        }
+    }
+    info += ")";
+    return info;
 }
 
 void Building::addMaterial(ProductMaterial &material, int quantity)

@@ -15,7 +15,7 @@ class TaxReport
     public:
         TaxReport(string _name, string _type, int _tax);
         string getName() const;
-        string getType() const;
+        string getRole() const;
         int getTax()  const;
         friend ostream &operator<<(ostream &os, const TaxReport &t);
 };
