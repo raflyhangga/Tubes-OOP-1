@@ -1,6 +1,7 @@
 #include <tubesoop1/cli/command/beli.h>
 #include <tubesoop1/cli/command/cetakpenyimpanan.h>
-#include <tubesoop1/shop/Exception.h>
+#include <tubesoop1/shop/shop_exception.h>
+#include <limits>
 
 using namespace std;
 
@@ -104,9 +105,19 @@ pair<int,int> Beli::welcomeMessage(vector<pair<Quantifiable<Resource*>,bool>> st
     int idxItem;
     int quantity;
     cout << "Barang ingin dibeli : ";
-    cin >> idxItem;
+    while(!(cin >> idxItem)){
+        cout<< "Error: enter a number\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "Barang ingin dibeli : ";
+    }
     cout << "Kuantitas : ";
-    cin >> quantity;
+    while(!(cin >> quantity)){
+        cout<< "Error: enter a number";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "Kuantitas : ";
+    }
 
     pair<int,int> temp(idxItem,quantity);
     return temp;
@@ -137,10 +148,10 @@ void Beli::execute(Petani *p){
     int idxItem = choice.first - 1;
     int quantity = choice.second;
 
+    validityChecking(stock,p,idxItem,quantity);
     if(!isBuyable(stock[idxItem])){
         throw(PetaniException());
     }
-    validityChecking(stock,p,idxItem,quantity);
     playerBuy(p,idxItem,quantity);
 }
 
@@ -151,10 +162,10 @@ void Beli::execute(Peternak *p){
     int idxItem = choice.first - 1;
     int quantity = choice.second;
 
+    validityChecking(stock,p,idxItem,quantity);
     if(!isBuyable(stock[idxItem])){
         throw(PeternakException());
     }
-    validityChecking(stock,p,idxItem,quantity);
     playerBuy(p,idxItem,quantity);
 }
 
@@ -165,9 +176,9 @@ void Beli::execute(Walikota *p){
     int idxItem = choice.first - 1;
     int quantity = choice.second;
 
+    validityChecking(stock,p,idxItem,quantity);
     if(!isBuyable(stock[idxItem])){
         throw(WalikotaException());
     }
-    validityChecking(stock,p,idxItem,quantity);
     playerBuy(p,idxItem,quantity);
 }
