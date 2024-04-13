@@ -41,3 +41,7 @@ ostream &operator<<(ostream &os, const Animal &a)
 void Animal::taken(TakerVisitor* t){
     t->take(this);
 }
+
+int Animal::getWeightToHarvest() const{
+    return weightToHarvest;
+}

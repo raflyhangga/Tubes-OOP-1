@@ -22,6 +22,7 @@ public:
 
     void setWeight(int weight);
     int getWeight() const;
+    int getWeightToHarvest() const;
 
     // Visitor pattern
     void eat(EatenElement&);

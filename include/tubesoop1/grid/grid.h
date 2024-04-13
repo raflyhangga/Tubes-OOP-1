@@ -4,7 +4,7 @@
 #include <optional>
 #include <iostream>
 #include <vector>
-#include "location.h"
+#include "tubesoop1/grid/location.h"
 
 using namespace std;
 
