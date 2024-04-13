@@ -47,6 +47,7 @@ set(GUISOURCES
   src/gui/components/inputdialog.cpp
   src/gui/components/dialog.cpp
   src/gui/components/moc_gridsignal.cpp
+  src/gui/components/application.cpp
 
   
   src/gui/game.cpp

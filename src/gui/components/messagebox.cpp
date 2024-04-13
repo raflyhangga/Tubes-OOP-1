@@ -8,6 +8,7 @@ MessageBox::MessageBox(QWidget* window, string title, string message) : QMessage
     QMessageBox::setText(QString::fromStdString(message));
     QMessageBox::setWindowTitle(QString::fromStdString(title));
     setWindowFlags(windowFlags() | Qt::MSWindowsFixedSizeDialogHint);
+    setWindowModality(Qt::ApplicationModal);
     setContentsMargins(10, 10, 25, 10);
 
     setStyleSheet(R"(

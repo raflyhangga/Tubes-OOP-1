@@ -26,91 +26,68 @@ Tanam::Tanam(State &state, MainWindow &window) : Command(state, window) {}
 
 */
 void Tanam::execute(Petani *petani) {
-    Dialog dialog(&window);
+    Dialog dialogInventory(&window);
 
     QVBoxLayout vLayout;
-    dialog.setLayout(&vLayout);
+    dialogInventory.setLayout(&vLayout);
     QLabel label("Pilih tanaman dari penyimpanan");
     vLayout.addWidget(&label);
 
-    Player *player = state.getCurrentPlayer();
-    auto &ladang = petani->getLadang();
-    auto &inventory = petani->getInventory();
-    
-    GridView<Resource*> inventoryWidget;
-    inventoryWidget.setMinimumSize(QSize(960, 540));
-    inventoryWidget.setGrid(&player->getInventory());
-    inventoryWidget.setEnabled(true);
-    vLayout.addWidget(&inventoryWidget);
+    GridView<Resource*> inventoryButtonGrid;
+    inventoryButtonGrid.setMinimumSize(QSize(960, 540));
+    inventoryButtonGrid.setGrid(&petani->getInventory());
+    inventoryButtonGrid.setEnabled(true);
+    vLayout.addWidget(&inventoryButtonGrid);
 
-    inventoryWidget.connect(&inventoryWidget, &GridView<Resource*>::cellClicked, [this, &inventoryWidget, &ladang, &inventory, &player, &dialog](Location slot) {
-        cout << slot << endl;
-        // Plant *plant;
-        // try {
-        //     plant = player->takeInventory<Plant>(slot);
-        // } catch (NotTakableException &e) {
-        //     MessageBox(&window, "Tanam", "Lokasi yang dipilih bukan berisi tanaman.").exec();
-        //     return;
-        // }
+    inventoryButtonGrid.connect(&inventoryButtonGrid, &GridView<Resource*>::cellClicked, [this, &petani, &dialogInventory](Location slot) {
+        // // Ambil tanaman dari penyimpanan
+        Plant *plant;
+        try {
+            plant = petani->takeInventory<Plant>(slot);
+        } catch (NotTakableException &e) {
+            MessageBox(&window, "Tanam", "Lokasi yang dipilih bukan berisi tanaman.\nPerintah tidak dilanjutkan.").exec();
+            return;
+        }
+        // // Sukses mengambil tanaman dari penyimpanan
+        MessageBox(&window, "Tanam", "Kamu memilih " + formatName(plant->getName()) + " dari penyimpanan.\n\n").exec();
+        dialogInventory.close();
 
-        // MessageBox(&window, "Tanam", "Kamu memilih " + plant->getName() + " dari penyimpanan.").exec();
+        // // print label and grid ladang
+        Dialog dialogLadang(&window);
 
-        // CetakLadang printer(state);
-        // printer.printGrid(ladang);
+        QVBoxLayout vLayout;
+        dialogLadang.setLayout(&vLayout);
+        QLabel label("Pilih lokasi tanah di ladang:");
+        vLayout.addWidget(&label);
 
-        // dialog.close();
+        GridView<Plant*> ladangButtonGrid;
+        ladangButtonGrid.setMinimumSize(QSize(960, 540));
+        ladangButtonGrid.setGrid(&petani->getLadang());
+        ladangButtonGrid.setEnabled(true);
+        vLayout.addWidget(&ladangButtonGrid);
+
+        ladangButtonGrid.connect(&ladangButtonGrid, &GridView<Plant*>::cellClicked, [this, &petani, &plant, &slot, &dialogLadang, &ladangButtonGrid](Location loc) {
+
+            // // Tanam tanaman ke ladang
+            try {
+                petani->getLadang().setElement(loc, plant);
+            } catch (logic_error &e) {
+                MessageBox(&window, "Tanam", "Petak tanah yang dipilih sudah terisi.\nPerintah gagal dieksekusi.").exec();
+                return;
+            }
+
+            // // Berhasil menanam tanaman
+            petani->getInventory().pop(slot);
+            ladangButtonGrid.refresh();
+            MessageBox(&window, "Tanam", "Cangkul, cangkul, cangkul yang dalam~!\nKamu telah menanam " + formatName(plant->getName()) + " di petak tanah " + loc.toStdString() + ".\n\n").exec();
+
+            dialogLadang.close();
+        });
+
+        dialogLadang.exec();
     });
 
-    // // print label and grid penyimpanan
-    // int total_length = petani->getInventory().getCol()*6 + 1;
-    // string message = " Penyimpanan ";
-    // string pad = string((total_length - message.length()) / 2 - 1, '=');
-    // cout << "   " <<  pad << '[' << message << ']' << pad << endl;
-
-    // GridDrawerCLI<Resource*> drawer = GridDrawerCLI<Resource*>(inventory);
-    // drawer.draw();
-
-    // cout << "\nSlot: ";
-    // Location slot;
-    // cin >> slot;
-
-    // // Ambil tanaman dari penyimpanan
-    // Plant *plant;
-    // try {
-    //     plant = player->takeInventory<Plant>(slot);
-    // } catch (NotTakableException &e) {
-    //     cout << "Lokasi yang dipilih bukan berisi tanaman.\n";
-    //     cout << "Perintah tidak dilanjutkan.\n";
-    //     return;
-    // }
-
-    // // Sukses mengambil tanaman dari penyimpanan
-    // cout << "\nKamu memilih " << plant->getName() << " dari penyimpanan.\n\n";
-
-    // // print label and grid ladang
-    // CetakLadang printer(state);
-    // printer.printGrid(ladang);
-
-
-    // // Pilih lokasi tanah di ladang
-    // cout << "\nPetak tanah: ";
-    // Location loc; cin >> loc;
-
-
-    // // Tanam tanaman ke ladang
-    // try {
-    //     ladang.setElement(loc, plant);
-    // } catch (logic_error &e) {
-    //     cout << "Petak tanah yang dipilih sudah terisi.\n";
-    //     cout << "Perintah gagal dieksekusi.\n";
-    //     return;
-    // }
-
-    // // Berhasil menanam tanaman
-    // inventory.pop(slot);
-    // cout << "Cangkul, cangkul, cangkul yang dalam~!\n";
-    // cout << "Kamu telah menanam " << plant->getName() << " di petak tanah " << loc << ".\n\n";
-    dialog.exec();
+    dialogInventory.exec();
 }
 void Tanam::execute(Peternak *peternak) {
     MessageBox(&window, "Tanam", "Anda tidak dapat menanam tanaman!").exec();

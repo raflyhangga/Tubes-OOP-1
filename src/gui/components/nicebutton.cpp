@@ -128,10 +128,11 @@ void NiceButton::setStyleNormalCheckable(){
         }
         QPushButton:hover {
             border: 1px solid rgb(139, 92, 246);
-            color: white;
+            color: rgb(139, 92, 246);
         }
         QPushButton:pressed {
             background-color: rgb(139, 92, 246);
+            color: white;
         }
         QPushButton:disabled {
             background-color: rgb(76, 29, 149);
@@ -162,7 +163,7 @@ void NiceButton::setStyleEmpty(){
             padding: 10px 20px;
         }
         QPushButton:hover {
-            background-color: rgb(139, 92, 246);
+            background-color: rgb(51, 65, 85);
             color: white;
         }
         QPushButton:pressed {

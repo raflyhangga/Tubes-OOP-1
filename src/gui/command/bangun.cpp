@@ -94,7 +94,7 @@ void Bangun::execute(Walikota* walikota) {
             }
 
             for (auto &quantifiable: missingResources) {
-                message += to_string(quantifiable.getQuantity()) + " " + quantifiable.getValue();
+                message += to_string(quantifiable.getQuantity()) + " " + formatName(quantifiable.getValue());
                 if (&quantifiable != &missingResources.back()) {
                     message += ", ";
                 } else {

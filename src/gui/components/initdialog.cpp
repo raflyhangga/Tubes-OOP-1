@@ -17,7 +17,7 @@ InitDialog::InitDialog(QMainWindow* window, State &state, ResourceFactory &facto
     hLayout.addWidget(&loadFileStateButton);
     hLayout.addWidget(&loadNewStateButton);
 
-    loadFileStateButton.connect(&loadFileStateButton, &QPushButton::pressed, [this, &state, &factory](){
+    loadFileStateButton.connect(&loadFileStateButton, &QPushButton::clicked, [this, &state, &factory](){
         QString fileName = QFileDialog::getOpenFileName(this, QString::fromStdString("Open Directory"), "", QString::fromStdString("Text Files (*.txt)"));
         if(fileName != ""){
             try{
@@ -32,7 +32,7 @@ InitDialog::InitDialog(QMainWindow* window, State &state, ResourceFactory &facto
         }
     });
 
-    loadNewStateButton.connect(&loadNewStateButton, &QPushButton::pressed, [this, &state, &factory](){
+    loadNewStateButton.connect(&loadNewStateButton, &QPushButton::clicked, [this, &state, &factory](){
         try{
             state.loadNew(factory);
             accept();

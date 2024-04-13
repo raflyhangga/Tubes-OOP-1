@@ -19,12 +19,13 @@
 #include <tubesoop1/gui/components/mainwindow.h>
 #include <tubesoop1/gui/components/initdialog.h>
 #include <tubesoop1/gui/game.h>
+#include <tubesoop1/gui/components/Application.h>
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    Application app(argc, argv);
 
     int fontId = QFontDatabase::addApplicationFont("assets/font/Outfit-SemiBold.ttf");
     if(fontId != -1){
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
 
     MainWindow window(state);
     window.show();
+    app.setMainWindow(&window);
 
     InitDialog initDialog(&window, state, factory);
     initDialog.setClosable(false);

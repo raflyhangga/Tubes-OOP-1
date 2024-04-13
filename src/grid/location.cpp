@@ -23,6 +23,11 @@ int Location::getCol() const {
     return second;
 }
 
+string Location::toStdString() const {
+    IcosiHexaString icosiHexaString(second);
+    return icosiHexaString.getString() + to_string(first + 1);
+}
+
 istream &operator>> (istream &is, Location &location) {
     string str; is >> str;
     // handles input like "A01"

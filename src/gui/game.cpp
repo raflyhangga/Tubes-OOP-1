@@ -14,25 +14,25 @@ Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(
     CetakPeternakan c3(state, window); execute(&c3);
     CetakLadang c4(state, window); execute(&c4);
 
-    window.nextButton.connect(&window.nextButton, &QPushButton::pressed, [this](){
+    window.nextButton.connect(&window.nextButton, &QPushButton::clicked, [this](){
         Next c(state, window); execute(&c);
         CetakPenyimpanan c2(state, window); execute(&c2);
         CetakPeternakan c3(state, window); execute(&c3);
         CetakLadang c4(state, window); execute(&c4);
     });
-    window.helpButton.connect(&window.helpButton, &QPushButton::pressed, [this](){
+    window.helpButton.connect(&window.helpButton, &QPushButton::clicked, [this](){
         Help c(state, window); execute(&c);
     });
-    window.pungutPajakButton.connect(&window.pungutPajakButton, &QPushButton::pressed, [this](){
+    window.pungutPajakButton.connect(&window.pungutPajakButton, &QPushButton::clicked, [this](){
         PungutPajak c(state, window); execute(&c);
     });
-    window.bangunButton.connect(&window.bangunButton, &QPushButton::pressed, [this](){
+    window.bangunButton.connect(&window.bangunButton, &QPushButton::clicked, [this](){
         Bangun c(state, window); execute(&c);
     });
-    window.tambahPemainButton.connect(&window.tambahPemainButton, &QPushButton::pressed, [this](){
+    window.tambahPemainButton.connect(&window.tambahPemainButton, &QPushButton::clicked, [this](){
         TambahPemain c(state, window); execute(&c);
     });
-    window.tanamButton.connect(&window.tanamButton, &QPushButton::pressed, [this](){
+    window.tanamButton.connect(&window.tanamButton, &QPushButton::clicked, [this](){
         Tanam c(state, window); execute(&c);
     });
 

@@ -18,6 +18,8 @@ class Command : public CommanderVisitor { // visitor pattern
     public:
         Command(State&, MainWindow&);
 
+        string formatName(string);
+
         // visitor pattern
         virtual void execute(Player*);
         virtual void execute(Petani*);

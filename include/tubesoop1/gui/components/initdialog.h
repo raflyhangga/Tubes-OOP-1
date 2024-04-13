@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QCloseEvent>
+#include <QMouseEvent>
 #include "tubesoop1/gui/components/nicebutton.h"
 #include "tubesoop1/state/state.h"
 #include "tubesoop1/resource/resourcefactory.h"
