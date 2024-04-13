@@ -1,4 +1,4 @@
-# <h1 style="text-align: center;">Tugas Besar Pemrograman Berbasis Objek IF2211<h1/>
+# Tugas Besar Pemrograman Berbasis Objek IF2211
 
 ## 🛸 Project Overview
 Welcome to the repository for our ***Object-Oriented Programming (IF2211)*** course project at Institut Teknologi Bandung. This project showcases our skills in building a *CLI / GUI game* that simulates the roles of a farmer, rancher, and mayor.
