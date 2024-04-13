@@ -1,6 +1,6 @@
 #include "tubesoop1/cli/command/makan.h"
 #include "tubesoop1/cli/command/cetakpenyimpanan.h"
-#include "tubesoop1/grid/location_exception.hpp"
+#include "tubesoop1/grid/location_exception.h"
 #include "tubesoop1/resourcevisitorpattern/resourcevisitorpattern_exception.h"
 #include "tubesoop1/player/player_partial.hpp"
 

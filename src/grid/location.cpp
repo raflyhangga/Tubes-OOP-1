@@ -1,6 +1,6 @@
 #include <tubesoop1/grid/location.h>
 #include <tubesoop1/icosihexastring/icosihexastring.h>
-#include <tubesoop1/grid/location_exception.hpp>
+#include <tubesoop1/grid/location_exception.h>
 
 #include <iomanip>
 

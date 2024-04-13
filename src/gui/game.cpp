@@ -8,6 +8,8 @@
 #include "tubesoop1/gui/command/bangun.h"
 #include "tubesoop1/gui/command/tambahpemain.h"
 #include "tubesoop1/gui/command/tanam.h"
+#include "tubesoop1/gui/command/ternak.h"
+#include "tubesoop1/gui/command/makan.h"
 
 Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(gameWindow) {
     CetakPenyimpanan c2(state, window); execute(&c2);
@@ -35,9 +37,16 @@ Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(
     window.tanamButton.connect(&window.tanamButton, &QPushButton::clicked, [this](){
         Tanam c(state, window); execute(&c);
     });
+    window.ternakButton.connect(&window.ternakButton, &QPushButton::clicked, [this](){
+        Ternak c(state, window); execute(&c);
+    });
+    window.makanButton.connect(&window.makanButton, &QPushButton::clicked, [this](){
+        Makan c(state, window); execute(&c);
+    });
 
 }
 
 void Game::execute(Command* command) {
     command->execute(state.getCurrentPlayer());
+    window.getStatusBar().refresh();
 }

@@ -4,7 +4,7 @@
 #include "tubesoop1/cli/command/cetakpeternakan.h"
 #include "tubesoop1/resourcevisitorpattern/taker.h"
 #include <tubesoop1/resourcevisitorpattern/taker.hpp>
-#include "tubesoop1/grid/location_exception.hpp"
+#include "tubesoop1/grid/location_exception.h"
 #include "tubesoop1/resourcevisitorpattern/resourcevisitorpattern_exception.h"
 #include "tubesoop1/player/player_partial.hpp"
 #include "tubesoop1/cli/command/command_exception.h"

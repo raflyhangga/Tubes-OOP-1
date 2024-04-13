@@ -1,5 +1,5 @@
 #include <exception>
-#include <tubesoop1/grid/location_exception.hpp>
+#include <tubesoop1/grid/location_exception.h>
 
 using namespace std;
 

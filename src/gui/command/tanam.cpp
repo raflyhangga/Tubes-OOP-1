@@ -26,10 +26,20 @@ Tanam::Tanam(State &state, MainWindow &window) : Command(state, window) {}
 
 */
 void Tanam::execute(Petani *petani) {
+    vector<Plant*> list = petani->takeAllFromInventory<Plant>();
+    if(list.size()==0){
+        MessageBox(&window, "Tanam", "Tidak ada tanaman di penyimpanan!").exec();
+        return;
+    }
+    if(petani->getLadang().isFull()){
+        MessageBox(&window, "Tanam", "Ladang penuh!").exec();
+        return;
+    }
+
     Dialog dialogInventory(&window);
 
     QVBoxLayout vLayout;
-    dialogInventory.setLayout(&vLayout);
+    dialogInventory.setLayout(&vLayout); dialogInventory.setWindowTitle("Tanam");
     QLabel label("Pilih tanaman dari penyimpanan");
     vLayout.addWidget(&label);
 
@@ -53,7 +63,7 @@ void Tanam::execute(Petani *petani) {
         dialogInventory.close();
 
         // // print label and grid ladang
-        Dialog dialogLadang(&window);
+        Dialog dialogLadang(&window); dialogLadang.setWindowTitle("Tanam");
 
         QVBoxLayout vLayout;
         dialogLadang.setLayout(&vLayout);
@@ -79,7 +89,7 @@ void Tanam::execute(Petani *petani) {
             // // Berhasil menanam tanaman
             petani->getInventory().pop(slot);
             ladangButtonGrid.refresh();
-            MessageBox(&window, "Tanam", "Cangkul, cangkul, cangkul yang dalam~!\nKamu telah menanam " + formatName(plant->getName()) + " di petak tanah " + loc.toStdString() + ".\n\n").exec();
+            MessageBox(&window, "Tanam", "Cangkul, cangkul, cangkul yang dalam~!\nKamu telah menanam " + formatName(plant->getName()) + " di petak tanah " + loc.toStdString() + ".").exec();
 
             dialogLadang.close();
         });
