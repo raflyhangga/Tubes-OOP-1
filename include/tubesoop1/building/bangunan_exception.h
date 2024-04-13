@@ -5,27 +5,19 @@ using namespace std;
 #include <exception>
 
 class RoleWaliKotaException: public exception{
-    const char* what() const throw() {
-		return "Bangun Bangunan Gagal, Role Anda Bukan Wali Kota";
-	}
+    const char* what() const throw();
 
 };
 class SlotNotAvailableException: public exception{
-    const char* what() const throw() {
-		return "Bangun Bangunan Gagal, Slot Tidak Tersedia";
-	}
+    const char* what() const throw() ;
 };
 
 class NotEnoughMaterialException: public exception{
-    const char* what() const throw() {
-        return "Bangun Bangunan Gagal, Material Tidak Cukup";
-    }
+    const char* what() const throw();
 };
 
 class NotEnoughMoneyException: public exception{
-    const char* what() const throw() {
-        return "Bangun Bangunan Gagal, Uang Tidak Cukup";
-    }
+    const char* what() const throw() ;
 };
 
 

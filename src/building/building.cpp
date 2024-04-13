@@ -85,27 +85,27 @@ void Building::build(Player &p)
     */
 
     // Check if the player has enough resources and money to build the building
-    // for (const auto &quantifiableProduct : recipe)
-    // {
-    //     const ProductMaterial &product = *quantifiableProduct.getValue();
-    //     const int quantity = quantifiableProduct.getQuantity();
+    for (const auto &quantifiableProduct : recipe)
+    {
+        const ProductMaterial &product = *quantifiableProduct.getValue();
+        const int quantity = quantifiableProduct.getQuantity();
 
-    //     int availableQuantity = 0;
-    //     Grid<Resource *> &playerInventory = p.getInventory();
-    //     for (const auto &location : playerInventory.getAllFilled())
-    //     {
-    //         Resource *res = playerInventory.getElement(location);
-    //         if (res && res == &product)
-    //         {
-    //             availableQuantity++;
-    //         }
-    //     }
+        int availableQuantity = 0;
+        Grid<Resource *> &playerInventory = p.getInventory();
+        for (const auto &location : playerInventory.getAllFilled())
+        {
+            Resource *res = playerInventory.getElement(location);
+            if (res && res == &product)
+            {
+                availableQuantity++;
+            }
+        }
 
-    //     if (availableQuantity < quantity)
-    //     {
-    //         throw NotEnoughMaterialException();
-    //     }
-    // }
+        if (availableQuantity < quantity)
+        {
+            throw NotEnoughMaterialException();
+        }
+    }
 
     // Deduct the player's money
     p.setMoney(p.getMoney() - price);
