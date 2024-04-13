@@ -1,6 +1,7 @@
 #include "tubesoop1/building/building.h"
 #include "tubesoop1/building/bangunan_exception.h"
 #include "tubesoop1/player/walikota.h"
+#include <map>
 
 Building::Building(string code, string name, int price, const vector<Quantifiable<ProductMaterial *>> &recipe) : Resource(code, name, price),
                                                                                                                  recipe(recipe)
@@ -72,30 +73,33 @@ void Building::build(Player &p)
     }
 
     // Check if the player has enough money to build the building
+    map<string, int> missingResources;
     if (p.getMoney() < price)
     {
-        throw NotEnoughMoneyException();
+        missingResources["gulden"] = price - p.getMoney();
     }
 
-    /**
-     * Below is handled by the Bangun command
-     * @ref src/cli/command/bangun.cpp
-     * 
-     * commented out by @ganadipa
-    */
 
     // Check if the player has enough resources and money to build the building
+    Grid<Resource *> &playerInventory = p.getInventory();
     for (const auto &quantifiableProduct : recipe)
     {
         const ProductMaterial &product = *quantifiableProduct.getValue();
         const int quantity = quantifiableProduct.getQuantity();
 
         int availableQuantity = 0;
-        Grid<Resource *> &playerInventory = p.getInventory();
-        for (const auto &location : playerInventory.getAllFilled())
+        for (const auto &location : playerInventory)
         {
             Resource *res = playerInventory.getElement(location);
-            if (res && res == &product)
+
+
+            // Below is commented out and fixed by @ganadipa
+            // if (res && res == &product)
+            // {
+            //     availableQuantity++;
+            // }
+
+            if (res->getCode() == product.getCode())
             {
                 availableQuantity++;
             }
@@ -103,8 +107,13 @@ void Building::build(Player &p)
 
         if (availableQuantity < quantity)
         {
-            throw NotEnoughMaterialException();
+            missingResources[product.getName()] = quantity - availableQuantity;
         }
+    }
+
+    if (!missingResources.empty())
+    {
+        throw MissingResourcesException(missingResources);
     }
 
     // Deduct the player's money
@@ -122,8 +131,6 @@ void Building::build(Player &p)
 
     // Add the building to the player's inventory
     p.putInventory(*this);
-
-    cout << "Bangunan berhasil dibangun dan telah menjadi hak milik walikota!" << endl;
 }
 
 void Building::taken(TakerVisitor* t){

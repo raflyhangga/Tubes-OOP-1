@@ -1,5 +1,6 @@
 #include "tubesoop1/cli/command/bangun.h"
 #include "tubesoop1/cli/command/command_exception.h"
+#include <tubesoop1/building/bangunan_exception.h>
 Bangun::Bangun(State& state): Command(state) {}
 
 void Bangun::execute(Petani* petani) {
@@ -36,63 +37,21 @@ void Bangun::execute(Walikota* walikota) {
         throw BuildingNotFoundException();
     }
 
-    /**
-     * This handles the case to check whether the player has enough resources to build the building
-     * @ref src/building/building.cpp - update: removed procedures to handle enough resources or not in there.
-    */
-
-    for (auto &quantifiableProduct: recipe) {
-        const ProductMaterial &product = *quantifiableProduct.getValue();
-        const int quantity = quantifiableProduct.getQuantity();
-        needs[product.getName()] = quantity;
-    }
-
-
-    for (const auto &loc: walikota->getInventory()) {
-        Resource *r = walikota->getInventory().getElement(loc);
-        string itemName = r->getName();
-        if (needs.find(itemName) != needs.end()) {
-            needs[itemName] -= 1;
-        }
-    }
-
-    bool ableToBuild = true;
-    int missingMoney = building->getPrice() - walikota->getMoney();
-    if (missingMoney > 0) {
-        ableToBuild = false;
-    }
-
-    vector<Quantifiable<string>> missingResources;
-    for (auto &[item, quantity]: needs) {
-        if (quantity > 0) {
-            string itemName = item;
-            ableToBuild = false;
-            missingResources.push_back(Quantifiable<string>(itemName, quantity));
-        }
-    }
-
-    if (!ableToBuild) {
-        cout << "Kamu tidak punya sumber daya yang cukup! Masih memerlukan ";
-
-        if (missingMoney > 0) {
-            cout << missingMoney << " gulden";
-            if (!missingResources.empty()) {
-                cout << ", serta ";
-            }
-        }
-
-        for (auto &quantifiable: missingResources) {
-            cout << quantifiable.getQuantity() << " " << quantifiable.getValue();
-            if (&quantifiable != &missingResources.back()) {
-                cout << ", ";
-            } else {
-                cout << ".";
-            }
-        }
-        cout << '\n';
-        return;
-    }
 
     // Build the building
-    building->build(*walikota);
+    try {
+        building->build(*walikota);
+        cout << "Bangunan berhasil dibangun dan telah menjadi hak milik walikota!" << endl;
+    } catch (logic_error &e) {
+        cout << "Bangunan gagal dibangun karena walikota tidak mempunyai inventory yang kosong." << endl;
+    } catch (MissingResourcesException &e) {
+        map<string, int> &missingResources = e.getMissingResources();
+        cout << "Bangunan gagal dibangun, karena sumber daya kurang: " << endl;
+        int i = 1;
+        for (auto &[resource, quantity]: missingResources) {
+            cout << "\t" << i << ". " << resource << ": " << quantity << endl;
+            ++i;
+        }
+    }
+
 }

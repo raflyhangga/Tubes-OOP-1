@@ -21,3 +21,17 @@ const char *NotEnoughMoneyException::what() const throw()
 {
     return "Bangun Bangunan Gagal, Uang Tidak Cukup";
 }
+
+
+MissingResourcesException::MissingResourcesException(map<string, int> missingResources) : missingResources(missingResources)
+{
+}
+
+map<string, int> &MissingResourcesException::getMissingResources()
+{
+    return missingResources;
+}
+const char *MissingResourcesException::what() const throw()
+{
+    return "Bangun Bangunan Gagal, Sumber Daya Tidak Cukup";
+}
