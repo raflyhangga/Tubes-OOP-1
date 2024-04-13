@@ -146,8 +146,10 @@ vector<pair<Quantifiable<Resource*>,bool>> Shop::getPetaniStock(){
                 temp.push_back(tempPair);
             }
         }
-        catch(NotTakableException& err){}
-        catch(exception & err){}
+        catch(exception & err){
+            pair<Quantifiable<Resource*>,bool> tempPair(rsc,false);
+            temp.push_back(tempPair);
+        }
     }
 
     return temp;
@@ -172,8 +174,10 @@ vector<pair<Quantifiable<Resource*>,bool>> Shop::getPeternakStock(){
                 temp.push_back(tempPair);
             }
         }
-        catch(NotTakableException& err){}
-        catch(exception & err){}
+        catch(exception & err){
+            pair<Quantifiable<Resource*>,bool> tempPair(rsc,false);
+            temp.push_back(tempPair);
+        }
     }
 
     return temp;

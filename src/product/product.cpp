@@ -65,4 +65,3 @@ void ProductMaterial::eaten(EaterVisitor &a)
 void ProductMaterial::taken(TakerVisitor* t){
     t->take(this);
 }
-

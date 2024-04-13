@@ -1,6 +1,5 @@
 // Include header file
 #include <tubesoop1/quantifiable/quantifiable.h>
-// #include "../../include/tubesoop1/quantifiable/quantifiable.h"
 
 // Constructor implementation with validation
 template <class T>
@@ -16,11 +15,16 @@ inline Quantifiable<T>::Quantifiable(T& val, int qty) : value(val) {
 // Set quantity implementation with validation
 template <class T>
 inline void Quantifiable<T>::setQuantity(int qty) {
-    // if (qty >= 0) {
-    //     quantity = qty;
-    // } else {
-    //     throw invalid_argument("Quantity cannot be negative.");
-    // }
+    if (qty >= 0) {
+        quantity = qty;
+    } else {
+        if(qty == -1){
+            quantity = qty;
+        }
+        else {
+            throw invalid_argument("Quantity cannot be negative.");
+        }
+    }
 }
 
 // Operator += implementation

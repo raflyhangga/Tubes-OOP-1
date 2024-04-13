@@ -54,6 +54,11 @@ set(SOURCES
   src/temp/temp.cpp src/txtparser/txtparser.cpp include/tubesoop1/grid/grid.hpp include/tubesoop1/grid/griddrawer.hpp include/tubesoop1/grid/location_exception.hpp include/tubesoop1/player/player_partial.hpp include/tubesoop1/quantifiable/quantifiable.hpp include/tubesoop1/resourcevisitorpattern/taker.hpp include/tubesoop1/txtparser/txtparser.hpp
   src/building/building_test.cpp
   src/plant/plant_test.cpp
+  src/player/petani_test.cpp
+  src/player/peternak_test.cpp
+  src/player/walikota_test.cpp
+  src/product/product_test.cpp
+  src/shop/shop_test.cpp
 )
 
 add_executable(unit_test ${SOURCES})

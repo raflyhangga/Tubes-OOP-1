@@ -22,17 +22,14 @@ TEST(PlantTest, ConstructorWithParameters) {
     EXPECT_EQ(plant.getAge(), 0); // Assuming initial age is set to 0 in all constructors EXPECT_EQ(plant.isHarvestable(), false);
 }
 
-// TEST(PlantTest, AgeManagement) {
-//     Plant plant;
-//     plant.setAge(5);
-//     EXPECT_EQ(plant.getAge(), 5);
+TEST(PlantTest, AgeManagement) {
+    Plant plant;
+    plant.setAge(5);
+    EXPECT_EQ(plant.getAge(), 5);
 
-//     plant.addAge(3);
-//     EXPECT_EQ(plant.getAge(), 8);
-
-//     plant.addAge(-2); // Assuming negative values are treated as a mistake
-//     EXPECT_EQ(plant.getAge(), 8); // No change due to negative input
-// }
+    plant.addAge(3);
+    EXPECT_EQ(plant.getAge(), 8);
+}
 
 TEST(PlantTest, Harvestability) {
     Plant plant("P001", "Sunflower", 50, 10, {});
