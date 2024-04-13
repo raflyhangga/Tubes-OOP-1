@@ -81,29 +81,27 @@ void MainWindow::initializeMenu(){
     tabPerintahLayout.addLayout(&vPlayerLayout, 1, 0, 1, 3); vPlayerLayout.setContentsMargins(margin, margin, margin, margin);   vPlayerLayout.setSpacing(spacing);
 
     
-    vPendudukLayout.addWidget(&tanamButton);
     
-    vWalikotaLayout.addWidget(&pungutPajakButton);
-    vWalikotaLayout.addWidget(&bangunButton);
-    vWalikotaLayout.addWidget(&tambahPemainButton);
-    vWalikotaLayout.addStretch();
+    vWalikotaLayout.addWidget(&pungutPajakButton);      pungutPajakButton.setStyleNormalCheckable();
+    vWalikotaLayout.addWidget(&bangunButton);           bangunButton.setStyleNormalCheckable();
+    vWalikotaLayout.addWidget(&tambahPemainButton);     tambahPemainButton.setStyleNormalCheckable();
+    vWalikotaLayout.addStretch();                       
     
-    vPendudukLayout.addWidget(&ternakButton);
-    vPendudukLayout.addWidget(&kasihMakanButton);
-    vPendudukLayout.addWidget(&panenButton);
-    vPendudukLayout.addWidget(&panenButton);
+    vPendudukLayout.addWidget(&tanamButton);            tanamButton.setStyleNormalCheckable();
+    vPendudukLayout.addWidget(&ternakButton);           ternakButton.setStyleNormalCheckable();
+    vPendudukLayout.addWidget(&kasihMakanButton);       kasihMakanButton.setStyleNormalCheckable();
+    vPendudukLayout.addWidget(&panenButton);            panenButton.setStyleNormalCheckable();
     vPendudukLayout.addStretch();
 
-    vPlayerLayout.addWidget(&makanButton);
-    vPlayerLayout.addWidget(&beliButton);
-    vPlayerLayout.addWidget(&jualButton);
-    vPlayerLayout.addWidget(&simpanButton);
+    vPlayerLayout.addWidget(&makanButton);              makanButton.setStyleNormalCheckable();
+    vPlayerLayout.addWidget(&beliButton);               beliButton.setStyleNormalCheckable();
+    vPlayerLayout.addWidget(&jualButton);               jualButton.setStyleNormalCheckable();
     vPlayerLayout.addStretch();
 
     // footer
-    footerLayout.addWidget(&helpButton);
+    footerLayout.addWidget(&helpButton);                
     footerLayout.addStretch();
-    footerLayout.addStretch();
+    footerLayout.addWidget(&simpanButton);
     footerLayout.addStretch();
     footerLayout.addWidget(&nextButton);
     

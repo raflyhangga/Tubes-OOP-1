@@ -111,6 +111,12 @@ buildrungui: $(OUTPUT_DIR)/$(OBJ_MAIN) $(OBJS)
 	@echo -n ">> "
 	./$(BUILD_DIR)/$(GUI_TARGET)
 
+generatemoc:
+	$(info [Generate moc files])
+	@echo -n ">> "
+	moc include/tubesoop1/gui/components/choicedialog.h -o src/gui/components/moc_choicedialog.cpp
+	moc include/tubesoop1/gui/components/gridsignal.h -o src/gui/components/moc_gridsignal.cpp
+
 
 
 # Include the dependency files

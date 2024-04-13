@@ -96,6 +96,12 @@
         "qfiledialog": "cpp",
         "bitset": "cpp",
         "qdialog": "cpp",
-        "qvboxlayout": "cpp"
+        "qvboxlayout": "cpp",
+        "qcoreapplication": "cpp",
+        "qinputdialog": "cpp",
+        "qcombobox": "cpp",
+        "qtcore": "cpp",
+        "future": "cpp",
+        "qhboxlayout": "cpp"
     }
 }

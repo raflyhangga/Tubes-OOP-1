@@ -10,7 +10,7 @@ void Help::execute(Petani *petani) {
     cout << "2.  CETAK_PENYIMPANAN" << endl;
  dashedCout("3.  PUNGUT_PAJAK") << endl;
     cout << "4.  CETAK_LADANG" << endl;
-    cout << "5.  CETAK_PETERNAKAN" << endl;
+    dashedCout ("5.  CETAK_PETERNAKAN") << endl;
     cout << "6.  TANAM" << endl;
  dashedCout("7.  TERNAK") << endl;
  dashedCout("8.  BANGUN") << endl;
@@ -18,7 +18,7 @@ void Help::execute(Petani *petani) {
  dashedCout("10. KASIH_MAKAN") << endl;
     cout << "11. BELI" << endl;
     cout << "12. JUAL" << endl;
- dashedCout("13. PANEN") << endl;
+   cout << "13. PANEN" << endl;
    //  cout << "14. MUAT" << endl;
     cout << "14. SIMPAN" << endl;
  dashedCout("15. TAMBAH_PEMAIN") << endl;
@@ -34,7 +34,7 @@ void Help::execute(Peternak *peternak) {
     cout << "1.  NEXT" << endl;
     cout << "2.  CETAK_PENYIMPANAN" << endl;
  dashedCout("3.  PUNGUT_PAJAK") << endl;
-    cout << "4.  CETAK_LADANG" << endl;
+    dashedCout("4.  CETAK_LADANG") << endl;
     cout << "5.  CETAK_PETERNAKAN" << endl;
  dashedCout("6.  TANAM") << endl;
     cout << "7.  TERNAK" << endl;
@@ -43,7 +43,7 @@ void Help::execute(Peternak *peternak) {
     cout << "10. KASIH_MAKAN" << endl;
     cout << "11. BELI" << endl;
     cout << "12. JUAL" << endl;
- dashedCout("13. PANEN") << endl;
+    cout << "13. PANEN" << endl;
    //  cout << "14. MUAT" << endl;
     cout << "14. SIMPAN" << endl;
  dashedCout("15. TAMBAH_PEMAIN") << endl;
@@ -68,7 +68,7 @@ void Help::execute(Walikota *walikota) {
  dashedCout("10. KASIH_MAKAN") << endl;
     cout << "11. BELI" << endl;
     cout << "12. JUAL" << endl;
-    cout << "13. PANEN" << endl;
+    dashedCout ("13. PANEN") << endl;
    //  cout << "14. MUAT" << endl;
     cout << "14. SIMPAN" << endl;
     cout << "15. TAMBAH_PEMAIN" << endl;

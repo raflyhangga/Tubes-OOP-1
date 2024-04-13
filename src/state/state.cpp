@@ -186,6 +186,12 @@ void State::addPlayer(string type, string name){
     else throw InvalidPlayerTypeException(type);
     
     playerList.insert(playerList.begin() + turn + 1, currentPlayer);
+
+    
+    sort(playerList.begin(), playerList.end(), [](Player* a, Player* b) {
+        return a->getUsername() < b->getUsername();
+    });
+    
 }
 bool State::isAddedTypeValid(string &type){
     transform(type.begin(), type.end(), type.begin(), ::tolower); // lowercase

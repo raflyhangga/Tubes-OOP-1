@@ -5,7 +5,7 @@
 CetakLadang::CetakLadang(State& state, MainWindow &window) : Command(state, window) {}
 
 void CetakLadang::execute(Peternak *player) {
-    window.getTabLadang().clear();
+    window.getTabLadang().showError("Hanya petani yang bisa melihat ladang!");
 }
 
 void CetakLadang::execute(Petani *player) {
@@ -13,5 +13,5 @@ void CetakLadang::execute(Petani *player) {
 }
 
 void CetakLadang::execute(Walikota *player) {
-    window.getTabLadang().clear();
+    window.getTabLadang().showError("Hanya petani yang bisa melihat ladang!");
 }

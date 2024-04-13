@@ -8,7 +8,7 @@ TaxReport::TaxReport(string name, string type, int tax){
 string TaxReport::getName() const {
     return name;
 }
-string TaxReport::getType()const {
+string TaxReport::getRole()const {
     return type;
 }
 int TaxReport::getTax() const {

@@ -7,6 +7,7 @@ void Next::execute(Petani *petani) {
     string message = "Giliran dilanjut ke pemain berikutnya.\n";
     petani->addAllPlantAge(state.getTotalPlayer());
     state.nextTurn();
+    Petani::incrementAllPlantAge();
     window.getStatusBar().setPlayer(state.getCurrentPlayer());
 
     message += turnInfo();
@@ -15,6 +16,7 @@ void Next::execute(Petani *petani) {
 void Next::execute(Peternak *peternak) {
     string message = "Giliran dilanjut ke pemain berikutnya.\n";
     state.nextTurn();
+    Petani::incrementAllPlantAge();
     window.getStatusBar().setPlayer(state.getCurrentPlayer());
 
     message += turnInfo();
@@ -23,6 +25,7 @@ void Next::execute(Peternak *peternak) {
 void Next::execute(Walikota *walikota) {
     string message = "Giliran dilanjut ke pemain berikutnya.\n";
     state.nextTurn();
+    Petani::incrementAllPlantAge();
     window.getStatusBar().setPlayer(state.getCurrentPlayer());
 
     message += turnInfo();

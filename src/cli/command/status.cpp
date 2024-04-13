@@ -9,6 +9,10 @@ void Status::execute(Peternak *player) {
     cout << "Role:  Peternak" << endl;
     cout << "Uang:  " << player->getMoney() << endl;
     cout << "Berat: " << player->getWeight() << endl;
+    cout << "=============== [Winning Condition] ==================" << endl;
+    cout << "Berat untuk menang: " << Player::weightToWin << endl;
+    cout << "Uang untuk menang: " << Player::moneyToWin << endl;
+    cout << "======================================================" << endl;
 }
 
 void Status::execute(Petani *player) {
@@ -16,6 +20,10 @@ void Status::execute(Petani *player) {
     cout << "Role:  Petani" << endl;
     cout << "Uang:  " << player->getMoney() << endl;
     cout << "Berat: " << player->getWeight() << endl;
+    cout << "=============== [Winning Condition] ==================" << endl;
+    cout << "Berat untuk menang: " << Player::weightToWin << endl;
+    cout << "Uang untuk menang: " << Player::moneyToWin << endl;
+    cout << "======================================================" << endl;
 }
 
 void Status::execute(Walikota *player) {

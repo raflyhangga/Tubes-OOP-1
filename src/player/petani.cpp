@@ -2,7 +2,10 @@
 #include "tubesoop1/player/walikota.h"
 #include <algorithm>
 
-Petani::Petani(string &_username) : Player(_username) {}
+vector<Petani*> Petani::listPetani;
+Petani::Petani(string &_username) : Player(_username) {
+    listPetani.push_back(this);
+}
 
 void Petani::putLadang(Plant &p)
 {
@@ -23,6 +26,16 @@ void Petani::addAllPlantAge(int age){
     for(Location l : ladang){
         Plant *p = ladang.getElement(l);
         p->addAge(age);
+    }    
+}
+
+void Petani::incrementAllPlantAge(){
+    for(Petani *p : listPetani){
+        Grid<Plant*> ladangtemp = p->getLadang();
+        for(Location l : ladangtemp){
+            Plant *plant = ladangtemp.getElement(l);
+            plant->addAge(1);
+        }
     }
 }
 
