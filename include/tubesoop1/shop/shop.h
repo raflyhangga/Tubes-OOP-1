@@ -75,6 +75,17 @@ class Shop {
         void buy(int idxItem, int quantity);
 
         /**
+         * Membatalkan pembelian dari Player.
+         * Item yang memiliki kuantitas -1 nilainya akan tetap.
+         * Item yang memiliki kuantitas 0 akan melakukan throw ``ItemShopEmptyException()``
+         * 
+         * @param idxItem idx dari resource pada stock Shop
+         * @param quantity banyak item yang ingin dibeli
+         * @note Diasumsikan player bisa membeli seluruh item yang ada di Shop.
+        */
+        void cancelBuy(int idxItem, int quantity);
+
+        /**
          * Menambahi jumlah quantity dari resource yang akan dijual oleh Player.
          * Jika item belum ada di Shop, akan dibuatkan katalog baru.
          * 

@@ -6,6 +6,14 @@
 
 using namespace std;
 
+class BuyingFromShopNotSuccesfullException : public exception {
+    private:
+        string message;
+    public:
+        BuyingFromShopNotSuccesfullException();
+        const char* what() const throw();
+};
+
 class ItemShopNotFoundException : public exception {
     private:
         string message;
