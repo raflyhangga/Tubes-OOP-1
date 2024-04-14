@@ -36,12 +36,10 @@
                 "${workspaceFolder}/src/shop/shop.cpp",
                 "${workspaceFolder}/src/state/state.cpp",
                 "${workspaceFolder}/src/state/state_exception.cpp",
-                "${workspaceFolder}/src/temp/temp.cpp",
                 "${workspaceFolder}/src/cli/command/cetakpenyimpanan.cpp",
                 "${workspaceFolder}/src/cli/command/next.cpp",
                 "${workspaceFolder}/include/tubesoop1/grid/grid.hpp",
                 "${workspaceFolder}/include/tubesoop1/quantifiable/quantifiable.hpp",
-                "${workspaceFolder}/include/tubesoop1/txtparser/txtparser.hpp"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/bin"
