@@ -28,12 +28,10 @@ Tanam::Tanam(State &state, MainWindow &window) : Command(state, window) {}
 void Tanam::execute(Petani *petani) {
     vector<Plant*> list = petani->takeAllFromInventory<Plant>();
     if(list.size()==0){
-        MessageBox(&window, "Tanam", "Tidak ada tanaman di penyimpanan!").exec();
-        return;
+        MessageBox(&window, "Tanam", "Tidak ada tanaman di penyimpanan!").exec(); return;
     }
     if(petani->getLadang().isFull()){
-        MessageBox(&window, "Tanam", "Ladang penuh!").exec();
-        return;
+        MessageBox(&window, "Tanam", "Ladang penuh!").exec(); return;
     }
 
     Dialog dialogInventory(&window);
