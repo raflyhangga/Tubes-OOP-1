@@ -94,6 +94,28 @@ inline bool Quantifiable<T>::operator==(Quantifiable<T> other){
     return value == other.value && quantity == other.quantity;
 }
 
+/**
+ * @brief Check if value is infinite. Quantity is -1 if infinite
+ * 
+ * @param other 
+ * @return true if is infinite
+ */
+template <class T>
+inline bool Quantifiable<T>::isInfinite() const {
+    return quantity == -1;
+}
+
+/**
+ * @brief Check if value is infinite. static version. Quantity is -1 if infinite
+ * 
+ * @param other 
+ * @return true if is infinite
+ */
+template <class T>
+inline bool Quantifiable<T>::isInfinite(Quantifiable<T> q) {
+    return q.quantity == -1;
+}
+
 // Todo: Delete this main function if not needed (only for testing purpose)
 // int main() {
 //     int value = 10;

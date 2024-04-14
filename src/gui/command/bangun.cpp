@@ -19,20 +19,15 @@ void Bangun::execute(Peternak* peternak) {
 }
 
 void Bangun::execute(Walikota* walikota) {
-    // ChoiceDialog dialog = ChoiceDialog(&window, {"Bangunan", "Tanaman"}, "Bangun", "Pilih jenis bangunan yang ingin dibangun", "pilih woi");
-    // dialog.exec();
-
     string headerText = "Resep bangunan yang ada adalah sebagai berikut.";
     auto &recipeMap = state.getRecipeMap();
     QVector<pair<string, string>> choices;
     vector<string> indexedKeys;
     
-    int number = 1;
     for (auto &[key, building]: recipeMap) {
         string info = building->getFormattedBuildingInfo();
         choices.append(pair<string, string>(formatName(key), info));
         indexedKeys.push_back(key);
-        number++;
     }
 
     ChoiceDialog choiceDialog = ChoiceDialog(&window, choices, "Bangun", "Daftar Resep Bangunan", "Pilih jenis bangunan yang ingin dibangun");

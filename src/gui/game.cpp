@@ -13,6 +13,7 @@
 #include "tubesoop1/gui/command/kasihmakan.h"
 #include "tubesoop1/gui/command/panen.h"
 #include "tubesoop1/gui/command/simpan.h"
+#include "tubesoop1/gui/command/beli.h"
 
 Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(gameWindow) {
     refreshAllStatus();
@@ -49,6 +50,9 @@ Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(
     });
     window.simpanButton.connect(&window.simpanButton, &QPushButton::clicked, [this](){
         Simpan c(state, window); execute(&c); refreshAllStatus();
+    });
+    window.beliButton.connect(&window.beliButton, &QPushButton::clicked, [this](){
+        Beli c(state, window); execute(&c); refreshAllStatus();
     });
 
 }

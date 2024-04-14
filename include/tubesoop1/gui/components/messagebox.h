@@ -10,7 +10,6 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMainWindow>
-#include <QCloseEvent>
 #include <QWidget>
 #include <QMessageBox>
 

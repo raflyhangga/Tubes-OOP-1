@@ -63,6 +63,8 @@ class Grid {
 
         vector<Location> getAllFilled();
 
+        bool isElementFilled(Location l);
+
         class Iterator {
             private:
                 const Grid<T>* grid;

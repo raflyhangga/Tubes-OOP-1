@@ -10,6 +10,8 @@
 #include <tubesoop1/state/state.h>
 #include <tubesoop1/gui/command/command.h>
 #include <tubesoop1/gui/components/mainwindow.h>
+#include <QVector>
+#include <utility>
 
 class Beli: public Command {
     private:
@@ -21,13 +23,12 @@ class Beli: public Command {
         void execute(Petani*);
         void execute(Peternak*);
 
-        void playerBuy(Player*, int,int);
-
         bool isBuyable(pair<Quantifiable<Resource*>,bool> pair);
         void validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stok, Player* p,int idxItem,int quantity);
 
-        pair<int,int> welcomeMessage(vector<pair<Quantifiable<Resource*>,bool>>,Player*);
-        void printStocks(vector<pair<Quantifiable<Resource*>,bool>> stock);
+        QVector<pair<string, string>> getChoices(vector<pair<Quantifiable<Resource*>,bool>>&);
+        int promptQuantityToBuy(vector<pair<Quantifiable<Resource*>,bool>> &stockList, Player &player, int choosenIndex);
+        void handleCurrentPlayer(Player* player, vector<pair<Quantifiable<Resource*>,bool>> &stockList);
 };
 
 #endif

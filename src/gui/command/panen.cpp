@@ -40,11 +40,10 @@ void Panen::execute(Petani *petani) {
         CetakLadang(state, window).getInfo(petani->getLadang())
     ));
     vLayout.addWidget(&infoLabel);
-    QLabel panenLocationListLabel; panenLocationListLabel.setText("Pilihan petak untuk dipanen: \n");
+    QLabel panenLocationListLabel;
     vLayout.addWidget(&panenLocationListLabel);
 
     QVector<pair<string, string>> choices;
-    vector<string> indexedKeys;
 
     for(int i = 0; i < allHarvestablePlant->size(); i++) {
         // pop the element if the quantity is 0
@@ -171,11 +170,10 @@ void Panen::execute(Peternak *peternak) {
         CetakPeternakan(state, window).getInfo(peternak->getPeternakan())
     ));
     vLayout.addWidget(&infoLabel);
-    QLabel panenLocationListLabel; panenLocationListLabel.setText("");
+    QLabel panenLocationListLabel;
     vLayout.addWidget(&panenLocationListLabel);
 
     QVector<pair<string, string>> choices;
-    vector<string> indexedKeys;
 
     for(int i = 0; i < allHarvestableAnimal->size(); i++) {
         // pop the element if the quantity is 0

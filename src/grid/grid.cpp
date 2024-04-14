@@ -142,6 +142,14 @@ inline T Grid<T>::operator[](Location l) {
     return getElement(l);
 }
 
+template<class T>
+inline bool Grid<T>::isElementFilled(Location l) {
+    int row = l.getRow(), col = l.getCol();
+    if (row < 0 || row >= element.size() || col < 0 || col >= element[0].size()) {
+        throw out_of_range("Row or column is out of range.");
+    }
+    return isFilled[row][col];
+}
 
 template<class T>
 inline vector<Location> Grid<T>::getAllFilled() {

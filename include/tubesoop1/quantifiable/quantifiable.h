@@ -104,6 +104,15 @@ public:
      * @return true if same
      */
     bool operator==(Quantifiable<T> other);
+
+    /**
+     * @brief Check if value is infinite. static version. Quantity is -1 if infinite
+     * 
+     * @param other 
+     * @return true if is infinite
+     */
+    bool isInfinite() const;
+    static bool isInfinite(Quantifiable<T> q);
 };
 
 #endif
