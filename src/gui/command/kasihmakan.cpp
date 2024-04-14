@@ -100,7 +100,7 @@ void KasihMakan::execute(Peternak* peternak){
 
             peternak->getInventory().pop(loc);
             inventoryButtonGrid.refresh();
-            MessageBox(&window, "Kasih Makan", "Hewan telah diberi makan!\nBeratnya menjadi " + to_string(animal->getWeight()) + ".").exec();
+            MessageBox(&window, "Kasih Makan", animal->getName() + " telah diberi makan!\nBeratnya menjadi " + to_string(animal->getWeight()) + ".").exec();
 
             dialogInventory.close();
         });
