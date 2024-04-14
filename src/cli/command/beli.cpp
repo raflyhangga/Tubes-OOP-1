@@ -65,38 +65,52 @@ void Beli::playerBuy(Player* p, int idxItem,int quantity){
     string line;
     cin.ignore();
     getline(cin, line);
-    vector<Location> ansLoc = inputListLocation(line);
-
-    // Validation not balance with quantity
-    if (ansLoc.size() != quantity)
-    {
-        cout << "Jumlah petak tidak sesuai dengan kuantitas barang yang dibeli" << endl;
-        return;
-    }
-
-    // Try to access inventory location
-    for (Location l : ansLoc)
-    {
-        try
+    try{
+        vector<Location> ansLoc = inputListLocation(line);
+        // Validation not balance with quantity
+        if (ansLoc.size() != quantity)
         {
-            p->getInventory()[l];
+            throw logic_error("Jumlah petak tidak sesuai dengan kuantitas barang yang dibeli");
         }
-        catch (logic_error &e)
+
+        // Try to access inventory location
+        for (Location l : ansLoc)
         {
-            stringstream ss;
-            ss << l;
-            string message = "Petak " + ss.str() + " kosong, tidak bisa dijual.";
-            throw logic_error(message);
+            try
+            {
+                p->getInventory()[l];
+            }
+            catch (logic_error &e)
+            {
+                stringstream ss;
+                ss << l;
+                string message = "Petak " + ss.str() + " kosong, tidak bisa dibeli.";
+                throw logic_error(message);
+            }
         }
+
+        for (Location l : ansLoc)
+        {
+            Resource *r = shop.getstock()[idxItem].getValue();
+            (*p).putInventoryAt(*r, l);
+        }
+
+        cout << shop.getstock()[idxItem].getValue()->getName() << " berhasil disimpan dalam penyimpanan" << endl;
+
+        // Pengurangan uang
+        if(p->getMoney() - shop.getstock()[idxItem].getValue()->getPrice() * quantity < 0) {
+            throw(UangTidakCukupShopException());
+        } 
+        else {
+            p->setMoney(p->getMoney() - shop.getstock()[idxItem].getValue()->getPrice() * quantity);
+        }
+
+    } catch(exception& err){
+        state.cancelBuyShopItem(idxItem,quantity);
+        cout<<err.what()<<endl;
+        throw(BuyingFromShopNotSuccesfullException());
     }
 
-    for (Location l : ansLoc)
-    {
-        Resource *r = shop.getstock()[idxItem].getValue();
-        (*p).putInventoryAt(*r, l);
-    }
-
-    cout << shop.getstock()[idxItem].getValue()->getName() << " berhasil disimpan dalam penyimpanan" << endl;
 }
 
 pair<int,int> Beli::welcomeMessage(vector<pair<Quantifiable<Resource*>,bool>> stock, Player * p){

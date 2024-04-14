@@ -252,6 +252,10 @@ void State::buyShopItem(int idxItem, int quantity){
     shop.buy(idxItem,quantity);
 }
 
+void State::cancelBuyShopItem(int idxItem, int quantity){
+    shop.cancelBuy(idxItem,quantity);
+}
+
 map<string, Building*>& State::getRecipeMap(){
     return factory->getRecipeMap();
 }

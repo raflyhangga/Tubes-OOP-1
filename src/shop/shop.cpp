@@ -95,6 +95,13 @@ void Shop::buy(int idxItem, int quantity){
     }
 }
 
+void Shop::cancelBuy(int idxItem, int quantity){
+    Quantifiable<Resource*>* itemShop = &stock[idxItem];
+    if(itemShop->getQuantity() != -1){
+        *itemShop+=quantity;
+    }
+}
+
 void Shop::sell(Resource& rsc){
     try{
         int idxItem = getItem(rsc);

@@ -1,5 +1,10 @@
 #include "tubesoop1/shop/shop_exception.h"
 
+BuyingFromShopNotSuccesfullException::BuyingFromShopNotSuccesfullException():message("Purchasement failed."){}
+const char* BuyingFromShopNotSuccesfullException::what() const throw(){
+    return message.c_str();
+}
+
 ItemShopNotFoundException::ItemShopNotFoundException():message("Item is not available in shop"){}
 const char* ItemShopNotFoundException::what() const throw(){
     return message.c_str();
