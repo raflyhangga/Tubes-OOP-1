@@ -47,14 +47,11 @@ void Makan::execute(Player* player){
             inventoryButtonGrid.refresh();
             MessageBox(&window, "Makan", "Kenyang gan, berat badan naik " + to_string(food->getAddedWeight()) + " kg jadi " + to_string(player->getWeight())).exec();
             dialogInventory.close();
-        }
-        catch(LocationException& e){
+        } catch (logic_error& e){
             MessageBox(&window, "Makan", "Kamu mengambil harapan kosong dari penyimpanan.\nSilahkan masukan slot yang berisi makanan.").exec();
-        }
-        catch(NotTakableException& e){
+        } catch (NotTakableException& e){
             MessageBox(&window, "Makan", "Apa yang kamu lakukan? Kamu mencoba untuk memakan itu? Silahkan masukan slot yang berisi makanan.").exec();
-        }
-        catch(exception& e){
+        } catch (exception& e){
             MessageBox(&window, "Makan", e.what()).exec();
         }
         

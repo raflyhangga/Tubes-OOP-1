@@ -12,7 +12,6 @@ void Makan::execute(Player* player){
     // TO DO validasi penyimpanan apakah ada makanan/kosong
 
     Grid<Resource*> &inventory = state.getCurrentPlayer()->getInventory();
-    Player* currPlayer = state.getCurrentPlayer();
 
     if(inventory.getCountFilled() == 0){
        throw(EmptyInventoryException());
@@ -37,9 +36,9 @@ void Makan::execute(Player* player){
             
             Product *food = player->takeInventory<Product>(loc);
             
-            currPlayer->eat(*food);
+            player->eat(*food);
             inventory.pop(loc);
-            cout << "Kenyang gan, berat badan naik " << food->getAddedWeight() << " kg jadi " << currPlayer->getWeight() <<  endl;
+            cout << "Kenyang gan, berat badan naik " << food->getAddedWeight() << " kg jadi " << player->getWeight() <<  endl;
             inputNotCorrect = false;
         }
         catch(LocationException& e){
