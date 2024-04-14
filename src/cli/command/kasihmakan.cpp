@@ -5,6 +5,7 @@
 #include "tubesoop1/resourcevisitorpattern/taker.h"
 #include <tubesoop1/resourcevisitorpattern/taker.hpp>
 #include "tubesoop1/grid/location_exception.h"
+#include "tubesoop1/animal/animal_exception.h"
 #include "tubesoop1/resourcevisitorpattern/resourcevisitorpattern_exception.h"
 #include "tubesoop1/player/player_partial.hpp"
 #include "tubesoop1/cli/command/command_exception.h"
@@ -39,6 +40,22 @@ void KasihMakan::execute(Peternak* peternak){
     try{
         cin >> loc;
         Animal *animal = peternakan.getElement(loc);
+
+        // Check if there's no food that can be given to the animal
+        vector<Product*> productList = peternak->takeAllFromInventory<Product>();
+        // If there exist a product that can be given to the animal, then the player can give food to the animal
+        bool canEat = false;
+        for(Product* product : productList){
+            try{
+                animal->eat(*product);
+                animal->setWeight(animal->getWeight() - product->getAddedWeight());
+                canEat = true;
+                break;
+            } catch (CannotEatException &e) {}
+        }
+        if(!canEat){
+            throw NoFoodForAnimalException("Makanan yang bisa diberikan kepada "+animal->getName()+" tidak tersedia!");
+        }
         
 
         cout << "Kamu memilih " << animal->getName() << " untuk diberi makan." << endl;
@@ -61,13 +78,13 @@ void KasihMakan::execute(Peternak* peternak){
         inventory.pop(loc2);
         
     
-    }
-    catch(LocationException &e){
+    } catch (LocationException &e){
         cout << e.what() << endl;
-    }
-    catch(NotTakableException &e){
+    } catch (NotTakableException &e){
         cout << e.what() << endl;
-    }
+    } catch (CannotEatException &e) {
+        cout << e.what() << endl;
+    } 
 
     
     

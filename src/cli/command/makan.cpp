@@ -3,6 +3,7 @@
 #include "tubesoop1/grid/location_exception.h"
 #include "tubesoop1/resourcevisitorpattern/resourcevisitorpattern_exception.h"
 #include "tubesoop1/player/player_partial.hpp"
+#include "tubesoop1/animal/animal_exception.h"
 
 #include <tubesoop1/resourcevisitorpattern/taker.hpp>
 #include "tubesoop1/cli/command/command_exception.h"
@@ -47,6 +48,10 @@ void Makan::execute(Player* player){
         }
         catch(NotTakableException& e){
             cout << e.what() << endl;
+            cout << "Masukkan slot lagi brok." << endl;
+        }
+        catch(CannotEatException& e){
+            cout << "Keras, makanannya ga bisa digigit." << endl;
             cout << "Masukkan slot lagi brok." << endl;
         }
         catch(exception& e){

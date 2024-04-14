@@ -73,4 +73,12 @@ class PeternakanPenuhException: public exception {
         PeternakanPenuhException();
         const char* what() const throw();
 };
+
+class NoFoodForAnimalException: public exception {
+    private:
+        string message;
+    public:
+        NoFoodForAnimalException(string message);
+        const char* what() const throw();
+};
 #endif

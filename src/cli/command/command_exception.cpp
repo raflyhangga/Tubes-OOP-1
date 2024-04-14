@@ -56,3 +56,8 @@ PeternakanPenuhException::PeternakanPenuhException() : message("Peternakan penuh
 const char* PeternakanPenuhException::what() const throw()  {
     return message.c_str();
 }
+
+NoFoodForAnimalException::NoFoodForAnimalException(string message) : message(message){}
+const char* NoFoodForAnimalException::what() const throw()  {
+    return message.c_str();
+}
