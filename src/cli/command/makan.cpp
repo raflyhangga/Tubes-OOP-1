@@ -41,8 +41,8 @@ void Makan::execute(Player* player){
             cout << "Kenyang gan, berat badan naik " << food->getAddedWeight() << " kg jadi " << player->getWeight() <<  endl;
             inputNotCorrect = false;
         }
-        catch(LocationException& e){
-            cout << e.what() << endl;
+        catch(logic_error& e){
+            cout << "Itu slot kosong gan.\n" << endl;
             cout << "Masukkan slot lagi brok." << endl;
         }
         catch(NotTakableException& e){
