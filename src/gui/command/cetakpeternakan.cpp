@@ -26,7 +26,7 @@ string CetakPeternakan::getInfo(Grid<Animal *> &peternakan){
         codesAndNames.insert({animal->getCode(), animal->getName()});
     }
     for (auto &[code, name]: codesAndNames) {
-        info += "- " + code + ": " + name + '\n';
+        info += "- " + code + ": " + formatName(name) + '\n';
     }
     return info;
 }

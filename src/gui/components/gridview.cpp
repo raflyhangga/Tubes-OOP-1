@@ -177,3 +177,9 @@ void GridView<T>::setCheckable(bool checkable){
         ((QPushButton*)button)->setCheckable(checkable);
     }
 }
+
+template <class T>
+void GridView<T>::setButtonChecked(Location location, bool checked){
+    QPushButton *button = buttonList[location.getRow() * grid->getCol() + location.getCol()];
+    button->setChecked(checked);
+}

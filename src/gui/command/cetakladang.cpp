@@ -26,7 +26,7 @@ string CetakLadang::getInfo(Grid<Plant *> &ladang){
     }
 
     for (auto &[code, name]: codesAndNames) {
-        info += "- " + code + ": " + name + '\n';
+        info += "- " + code + ": " + formatName(name) + '\n';
     }
     return info;
 }

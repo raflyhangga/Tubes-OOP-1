@@ -23,7 +23,7 @@ private:
     QLabel errorLabel;
     
     // Just to make sure we can free the memory later.
-    vector<QWidget*> buttonList;
+    vector<QPushButton*> buttonList;
     vector<QHBoxLayout*> hLayoutList; 
     vector<LocationLabel*> labelList;
 public:
@@ -38,6 +38,8 @@ public:
 
     void setEnabled(bool enabled);
     void setCheckable(bool checkable);
+
+    void setButtonChecked(Location location, bool checked);
 };
 
 
