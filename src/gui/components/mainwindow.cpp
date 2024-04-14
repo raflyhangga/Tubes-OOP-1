@@ -53,6 +53,7 @@ void MainWindow::initializeMenu(){
     // Divide 3 section: header, body, footer
     vLayout.addWidget(&headerWidget); headerWidget.setLayout(&headerLayout);
     vLayout.addWidget(&bodyWidget);   bodyWidget.setLayout(&bodyLayout);
+    vLayout.addStretch();
     vLayout.addWidget(&footerWidget); footerWidget.setLayout(&footerLayout);
     vLayout.setSpacing(0);
 
@@ -78,7 +79,7 @@ void MainWindow::initializeMenu(){
     int margin = 5; int spacing = 10;
     tabPerintahLayout.addLayout(&vPendudukLayout, 0, 0);     vPendudukLayout.setContentsMargins(margin, margin, margin, margin); vPendudukLayout.setSpacing(spacing);
     tabPerintahLayout.addLayout(&vWalikotaLayout, 0, 1);     vWalikotaLayout.setContentsMargins(margin, margin, margin, margin); vWalikotaLayout.setSpacing(spacing);
-    tabPerintahLayout.addLayout(&vPlayerLayout, 1, 0, 1, 3); vPlayerLayout.setContentsMargins(margin, margin, margin, margin);   vPlayerLayout.setSpacing(spacing);
+    tabPerintahLayout.addLayout(&vPlayerLayout, 1, 0, 1, 2); vPlayerLayout.setContentsMargins(margin, margin, margin, margin);   vPlayerLayout.setSpacing(spacing);
 
     
     
@@ -100,9 +101,9 @@ void MainWindow::initializeMenu(){
 
     // footer
     footerLayout.addWidget(&helpButton);                
-    footerLayout.addStretch();
+    // footerLayout.addStretch();
     footerLayout.addWidget(&simpanButton);
-    footerLayout.addStretch();
+    // footerLayout.addStretch();
     footerLayout.addWidget(&nextButton);
     
 }
