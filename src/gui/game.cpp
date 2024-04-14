@@ -12,6 +12,7 @@
 #include "tubesoop1/gui/command/makan.h"
 #include "tubesoop1/gui/command/kasihmakan.h"
 #include "tubesoop1/gui/command/panen.h"
+#include "tubesoop1/gui/command/simpan.h"
 
 Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(gameWindow) {
     refreshAllStatus();
@@ -45,6 +46,9 @@ Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(
     });
     window.panenButton.connect(&window.panenButton, &QPushButton::clicked, [this](){
         Panen c(state, window); execute(&c); refreshAllStatus();
+    });
+    window.simpanButton.connect(&window.simpanButton, &QPushButton::clicked, [this](){
+        Simpan c(state, window); execute(&c); refreshAllStatus();
     });
 
 }

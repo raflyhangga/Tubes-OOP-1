@@ -113,7 +113,7 @@ void Panen::execute(Petani *petani) {
                 locationList.push_back(slot);
             }
             // update the label
-            QString locationListText = "Pilihan petak untuk dipanen: \n";
+            QString locationListText = "Pilihan petak untuk dipanen (klik elemen grid di atas): \n";
             for(int i = 0; i < locationList.size(); i++){
                 locationListText += QString::fromStdString("Petak ke-" + to_string(i) + ": " + locationList[i].toStdString()) + "\n";
             }
@@ -171,7 +171,7 @@ void Panen::execute(Peternak *peternak) {
         CetakPeternakan(state, window).getInfo(peternak->getPeternakan())
     ));
     vLayout.addWidget(&infoLabel);
-    QLabel panenLocationListLabel; panenLocationListLabel.setText("Pilihan petak untuk dipanen: \n");
+    QLabel panenLocationListLabel; panenLocationListLabel.setText("");
     vLayout.addWidget(&panenLocationListLabel);
 
     QVector<pair<string, string>> choices;
@@ -244,7 +244,7 @@ void Panen::execute(Peternak *peternak) {
                 locationList.push_back(slot);
             }
             // update the label
-            QString locationListText = "Pilihan petak untuk dipanen: \n";
+            QString locationListText = "Pilihan petak untuk dipanen (klik elemen grid di atas): \n";
             for(int i = 0; i < locationList.size(); i++){
                 locationListText += QString::fromStdString("Petak ke-" + to_string(i) + ": " + locationList[i].toStdString()) + "\n";
             }
