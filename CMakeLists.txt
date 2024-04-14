@@ -53,12 +53,17 @@ set(SOURCES
   src/state/state_exception.cpp 
   src/temp/temp.cpp src/txtparser/txtparser.cpp include/tubesoop1/grid/grid.hpp include/tubesoop1/grid/griddrawer.hpp include/tubesoop1/grid/location_exception.h include/tubesoop1/player/player_partial.hpp include/tubesoop1/quantifiable/quantifiable.hpp include/tubesoop1/resourcevisitorpattern/taker.hpp include/tubesoop1/txtparser/txtparser.hpp
   src/building/building_test.cpp
+  src/building/bangunan_exception.cpp
   src/plant/plant_test.cpp
   src/player/petani_test.cpp
   src/player/peternak_test.cpp
   src/player/walikota_test.cpp
   src/product/product_test.cpp
   src/shop/shop_test.cpp
+  src/quantifiable/quantifiable_test.cpp
+  src/grid/grid_test.cpp
+  src/grid/location_test.cpp
+  src/grid/location_exception.cpp
 )
 
 add_executable(unit_test ${SOURCES})
