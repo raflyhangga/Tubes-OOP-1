@@ -20,6 +20,7 @@ using namespace std;
 class Dialog : public QDialog {
 public:
     Dialog(QWidget* window);
+    void moveCenter();
 };
 
 

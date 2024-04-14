@@ -49,14 +49,14 @@ ResourceFactory::ResourceFactory(string configPath){
         int ageToHarvest, price;
         file >> _ >> kode >> name >> _ >> ageToHarvest >> price;
         vector<Product*> dropsMapValue = dropsMap[name];
-        insert({name, [=](){return new Plant(kode, name, ageToHarvest, price, dropsMapValue);}});
+        insert({name, [=](){return new Plant(kode, name, price, ageToHarvest, dropsMapValue);}});
     }
     for(int i = 0; i < 4; i++) {
         string kode, name;
         int ageToHarvest, price;
         file >> _ >> kode >> name >> _ >> ageToHarvest >> price;
         vector<Product*> dropsMapValue = dropsMap[name];
-        insert({name, [=](){return new Plant(kode, name, ageToHarvest, price, dropsMapValue);}});
+        insert({name, [=](){return new Plant(kode, name, price, ageToHarvest, dropsMapValue);}});
     }
     file.close();
 
@@ -68,21 +68,21 @@ ResourceFactory::ResourceFactory(string configPath){
         int weightToHarvest, price;
         file >> _ >> kode >> name >> _ >> weightToHarvest >> price;
         vector<Product*> dropsMapValue = dropsMap[name];
-        insert({name, [=](){return new Herbivore(kode, name, weightToHarvest, price, dropsMapValue);}});
+        insert({name, [=](){return new Herbivore(kode, name, price, weightToHarvest, dropsMapValue);}});
     }
     for(int i = 0; i < 1; i++) {
         string kode, name;
         int weightToHarvest, price;
         file >> _ >> kode >> name >> _ >> weightToHarvest >> price;
         vector<Product*> dropsMapValue = dropsMap[name];
-        insert({name, [=](){return new Carnivore(kode, name, weightToHarvest, price, dropsMapValue);}});
+        insert({name, [=](){return new Carnivore(kode, name, price, weightToHarvest, dropsMapValue);}});
     }
     for(int i = 0; i < 2; i++) {
         string kode, name;
         int weightToHarvest, price;
         file >> _ >> kode >> name >> _ >> weightToHarvest >> price;
         vector<Product*> dropsMapValue = dropsMap[name];
-        insert({name, [=](){return new Omnivore(kode, name, weightToHarvest, price, dropsMapValue);}});
+        insert({name, [=](){return new Omnivore(kode, name, price, weightToHarvest, dropsMapValue);}});
     }
     file.close();
 

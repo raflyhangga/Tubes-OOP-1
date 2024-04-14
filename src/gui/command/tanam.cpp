@@ -41,7 +41,8 @@ void Tanam::execute(Petani *petani) {
     QVBoxLayout vLayout;
     dialogInventory.setLayout(&vLayout); dialogInventory.setWindowTitle("Tanam");
     QLabel label("Pilih tanaman dari penyimpanan");
-    vLayout.addWidget(&label);
+    QLabel gridTitle("Penyimpanan"); gridTitle.setAlignment(Qt::AlignCenter);
+    vLayout.addWidget(&label); vLayout.addWidget(&gridTitle);
 
     GridView<Resource*> inventoryButtonGrid;
     inventoryButtonGrid.setMinimumSize(QSize(960, 540));
@@ -68,7 +69,8 @@ void Tanam::execute(Petani *petani) {
         QVBoxLayout vLayout;
         dialogLadang.setLayout(&vLayout);
         QLabel label("Pilih lokasi tanah di ladang:");
-        vLayout.addWidget(&label);
+        QLabel gridTitle("Ladang"); gridTitle.setAlignment(Qt::AlignCenter);
+        vLayout.addWidget(&label); vLayout.addWidget(&gridTitle);
 
         GridView<Plant*> ladangButtonGrid;
         ladangButtonGrid.setMinimumSize(QSize(960, 540));
@@ -82,8 +84,7 @@ void Tanam::execute(Petani *petani) {
             try {
                 petani->getLadang().setElement(loc, plant);
             } catch (logic_error &e) {
-                MessageBox(&window, "Tanam", "Petak tanah yang dipilih sudah terisi.\nPerintah gagal dieksekusi.").exec();
-                return;
+                MessageBox(&window, "Tanam", "Petak tanah yang dipilih sudah terisi.\nPerintah gagal dieksekusi.").exec(); return;
             }
 
             // // Berhasil menanam tanaman

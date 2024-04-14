@@ -20,6 +20,8 @@ class CetakPeternakan : public Command { // visitor pattern
         virtual void execute(Peternak*);
         virtual void execute(Walikota*);
 
+        string getInfo(Grid<Animal *> &peternakan);
+
 };
 
 

@@ -7,6 +7,7 @@
 #include <QStringList>
 #include <QString>
 #include <QObject>
+#include <utility>
 
 Bangun::Bangun(State& state, MainWindow& window): Command(state, window) {}
 
@@ -23,13 +24,13 @@ void Bangun::execute(Walikota* walikota) {
 
     string headerText = "Resep bangunan yang ada adalah sebagai berikut.";
     auto &recipeMap = state.getRecipeMap();
-    QVector<QString> choices;
+    QVector<pair<string, string>> choices;
     vector<string> indexedKeys;
     
     int number = 1;
     for (auto &[key, building]: recipeMap) {
         string info = building->getFormattedBuildingInfo();
-        choices.append(QString::fromStdString(to_string(number) + ". " + info));
+        choices.append(pair<string, string>(formatName(key), info));
         indexedKeys.push_back(key);
         number++;
     }

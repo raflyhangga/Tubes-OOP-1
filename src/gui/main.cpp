@@ -14,13 +14,16 @@
 #include <QDialog>
 #include <QFont>
 #include <QFontDatabase>
+#include <QDesktopWidget>
+#include <QApplication>
+#include <QRect>
+#include <QPoint>
 
 #include <tubesoop1/gui/components/nicebutton.h>
 #include <tubesoop1/gui/components/mainwindow.h>
 #include <tubesoop1/gui/components/initdialog.h>
 #include <tubesoop1/gui/game.h>
 #include <tubesoop1/gui/components/Application.h>
-
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -44,6 +47,7 @@ int main(int argc, char *argv[])
 
     InitDialog initDialog(&window, state, factory);
     initDialog.setClosable(false);
+    initDialog.moveCenter();
     initDialog.exec();
 
     window.initializeMenu();
