@@ -1,7 +1,7 @@
 #include "tubesoop1/gui/components/choicedialog.h"
 #include <QMessageBox>
 
-ChoiceDialog::ChoiceDialog(QWidget *parent, const QVector<QString>& choices, const QString& title, const QString& headerText, const QString& footerText)
+ChoiceDialog::ChoiceDialog(QWidget *parent, const QVector<pair<string, string>>& choices, const QString& title, const QString& headerText, const QString& footerText)
     : QDialog(parent)
 {
     int m = 10;
@@ -14,9 +14,8 @@ ChoiceDialog::ChoiceDialog(QWidget *parent, const QVector<QString>& choices, con
     header.setText(headerText);
 
     for(int i = 0; i < choices.size(); ++i) {
-        NiceButton* button = new NiceButton(choices[i].toStdString());
+        DescriptionButton* button = new DescriptionButton(to_string(i+1), choices[i].first, choices[i].second);
         button->setStyleNormalCheckable();
-        button->setStyleSheet(button->styleSheet() + "QPushButton {text-align: left;}");
         choiceButtons.append(button);
         vLayout.addWidget(button);
         connect(button, &QPushButton::clicked, this, &ChoiceDialog::handleChoice);
@@ -29,7 +28,7 @@ ChoiceDialog::ChoiceDialog(QWidget *parent, const QVector<QString>& choices, con
 }
 
 void ChoiceDialog::handleChoice() {
-    QPushButton* senderButton = qobject_cast<QPushButton*>(sender());
+    DescriptionButton* senderButton = qobject_cast<DescriptionButton*>(sender());
     if(!senderButton) return;
 
     int index = choiceButtons.indexOf(senderButton);
@@ -37,3 +36,8 @@ void ChoiceDialog::handleChoice() {
         emit choiceMade(index);
 }
 
+ChoiceDialog::~ChoiceDialog() {
+    for(auto button: choiceButtons) {
+        delete button;
+    }
+}

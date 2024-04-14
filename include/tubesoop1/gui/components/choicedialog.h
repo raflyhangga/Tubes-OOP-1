@@ -16,8 +16,10 @@
 #include <QtCore>
 #include "tubesoop1/gui/components/nicebutton.h"
 #include "tubesoop1/gui/components/mainwindow.h"
+#include "tubesoop1/gui/components/descriptionbutton.h"
 #include "tubesoop1/state/state.h"
 #include "tubesoop1/resource/resourcefactory.h"
+#include <utility>
 
 using namespace std;
 
@@ -28,11 +30,11 @@ private:
 
     QLabel header;
     QLabel footer;
-    QVector<QPushButton*> choiceButtons;
-    QVector<QString> choiceList;
+    QVector<DescriptionButton*> choiceButtons;
 
 public:
-    ChoiceDialog(QWidget* parent, const QVector<QString>& choices, const QString& title, const QString& headerText, const QString& footerText);
+    ChoiceDialog(QWidget* parent, const QVector<pair<string, string>>& choices, const QString& title, const QString& headerText, const QString& footerText);
+    ~ChoiceDialog();
 
 signals:
     void choiceMade(int index);

@@ -30,7 +30,8 @@ void Makan::execute(Player* player){
     QVBoxLayout vLayout;
     dialogInventory.setLayout(&vLayout); dialogInventory.setWindowTitle("Makan");
     QLabel label("Pilih makanan dari penyimpanan");
-    vLayout.addWidget(&label);
+    QLabel gridTitle("Penyimpanan"); gridTitle.setAlignment(Qt::AlignCenter);
+    vLayout.addWidget(&label); vLayout.addWidget(&gridTitle);
 
     GridView<Resource*> inventoryButtonGrid;
     inventoryButtonGrid.setMinimumSize(QSize(960, 540));
@@ -41,19 +42,6 @@ void Makan::execute(Player* player){
     inventoryButtonGrid.connect(&inventoryButtonGrid, &GridView<Resource*>::cellClicked, [this, &player, &dialogInventory, &productList, &inventoryButtonGrid](Location loc) {
         try{
             Product *food = player->takeInventory<Product>(loc);
-            
-            // check if food is edible (one of the products in productList)
-            bool isEdible = false;
-            for(Product* p : productList){
-                if(p == food){
-                    isEdible = true;
-                    break;
-                }
-            }
-            if(!isEdible){
-                MessageBox(&window, "Makan", "Apa yang kamu lakukan? Kamu mencoba untuk memakan itu? Silahkan masukan slot yang berisi makanan.").exec(); return;
-            }
-
             player->eat(*food);
             player->getInventory().pop(loc);
             inventoryButtonGrid.refresh();

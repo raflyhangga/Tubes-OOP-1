@@ -11,23 +11,28 @@ Beli::Beli(State &state) : Command(state), shop(state.getShop()) {
 
 void Beli::printStocks(vector<pair<Quantifiable<Resource*>,bool>> stock){
     int idx = 1;
-    for(pair<Quantifiable<Resource*>,bool> pr: stock){
-        Quantifiable<Resource*> rsc = pr.first;
-        string productName = rsc.getValue()->getName();
-        int productPrice = rsc.getValue()->getPrice();
-        int quantity = rsc.getQuantity();
-        cout<<idx<<". ";
-        cout<<productName;
-        cout<<" - ";
-        cout<< productPrice;
-        // Check if quantity is unlimited or not
-        if(quantity != -1){
-            cout<< "("<<quantity<<")\n";
+    if(stock.size() == 0){
+        cout<<"\n======= STOCK IS EMPTY =======\n";
+        cout<<"Please check your state \n\n";
+    } else {
+        for(pair<Quantifiable<Resource*>,bool> pr: stock){
+            Quantifiable<Resource*> rsc = pr.first;
+            string productName = rsc.getValue()->getName();
+            int productPrice = rsc.getValue()->getPrice();
+            int quantity = rsc.getQuantity();
+            cout<<idx<<". ";
+            cout<<productName;
+            cout<<" - ";
+            cout<< productPrice;
+            // Check if quantity is unlimited or not
+            if(quantity != -1){
+                cout<< "("<<quantity<<")\n";
+            }
+            else {
+                cout<<endl;
+            }
+            idx++;
         }
-        else {
-            cout<<endl;
-        }
-        idx++;
     }
 }
 

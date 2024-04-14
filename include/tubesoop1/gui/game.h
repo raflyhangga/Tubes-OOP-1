@@ -13,6 +13,7 @@ class Game{
         State &state;
         MainWindow &window;
         void execute(Command* command);
+        void refreshAllStatus();
 };
 
 #endif

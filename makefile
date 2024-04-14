@@ -115,7 +115,10 @@ generatemoc:
 	$(info [Generate moc files])
 	@echo -n ">> "
 	moc include/tubesoop1/gui/components/choicedialog.h -o src/gui/components/moc_choicedialog.cpp
+	@echo -n ">> "
 	moc include/tubesoop1/gui/components/gridsignal.h -o src/gui/components/moc_gridsignal.cpp
+	@echo -n ">> "
+	moc include/tubesoop1/gui/components/descriptionbutton.h -o src/gui/components/moc_descriptionbutton.cpp
 
 
 

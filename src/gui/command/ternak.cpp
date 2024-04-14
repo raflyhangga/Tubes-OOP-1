@@ -23,7 +23,8 @@ void Ternak::execute(Peternak *peternak) {
     QVBoxLayout vLayout;
     dialogInventory.setLayout(&vLayout);
     QLabel label("Pilih hewan dari penyimpanan");
-    vLayout.addWidget(&label);
+    QLabel gridTitle("Penyimpanan"); gridTitle.setAlignment(Qt::AlignCenter);
+    vLayout.addWidget(&label); vLayout.addWidget(&gridTitle);
 
     GridView<Resource*> inventoryButtonGrid;
     inventoryButtonGrid.setMinimumSize(QSize(960, 540));
@@ -50,7 +51,8 @@ void Ternak::execute(Peternak *peternak) {
         QVBoxLayout vLayout;
         dialogPeternakan.setLayout(&vLayout);
         QLabel label("Pilih lokasi tanah di peternakan:");
-        vLayout.addWidget(&label);
+        QLabel gridTitle("Peternakan"); gridTitle.setAlignment(Qt::AlignCenter);
+        vLayout.addWidget(&label); vLayout.addWidget(&gridTitle);
 
         GridView<Animal*> peternakanButtonGrid;
         peternakanButtonGrid.setMinimumSize(QSize(960, 540));

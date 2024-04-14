@@ -25,7 +25,9 @@ int Location::getCol() const {
 
 string Location::toStdString() const {
     IcosiHexaString icosiHexaString(second);
-    return icosiHexaString.getString() + to_string(first + 1);
+    string number = to_string(first + 1);
+    if(first + 1 < 10) number = "0" + number;
+    return icosiHexaString.getString() + number;
 }
 
 istream &operator>> (istream &is, Location &location) {

@@ -2,8 +2,10 @@
 #include "tubesoop1/gui/components/messagebox.h"
 #include "tubesoop1/resource/resourcefactory_exception.h"
 #include <QMessageBox>
+#include <QRect>
+#include <QGuiApplication>
 
-InitDialog::InitDialog(QMainWindow* window, State &state, ResourceFactory &factory) : QDialog(window), loadFileStateButton("Load File State"), loadNewStateButton("Load New State"), label(QString::fromStdString("Apakah anda ingin memuat state baru/lama ?")){
+InitDialog::InitDialog(QMainWindow* window, State &state, ResourceFactory &factory) : Dialog(window), loadFileStateButton("Load File State"), loadNewStateButton("Load New State"), label(QString::fromStdString("Apakah anda ingin memuat state baru/lama ?")){
     setWindowFlags(windowFlags() & ~Qt::WindowCloseButtonHint);
     setWindowModality(Qt::ApplicationModal); 
 
@@ -41,7 +43,6 @@ InitDialog::InitDialog(QMainWindow* window, State &state, ResourceFactory &facto
             MessageBox(this, "Success", "State baru berhasil dimuat!").exec();
         }
     });
-
 }
 
 void InitDialog::setClosable(bool closable){

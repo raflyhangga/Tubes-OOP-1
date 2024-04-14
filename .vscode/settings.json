@@ -102,6 +102,8 @@
         "qcombobox": "cpp",
         "qtcore": "cpp",
         "future": "cpp",
-        "qhboxlayout": "cpp"
+        "qhboxlayout": "cpp",
+        "qwidget": "cpp",
+        "qobject": "cpp"
     }
 }
