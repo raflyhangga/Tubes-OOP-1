@@ -56,8 +56,9 @@ void Tanam::execute(Petani *petani) {
         try {
             plant = petani->takeInventory<Plant>(slot);
         } catch (NotTakableException &e) {
-            MessageBox(&window, "Tanam", "Lokasi yang dipilih bukan berisi tanaman.\nPerintah tidak dilanjutkan.").exec();
-            return;
+            MessageBox(&window, "Tanam", "Lokasi yang dipilih bukan berisi tanaman.\nPerintah tidak dilanjutkan.").exec(); return;
+        } catch (logic_error &e) {
+            MessageBox(&window, "Tanam", "Lokasi yang dipilih kosong.\nPerintah tidak dilanjutkan.").exec(); return;
         }
         // // Sukses mengambil tanaman dari penyimpanan
         MessageBox(&window, "Tanam", "Kamu memilih " + formatName(plant->getName()) + " dari penyimpanan.\n\n").exec();

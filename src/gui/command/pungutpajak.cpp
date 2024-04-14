@@ -21,7 +21,7 @@ void PungutPajak::execute(Walikota *walikota) {
     int total = 0;
     for (int i = 0; i < taxReports.size(); i++) {
         total += taxReports[i]->getTax();
-        message += "   " + to_string(i + 1) + ". " + taxReports[i]->getName() + " - " + taxReports[i]->getRole() + " " + to_string(taxReports[i]->getTax()) + "\n";
+        message += "   " + to_string(i + 1) + ". " + taxReports[i]->getName() + " - " + taxReports[i]->getRole() + ": " + to_string(taxReports[i]->getTax()) + "\n";
     }
 
     message += "\nNegara mendapatkan pemasukan sebesar " + to_string(total) + " gulden.\n";

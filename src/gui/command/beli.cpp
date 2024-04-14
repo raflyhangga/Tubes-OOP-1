@@ -142,7 +142,7 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
                 Resource *r = stockList[choosenIndex].first.getValue();
                 string name = r->getName();
                 for(Location l : locationList){
-                    shop.buy(choosenIndex);
+                    shop.buy(choosenIndex, quantityToBuy);
                     Resource *copy = state.translate(name);
                     player->putInventoryAt(*copy, l);
                 }
@@ -159,16 +159,16 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
 }
 
 void Beli::execute(Petani *petani){
-    vector<std::pair<Quantifiable<Resource *>, bool>> stockList = shop.getPetaniStock();
+    vector<std::pair<Quantifiable<Resource *>, bool>> stockList = shop.getStock(petani);
     handleCurrentPlayer(petani, stockList);
 }
 
 void Beli::execute(Peternak *peternak){
-    vector<std::pair<Quantifiable<Resource *>, bool>> stockList = shop.getPeternakStock();
+    vector<std::pair<Quantifiable<Resource *>, bool>> stockList = shop.getStock(peternak);
     handleCurrentPlayer(peternak, stockList);
 }
 
 void Beli::execute(Walikota *walikota){
-    vector<std::pair<Quantifiable<Resource *>, bool>> stockList = shop.getWalikotaStock();
+    vector<std::pair<Quantifiable<Resource *>, bool>> stockList = shop.getStock(walikota);
     handleCurrentPlayer(walikota, stockList);
 }

@@ -91,7 +91,7 @@ int Player::getNetWealth(){
     for(Location l : inventory){
         totalMoney += inventory[l]->getPrice();
     }
-    return totalMoney;
+    return totalMoney + money;
 }
 int Player::getKKP(){
     return getNetWealth() - getKTKP();

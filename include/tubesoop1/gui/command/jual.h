@@ -15,7 +15,7 @@
 class Jual: public Command {
     private:
         /**
-         * @brief get the location from user input. Can be used to validate if any building is choosen by player other than Walikota
+         * @brief if user close the dialog without choosing any location, it will return empty vector. if confirming when no location is chosen, it will stay inside and show a messagebox.
          * 
          * @return vector<Location> 
          */

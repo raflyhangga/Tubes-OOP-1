@@ -55,6 +55,9 @@ void Jual::execute(Walikota* p){
 
 
 void Jual::popAndAddMoneyFromInventory(Player* p, vector<Location>& ansLoc){
+    // this means the player closes the dialog without choosing any location. Not an error, not confirming when no location is chosen.
+    if(ansLoc.size() == 0) return;
+
     Grid<Resource*> &inventory = p->getInventory();
     // pop the resource and add the price
     int addedMoney = 0;
@@ -109,6 +112,9 @@ vector<Location> Jual::promptChoosenLocation(Player *player) {
             else locationListText += QString::fromStdString(", " + locationList[i].toStdString());
         }
         labelBottom.setText(locationListText);
+    });
+    inventoryButtonGrid.connect(&inventoryButtonGrid, &GridView<Resource*>::close, [&](){
+        locationList.clear();
     });
 
     confirmButton.connect(&confirmButton, &NiceButton::clicked, [&](){
