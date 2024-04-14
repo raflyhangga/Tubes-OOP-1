@@ -186,7 +186,7 @@ void State::addPlayer(string type, string name){
     else throw InvalidPlayerTypeException(type);
     
     playerList.insert(playerList.begin() + turn + 1, currentPlayer);
-
+    currentPlayer->setWeight(0);
     
     sort(playerList.begin(), playerList.end(), [](Player* a, Player* b) {
         return a->getUsername() < b->getUsername();
@@ -255,6 +255,18 @@ map<string, Building*>& State::getRecipeMap(){
 Shop& State::getShop() {
     return shop; 
 }
+bool State::tryGetWinningPlayer(Player* player){
+    for(Player* p : playerList){
+        if(p->isWin()){
+            player = p;
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
 
 
 void State::ClassVisitor::execute(Player* player) {

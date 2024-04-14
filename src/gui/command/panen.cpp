@@ -17,6 +17,7 @@ using namespace std;
 
 Panen::Panen(State &state, MainWindow& window) : Command(state, window) {}
 
+// Content of panen has so many difference for Petani and Peternak. So combining parts of the logic into one function is not possible
 void Panen::execute(Petani *petani) {
     vector<Quantifiable<Plant *>>* allHarvestablePlant = petani->getAllHarvestablePlant();
     if(allHarvestablePlant->size() == 0) {

@@ -14,6 +14,7 @@ class Game{
         MainWindow &window;
         void execute(Command* command);
         void refreshAllStatus();
+        void win(Player* winningPlayer);
 };
 
 #endif

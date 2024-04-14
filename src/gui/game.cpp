@@ -14,6 +14,7 @@
 #include "tubesoop1/gui/command/panen.h"
 #include "tubesoop1/gui/command/simpan.h"
 #include "tubesoop1/gui/command/beli.h"
+#include "tubesoop1/gui/command/jual.h"
 
 Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(gameWindow) {
     refreshAllStatus();
@@ -54,6 +55,9 @@ Game::Game(State &gameState, MainWindow &gameWindow) : state(gameState), window(
     window.beliButton.connect(&window.beliButton, &QPushButton::clicked, [this](){
         Beli c(state, window); execute(&c); refreshAllStatus();
     });
+    window.jualButton.connect(&window.jualButton, &QPushButton::clicked, [this](){
+        Jual c(state, window); execute(&c); refreshAllStatus();
+    });
 
 }
 
@@ -66,4 +70,15 @@ void Game::refreshAllStatus() {
     CetakPenyimpanan c2(state, window); execute(&c2);
     CetakPeternakan c3(state, window); execute(&c3);
     CetakLadang c4(state, window); execute(&c4);
+
+    Player* winningPlayer;
+    if(state.tryGetWinningPlayer(winningPlayer)){
+        win(winningPlayer);
+    }
+}
+
+void Game::win(Player* player) {
+    MessageBox(&window, "Game Ended", player->getUsername() + " menang!").exec();
+    Simpan(state, window).execute(player);
+    window.close();
 }

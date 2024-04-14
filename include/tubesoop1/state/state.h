@@ -129,6 +129,11 @@ class State {
         map<string, Building*>& getRecipeMap();
 
         Shop& getShop();
+
+        /**
+         * @brief Get the Winning Player object. If there is no winning player, return false
+         */
+        bool tryGetWinningPlayer(Player* player);
 };
 
 #endif

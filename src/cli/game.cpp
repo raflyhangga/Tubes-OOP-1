@@ -104,8 +104,10 @@ void CLIGame::run() {
             Command *c = choose(command);
             Player* player = state.getCurrentPlayer();
             c->execute(player);
-            if(player->isWin()){
-                win(player);
+
+            Player* winningPlayer;
+            if(state.tryGetWinningPlayer(winningPlayer)){
+                win(winningPlayer);
             }
         } catch (exception &e) {
             cout << e.what() << endl;
