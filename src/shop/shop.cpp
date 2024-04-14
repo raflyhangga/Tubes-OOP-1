@@ -29,7 +29,7 @@ ostream& operator<<(ostream& os,Shop& Shop){
         os<<" - ";
         os<< productPrice;
         // Check if quantity is unlimited or not
-        if(quantity != -1){
+        if(!Quantifiable<Resource*>::isInfinite(rsc)){
             os<< "("<<quantity<<")\n";
         }
         else {
@@ -85,10 +85,10 @@ void Shop::addItem(Quantifiable<Resource*> otherquant){
     }
 }
 
-void Shop::buy(int idxItem){
+void Shop::buy(int idxItem, int quantity){
     Quantifiable<Resource*>* itemShop = &stock[idxItem];
-    if(itemShop->getQuantity() > 0){
-        *itemShop--;
+    if(itemShop->getQuantity() - quantity >= 0){
+        *itemShop-=quantity;
     }
     else if(itemShop->getQuantity() == 0){
         throw(ItemShopEmptyException());
@@ -117,7 +117,7 @@ void Shop::getProducts(){
         cout<<" - ";
         cout<< productPrice;
         // Check if quantity is unlimited or not
-        if(quantity != -1){
+        if(!Quantifiable<Resource*>::isInfinite(rsc)){
             cout<< "("<<quantity<<")\n";
         }
         else {
@@ -127,7 +127,7 @@ void Shop::getProducts(){
     }
 }
 
-vector<pair<Quantifiable<Resource*>,bool>> Shop::getPetaniStock(){
+vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Petani* pl){
     vector<pair<Quantifiable<Resource*>,bool>> temp;
     for(Quantifiable<Resource*> rsc: stock){
         try{
@@ -155,7 +155,7 @@ vector<pair<Quantifiable<Resource*>,bool>> Shop::getPetaniStock(){
     return temp;
 }
 
-vector<pair<Quantifiable<Resource*>,bool>> Shop::getPeternakStock(){
+vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Peternak* pl){
     vector<pair<Quantifiable<Resource*>,bool>> temp;
     for(Quantifiable<Resource*> rsc: stock){
         try{
@@ -183,7 +183,7 @@ vector<pair<Quantifiable<Resource*>,bool>> Shop::getPeternakStock(){
     return temp;
 }
 
-vector<pair<Quantifiable<Resource*>,bool>> Shop::getWalikotaStock(){
+vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Walikota*){
     vector<pair<Quantifiable<Resource*>,bool>> temp;
     for(Quantifiable<Resource*> rsc: stock){
         pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);

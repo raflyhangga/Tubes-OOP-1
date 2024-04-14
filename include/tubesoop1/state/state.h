@@ -124,6 +124,11 @@ class State {
         void addShopItem(Quantifiable<Resource*> item);
 
         /**
+         * @brief Buy an item from a stock
+        */
+        void buyShopItem(int idxItem, int quantity);
+
+        /**
          * @brief get the recipe for buildings
          */
         map<string, Building*>& getRecipeMap();

@@ -69,9 +69,10 @@ class Shop {
          * Item yang memiliki kuantitas 0 akan melakukan throw ``ItemShopEmptyException()``
          * 
          * @param idxItem idx dari resource pada stock Shop
+         * @param quantity banyak item yang ingin dibeli
          * @note Diasumsikan player bisa membeli seluruh item yang ada di Shop.
         */
-        void buy(int idxItem);
+        void buy(int idxItem, int quantity);
 
         /**
          * Menambahi jumlah quantity dari resource yang akan dijual oleh Player.
@@ -92,21 +93,21 @@ class Shop {
          * 
          * @return ``vector<pair<Quantifiable<Resource*>,bool>>`` stok petani dengan bool apakah item bisa dibeli atau tidak
         */
-        vector<pair<Quantifiable<Resource*>,bool>> getPetaniStock();
+        vector<pair<Quantifiable<Resource*>,bool>> getStock(Petani*);
 
         /**
          * Mengembalikan stock yang dapat dibeli oleh peternak
          * 
          * @return ``vector<pair<Quantifiable<Resource*>,bool>>`` stok peternak dengan bool apakah item bisa dibeli atau tidak
         */
-        vector<pair<Quantifiable<Resource*>,bool>> getPeternakStock();
+        vector<pair<Quantifiable<Resource*>,bool>> getStock(Peternak*);
 
         /**
          * Mengembalikan stock yang dapat dibeli oleh walikota
          * 
          * @return ``vector<pair<Quantifiable<Resource*>,bool>>`` stok walikota dengan bool apakah item bisa dibeli atau tidak
         */
-        vector<pair<Quantifiable<Resource*>,bool>> getWalikotaStock();
+        vector<pair<Quantifiable<Resource*>,bool>> getStock(Walikota*);
 
 };
 

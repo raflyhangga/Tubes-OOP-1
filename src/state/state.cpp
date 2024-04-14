@@ -248,6 +248,10 @@ void State::addShopItem(Quantifiable<Resource*> item){
     shop.addItem(item);
 }
 
+void State::buyShopItem(int idxItem, int quantity){
+    shop.buy(idxItem,quantity);
+}
+
 map<string, Building*>& State::getRecipeMap(){
     return factory->getRecipeMap();
 }

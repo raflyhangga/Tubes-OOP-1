@@ -25,7 +25,7 @@ void Beli::printStocks(vector<pair<Quantifiable<Resource*>,bool>> stock){
             cout<<" - ";
             cout<< productPrice;
             // Check if quantity is unlimited or not
-            if(quantity != -1){
+            if(!Quantifiable<Resource*>::isInfinite(rsc)){
                 cout<< "("<<quantity<<")\n";
             }
             else {
@@ -41,7 +41,7 @@ bool Beli::isBuyable(pair<Quantifiable<Resource*>,bool> pair){
 }
 
 void Beli::playerBuy(Player* p, int idxItem,int quantity){
-    shop.buy(idxItem);
+    state.buyShopItem(idxItem,quantity);
 
     // Decrement money
     p->setMoney(p->getMoney() - shop.getstock()[idxItem].getValue()->getPrice() * quantity);
@@ -130,7 +130,7 @@ pair<int,int> Beli::welcomeMessage(vector<pair<Quantifiable<Resource*>,bool>> st
 
 void Beli::validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stock, Player* p,int idxItem,int quantity){
     // input index item 0 or negative
-    if (idxItem < 1 || idxItem > shop.getstock().size())
+    if (idxItem < 0 || idxItem > shop.getstock().size())
     {
         throw (BeliOutOfRange());
     }
@@ -147,7 +147,7 @@ void Beli::validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stock, Pl
 }
 
 void Beli::execute(Petani *p){
-    vector<pair<Quantifiable<Resource*>,bool>> stock = shop.getPetaniStock();
+    vector<pair<Quantifiable<Resource*>,bool>> stock = shop.getStock(p);
 
     pair<int,int> choice = welcomeMessage(stock,p);
     int idxItem = choice.first - 1;
@@ -155,13 +155,13 @@ void Beli::execute(Petani *p){
 
     validityChecking(stock,p,idxItem,quantity);
     if(!isBuyable(stock[idxItem])){
-        throw(PetaniException());
+        throw(PetaniShopException());
     }
     playerBuy(p,idxItem,quantity);
 }
 
 void Beli::execute(Peternak *p){
-    vector<pair<Quantifiable<Resource*>,bool>> stock = shop.getPeternakStock();
+    vector<pair<Quantifiable<Resource*>,bool>> stock = shop.getStock(p);
 
     pair<int,int> choice = welcomeMessage(stock,p);
     int idxItem = choice.first - 1;
@@ -169,13 +169,13 @@ void Beli::execute(Peternak *p){
 
     validityChecking(stock,p,idxItem,quantity);
     if(!isBuyable(stock[idxItem])){
-        throw(PeternakException());
+        throw(PeternakShopException());
     }
     playerBuy(p,idxItem,quantity);
 }
 
 void Beli::execute(Walikota *p){
-    vector<pair<Quantifiable<Resource*>,bool>> stock = shop.getWalikotaStock();
+    vector<pair<Quantifiable<Resource*>,bool>> stock = shop.getStock(p);
 
     pair<int,int> choice = welcomeMessage(stock,p);
     int idxItem = choice.first - 1;
@@ -183,7 +183,7 @@ void Beli::execute(Walikota *p){
 
     validityChecking(stock,p,idxItem,quantity);
     if(!isBuyable(stock[idxItem])){
-        throw(WalikotaException());
+        throw(WalikotaShopException());
     }
     playerBuy(p,idxItem,quantity);
 }

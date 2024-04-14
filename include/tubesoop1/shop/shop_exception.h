@@ -2,54 +2,64 @@
 #define EXCEPTION_H
 
 #include <exception>
+#include <string>
+
+using namespace std;
 
 class ItemShopNotFoundException : public exception {
-public:
-    const char *what() const throw() override {
-        return "Item is not available in shop";
-    }
+    private:
+        string message;
+    public:
+        ItemShopNotFoundException();
+        const char* what() const throw();
 };
 
 class ItemShopNotEqualException : public exception {
-public:
-    const char *what() const throw() override {
-        return "Both Item is not equal";
-    }
+    private:
+        string message;
+    public:
+        ItemShopNotEqualException();
+        const char* what() const throw();
 };
 
 class ItemShopEmptyException : public exception {
-public:
-    const char *what() const throw() override {
-        return "Stock is empty";
-    }
+    private:
+        string message;
+    public:
+        ItemShopEmptyException();
+        const char *what() const throw();
 };
 
-class UangTidakCukupException : public exception {
-public:
-    const char *what() const throw() override {
-        return "Insufficient balance";
-    }
+class UangTidakCukupShopException : public exception {
+    private:
+        string message;
+    public:
+        UangTidakCukupShopException();
+        const char *what() const throw();
 };
 
-class PetaniException : public exception {
-public:
-    const char *what() const throw() override {
-        return "Farmer Role can't buy this item";
-    }
+class PetaniShopException : public exception {
+    private:
+        string message;
+    public:
+        PetaniShopException();
+        const char *what() const throw();
 };
 
-class PeternakException : public exception {
-public:
-    const char *what() const throw() override {
-        return "Rancher Role can't buy this item";
-    }
+class PeternakShopException : public exception {
+    private:
+        string message;
+    public:
+        PeternakShopException();
+        const char *what() const throw();
 };
 
-class WalikotaException : public exception {
-public:
-    const char *what() const throw() override {
-        return "Mayor can't buy this item";
-    }
+class WalikotaShopException : public exception {
+    private:
+        string message;
+    public:
+        WalikotaShopException();
+        const char *what() const throw();
 };
 
 #endif
