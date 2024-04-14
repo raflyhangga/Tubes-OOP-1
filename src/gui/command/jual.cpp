@@ -70,7 +70,6 @@ void Jual::popAndAddMoneyFromInventory(Player* p, vector<Location>& ansLoc){
 
 vector<Location> Jual::promptChoosenLocation(Player *player) {
     Dialog dialogInventory(&window);
-
     QVBoxLayout vLayout;
     dialogInventory.setLayout(&vLayout); dialogInventory.setWindowTitle("Jual");
     QLabel label("Berikut merupakan penyimpanan Anda");
@@ -116,6 +115,7 @@ vector<Location> Jual::promptChoosenLocation(Player *player) {
         if(locationList.size() == 0){
             MessageBox(&dialogInventory, "Jual", "Anda belum memilih petak untuk dijual!").exec(); return;
         }
+        inventoryButtonGrid.refresh();
         dialogInventory.accept();
     });
 

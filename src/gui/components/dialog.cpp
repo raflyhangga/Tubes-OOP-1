@@ -7,6 +7,8 @@
 Dialog::Dialog(QWidget* parent) : QDialog(parent){
     setWindowModality(Qt::ApplicationModal); 
     setModal(true);
+    int m = 10;
+    setContentsMargins(m, m, m, m);
     setStyleSheet(R"(
         QDialog {
             background-color: rgb(2, 6, 23);

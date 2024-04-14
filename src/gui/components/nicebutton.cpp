@@ -34,12 +34,17 @@ void NiceButton::setStyleNormal(){
         QPushButton:checked {
             background-color: rgb(101, 43, 192);
             color: white;
-            border: 1px solid rgb(149, 102, 250);
+            border: 3px solid rgb(196, 181, 253);
         }
         QPushButton:pressed:checked {
             background-color: rgb(76, 29, 149);
             color: white;
-            border: 1px solid rgb(149, 102, 250);
+            border: 3px solid rgb(196, 181, 253);
+        }
+        QPushButton:hover:checked {
+            background-color: rgb(124, 58, 237);
+            color: white;
+            border: 3px solid rgb(196, 181, 253);
         }
     )");
 }
@@ -68,12 +73,12 @@ void NiceButton::setStyleSuccess(){
         }
         QPushButton:checked {
             color: white;
-            border: 2px solid rgb(220, 252, 231);
+            border: 3px solid rgb(220, 252, 231);
         }
         QPushButton:pressed:checked {
             background-color: rgb(22, 163, 74);
             color: white;
-            border: 2px solid rgb(220, 252, 231);
+            border: 3px solid rgb(220, 252, 231);
         }
     )");
 }
@@ -102,12 +107,12 @@ void NiceButton::setStyleFailed(){
         }
         QPushButton:checked {
             color: white;
-            border: 2px solid rgb(254, 205, 211);
+            border: 3px solid rgb(254, 205, 211);
         }
         QPushButton:checked {
             background-color: rgb(159, 18, 57);
             color: white;
-            border: 2px solid rgb(254, 205, 211);
+            border: 3px solid rgb(254, 205, 211);
         }
     )");
 }
