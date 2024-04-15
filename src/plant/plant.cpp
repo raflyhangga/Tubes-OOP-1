@@ -54,6 +54,7 @@ ostream &operator<<(ostream &os, const Plant &p)
             print_red(c);
         }
     }
+    return os;
 }
 
 void Plant::taken(TakerVisitor* t){
