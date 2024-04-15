@@ -268,13 +268,8 @@ int State::getTurn(){
     return turn;
 }
 
-
 void State::addShopItem(Quantifiable<Resource*> item){
     shop.addItem(item);
-}
-
-void State::cancelBuyShopItem(int idxItem, int quantity){
-    shop.cancelBuy(idxItem,quantity);
 }
 
 map<string, Building*>& State::getRecipeMap(){

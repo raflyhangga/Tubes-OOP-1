@@ -89,66 +89,43 @@ void Shop::addItem(Quantifiable<Resource*> otherquant){
 
 void Shop::buy(Walikota* pl,int idxItem, int quantity){
     Quantifiable<Resource*>* itemShop = &stock[idxItem];
-    if (idxItem < 0 || idxItem > stock.size() - 1)
-    {
-        throw (BeliOutOfRange());
-    }
-    if(!isBuyable(getStock(pl)[idxItem])){
+    if(!getStock(pl)[idxItem].second){
         throw(WalikotaShopException());
     }
-    if(pl->getInventory().getCountNotFilled() < quantity){
-        throw(PenyimpananTidakCukup());
-    }
-    if(itemShop->getQuantity() - quantity >= 0){
-        *itemShop-=quantity;
-    }
-    else{
-        throw(StockTidakCukupShopException());
-    }
+    buyValidator(pl,idxItem,quantity);
+    *itemShop-=quantity;
 }
 
 void Shop::buy(Petani* pl,int idxItem, int quantity){
     Quantifiable<Resource*>* itemShop = &stock[idxItem];
-    if (idxItem < 0 || idxItem > stock.size() - 1)
-    {
-        throw (BeliOutOfRange());
-    }
-    if(!isBuyable(getStock(pl)[idxItem])){
+    if(!getStock(pl)[idxItem].second){
         throw(PetaniShopException());
     }
-    if(pl->getInventory().getCountNotFilled() < quantity){
-        throw(PenyimpananTidakCukup());
-    }
-    if(itemShop->getQuantity() - quantity >= 0){
-        *itemShop-=quantity;
-    }
-    else{
-        throw(StockTidakCukupShopException());
-    }
+    buyValidator(pl,idxItem,quantity);
+    *itemShop-=quantity;
 }
 
 void Shop::buy(Peternak* pl,int idxItem, int quantity){
+    Quantifiable<Resource*>* itemShop = &stock[idxItem];
+    if(!getStock(pl)[idxItem].second){
+        throw(PeternakShopException());
+    }
+    buyValidator(pl,idxItem,quantity);
+    *itemShop-=quantity;
+}
+
+void Shop::buyValidator(Player*pl,int idxItem,int quantity){
     Quantifiable<Resource*>* itemShop = &stock[idxItem];
     if (idxItem < 0 || idxItem > stock.size() - 1)
     {
         throw (BeliOutOfRange());
     }
-    if(!isBuyable(getStock(pl)[idxItem])){
-        throw(PeternakShopException());
-    }
     if(pl->getInventory().getCountNotFilled() < quantity){
         throw(PenyimpananTidakCukup());
     }
-    if(itemShop->getQuantity() - quantity >= 0){
-        *itemShop-=quantity;
-    }
-    else{
+    if(itemShop->getQuantity() - quantity < 0){
         throw(StockTidakCukupShopException());
     }
-}
-
-bool Shop::isBuyable(pair<Quantifiable<Resource*>,bool> pair){
-    return pair.second;
 }
 
 void Shop::cancelBuy(int idxItem, int quantity){

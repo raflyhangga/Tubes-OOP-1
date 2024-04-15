@@ -102,9 +102,11 @@ class Shop {
         /**
          * Mengecek apakah item bisa dibeli
          * 
-         * @param pair item beserta status pembeliannya
+         * @param pl player yang akan dicek
+         * @param idx index dari katalog yang akan dibeli
+         * @param quantity banyaknya barang yang akan dibeli
         */
-        static bool isBuyable(pair<Quantifiable<Resource*>,bool> pair);
+        void buyValidator(Player*pl,int idx,int quantity);
 
         /**
          * Membatalkan pembelian dari Player.

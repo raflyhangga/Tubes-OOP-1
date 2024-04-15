@@ -122,7 +122,7 @@ void Beli::paymentProcessor(int idxItem, int quantity, Player* p){
 
     } catch(exception& err){
         cout<<err.what()<<endl;
-        state.cancelBuyShopItem(idxItem,quantity);
+        shop.cancelBuy(idxItem,quantity);
         p->setMoney(p->getMoney() + shop.getstock()[idxItem].getValue()->getPrice() * quantity);
         cout<<"Money has been returned succesfully!\n";
         throw(BuyingFromShopNotSuccesfullException());
