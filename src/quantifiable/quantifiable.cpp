@@ -4,12 +4,8 @@
 // Constructor implementation with validation
 template <class T>
 inline Quantifiable<T>::Quantifiable(T& val, int qty) : value(val) {
-    if (qty >= 0) {
         value = val;
         quantity = qty;
-    } else {
-        throw invalid_argument("Quantity cannot be negative.");
-    }
 }
 
 // Set quantity implementation with validation

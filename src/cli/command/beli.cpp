@@ -1,6 +1,4 @@
 #include <tubesoop1/cli/command/beli.h>
-#include <tubesoop1/cli/command/cetakpenyimpanan.h>
-#include <tubesoop1/shop/shop_exception.h>
 #include <limits>
 
 using namespace std;
@@ -9,29 +7,68 @@ Beli::Beli(State &state) : Command(state), shop(state.getShop()) {
     
 }
 
+int Beli::pageSize(vector<pair<Quantifiable<Resource*>,bool>> stock, int currentPos){
+    return (stock.size() - currentPos * 5) >= 5? 5 : stock.size() - currentPos * 5;
+}
+
 void Beli::printStocks(vector<pair<Quantifiable<Resource*>,bool>> stock){
-    int idx = 1;
     if(stock.size() == 0){
-        cout<<"\n======= STOCK IS EMPTY =======\n";
-        cout<<"Please check your state \n\n";
-    } else {
-        for(pair<Quantifiable<Resource*>,bool> pr: stock){
-            Quantifiable<Resource*> rsc = pr.first;
-            string productName = rsc.getValue()->getName();
-            int productPrice = rsc.getValue()->getPrice();
-            int quantity = rsc.getQuantity();
-            cout<<idx<<". ";
-            cout<<productName;
-            cout<<" - ";
-            cout<< productPrice;
-            // Check if quantity is unlimited or not
-            if(!Quantifiable<Resource*>::isInfinite(rsc)){
-                cout<< "("<<quantity<<")\n";
+        cout<<"\n============= SHOP =============\n";
+        cout<<"\n!!!! STOCK KOSONG !!!!\n\n";
+        throw(ItemShopEmptyException());
+    } 
+    else {
+        int pages = stock.size() / 5;
+        int currentPos = 0;
+        string choice;
+        while (true){
+            cout<<"\n============= SHOP =============\n";
+            cout << "Selamat datang di toko!!" << endl;
+            cout << "Berikut merupakan hal yang dapat Anda Beli" << endl;
+            cout<<"-> Pages "<<currentPos+1<<" out of "<<pages<<"\n";
+            for(int i=0; i<pageSize(stock,currentPos);i++){
+                int dispIdx = i + (currentPos*5) + 1;
+                Quantifiable<Resource*> rsc = stock[dispIdx - 1].first;
+                string productName = rsc.getValue()->getName();
+                int productPrice = rsc.getValue()->getPrice();
+                int quantity = rsc.getQuantity();
+                cout<<dispIdx<<". ";
+                cout<<productName;
+                cout<<" - ";
+                cout<< productPrice;
+
+                // Check if quantity is unlimited or not
+                if(!Quantifiable<Resource*>::isInfinite(rsc)){
+                    cout<< "("<<quantity<<")\n";
+                }
+                else {
+                    cout<<endl;
+                }
             }
-            else {
-                cout<<endl;
+
+            cout<<"Beli apa hari ini? (PREV/BUY/NEXT)\n";
+            cout<<"> ";
+            while(!(cin >> choice)){
+                cout << "Invalid input type, try again\n";
+                cout<<"> ";
             }
-            idx++;
+
+            transform(choice.begin(),choice.end(),choice.begin(),::toupper);
+
+            if(choice == "BUY"){
+                break;
+            }
+            else if(choice == "NEXT"){
+                currentPos = (currentPos + 1) % pages;
+                clearScreen();
+            }
+            else if(choice == "PREV"){
+                currentPos = ((currentPos - 1) + pages) % pages;
+                clearScreen();
+            }
+            else{
+                cout<< "Input tidak valid, silahkan ulangi!";
+            }
         }
     }
 }
@@ -43,11 +80,8 @@ bool Beli::isBuyable(pair<Quantifiable<Resource*>,bool> pair){
 void Beli::playerBuy(Player* p, int idxItem,int quantity){
     state.buyShopItem(idxItem,quantity);
 
-    // Decrement money
-    p->setMoney(p->getMoney() - shop.getstock()[idxItem].getValue()->getPrice() * quantity);
-
     // Success payment message
-    cout << "Selamat Anda berhasil membeli " 
+    cout << "\nSelamat Anda berhasil membeli " 
     << quantity 
     << " " 
     << shop.getstock()[idxItem].getValue()->getName();
@@ -57,7 +91,7 @@ void Beli::playerBuy(Player* p, int idxItem,int quantity){
     << endl;
 
     // Allocation item to inventory
-    cout << "Pilih slot untuk menyimpan barang yang Anda beli!" << endl;
+    cout << "Pilih slot untuk menyimpan barang yang Anda beli!\n" << endl;
     CetakPenyimpanan(state).print(p->getInventory());
     cout << "Petak : ";
 
@@ -71,22 +105,6 @@ void Beli::playerBuy(Player* p, int idxItem,int quantity){
         if (ansLoc.size() != quantity)
         {
             throw logic_error("Jumlah petak tidak sesuai dengan kuantitas barang yang dibeli");
-        }
-
-        // Try to access inventory location
-        for (Location l : ansLoc)
-        {
-            try
-            {
-                p->getInventory()[l];
-            }
-            catch (logic_error &e)
-            {
-                stringstream ss;
-                ss << l;
-                string message = "Petak " + ss.str() + " kosong, tidak bisa dibeli.";
-                throw logic_error(message);
-            }
         }
 
         for (Location l : ansLoc)
@@ -106,19 +124,22 @@ void Beli::playerBuy(Player* p, int idxItem,int quantity){
         }
 
     } catch(exception& err){
-        state.cancelBuyShopItem(idxItem,quantity);
         cout<<err.what()<<endl;
+        state.cancelBuyShopItem(idxItem,quantity);
+        p->setMoney(p->getMoney() + shop.getstock()[idxItem].getValue()->getPrice() * quantity);
+        cout<<"Money has been returned succesfully!\n";
         throw(BuyingFromShopNotSuccesfullException());
     }
 
 }
 
 pair<int,int> Beli::welcomeMessage(vector<pair<Quantifiable<Resource*>,bool>> stock, Player * p){
-    cout << "Selamat datang di toko!!" << endl;
-    cout << "Berikut merupakan hal yang dapat Anda Beli" << endl;
+    clearScreen();
     printStocks(stock);
+    cout << "++++++++++++++++++++++++++++++++++\n";
     cout << "Uang Anda : " << p->getMoney() << endl;
     cout << "Slot penyimpanan tersedia : " << p->getInventory().getCountNotFilled() << endl;
+    cout << "++++++++++++++++++++++++++++++++++\n\n";
 
     // Input Section
     int idxItem;
@@ -142,6 +163,10 @@ pair<int,int> Beli::welcomeMessage(vector<pair<Quantifiable<Resource*>,bool>> st
     return temp;
 }
 
+void Beli::clearScreen(){
+    cout << "\033[2J\033[1;1H"; 
+}
+
 void Beli::validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stock, Player* p,int idxItem,int quantity){
     // input index item 0 or negative
     if (idxItem < 0 || idxItem > shop.getstock().size())
@@ -149,9 +174,11 @@ void Beli::validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stock, Pl
         throw (BeliOutOfRange());
     }
     // input quantity more than stock
-    if (quantity > shop.getstock()[idxItem].getQuantity())
-    {
-        throw(BarangTidakCukup());
+    if (shop.getstock()[idxItem].getQuantity() != -1){
+        if (quantity > shop.getstock()[idxItem].getQuantity())
+        {
+            throw(BarangTidakCukup());
+        }
     }
     // player money less than price
     if (p->getMoney() < shop.getstock()[idxItem].getValue()->getPrice() * quantity)

@@ -161,3 +161,12 @@ ResourceFactory::~ResourceFactory() {
 map<string, Building*>& ResourceFactory::getRecipeMap(){
     return recipeMap;
 }
+
+vector<Resource*> ResourceFactory::getResources(){
+    vector<Resource*> temp;
+    for(auto itr = this->begin(); itr != this->end();itr++){
+        temp.push_back(itr->second());
+    }
+
+    return temp;
+}

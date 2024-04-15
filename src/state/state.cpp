@@ -27,6 +27,11 @@ void State::loadNew(ResourceFactory &factory){
     playerList.push_back(peternak1);
     playerList.push_back(walikota);
 
+    for(Resource* rsc:factory.getResources()){
+        Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, -1);
+        shop.addItem(qr);
+    }
+
     sort(playerList.begin(), playerList.end(), [](Player* a, Player* b) {
         return a->getUsername() < b->getUsername();
     });
@@ -87,6 +92,7 @@ void State::load(string statePath, ResourceFactory &factory){
                 animal->setWeight(weight);
                 ((Peternak*)currentPlayer)->putPeternakanAt(*animal, location);
             }
+
         }
 
         this->playerList.push_back(currentPlayer);
@@ -94,12 +100,18 @@ void State::load(string statePath, ResourceFactory &factory){
 
     int shopStockCount;
     file >> shopStockCount;
+    // For Limited Stock
     for(int i = 0; i < shopStockCount; i++) {
         string itemName;
         int itemAmount;
         file >> itemName >> itemAmount;
         Resource *r = factory.translate(itemName);
         Quantifiable<Resource*> qr = Quantifiable<Resource*>(r, itemAmount);
+        shop.addItem(qr);
+    }
+
+    for(Resource* rsc:factory.getResources()){
+        Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, -1);
         shop.addItem(qr);
     }
 

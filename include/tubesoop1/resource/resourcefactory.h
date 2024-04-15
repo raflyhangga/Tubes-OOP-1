@@ -49,6 +49,11 @@ class ResourceFactory : map<string, function<Resource*()>>{
         */
         map<string, Building*>& getRecipeMap();
 
+        /**
+         * Get the ResourceFactory begin iterator
+        */
+        vector<Resource*> getResources();
+
         friend ostream& operator<<(ostream& os, const ResourceFactory& factory);
 };
 
