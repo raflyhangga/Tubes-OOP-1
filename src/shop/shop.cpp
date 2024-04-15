@@ -113,6 +113,9 @@ void Shop::buy(Petani* pl,int idxItem, int quantity){
     if(!isBuyable(getStock(pl)[idxItem])){
         throw(PetaniShopException());
     }
+    if(pl->getInventory().getCountNotFilled() < quantity){
+        throw(PenyimpananTidakCukup());
+    }
     if(itemShop->getQuantity() - quantity >= 0){
         *itemShop-=quantity;
     }

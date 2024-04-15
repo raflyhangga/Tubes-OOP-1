@@ -2,6 +2,9 @@
 #define Shop_H
 #include "tubesoop1/quantifiable/quantifiable.hpp"
 #include "tubesoop1/player/player.h"
+#include "tubesoop1/player/petani.h"
+#include "tubesoop1/player/walikota.h"
+#include "tubesoop1/player/peternak.h"
 #include "tubesoop1/resource/resource.h"
 #include "tubesoop1/shop/shop_exception.h"
 #include "tubesoop1/cli/command/beli_exception.h"

@@ -85,6 +85,7 @@ void Beli::paymentProcessor(int idxItem, int quantity, Player* p){
     << " gulden." 
     << endl;
 
+
     // Allocation item to inventory
     cout << "Pilih slot untuk menyimpan barang yang Anda beli!\n" << endl;
     CetakPenyimpanan(state).print(p->getInventory());
