@@ -81,4 +81,20 @@ class NoFoodForAnimalException: public exception {
         NoFoodForAnimalException(string message);
         const char* what() const throw();
 };
+
+class NoHarvestablePlantException : public exception {
+    private:
+        string message;
+    public:
+        NoHarvestablePlantException();
+        const char* what() const throw();
+};
+
+class NoHarvestableAnimalException : public exception {
+    private:
+        string message;
+    public:
+        NoHarvestableAnimalException();
+        const char* what() const throw();
+};
 #endif

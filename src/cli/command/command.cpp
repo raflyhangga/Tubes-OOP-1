@@ -34,3 +34,15 @@ vector<Location> Command::inputListLocation(const string &line) {
 
     return result;
 }
+
+int Command::stringToInt(const string& str) {
+    for (size_t i = 0; i < str.size(); i++) {
+        if (i == 0 && str[i] == '-' && str.size() != 1) {
+            continue;
+        }
+        if (!isdigit(str[i])) {
+            throw invalid_argument("Input is not a number!");
+        }
+    }
+    return stoi(str);
+}

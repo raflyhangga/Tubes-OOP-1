@@ -16,7 +16,7 @@ class Command : public CommanderVisitor { // visitor pattern
         vector<Location> inputListLocation(const string &line);
     public:
         Command(State&);
-
+        int stringToInt(const string& str);
         // visitor pattern
         virtual void execute(Player*);
         virtual void execute(Petani*);
