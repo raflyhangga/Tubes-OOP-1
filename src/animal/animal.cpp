@@ -1,4 +1,5 @@
 #include "tubesoop1/animal/animal.h"
+#include <tubesoop1/cli/pcolor.h>
 
 Animal::Animal(string code, string name, int price, int weightToHarvest, vector<Product*> drops): Creature(code,name,price,drops)
 {
@@ -32,9 +33,15 @@ void Animal::eat(EatenElement &p)
 
 ostream &operator<<(ostream &os, const Animal &a)
 {
-    if(a.isHarvestable()) os << "\033[1;32m";
-    else os << "\033[1;31m";
-    os << a.getCode() << "\033[0m";
+    if(a.isHarvestable()) {
+        for (auto &c: a.getCode()) {
+            print_green(c);
+        }
+    } else {
+        for (auto &c: a.getCode()) {
+            print_red(c);
+        }
+    }
     return os;
 }
 
