@@ -11,7 +11,7 @@ DescriptionButton::DescriptionButton(string number, string title, string descrip
 
     setMinimumSize(QSize(520, 65));
 
-    numberLabel.setText(QString::fromStdString(number));
+    numberLabel.setText(QString::fromStdString(number)); numberLabel.setFixedWidth(35);
     titleLabel.setText(QString::fromStdString(title));
     descriptionLabel.setText(QString::fromStdString(description));
 
@@ -59,3 +59,8 @@ DescriptionButton::DescriptionButton(string number, string title, string descrip
     )");
 }
 
+void DescriptionButton::setText(string number, string title, string description) {
+    numberLabel.setText(QString::fromStdString(number));
+    titleLabel.setText(QString::fromStdString(title));
+    descriptionLabel.setText(QString::fromStdString(description));
+}

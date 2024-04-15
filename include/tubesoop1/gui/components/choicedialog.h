@@ -23,6 +23,9 @@
 
 using namespace std;
 
+/**
+ * If the items bigger than 5, it will do pagination
+*/
 class ChoiceDialog : public QDialog {
     Q_OBJECT
 private:
@@ -32,6 +35,20 @@ private:
     QLabel footer;
     QVector<DescriptionButton*> choiceButtons;
 
+
+    // Will only be used if the items bigger than 5 (pagination)
+    QWidget pageWidget;
+    QHBoxLayout hPageLayout;
+    int currentPage;
+    static int maxItemsPerPage;
+    NiceButton nextButton;
+    NiceButton prevButton;
+    QLabel pageLabel;
+    void nextPage();
+    void prevPage();
+    int totalPage();
+    void refreshPage();
+    const QVector<pair<string, string>>& choices;
 public:
     ChoiceDialog(QWidget* parent, const QVector<pair<string, string>>& choices, const QString& title, const QString& headerText, const QString& footerText);
     ~ChoiceDialog();
