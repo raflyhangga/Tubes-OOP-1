@@ -96,6 +96,9 @@ void Shop::buy(Walikota* pl,int idxItem, int quantity){
     if(!isBuyable(getStock(pl)[idxItem])){
         throw(WalikotaShopException());
     }
+    if(pl->getInventory().getCountNotFilled() < quantity){
+        throw(PenyimpananTidakCukup());
+    }
     if(itemShop->getQuantity() - quantity >= 0){
         *itemShop-=quantity;
     }
@@ -132,6 +135,9 @@ void Shop::buy(Peternak* pl,int idxItem, int quantity){
     }
     if(!isBuyable(getStock(pl)[idxItem])){
         throw(PeternakShopException());
+    }
+    if(pl->getInventory().getCountNotFilled() < quantity){
+        throw(PenyimpananTidakCukup());
     }
     if(itemShop->getQuantity() - quantity >= 0){
         *itemShop-=quantity;
