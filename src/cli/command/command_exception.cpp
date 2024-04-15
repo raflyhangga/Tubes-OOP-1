@@ -61,3 +61,15 @@ NoFoodForAnimalException::NoFoodForAnimalException(string message) : message(mes
 const char* NoFoodForAnimalException::what() const throw()  {
     return message.c_str();
 }
+
+NoHarvestablePlantException::NoHarvestablePlantException() : message("Tidak ada tanaman yang siap dipanen."){}
+
+const char* NoHarvestablePlantException::what() const throw()  {
+    return message.c_str();
+}
+
+NoHarvestableAnimalException::NoHarvestableAnimalException() : message("Tidak ada hewan yang siap dipanen."){}
+
+const char* NoHarvestableAnimalException::what() const throw()  {
+    return message.c_str();
+}

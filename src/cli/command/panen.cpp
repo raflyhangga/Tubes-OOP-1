@@ -15,11 +15,10 @@ void Panen::execute(Petani *petani) {
     
     printer.printGrid(ladang);
     printer.printInfo(ladang);
-
+ 
     vector<Quantifiable<Plant *>>* allHarvestablePlant = petani->getAllHarvestablePlant();
     if(allHarvestablePlant->size() == 0) {
-        cout << "Tidak ada tanaman yang siap dipanen." << endl;
-        return;
+        throw(NoHarvestablePlantException());
     }
 
     cout << "\nPilih tanaman siap panen yang kamu miliki" << endl;
@@ -32,17 +31,20 @@ void Panen::execute(Petani *petani) {
         << " (" << (*allHarvestablePlant)[i].getQuantity() << " petak siap panen)"
         << endl;
     }
-
+    string checker;
     int chosenPlantIdx;
     cout << "\nNomor tanaman yang ingin dipanen: ";
-    cin >> chosenPlantIdx; chosenPlantIdx--;
+    cin >> checker;
+    chosenPlantIdx = Command::stringToInt(checker);
+    chosenPlantIdx--;
     if(chosenPlantIdx > allHarvestablePlant->size()-1 || chosenPlantIdx < 0) 
         throw out_of_range("Index di luar batas.");
 
     int amountOfSquareToHarvest;
     cout << "\nBerapa petak yang ingin dipanen: " << endl << endl;
 
-    cin >> amountOfSquareToHarvest;
+    cin >> checker;
+    amountOfSquareToHarvest = Command::stringToInt(checker);
     if(amountOfSquareToHarvest < 1) 
         throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh kurang dari 1.");
     if(amountOfSquareToHarvest > (*allHarvestablePlant)[chosenPlantIdx].getQuantity()){
@@ -96,8 +98,7 @@ void Panen::execute(Peternak *peternak) {
 
     vector<Quantifiable<Animal *>>* allHarvestableAnimal = peternak->getAllHarvestableAnimal();
     if(allHarvestableAnimal->size() == 0) {
-        cout << "Tidak ada tanaman yang siap dipanen." << endl;
-        return;
+        throw(NoHarvestableAnimalException());
     }
 
     cout << "Pilih tanaman siap panen yang kamu miliki" << endl;
@@ -111,16 +112,19 @@ void Panen::execute(Peternak *peternak) {
         << endl;
     }
 
-    int chosenAnimalIdx;
+    string checker;
     cout << "\nNomor tanaman yang ingin dipanen: ";
-    cin >> chosenAnimalIdx; chosenAnimalIdx--;
+    cin >> checker;
+    int chosenAnimalIdx = Command::stringToInt(checker);
+    chosenAnimalIdx--;
     if(chosenAnimalIdx >= allHarvestableAnimal->size() || chosenAnimalIdx < 0) 
         throw out_of_range("Index di luar batas.");
 
     int amountOfSquareToHarvest;
     cout << "\nBerapa petak yang ingin dipanen: ";
 
-    cin >> amountOfSquareToHarvest;
+    cin >> checker;
+    amountOfSquareToHarvest = Command::stringToInt(checker);
     if(amountOfSquareToHarvest < 1) 
         throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh kurang dari 1.");
     if(amountOfSquareToHarvest > (*allHarvestableAnimal)[chosenAnimalIdx].getQuantity()){

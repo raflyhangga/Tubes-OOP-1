@@ -23,7 +23,7 @@
 #include <tubesoop1/gui/components/mainwindow.h>
 #include <tubesoop1/gui/components/initdialog.h>
 #include <tubesoop1/gui/game.h>
-#include <tubesoop1/gui/components/Application.h>
+#include <tubesoop1/gui/components/application.h>
 using namespace std;
 
 int main(int argc, char *argv[])
