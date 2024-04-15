@@ -44,3 +44,11 @@ WalikotaShopException::WalikotaShopException():message("Mayor can't buy this ite
 const char *WalikotaShopException::what() const throw(){
     return message.c_str();
 }
+
+const char* BeliOutOfRange::what() const throw() {
+    return "Barang tidak ditemukan";
+}
+
+const char* PenyimpananTidakCukup::what() const throw() {
+    return "Slot penyimpanan tidak mencukupi";
+}

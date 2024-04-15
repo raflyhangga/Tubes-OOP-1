@@ -7,7 +7,6 @@
 #include "tubesoop1/player/peternak.h"
 #include "tubesoop1/resource/resource.h"
 #include "tubesoop1/shop/shop_exception.h"
-#include "tubesoop1/cli/command/beli_exception.h"
 #include "tubesoop1/resourcevisitorpattern/taker.hpp"
 #include <vector>
 #include <iostream>

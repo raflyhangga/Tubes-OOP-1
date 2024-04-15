@@ -78,4 +78,14 @@ class WalikotaShopException : public exception {
         const char *what() const throw();
 };
 
+class BeliOutOfRange: public exception{
+	public:
+		const char* what() const throw();
+};
+
+class PenyimpananTidakCukup: public exception{
+    public:
+		const char* what() const throw();
+};
+
 #endif
