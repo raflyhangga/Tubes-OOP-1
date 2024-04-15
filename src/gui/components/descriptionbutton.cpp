@@ -1,5 +1,6 @@
 #include "tubesoop1/gui/components/descriptionbutton.h"
 #include <QSize>
+#include <QSizePolicy>
 
 DescriptionButton::DescriptionButton() : NiceButton() {
 }
@@ -8,6 +9,11 @@ DescriptionButton::DescriptionButton(string number, string title, string descrip
     numberLabel.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     titleLabel.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     descriptionLabel.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    // retain size policy
+    QSizePolicy sp = sizePolicy();
+    sp.setRetainSizeWhenHidden(true);
+    setSizePolicy(sp);
 
     setMinimumSize(QSize(520, 65));
 

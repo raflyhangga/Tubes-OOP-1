@@ -85,7 +85,7 @@ inline void GridView<T>::refresh(){
 
         // Actual grid
         for (int j = 0; j < grid->getCol(); j++) {
-            QPushButton *widget = getWidget(Location(i, j));
+            QPushButton *widget = getWidget(Location(i, j));  widget->setMaximumWidth(GridView<T>::maxCellWidth);
             connect(widget, &QPushButton::clicked, this, [this, i, j](){
                 Location location(i, j);
                 emit cellClicked(location);
@@ -110,7 +110,7 @@ inline QPushButton* GridView<T>::getWidget(Location location){
     } catch (const exception& e) {
         labelStr = "";
     }
-    NiceButton *button = new NiceButton(labelStr); button->setMaximumWidth(GridView<T>::maxCellWidth);
+    NiceButton *button = new NiceButton(labelStr);
     button->setEnabled(false);
     return button;
 }

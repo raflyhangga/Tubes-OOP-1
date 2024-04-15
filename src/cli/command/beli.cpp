@@ -155,7 +155,9 @@ pair<int,int> Beli::welcomeMessage(vector<pair<Quantifiable<Resource*>,bool>> st
         cin.ignore(numeric_limits<streamsize>::max(),'\n');
         cout << "Kuantitas : ";
     }
-
+    if(quantity < 0){
+        throw(logic_error("Quantity can't be negative"));
+    }
     pair<int,int> temp(idxItem,quantity);
     return temp;
 }

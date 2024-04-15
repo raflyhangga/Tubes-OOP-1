@@ -123,7 +123,7 @@ void Shop::buyValidator(Player*pl,int idxItem,int quantity){
     if(pl->getInventory().getCountNotFilled() < quantity){
         throw(PenyimpananTidakCukup());
     }
-    if(itemShop->getQuantity() - quantity < 0){
+    if((itemShop->getQuantity() - quantity < 0) && (!itemShop->isInfinite())){
         throw(StockTidakCukupShopException());
     }
 }

@@ -75,7 +75,6 @@ void Panen::execute(Petani *petani) {
         Plant* p = ladang.pop(loc);
         vector<Product *>& drops = p->harvest();
         for(Product *product : drops) {
-            cout << product->getName() << endl;
             petani->putInventory(*product);
         }
         // delete p;
