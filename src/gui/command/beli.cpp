@@ -62,28 +62,6 @@ QVector<pair<string, string>> Beli::getChoices(vector<pair<Quantifiable<Resource
     return choices;
 }
 
-int Beli::promptQuantityToBuy(vector<pair<Quantifiable<Resource*>,bool>> &stockList, Player &player, int choosenIndex){
-    bool ok = false;
-    int quantityToBuy;
-    while(!ok){
-        quantityToBuy = InputDialog::getInt(
-                                            &window, 
-                                            QString::fromStdString("Beli"),
-                                            QString::fromStdString("Berapa yang ingin dibeli: "), 1, numeric_limits<int>::min(), numeric_limits<int>::max(), 1, &ok
-                                    );
-        try{
-            validityChecking(stockList, &player, choosenIndex, quantityToBuy);
-            if(!isBuyable(stockList[choosenIndex])){
-                MessageBox(&window, "Beli", "Anda tidak bisa membeli barang ini!").exec();
-            }
-            ok = true;
-        } catch (exception &e){
-            MessageBox(&window, "Beli", e.what()).exec();
-            ok = false;
-        }
-    }
-    return quantityToBuy;
-}
 
 void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource*>,bool>> &stockList){
     QVector<pair<string, string>> choices = getChoices(stockList);
@@ -91,10 +69,38 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
     ChoiceDialog choiceDialog = ChoiceDialog(&window, choices, "Bangun", QString::fromStdString("Selamat datang di toko!\nBerikut merupakan hal yang dapat Anda Beli"), QString::fromStdString("Uang Anda: " + to_string(player->getMoney()) + "\nSlot penyimpanan tersedia: " + to_string(player->getInventory().getCountNotFilled())) );
 
     choiceDialog.connect(&choiceDialog, &ChoiceDialog::choiceMade, [&](int choosenIndex){
-        int quantityToBuy = promptQuantityToBuy(stockList, *player, choosenIndex);
+        if(stockList[choosenIndex].first.getQuantity() == 0) {
+            MessageBox(&window, "Beli", "Stok barang yang dipilih sedang kosong!").exec(); return;
+        }
+        
+
+        // Ask for quantity
+        bool ok = false;
+        int quantityToBuy;
+        while(!ok){
+            quantityToBuy = InputDialog::getInt(
+                                                &window, 
+                                                QString::fromStdString("Beli"),
+                                                QString::fromStdString("Berapa yang ingin dibeli: "), 1, numeric_limits<int>::min(), numeric_limits<int>::max(), 1, &ok
+                                        );
+            if(!ok) return; // user clicked cancel or close
+            try{
+                validityChecking(stockList, player, choosenIndex, quantityToBuy);
+                if(!isBuyable(stockList[choosenIndex])){
+                    MessageBox(&window, "Beli", "Anda tidak bisa membeli barang ini!").exec();
+                }
+                ok = true;
+            } catch (exception &e){
+                MessageBox(&window, "Beli", e.what()).exec();
+                ok = false;
+            }
+        }
+
+
+
         choiceDialog.close();
 
-            MessageBox(&window, "Beli", "Anda berhasil membeli " + to_string(quantityToBuy) + " " + formatName(stockList[choosenIndex].first.getValue()->getName()) + ". Uang Anda tersisa " + to_string(player->getMoney()) + " gulden.").exec();
+        MessageBox(&window, "Beli", "Anda berhasil membeli " + to_string(quantityToBuy) + " " + formatName(stockList[choosenIndex].first.getValue()->getName()) + ". Uang Anda tersisa " + to_string(player->getMoney()) + " gulden.").exec();
 
         Dialog dialogInventory(&window);
         QVBoxLayout vLayout;

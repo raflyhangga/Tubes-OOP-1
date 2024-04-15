@@ -145,6 +145,7 @@ class Shop {
         */
         vector<pair<Quantifiable<Resource*>,bool>> getStock(Walikota*);
 
+        int countFiniteStock();
 };
 
 

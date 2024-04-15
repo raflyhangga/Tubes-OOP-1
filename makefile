@@ -31,7 +31,7 @@ $(OUTPUT_DIR)/%.o: %.hpp
 	@echo -n ">> "
 	$(CC) $(CFLAGS) $(DEPFLAGS) -x c++ -c -o $@ $<
 
-SRC_CLI = $(wildcard $(SRC_DIR)/cli/*.cpp) $(wildcard $(SRC_DIR)/cli/*/*.cpp)
+SRC_CLI = $(wildcard $(SRC_DIR)/cli/*.cpp) $(wildcard $(SRC_DIR)/cli/*/*.cpp) 
 
 SRC = $(SRC_MAIN) $(filter-out $(wildcard $(SRC_DIR)/*/*_test.cpp) $(wildcard $(SRC_DIR)/gui/*), $(wildcard $(SRC_DIR)/*/*.cpp)) $(SRC_CLI)
 OBJS = $(patsubst %.cpp,$(OUTPUT_DIR)/%.o,$(filter-out $(SRC_MAIN), $(SRC))) $(patsubst %.hpp,$(OUTPUT_DIR)/%.o,$(wildcard $(SRC_HPP_DIR)/*/*.hpp))

@@ -25,6 +25,7 @@ private:
 public:
     DescriptionButton();
     DescriptionButton(string number, string title, string description);
+    void setText(string number, string title, string description);
 };
 
 

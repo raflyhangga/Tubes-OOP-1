@@ -1,4 +1,5 @@
 #include "tubesoop1/plant/plant.h"
+#include <tubesoop1/cli/pcolor.h>
 
 Plant::Plant(string code, string name, int price, int durationToHarvest, vector<Product*> drops):
     Creature(code,name,price,drops)
@@ -44,10 +45,15 @@ istream &operator>>(istream &is, Plant &p)
 
 ostream &operator<<(ostream &os, const Plant &p)
 {
-    if(p.isHarvestable()) os << "\033[1;32m";
-    else os << "\033[1;31m";
-    os << p.getCode() << "\033[0m";
-    return os;
+    if(p.isHarvestable()) {
+        for (auto &c: p.getCode()) {
+            print_green(c);
+        }
+    } else {
+        for (auto &c: p.getCode()) {
+            print_red(c);
+        }
+    }
 }
 
 void Plant::taken(TakerVisitor* t){

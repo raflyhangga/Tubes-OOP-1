@@ -64,6 +64,7 @@ set(SOURCES
   src/grid/grid_test.cpp
   src/grid/location_test.cpp
   src/grid/location_exception.cpp
+  src/cli/pcolor.cpp
 )
 
 add_executable(unit_test ${SOURCES})

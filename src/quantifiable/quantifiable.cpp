@@ -14,7 +14,7 @@ inline void Quantifiable<T>::setQuantity(int qty) {
     if (qty >= 0) {
         quantity = qty;
     } else {
-        if(qty == -1){
+        if(qty == Quantifiable<T>::infinite){
             quantity = qty;
         }
         else {
@@ -26,7 +26,7 @@ inline void Quantifiable<T>::setQuantity(int qty) {
 // Operator += implementation
 template <class T>
 inline void Quantifiable<T>::operator+=(int qty) {
-    if(quantity != -1){
+    if(quantity != Quantifiable<T>::infinite){
         quantity += qty;
     }
 }
@@ -38,7 +38,7 @@ inline void Quantifiable<T>::operator+=(int qty) {
      */
 template <class T>
 inline void Quantifiable<T>::operator+=(Quantifiable<T> other){
-    if(quantity != -1){
+    if(quantity != Quantifiable<T>::infinite){
         quantity += other.quantity;
     }
 }
@@ -46,7 +46,7 @@ inline void Quantifiable<T>::operator+=(Quantifiable<T> other){
 // Operator -= implementation with validation
 template <class T>
 inline void Quantifiable<T>::operator-=(int qty) {
-    if(quantity != -1){
+    if(quantity != Quantifiable<T>::infinite){
         if (quantity - qty >= 0) {
             quantity -= qty;
         } else {
@@ -59,7 +59,7 @@ inline void Quantifiable<T>::operator-=(int qty) {
 template <class T>
 inline Quantifiable<T> Quantifiable<T>::operator++(int) {
     Quantifiable<T> temp = *this;
-    if(quantity != -1){
+    if(quantity != Quantifiable<T>::infinite){
         ++quantity;
     }
     return temp;
@@ -68,7 +68,7 @@ inline Quantifiable<T> Quantifiable<T>::operator++(int) {
 // Operator -- (postfix) implementation with validation
 template <class T>
 inline Quantifiable<T> Quantifiable<T>::operator--(int) {
-    if(quantity != -1){
+    if(quantity != Quantifiable<T>::infinite){
         if (quantity - 1 >= 0) {
             Quantifiable<T> temp = *this;
             --quantity;
@@ -98,7 +98,7 @@ inline bool Quantifiable<T>::operator==(Quantifiable<T> other){
  */
 template <class T>
 inline bool Quantifiable<T>::isInfinite() const {
-    return quantity == -1;
+    return quantity == Quantifiable<T>::infinite;
 }
 
 /**
@@ -109,8 +109,11 @@ inline bool Quantifiable<T>::isInfinite() const {
  */
 template <class T>
 inline bool Quantifiable<T>::isInfinite(Quantifiable<T> q) {
-    return q.quantity == -1;
+    return q.quantity == Quantifiable<T>::infinite;
 }
+
+template <class T>
+inline int Quantifiable<T>::infinite = -1;
 
 // Todo: Delete this main function if not needed (only for testing purpose)
 // int main() {

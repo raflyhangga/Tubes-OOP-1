@@ -18,38 +18,46 @@ Jual::Jual(State &state, MainWindow &window) : Command(state, window) {}
 
 void Jual::execute(Petani* p){
     Grid<Resource*> &inventory = p->getInventory();
-    vector<Location> ansLoc = promptChoosenLocation(p); // Will throw error if the location is not valid
-
     vector<Building*> buildingList = p->takeAllFromInventory<Building>();
-
-    // throw error if there is any building in ansLoc
-    for(Location l : ansLoc){
+    
+    // validate that its not a building
+    vector<Location> ansLoc = promptChoosenLocation(p, [&](Location l){
+        // if the current selected location is a building, return false
         for(Building* b : buildingList){
-            if(inventory[l] == b) throw invalid_argument("Tidak bisa menjual bangunan!");
+            if(inventory[l] == b) {
+                MessageBox(&window, "Jual", "Petani tidak bisa menjual bangunan!").exec();
+                return false;
+            }
         }
-    }
+        return true;
+    }); // Will throw error if the location is not valid
     
     popAndAddMoneyFromInventory(p, ansLoc);
 }
 
 void Jual::execute(Peternak* p){
     Grid<Resource*> &inventory = p->getInventory();
-    vector<Location> ansLoc = promptChoosenLocation(p); // Will throw error if the location is not valid
     vector<Building*> buildingList = p->takeAllFromInventory<Building>();
+    
+    // validate that its not a building
+    vector<Location> ansLoc = promptChoosenLocation(p, [&](Location l){
+        for(Building* b : buildingList){
+            if(inventory[l] == b) {
+                MessageBox(&window, "Jual", "Peternak tidak bisa menjual bangunan!").exec();
+                return false;
+            }
+        }
+        return true;
+    }); // Will throw error if the location is not valid
 
     // throw error if there is any building in ansLoc
-    for(Location l : ansLoc){
-        for(Building* b : buildingList){
-            if(inventory[l] == b) throw invalid_argument("Tidak bisa menjual bangunan!");
-        }
-    }
 
     popAndAddMoneyFromInventory(p, ansLoc);
 }
 
 void Jual::execute(Walikota* p){
     Grid<Resource*> &inventory = p->getInventory();
-    vector<Location> ansLoc = promptChoosenLocation(p); // Will throw error if the location is not valid
+    vector<Location> ansLoc = promptChoosenLocation(p, [](Location l) { return true; }); // Will throw error if the location is not valid. Walikota can sell anything so the validator is always true
     popAndAddMoneyFromInventory(p, ansLoc);
 }
 
@@ -71,7 +79,7 @@ void Jual::popAndAddMoneyFromInventory(Player* p, vector<Location>& ansLoc){
     MessageBox(&window, "Jual", "Barang Anda berhasil dijual! Uang Anda bertambah " + to_string(addedMoney) + " gulden!").exec();
 }
 
-vector<Location> Jual::promptChoosenLocation(Player *player) {
+vector<Location> Jual::promptChoosenLocation(Player *player, function<bool(Location)> validator) {
     Dialog dialogInventory(&window);
     QVBoxLayout vLayout;
     dialogInventory.setLayout(&vLayout); dialogInventory.setWindowTitle("Jual");
@@ -97,6 +105,9 @@ vector<Location> Jual::promptChoosenLocation(Player *player) {
             MessageBox(&dialogInventory, "Jual", "Petak yang dipilih kosong!").exec(); 
             inventoryButtonGrid.setButtonChecked(slot, false); return;
         }
+        if(!validator(slot)){
+            inventoryButtonGrid.setButtonChecked(slot, false); return;
+        }
 
         // if the slot is already in the list, remove it, otherwise add it
         if(find(locationList.begin(), locationList.end(), slot) != locationList.end()) {
@@ -113,7 +124,7 @@ vector<Location> Jual::promptChoosenLocation(Player *player) {
         }
         labelBottom.setText(locationListText);
     });
-    inventoryButtonGrid.connect(&inventoryButtonGrid, &GridView<Resource*>::close, [&](){
+    dialogInventory.connect(&dialogInventory, &QDialog::rejected, [&]() {
         locationList.clear();
     });
 

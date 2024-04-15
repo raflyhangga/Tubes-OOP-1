@@ -27,7 +27,6 @@ class Beli: public Command {
         void validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stok, Player* p,int idxItem,int quantity);
 
         QVector<pair<string, string>> getChoices(vector<pair<Quantifiable<Resource*>,bool>>&);
-        int promptQuantityToBuy(vector<pair<Quantifiable<Resource*>,bool>> &stockList, Player &player, int choosenIndex);
         void handleCurrentPlayer(Player* player, vector<pair<Quantifiable<Resource*>,bool>> &stockList);
 };
 
