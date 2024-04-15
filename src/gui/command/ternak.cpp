@@ -40,6 +40,8 @@ void Ternak::execute(Peternak *peternak) {
         } catch (NotTakableException &e) {
             MessageBox(&window, "Ternak", "HEY HEY HEY APA ITU YG MAU ANDA MASUKKAN KE KANDANG!\nMasukkan slot lagi brok.").exec();
             return;
+        } catch (logic_error &e) {
+            MessageBox(&window, "Ternak", "Lokasi yang dipilih kosong.\nPerintah tidak dilanjutkan.").exec(); return;
         }
         // // Sukses mengambil tanaman dari penyimpanan
         MessageBox(&window, "Ternak", "Kamu memilih " + formatName(animal->getName()) + " dari penyimpanan.\n\n").exec();

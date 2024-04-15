@@ -7,13 +7,15 @@
 #include <QPushButton>
 
 template <class T>
+inline const int GridView<T>::maxCellWidth = 100;
+
+template <class T>
 inline GridView<T>::GridView() : GridSignal() {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
     vLayout.setSpacing(5);
     vLayout.setContentsMargins(0, 0, 0, 0);
     setLayout(&vLayout);
-
 }
 
 template <class T>
@@ -58,13 +60,13 @@ inline void GridView<T>::refresh(){
 
     // Top left, just empty string
     string labelStr = "";
-    LocationLabel *label = new LocationLabel(labelStr);
+    LocationLabel *label = new LocationLabel(labelStr); label->setMaximumWidth(GridView<T>::maxCellWidth);
     labelList.push_back(label);
     hLayout->addWidget(label);
     // Top coordinates
     for (int j = 0; j < grid->getCol(); j++) {
         string labelStr = IcosiHexaString(j).getString();
-        LocationLabel *label = new LocationLabel(labelStr);
+        LocationLabel *label = new LocationLabel(labelStr); label->setMaximumWidth(GridView<T>::maxCellWidth);
         labelList.push_back(label);
         hLayout->addWidget(label);
     }
@@ -77,7 +79,7 @@ inline void GridView<T>::refresh(){
         QHBoxLayout *hLayout = new QHBoxLayout(); hLayout->setSpacing(spacing); hLayout->setContentsMargins(0, 0, 0, 0);
         string labelStr = to_string(i + 1);
         if(i + 1 < 10) labelStr = "0" + labelStr;
-        LocationLabel *label = new LocationLabel(labelStr);
+        LocationLabel *label = new LocationLabel(labelStr); label->setMaximumWidth(GridView<T>::maxCellWidth);
         labelList.push_back(label);
         hLayout->addWidget(label);
 
@@ -108,7 +110,7 @@ inline QPushButton* GridView<T>::getWidget(Location location){
     } catch (const exception& e) {
         labelStr = "";
     }
-    NiceButton *button = new NiceButton(labelStr);
+    NiceButton *button = new NiceButton(labelStr); button->setMaximumWidth(GridView<T>::maxCellWidth);
     button->setEnabled(false);
     return button;
 }

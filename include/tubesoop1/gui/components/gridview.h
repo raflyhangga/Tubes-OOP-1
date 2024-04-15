@@ -12,6 +12,8 @@
 #include <QHBoxLayout>
 #include <QSizePolicy>
 #include <QtCore>
+#include <QScrollArea>
+#include <QLayout>
 
 using namespace std;
 
@@ -26,6 +28,8 @@ private:
     vector<QPushButton*> buttonList;
     vector<QHBoxLayout*> hLayoutList; 
     vector<LocationLabel*> labelList;
+
+    static const int maxCellWidth;
 public:
     GridView();
     ~GridView();

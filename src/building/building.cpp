@@ -33,7 +33,7 @@ void Building::printBuildingInfo() const
 }
 
 string Building::getFormattedBuildingInfo(){
-    string info = name + " (" + to_string(price) + " gulden, ";
+    string info = to_string(price) + " gulden, ";
     for (const auto &quantifiableProduct : recipe)
     {
         const ProductMaterial &product = *quantifiableProduct.getValue();
@@ -46,13 +46,12 @@ string Building::getFormattedBuildingInfo(){
             else c = tolower(c);
         }
 
-        info += formattedName + " " + to_string(quantity);
+        info += to_string(quantity) + " " + formattedName;
         if (&quantifiableProduct != &recipe.back())
         {
             info += ", ";
         }
     }
-    info += ")";
     return info;
 }
 

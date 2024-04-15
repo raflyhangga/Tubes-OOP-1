@@ -19,7 +19,7 @@ DescriptionButton::DescriptionButton(string number, string title, string descrip
     titleLabel.setStyleSheet("QLabel{color: white;}");
     titleLabel.setAlignment(Qt::AlignLeft);
     descriptionLabel.setStyleSheet("QLabel{color: white;}");
-    descriptionLabel.setAlignment(Qt::AlignLeft); descriptionLabel.setMaximumHeight(13);
+    descriptionLabel.setAlignment(Qt::AlignLeft);
     
     setLayout(&gridLayout);
     int m = 10;
@@ -47,6 +47,7 @@ DescriptionButton::DescriptionButton(string number, string title, string descrip
             background-color: rgba( 255, 255, 255, 0% );
             font-size: 13px;
             margin-right: 5px;
+            margin-left: 0px;
         }
     )");
     titleLabel.setStyleSheet(R"(

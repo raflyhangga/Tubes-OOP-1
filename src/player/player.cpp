@@ -1,4 +1,5 @@
 #include "tubesoop1/player/player.h"
+#include "tubesoop1/animal/animal_exception.h"
 #include <tubesoop1/grid/griddrawer.hpp>
 
 int Player::moneyToWin;
@@ -91,7 +92,7 @@ int Player::getNetWealth(){
     for(Location l : inventory){
         totalMoney += inventory[l]->getPrice();
     }
-    return totalMoney;
+    return totalMoney + money;
 }
 int Player::getKKP(){
     return getNetWealth() - getKTKP();
@@ -123,5 +124,5 @@ void Player::eat(ProductFruit &p){
 }
 
 void Player::eat(ProductMaterial &p){
-    throw invalid_argument("Keras, makanannya gabisa digigit.");
+    throw CannotEatException("Keras, makanannya gabisa digigit.");
 }

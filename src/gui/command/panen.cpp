@@ -67,10 +67,11 @@ void Panen::execute(Petani *petani) {
         int amountOfSquareToHarvest;
         while(!ok){
             amountOfSquareToHarvest = InputDialog::getInt(
-                                                &window, 
+                                                &choiceDialog, 
                                                 QString::fromStdString("Panen"),
                                                 QString::fromStdString("Berapa petak yang ingin dipanen: "), 1, numeric_limits<int>::min(), numeric_limits<int>::max(), 1, &ok
                                         );
+            if(!ok) return; // if cancel (close button)
             if(amountOfSquareToHarvest < 1) {
                 MessageBox(&window, "Panen", "Jumlah petak yang ingin dipanen tidak boleh kurang dari 1!").exec(); 
                 ok = false; continue;
@@ -106,6 +107,11 @@ void Panen::execute(Petani *petani) {
                 ladangButtonGrid.setButtonChecked(slot, false); return;
             }
 
+            if(!chosenPlant->isHarvestable()){
+                MessageBox(&window, "Panen", "Tanaman yang dipilih belum siap dipanen!").exec();
+                ladangButtonGrid.setButtonChecked(slot, false); return;
+            }
+
             // if the slot is already in the list, remove it, otherwise add it
             if(find(locationList.begin(), locationList.end(), slot) != locationList.end()) {
                 locationList.erase(remove(locationList.begin(), locationList.end(), slot), locationList.end());
@@ -115,7 +121,7 @@ void Panen::execute(Petani *petani) {
             // update the label
             QString locationListText = "Pilihan petak untuk dipanen (klik elemen grid di atas): \n";
             for(int i = 0; i < locationList.size(); i++){
-                locationListText += QString::fromStdString("Petak ke-" + to_string(i) + ": " + locationList[i].toStdString()) + "\n";
+                locationListText += QString::fromStdString("Petak ke-" + to_string(i+1) + ": " + locationList[i].toStdString()) + "\n";
             }
             panenLocationListLabel.setText(locationListText);
 
@@ -197,10 +203,11 @@ void Panen::execute(Peternak *peternak) {
         int amountOfSquareToHarvest;
         while(!ok){
             amountOfSquareToHarvest = InputDialog::getInt(
-                                                &window, 
+                                                &choiceDialog, 
                                                 QString::fromStdString("Panen"),
                                                 QString::fromStdString("Berapa petak yang ingin dipanen: "), 1, numeric_limits<int>::min(), numeric_limits<int>::max(), 1, &ok
                                         );
+            if(!ok) return; // if cancel (close button)
             if(amountOfSquareToHarvest < 1) {
                 MessageBox(&window, "Panen", "Jumlah petak yang ingin dipanen tidak boleh kurang dari 1!").exec(); 
                 ok = false; continue;
@@ -235,6 +242,10 @@ void Panen::execute(Peternak *peternak) {
                 MessageBox(&window, "Panen", "Hewan yang dipilih tidak sesuai.\nSeharusnya: " + chosenAnimalCode + "\nDitemukan: " + chosenAnimal->getCode()).exec();
                 peternakanButtonGrid.setButtonChecked(slot, false); return;
             }
+            if(!chosenAnimal->isHarvestable()){
+                MessageBox(&window, "Panen", "Hewan yang dipilih belum siap dipanen!").exec();
+                peternakanButtonGrid.setButtonChecked(slot, false); return;
+            }
 
             // if the slot is already in the list, remove it, otherwise add it
             if(find(locationList.begin(), locationList.end(), slot) != locationList.end()) {
@@ -245,7 +256,7 @@ void Panen::execute(Peternak *peternak) {
             // update the label
             QString locationListText = "Pilihan petak untuk dipanen (klik elemen grid di atas): \n";
             for(int i = 0; i < locationList.size(); i++){
-                locationListText += QString::fromStdString("Petak ke-" + to_string(i) + ": " + locationList[i].toStdString()) + "\n";
+                locationListText += QString::fromStdString("Petak ke-" + to_string(i+1) + ": " + locationList[i].toStdString()) + "\n";
             }
             panenLocationListLabel.setText(locationListText);
 

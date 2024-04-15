@@ -3,6 +3,7 @@
 #include "tubesoop1/resourcevisitorpattern/taker.h"
 #include <tubesoop1/resourcevisitorpattern/taker.hpp>
 #include "tubesoop1/grid/location_exception.h"
+#include "tubesoop1/animal/animal_exception.h"
 #include "tubesoop1/resourcevisitorpattern/resourcevisitorpattern_exception.h"
 #include "tubesoop1/player/player_partial.hpp"
 #include "tubesoop1/animal/animal.h"
@@ -43,7 +44,12 @@ void KasihMakan::execute(Peternak* peternak){
     vLayout.addWidget(&peternakanButtonGrid);
 
     peternakanButtonGrid.connect(&peternakanButtonGrid, &GridView<Animal*>::cellClicked, [this, &peternak, &dialogPeternakan](Location slot) {
-        Animal *animal = peternak->getPeternakan()[slot];
+        Animal *animal;
+        try{
+            animal = peternak->getPeternakan()[slot];
+        } catch(logic_error& e){
+            MessageBox(&window, "Kasih Makan", "Petak kandang yang dipilih kosong!").exec(); return;
+        }
 
         // Check if there's no food that can be given to the animal
         vector<Product*> productList = peternak->takeAllFromInventory<Product>();
@@ -55,12 +61,10 @@ void KasihMakan::execute(Peternak* peternak){
                 animal->setWeight(animal->getWeight() - product->getAddedWeight());
                 canEat = true;
                 break;
-            } catch (CannotEatException &e) {
-            }
+            } catch (CannotEatException &e) {}
         }
         if(!canEat){
-            MessageBox(&window, "Kasih Makan", "Makanan yang bisa diberikan kepada "+formatName(animal->getName())+" tidak tersedia!").exec();
-            return;
+            MessageBox(&window, "Kasih Makan", "Makanan yang bisa diberikan kepada "+formatName(animal->getName())+" tidak tersedia!").exec(); return;
         }
 
         dialogPeternakan.close();
@@ -87,6 +91,8 @@ void KasihMakan::execute(Peternak* peternak){
                 animal->eat(*product);
             } catch (NotTakableException &e) {
                 MessageBox(&window, "Kasih Makan", "Benda tersebut tidak dapat dimakan oleh hewan!").exec(); return;
+            } catch (CannotEatException &e) {
+                MessageBox(&window, "Kasih Makan", formatName(e.what())).exec(); return;
             } catch (exception &e) {
                 MessageBox(&window, "Kasih Makan", e.what()).exec(); return;
             }
@@ -94,7 +100,7 @@ void KasihMakan::execute(Peternak* peternak){
 
             peternak->getInventory().pop(loc);
             inventoryButtonGrid.refresh();
-            MessageBox(&window, "Kasih Makan", "Hewan telah diberi makan!\nBeratnya menjadi " + to_string(animal->getWeight()) + ".").exec();
+            MessageBox(&window, "Kasih Makan", animal->getName() + " telah diberi makan!\nBeratnya menjadi " + to_string(animal->getWeight()) + ".").exec();
 
             dialogInventory.close();
         });

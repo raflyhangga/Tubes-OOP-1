@@ -6,6 +6,7 @@
 #include <QInputDialog>
 #include <QStringList>
 #include <QString>
+#include <tubesoop1/building/bangunan_exception.h>
 #include <QObject>
 #include <utility>
 
@@ -19,7 +20,6 @@ void Bangun::execute(Peternak* peternak) {
 }
 
 void Bangun::execute(Walikota* walikota) {
-    string headerText = "Resep bangunan yang ada adalah sebagai berikut.";
     auto &recipeMap = state.getRecipeMap();
     QVector<pair<string, string>> choices;
     vector<string> indexedKeys;
@@ -44,71 +44,22 @@ void Bangun::execute(Walikota* walikota) {
             throw BuildingNotFoundException();
         }
 
-        /**
-         * This handles the case to check whether the player has enough resources to build the building
-         * @ref src/building/building.cpp - update: removed procedures to handle enough resources or not in there.
-        */
-
-        for (auto &quantifiableProduct: recipe) {
-            const ProductMaterial &product = *quantifiableProduct.getValue();
-            const int quantity = quantifiableProduct.getQuantity();
-            needs[product.getName()] = quantity;
-        }
-
-        for (const auto &loc: walikota->getInventory()) {
-            Resource *r = walikota->getInventory().getElement(loc);
-            string itemName = r->getName();
-            if (needs.find(itemName) != needs.end()) {
-                needs[itemName] -= 1;
-            }
-        }
-
-        bool ableToBuild = true;
-        int missingMoney = building->getPrice() - walikota->getMoney();
-        if (missingMoney > 0) {
-            ableToBuild = false;
-        }
-
-        vector<Quantifiable<string>> missingResources;
-        for (auto &[item, quantity]: needs) {
-            if (quantity > 0) {
-                string itemName = item;
-                ableToBuild = false;
-                missingResources.push_back(Quantifiable<string>(itemName, quantity));
-            }
-        }
-
-        if (!ableToBuild) {
-            string message;
-            message += "Kamu tidak punya sumber daya yang cukup! Masih memerlukan ";
-
-            if (missingMoney > 0) {
-                message += to_string(missingMoney) + " gulden";
-                if (!missingResources.empty()) {
-                    message += ", serta ";
-                }
-            }
-
-            for (auto &quantifiable: missingResources) {
-                message += to_string(quantifiable.getQuantity()) + " " + formatName(quantifiable.getValue());
-                if (&quantifiable != &missingResources.back()) {
-                    message += ", ";
-                } else {
-                    message += ".";
-                }
-            }
-            message += '\n';
-            
-            MessageBox(&window, "Bangun", message).exec();
-            return;
-        }
-
         // Build the building
-        try{
+        try {
             building->build(*walikota);
-        } catch (exception &e) {
-            MessageBox(&window, "Bangun", e.what()).exec();
-            return;
+            MessageBox(&window, "Bangun", "Bangunan berhasil dibangun dan telah menjadi hak milik walikota!").exec();
+            choiceDialog.close();
+        } catch (logic_error &e) {
+            MessageBox(&window, "Bangun", "Bangunan gagal dibangun karena walikota tidak mempunyai inventory yang kosong.").exec();
+        } catch (MissingResourcesException &e) {
+            map<string, int> &missingResources = e.getMissingResources();
+            string message = "Bangunan gagal dibangun, karena sumber daya kurang: \n";
+            int i = 1;
+            for (auto &[resource, quantity]: missingResources) {
+                message += "   " + to_string(i) + ". " + to_string(quantity) + " " + formatName(resource) + " \n";
+                ++i;
+            }
+            MessageBox(&window, "Bangun", message).exec();
         }
 
     });

@@ -14,6 +14,7 @@ private:
     const string message;
 public:
     CannotEatException(const Animal &animal, const Product &product);
+    CannotEatException(string message);
     const char* what() const throw();
 };
 
