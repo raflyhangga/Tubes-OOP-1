@@ -1,5 +1,5 @@
 #include "tubesoop1/animal/animal.h"
-#include <tubesoop1/cli/pcolor.h>
+#include <tubesoop1/pcolor/pcolor.h>
 
 Animal::Animal(string code, string name, int price, int weightToHarvest, vector<Product*> drops): Creature(code,name,price,drops)
 {

@@ -1,5 +1,5 @@
 #include "tubesoop1/plant/plant.h"
-#include <tubesoop1/cli/pcolor.h>
+#include <tubesoop1/pcolor/pcolor.h>
 
 Plant::Plant(string code, string name, int price, int durationToHarvest, vector<Product*> drops):
     Creature(code,name,price,drops)

@@ -68,6 +68,7 @@ ChoiceDialog::~ChoiceDialog() {
 }
 
 void ChoiceDialog::nextPage(){
+    cout << choices.size() << endl; 
     currentPage = (currentPage + 1) % totalPage();
     refreshPage();
 }

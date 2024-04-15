@@ -63,3 +63,10 @@ void Dialog::moveCenter() {
     QPoint centerPoint = screenGeometry.center();
     move(centerPoint.x() - width() / 2, centerPoint.y() - height() / 2);
 }
+
+void Dialog::setClosable(bool closable){
+    this->closable = closable;
+}
+void Dialog::closeEvent(QCloseEvent *event) {
+    if(!closable) event->ignore();
+}

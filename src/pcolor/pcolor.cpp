@@ -7,7 +7,7 @@ Modified at: 23/10/2023
 **/
 
 #include <stdio.h>
-#include <tubesoop1/cli/pcolor.h>
+#include <tubesoop1/pcolor/pcolor.h>
 
 void print_red(char c)
 {
