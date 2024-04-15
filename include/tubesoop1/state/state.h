@@ -124,21 +124,6 @@ class State {
         void addShopItem(Quantifiable<Resource*> item);
 
         /**
-         * @brief Buy an item from a stock
-        */
-        void buyShopItem(Walikota*pl,int idxItem, int quantity);
-
-        /**
-         * @brief Buy an item from a stock
-        */
-        void buyShopItem(Petani*pl,int idxItem, int quantity);
-
-        /**
-         * @brief Buy an item from a stock
-        */
-        void buyShopItem(Peternak*pl,int idxItem, int quantity);
-
-        /**
          * @brief Cancel to buy an item from a stock
         */
         void cancelBuyShopItem(int idxItem, int quantity);

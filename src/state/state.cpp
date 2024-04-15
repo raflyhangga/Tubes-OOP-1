@@ -273,18 +273,6 @@ void State::addShopItem(Quantifiable<Resource*> item){
     shop.addItem(item);
 }
 
-void State::buyShopItem(Walikota* pl,int idxItem, int quantity){
-    shop.buy(pl,idxItem,quantity);
-}
-
-void State::buyShopItem(Petani* pl,int idxItem, int quantity){
-    shop.buy(pl,idxItem,quantity);
-}
-
-void State::buyShopItem(Peternak* pl,int idxItem, int quantity){
-    shop.buy(pl,idxItem,quantity);
-}
-
 void State::cancelBuyShopItem(int idxItem, int quantity){
     shop.cancelBuy(idxItem,quantity);
 }

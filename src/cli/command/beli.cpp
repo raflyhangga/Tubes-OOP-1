@@ -166,7 +166,7 @@ void Beli::execute(Petani *p){
     int idxItem = choice.first - 1;
     int quantity = choice.second;
 
-    state.buyShopItem(p,idxItem,quantity);
+    shop.buy(p,idxItem,quantity);
     paymentProcessor(idxItem,quantity,p);
 }
 
@@ -177,7 +177,7 @@ void Beli::execute(Peternak *p){
     int idxItem = choice.first - 1;
     int quantity = choice.second;
 
-    state.buyShopItem(p,idxItem,quantity);
+    shop.buy(p,idxItem,quantity);    
     paymentProcessor(idxItem,quantity,p);
 }
 
@@ -188,6 +188,6 @@ void Beli::execute(Walikota *p){
     int idxItem = choice.first - 1;
     int quantity = choice.second;
 
-    state.buyShopItem(p,idxItem,quantity);
+    shop.buy(p,idxItem,quantity);
     paymentProcessor(idxItem,quantity,p);
     }
