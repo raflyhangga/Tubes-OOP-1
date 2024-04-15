@@ -48,7 +48,7 @@ int Shop::getItem(Quantifiable<Resource*> otherquant){
     int len = stock.size();
     int i = 0;
     for(Quantifiable<Resource*> quant:stock){
-        if (&quant == &otherquant){ // BAHAYA POINTER!
+        if (*quant.getValue() == *otherquant.getValue()){ // BAHAYA POINTER!
             return i;
         }
         i++;
@@ -85,14 +85,59 @@ void Shop::addItem(Quantifiable<Resource*> otherquant){
     }
 }
 
-void Shop::buy(int idxItem, int quantity){
+void Shop::buy(Walikota* pl,int idxItem, int quantity){
     Quantifiable<Resource*>* itemShop = &stock[idxItem];
+    if (idxItem < 0 || idxItem > stock.size() - 1)
+    {
+        throw (BeliOutOfRange());
+    }
+    if(!isBuyable(getStock(pl)[idxItem])){
+        throw(WalikotaShopException());
+    }
     if(itemShop->getQuantity() - quantity >= 0){
         *itemShop-=quantity;
     }
-    else if(itemShop->getQuantity() == 0){
-        throw(ItemShopEmptyException());
+    else{
+        throw(StockTidakCukupShopException());
     }
+}
+
+void Shop::buy(Petani* pl,int idxItem, int quantity){
+    Quantifiable<Resource*>* itemShop = &stock[idxItem];
+    if (idxItem < 0 || idxItem > stock.size() - 1)
+    {
+        throw (BeliOutOfRange());
+    }
+    if(!isBuyable(getStock(pl)[idxItem])){
+        throw(PetaniShopException());
+    }
+    if(itemShop->getQuantity() - quantity >= 0){
+        *itemShop-=quantity;
+    }
+    else{
+        throw(StockTidakCukupShopException());
+    }
+}
+
+void Shop::buy(Peternak* pl,int idxItem, int quantity){
+    Quantifiable<Resource*>* itemShop = &stock[idxItem];
+    if (idxItem < 0 || idxItem > stock.size() - 1)
+    {
+        throw (BeliOutOfRange());
+    }
+    if(!isBuyable(getStock(pl)[idxItem])){
+        throw(PeternakShopException());
+    }
+    if(itemShop->getQuantity() - quantity >= 0){
+        *itemShop-=quantity;
+    }
+    else{
+        throw(StockTidakCukupShopException());
+    }
+}
+
+bool Shop::isBuyable(pair<Quantifiable<Resource*>,bool> pair){
+    return pair.second;
 }
 
 void Shop::cancelBuy(int idxItem, int quantity){
@@ -110,27 +155,6 @@ void Shop::sell(Resource& rsc){
         Resource* rscPtr = &rsc;
         Quantifiable<Resource*> stockBaru(rscPtr,1);
         addItem(stockBaru);
-    }
-}
-
-void Shop::getProducts(){
-    int idx = 1;
-    for(Quantifiable<Resource*> rsc: stock){
-        string productName = rsc.getValue()->getName();
-        int productPrice = rsc.getValue()->getPrice();
-        int quantity = rsc.getQuantity();
-        cout<<idx<<". ";
-        cout<<productName;
-        cout<<" - ";
-        cout<< productPrice;
-        // Check if quantity is unlimited or not
-        if(!Quantifiable<Resource*>::isInfinite(rsc)){
-            cout<< "("<<quantity<<")\n";
-        }
-        else {
-            cout<<endl;
-        }
-        idx++;
     }
 }
 

@@ -7,6 +7,7 @@
 #include <sstream>
 #include <functional>
 #include "tubesoop1/resource/resource.h"
+#include "tubesoop1/resourcevisitorpattern/taker.hpp"
 #include "tubesoop1/product/product.h"
 #include "tubesoop1/quantifiable/quantifiable.hpp"
 #include "tubesoop1/player/player.h"
@@ -30,6 +31,8 @@ class ResourceFactory : map<string, function<Resource*()>>{
     private:
         map<string, vector<Product*>> dropsMap;
         map<string, Building*> recipeMap;
+        map<string, Resource*> creatureMap;
+        map<string, Resource*> nonCreatureMap;
     public:
 
         /**
@@ -49,10 +52,9 @@ class ResourceFactory : map<string, function<Resource*()>>{
         */
         map<string, Building*>& getRecipeMap();
 
-        /**
-         * Get the ResourceFactory begin iterator
-        */
-        vector<Resource*> getResources();
+        vector<Resource*> getNonCreatureReesources();
+
+        vector<Resource*> getCreatureResources();
 
         friend ostream& operator<<(ostream& os, const ResourceFactory& factory);
 };

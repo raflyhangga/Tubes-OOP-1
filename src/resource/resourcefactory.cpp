@@ -24,6 +24,7 @@ ResourceFactory::ResourceFactory(string configPath){
         file >> _ >> kode >> name >> _ >> origin >> addedWeight >> price;
         insert({name, [=](){return new ProductMaterial(kode, name, addedWeight, price);}});
         dropsMap[origin].push_back(new ProductMaterial(kode, name, addedWeight, price));
+        nonCreatureMap[name] = new ProductMaterial(kode, name, addedWeight, price);
     }
     for(int i = 0; i < 4; i++) {
         string kode, name, origin;
@@ -31,6 +32,7 @@ ResourceFactory::ResourceFactory(string configPath){
         file >> _ >> kode >> name >> _ >> origin >> addedWeight >> price;
         insert({name, [=](){return new ProductFruit(kode, name, addedWeight, price);}});
         dropsMap[origin].push_back(new ProductFruit(kode, name, addedWeight, price));
+        nonCreatureMap[name] = new ProductFruit(kode, name, addedWeight, price);
     }
     for(int i = 0; i < 9; i++) {
         string kode, name, origin;
@@ -38,6 +40,7 @@ ResourceFactory::ResourceFactory(string configPath){
         file >> _ >> kode >> name >> _ >> origin >> addedWeight >> price;
         insert({name, [=](){return new ProductAnimal(kode, name, addedWeight, price);}});
         dropsMap[origin].push_back(new ProductAnimal(kode, name, addedWeight, price));
+        nonCreatureMap[name] = new ProductAnimal(kode, name, addedWeight, price);
     }
     file.close();
 
@@ -50,6 +53,7 @@ ResourceFactory::ResourceFactory(string configPath){
         file >> _ >> kode >> name >> _ >> ageToHarvest >> price;
         vector<Product*> dropsMapValue = dropsMap[name];
         insert({name, [=](){return new Plant(kode, name, price, ageToHarvest, dropsMapValue);}});
+        creatureMap[name] = new Plant(kode, name, price, ageToHarvest, dropsMapValue);
     }
     for(int i = 0; i < 4; i++) {
         string kode, name;
@@ -57,6 +61,7 @@ ResourceFactory::ResourceFactory(string configPath){
         file >> _ >> kode >> name >> _ >> ageToHarvest >> price;
         vector<Product*> dropsMapValue = dropsMap[name];
         insert({name, [=](){return new Plant(kode, name, price, ageToHarvest, dropsMapValue);}});
+        creatureMap[name] = new Plant(kode, name, price, ageToHarvest, dropsMapValue);
     }
     file.close();
 
@@ -69,6 +74,7 @@ ResourceFactory::ResourceFactory(string configPath){
         file >> _ >> kode >> name >> _ >> weightToHarvest >> price;
         vector<Product*> dropsMapValue = dropsMap[name];
         insert({name, [=](){return new Herbivore(kode, name, price, weightToHarvest, dropsMapValue);}});
+        creatureMap[name] = new Herbivore(kode, name, price, weightToHarvest, dropsMapValue);
     }
     for(int i = 0; i < 1; i++) {
         string kode, name;
@@ -76,6 +82,7 @@ ResourceFactory::ResourceFactory(string configPath){
         file >> _ >> kode >> name >> _ >> weightToHarvest >> price;
         vector<Product*> dropsMapValue = dropsMap[name];
         insert({name, [=](){return new Carnivore(kode, name, price, weightToHarvest, dropsMapValue);}});
+        creatureMap[name] = new Herbivore(kode, name, price, weightToHarvest, dropsMapValue);
     }
     for(int i = 0; i < 2; i++) {
         string kode, name;
@@ -83,6 +90,7 @@ ResourceFactory::ResourceFactory(string configPath){
         file >> _ >> kode >> name >> _ >> weightToHarvest >> price;
         vector<Product*> dropsMapValue = dropsMap[name];
         insert({name, [=](){return new Omnivore(kode, name, price, weightToHarvest, dropsMapValue);}});
+        creatureMap[name] = new Herbivore(kode, name, price, weightToHarvest, dropsMapValue);
     }
     file.close();
 
@@ -108,6 +116,7 @@ ResourceFactory::ResourceFactory(string configPath){
         }
         insert({name, [=](){return new Building(kode, name, price, recipe);}});
         recipeMap[name] = new Building(kode, name, price, recipe);
+        nonCreatureMap[name] = new Building(kode, name, price, recipe);
     }
     file.close();
 
@@ -162,11 +171,18 @@ map<string, Building*>& ResourceFactory::getRecipeMap(){
     return recipeMap;
 }
 
-vector<Resource*> ResourceFactory::getResources(){
+vector<Resource*> ResourceFactory::getCreatureResources(){
     vector<Resource*> temp;
-    for(auto itr = this->begin(); itr != this->end();itr++){
-        temp.push_back(itr->second());
+    for(auto itr = creatureMap.begin(); itr != creatureMap.end();itr++){
+        temp.push_back(itr->second);
     }
+    return temp;
+}
 
+vector<Resource*> ResourceFactory::getNonCreatureReesources(){
+    vector<Resource*> temp;
+    for(auto itr = nonCreatureMap.begin(); itr != nonCreatureMap.end();itr++){
+        temp.push_back(itr->second);
+    }
     return temp;
 }

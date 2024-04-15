@@ -20,16 +20,12 @@ class Beli: public Command {
         void execute(Petani*);
         void execute(Peternak*);
 
-        int pageSize(vector<pair<Quantifiable<Resource*>,bool>> stok, int currentPage);
-
-        void playerBuy(Player*, int,int);
-
-        bool isBuyable(pair<Quantifiable<Resource*>,bool> pair);
-        void validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stok, Player* p,int idxItem,int quantity);
-
-        void clearScreen();
         pair<int,int> welcomeMessage(vector<pair<Quantifiable<Resource*>,bool>>,Player*);
         void printStocks(vector<pair<Quantifiable<Resource*>,bool>> stock);
+        void paymentProcessor(int idxItem, int quantity, Player* p);
+
+
+        int pageSize(vector<pair<Quantifiable<Resource*>,bool>> stok, int currentPage);
 };
 
 #endif

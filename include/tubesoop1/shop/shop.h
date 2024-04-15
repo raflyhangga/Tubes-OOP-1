@@ -4,6 +4,7 @@
 #include "tubesoop1/player/player.h"
 #include "tubesoop1/resource/resource.h"
 #include "tubesoop1/shop/shop_exception.h"
+#include "tubesoop1/cli/command/beli_exception.h"
 #include "tubesoop1/resourcevisitorpattern/taker.hpp"
 #include <vector>
 #include <iostream>
@@ -72,7 +73,36 @@ class Shop {
          * @param quantity banyak item yang ingin dibeli
          * @note Diasumsikan player bisa membeli seluruh item yang ada di Shop.
         */
-        void buy(int idxItem, int quantity);
+        void buy(Walikota* pl,int idxItem, int quantity);
+
+        /**
+         * Mengurangi jumlah quantity dari item yang akan dipilih oleh Player.
+         * Item yang memiliki kuantitas -1 nilainya akan tetap.
+         * Item yang memiliki kuantitas 0 akan melakukan throw ``ItemShopEmptyException()``
+         * 
+         * @param idxItem idx dari resource pada stock Shop
+         * @param quantity banyak item yang ingin dibeli
+         * @note Diasumsikan player bisa membeli seluruh item yang ada di Shop.
+        */
+        void buy(Petani* pl,int idxItem, int quantity);
+
+        /**
+         * Mengurangi jumlah quantity dari item yang akan dipilih oleh Player.
+         * Item yang memiliki kuantitas -1 nilainya akan tetap.
+         * Item yang memiliki kuantitas 0 akan melakukan throw ``ItemShopEmptyException()``
+         * 
+         * @param idxItem idx dari resource pada stock Shop
+         * @param quantity banyak item yang ingin dibeli
+         * @note Diasumsikan player bisa membeli seluruh item yang ada di Shop.
+        */
+        void buy(Peternak* pl,int idxItem, int quantity);
+
+        /**
+         * Mengecek apakah item bisa dibeli
+         * 
+         * @param pair item beserta status pembeliannya
+        */
+        static bool isBuyable(pair<Quantifiable<Resource*>,bool> pair);
 
         /**
          * Membatalkan pembelian dari Player.
@@ -93,11 +123,6 @@ class Shop {
          * @note Diasumsikan player bisa membeli seluruh item yang ada di Shop.
         */
         void sell(Resource& rsc);
-
-        /**
-         * Mencetak isi produk dengan format ``[IDX]. [NAMA PRODUK] - [HARGA] (OPTIONAL[QUANTITY])``
-        */
-        void getProducts();
 
         /**
          * Mengembalikan stock yang dapat dibeli oleh petani

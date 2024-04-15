@@ -13,18 +13,18 @@ int Beli::pageSize(vector<pair<Quantifiable<Resource*>,bool>> stock, int current
 
 void Beli::printStocks(vector<pair<Quantifiable<Resource*>,bool>> stock){
     if(stock.size() == 0){
-        cout<<"\n============= SHOP =============\n";
+        cout<<"============= SHOP =============\n";
         cout<<"\n!!!! STOCK KOSONG !!!!\n\n";
         throw(ItemShopEmptyException());
     } 
     else {
-        int pages = stock.size() / 5;
+        int pages = (stock.size() + 4) / 5;
         int currentPos = 0;
         string choice;
         while (true){
-            cout<<"\n============= SHOP =============\n";
+            cout<<"============= SHOP =============\n";
             cout << "Selamat datang di toko!!" << endl;
-            cout << "Berikut merupakan hal yang dapat Anda Beli" << endl;
+            cout << "Berikut merupakan "<<stock.size()<<" item yang dapat Anda Beli" << endl;
             cout<<"-> Pages "<<currentPos+1<<" out of "<<pages<<"\n";
             for(int i=0; i<pageSize(stock,currentPos);i++){
                 int dispIdx = i + (currentPos*5) + 1;
@@ -39,7 +39,7 @@ void Beli::printStocks(vector<pair<Quantifiable<Resource*>,bool>> stock){
 
                 // Check if quantity is unlimited or not
                 if(!Quantifiable<Resource*>::isInfinite(rsc)){
-                    cout<< "("<<quantity<<")\n";
+                    cout<< " ("<<quantity<<")\n";
                 }
                 else {
                     cout<<endl;
@@ -60,11 +60,12 @@ void Beli::printStocks(vector<pair<Quantifiable<Resource*>,bool>> stock){
             }
             else if(choice == "NEXT"){
                 currentPos = (currentPos + 1) % pages;
-                clearScreen();
+                cout<<endl;
+                
             }
             else if(choice == "PREV"){
                 currentPos = ((currentPos - 1) + pages) % pages;
-                clearScreen();
+                cout<<endl;
             }
             else{
                 cout<< "Input tidak valid, silahkan ulangi!";
@@ -73,13 +74,7 @@ void Beli::printStocks(vector<pair<Quantifiable<Resource*>,bool>> stock){
     }
 }
 
-bool Beli::isBuyable(pair<Quantifiable<Resource*>,bool> pair){
-    return pair.second;
-}
-
-void Beli::playerBuy(Player* p, int idxItem,int quantity){
-    state.buyShopItem(idxItem,quantity);
-
+void Beli::paymentProcessor(int idxItem, int quantity, Player* p){
     // Success payment message
     cout << "\nSelamat Anda berhasil membeli " 
     << quantity 
@@ -102,6 +97,13 @@ void Beli::playerBuy(Player* p, int idxItem,int quantity){
     try{
         vector<Location> ansLoc = inputListLocation(line);
         // Validation not balance with quantity
+        // Pengurangan uang
+        if(p->getMoney() - shop.getstock()[idxItem].getValue()->getPrice() * quantity < 0) {
+            throw(UangTidakCukupShopException());
+        } 
+        else {
+            p->setMoney(p->getMoney() - shop.getstock()[idxItem].getValue()->getPrice() * quantity);
+        }
         if (ansLoc.size() != quantity)
         {
             throw logic_error("Jumlah petak tidak sesuai dengan kuantitas barang yang dibeli");
@@ -115,14 +117,6 @@ void Beli::playerBuy(Player* p, int idxItem,int quantity){
 
         cout << shop.getstock()[idxItem].getValue()->getName() << " berhasil disimpan dalam penyimpanan" << endl;
 
-        // Pengurangan uang
-        if(p->getMoney() - shop.getstock()[idxItem].getValue()->getPrice() * quantity < 0) {
-            throw(UangTidakCukupShopException());
-        } 
-        else {
-            p->setMoney(p->getMoney() - shop.getstock()[idxItem].getValue()->getPrice() * quantity);
-        }
-
     } catch(exception& err){
         cout<<err.what()<<endl;
         state.cancelBuyShopItem(idxItem,quantity);
@@ -134,12 +128,12 @@ void Beli::playerBuy(Player* p, int idxItem,int quantity){
 }
 
 pair<int,int> Beli::welcomeMessage(vector<pair<Quantifiable<Resource*>,bool>> stock, Player * p){
-    clearScreen();
+    
     printStocks(stock);
     cout << "++++++++++++++++++++++++++++++++++\n";
     cout << "Uang Anda : " << p->getMoney() << endl;
     cout << "Slot penyimpanan tersedia : " << p->getInventory().getCountNotFilled() << endl;
-    cout << "++++++++++++++++++++++++++++++++++\n\n";
+    cout << "++++++++++++++++++++++++++++++++++\n";
 
     // Input Section
     int idxItem;
@@ -163,30 +157,6 @@ pair<int,int> Beli::welcomeMessage(vector<pair<Quantifiable<Resource*>,bool>> st
     return temp;
 }
 
-void Beli::clearScreen(){
-    cout << "\033[2J\033[1;1H"; 
-}
-
-void Beli::validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stock, Player* p,int idxItem,int quantity){
-    // input index item 0 or negative
-    if (idxItem < 0 || idxItem > shop.getstock().size())
-    {
-        throw (BeliOutOfRange());
-    }
-    // input quantity more than stock
-    if (shop.getstock()[idxItem].getQuantity() != -1){
-        if (quantity > shop.getstock()[idxItem].getQuantity())
-        {
-            throw(BarangTidakCukup());
-        }
-    }
-    // player money less than price
-    if (p->getMoney() < shop.getstock()[idxItem].getValue()->getPrice() * quantity)
-    {
-        throw(UangTidakCukup());
-    }
-}
-
 void Beli::execute(Petani *p){
     vector<pair<Quantifiable<Resource*>,bool>> stock = shop.getStock(p);
 
@@ -194,11 +164,8 @@ void Beli::execute(Petani *p){
     int idxItem = choice.first - 1;
     int quantity = choice.second;
 
-    validityChecking(stock,p,idxItem,quantity);
-    if(!isBuyable(stock[idxItem])){
-        throw(PetaniShopException());
-    }
-    playerBuy(p,idxItem,quantity);
+    state.buyShopItem(p,idxItem,quantity);
+    paymentProcessor(idxItem,quantity,p);
 }
 
 void Beli::execute(Peternak *p){
@@ -208,11 +175,8 @@ void Beli::execute(Peternak *p){
     int idxItem = choice.first - 1;
     int quantity = choice.second;
 
-    validityChecking(stock,p,idxItem,quantity);
-    if(!isBuyable(stock[idxItem])){
-        throw(PeternakShopException());
-    }
-    playerBuy(p,idxItem,quantity);
+    state.buyShopItem(p,idxItem,quantity);
+    paymentProcessor(idxItem,quantity,p);
 }
 
 void Beli::execute(Walikota *p){
@@ -222,9 +186,6 @@ void Beli::execute(Walikota *p){
     int idxItem = choice.first - 1;
     int quantity = choice.second;
 
-    validityChecking(stock,p,idxItem,quantity);
-    if(!isBuyable(stock[idxItem])){
-        throw(WalikotaShopException());
+    state.buyShopItem(p,idxItem,quantity);
+    paymentProcessor(idxItem,quantity,p);
     }
-    playerBuy(p,idxItem,quantity);
-}

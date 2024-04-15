@@ -46,6 +46,14 @@ class UangTidakCukupShopException : public exception {
         const char *what() const throw();
 };
 
+class StockTidakCukupShopException : public exception {
+    private:
+        string message;
+    public:
+        StockTidakCukupShopException();
+        const char *what() const throw();
+};
+
 class PetaniShopException : public exception {
     private:
         string message;

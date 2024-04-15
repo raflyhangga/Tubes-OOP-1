@@ -25,6 +25,11 @@ const char *UangTidakCukupShopException::what() const throw(){
     return message.c_str();
 }
 
+StockTidakCukupShopException::StockTidakCukupShopException():message("Insufficient stock"){}
+const char *StockTidakCukupShopException::what() const throw(){
+    return message.c_str();
+}
+
 PetaniShopException::PetaniShopException():message("Farmer Role can't buy this item"){}
 const char *PetaniShopException::what() const throw(){
     return message.c_str();

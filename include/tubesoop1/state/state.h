@@ -126,7 +126,17 @@ class State {
         /**
          * @brief Buy an item from a stock
         */
-        void buyShopItem(int idxItem, int quantity);
+        void buyShopItem(Walikota*pl,int idxItem, int quantity);
+
+        /**
+         * @brief Buy an item from a stock
+        */
+        void buyShopItem(Petani*pl,int idxItem, int quantity);
+
+        /**
+         * @brief Buy an item from a stock
+        */
+        void buyShopItem(Peternak*pl,int idxItem, int quantity);
 
         /**
          * @brief Cancel to buy an item from a stock

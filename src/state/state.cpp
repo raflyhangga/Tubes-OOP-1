@@ -27,8 +27,13 @@ void State::loadNew(ResourceFactory &factory){
     playerList.push_back(peternak1);
     playerList.push_back(walikota);
 
-    for(Resource* rsc:factory.getResources()){
+    for(Resource* rsc:factory.getCreatureResources()){
         Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, -1);
+        shop.addItem(qr);
+    }
+
+    for(Resource* rsc:factory.getNonCreatureReesources()){
+        Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, 0);
         shop.addItem(qr);
     }
 
@@ -100,7 +105,18 @@ void State::load(string statePath, ResourceFactory &factory){
 
     int shopStockCount;
     file >> shopStockCount;
+
     // For Limited Stock
+    for(Resource* rsc:factory.getCreatureResources()){
+        Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, -1);
+        shop.addItem(qr);
+    }
+
+    for(Resource* rsc:factory.getNonCreatureReesources()){
+        Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, 0);
+        shop.addItem(qr);
+    }
+
     for(int i = 0; i < shopStockCount; i++) {
         string itemName;
         int itemAmount;
@@ -110,10 +126,6 @@ void State::load(string statePath, ResourceFactory &factory){
         shop.addItem(qr);
     }
 
-    for(Resource* rsc:factory.getResources()){
-        Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, -1);
-        shop.addItem(qr);
-    }
 
     sort(playerList.begin(), playerList.end(), [](Player* a, Player* b) {
         return a->getUsername() < b->getUsername();
@@ -260,8 +272,16 @@ void State::addShopItem(Quantifiable<Resource*> item){
     shop.addItem(item);
 }
 
-void State::buyShopItem(int idxItem, int quantity){
-    shop.buy(idxItem,quantity);
+void State::buyShopItem(Walikota* pl,int idxItem, int quantity){
+    shop.buy(pl,idxItem,quantity);
+}
+
+void State::buyShopItem(Petani* pl,int idxItem, int quantity){
+    shop.buy(pl,idxItem,quantity);
+}
+
+void State::buyShopItem(Peternak* pl,int idxItem, int quantity){
+    shop.buy(pl,idxItem,quantity);
 }
 
 void State::cancelBuyShopItem(int idxItem, int quantity){
