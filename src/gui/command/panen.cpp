@@ -136,6 +136,7 @@ void Panen::execute(Petani *petani) {
                     for(Product *product : drops) {
                         petani->putInventory(*product);
                     }
+                    delete p;
                 }
                 string message = to_string(locationList.size()) + " petak tanaman " + chosenPlant->getCode() + " pada petak " + locationList[0].toStdString();
                 for(int i = 1; i < locationList.size(); i++) {
@@ -273,6 +274,7 @@ void Panen::execute(Peternak *peternak) {
                     for(Product *product : drops) {
                         peternak->putInventory(*product);
                     }
+                    delete p;
                 }
                 string message = to_string(locationList.size()) + " petak hewan " + chosenAnimal->getCode() + " pada petak " + locationList[0].toStdString();
                 for(int i = 1; i < locationList.size(); i++) {
