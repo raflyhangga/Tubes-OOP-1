@@ -109,10 +109,12 @@ void Beli::paymentProcessor(int idxItem, int quantity, Player* p){
             throw logic_error("Jumlah petak tidak sesuai dengan kuantitas barang yang dibeli");
         }
 
+        Resource *r = shop.getstock()[idxItem].getValue();
+        string name = r->getName();
         for (Location l : ansLoc)
         {
-            Resource *r = shop.getstock()[idxItem].getValue();
-            (*p).putInventoryAt(*r, l);
+            Resource *copy = state.translate(name);
+            (*p).putInventoryAt(*copy, l);
         }
 
         cout << shop.getstock()[idxItem].getValue()->getName() << " berhasil disimpan dalam penyimpanan" << endl;

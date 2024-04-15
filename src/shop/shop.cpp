@@ -78,7 +78,9 @@ void Shop::addItem(Quantifiable<Resource*> otherquant){
     try{
         // If already inside, sum the quantity
         int idx = getItem(otherquant);
-        stock[idx] += otherquant;
+        stock[idx] += otherquant.getQuantity();
+
+        delete otherquant.getValue();
     }
     catch(ItemShopNotFoundException& e){
         stock.push_back(otherquant);
