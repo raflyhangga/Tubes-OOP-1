@@ -63,10 +63,10 @@ QVector<pair<string, string>> Beli::getChoices(vector<pair<Quantifiable<Resource
 }
 
 
-void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource*>,bool>> &stockList){
+void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource*>,bool>> &stockList, function<void(int, int)> onBuyValid){
     QVector<pair<string, string>> choices = getChoices(stockList);
 
-    ChoiceDialog choiceDialog = ChoiceDialog(&window, choices, "Bangun", QString::fromStdString("Selamat datang di toko!\nBerikut merupakan hal yang dapat Anda Beli"), QString::fromStdString("Uang Anda: " + to_string(player->getMoney()) + "\nSlot penyimpanan tersedia: " + to_string(player->getInventory().getCountNotFilled())) );
+    ChoiceDialog choiceDialog = ChoiceDialog(&window, choices, "Beli", QString::fromStdString("Selamat datang di toko!\nBerikut merupakan hal yang dapat Anda Beli"), QString::fromStdString("Uang Anda: " + to_string(player->getMoney()) + "\nSlot penyimpanan tersedia: " + to_string(player->getInventory().getCountNotFilled())) );
 
     choiceDialog.connect(&choiceDialog, &ChoiceDialog::choiceMade, [&](int choosenIndex){
         if(stockList[choosenIndex].first.getQuantity() == 0) {
@@ -102,7 +102,7 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
 
         MessageBox(&window, "Beli", "Anda berhasil membeli " + to_string(quantityToBuy) + " " + formatName(stockList[choosenIndex].first.getValue()->getName()) + ". Uang Anda tersisa " + to_string(player->getMoney()) + " gulden.").exec();
 
-        Dialog dialogInventory(&window);
+        Dialog dialogInventory(&window); dialogInventory.setClosable(false);
         QVBoxLayout vLayout;
         dialogInventory.setLayout(&vLayout); dialogInventory.setWindowTitle("Beli");
         QLabel label("Pilih slot untuk menyimpan barang yang Anda beli!");
@@ -118,7 +118,6 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
         vLayout.addWidget(&locationListLabel);
 
         // // Choose the locations
-        // // TODO:  Ensure not closable
         inventoryButtonGrid.setEnabled(true);
         inventoryButtonGrid.setCheckable(true);
         vector<Location> locationList;
@@ -147,18 +146,17 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
             if(locationList.size() == quantityToBuy) {
                 Resource *r = stockList[choosenIndex].first.getValue();
                 string name = r->getName();
+                onBuyValid(choosenIndex, quantityToBuy);
                 for(Location l : locationList){
-                    shop.buy(choosenIndex, quantityToBuy);
                     Resource *copy = state.translate(name);
                     player->putInventoryAt(*copy, l);
                 }
                 player->setMoney(player->getMoney() - stockList[choosenIndex].first.getValue()->getPrice() * quantityToBuy);
                 inventoryButtonGrid.refresh();
                 MessageBox(&dialogInventory, "Beli",  formatName(name) + " berhasil disimpan dalam penyimpanan!").exec();
-                dialogInventory.close();
+                dialogInventory.accept();
             }
         });
-
         dialogInventory.exec();
     });
     choiceDialog.exec();
@@ -166,15 +164,21 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
 
 void Beli::execute(Petani *petani){
     vector<std::pair<Quantifiable<Resource *>, bool>> stockList = shop.getStock(petani);
-    handleCurrentPlayer(petani, stockList);
+    handleCurrentPlayer(petani, stockList, [&](int idxItem, int quantity){
+        shop.buy(petani, idxItem, quantity);
+    });
 }
 
 void Beli::execute(Peternak *peternak){
     vector<std::pair<Quantifiable<Resource *>, bool>> stockList = shop.getStock(peternak);
-    handleCurrentPlayer(peternak, stockList);
+    handleCurrentPlayer(peternak, stockList, [&](int idxItem, int quantity){
+        shop.buy(peternak, idxItem, quantity);
+    });
 }
 
 void Beli::execute(Walikota *walikota){
     vector<std::pair<Quantifiable<Resource *>, bool>> stockList = shop.getStock(walikota);
-    handleCurrentPlayer(walikota, stockList);
+    handleCurrentPlayer(walikota, stockList, [&](int idxItem, int quantity){
+        shop.buy(walikota, idxItem, quantity);
+    });
 }

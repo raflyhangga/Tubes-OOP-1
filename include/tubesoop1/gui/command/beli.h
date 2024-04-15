@@ -10,6 +10,7 @@
 #include <tubesoop1/state/state.h>
 #include <tubesoop1/gui/command/command.h>
 #include <tubesoop1/gui/components/mainwindow.h>
+#include <functional>
 #include <QVector>
 #include <utility>
 
@@ -27,7 +28,7 @@ class Beli: public Command {
         void validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stok, Player* p,int idxItem,int quantity);
 
         QVector<pair<string, string>> getChoices(vector<pair<Quantifiable<Resource*>,bool>>&);
-        void handleCurrentPlayer(Player* player, vector<pair<Quantifiable<Resource*>,bool>> &stockList);
+        void handleCurrentPlayer(Player* player, vector<pair<Quantifiable<Resource*>,bool>> &stockList, function<void(int, int)> onBuyValid);
 };
 
 #endif

@@ -76,7 +76,7 @@ void Panen::execute(Petani *petani) {
             cout << product->getName() << endl;
             petani->putInventory(*product);
         }
-        delete p;
+        // delete p;
     }
 
 
@@ -154,7 +154,7 @@ void Panen::execute(Peternak *peternak) {
         for(Product *product : drops) {
             peternak->putInventory(*product);
         }
-        delete p;
+        // delete p;
     }
 
     cout << chosenAnimalLocation.size() << " petak tanaman " << chosenAnimal->getCode() << " pada petak ";

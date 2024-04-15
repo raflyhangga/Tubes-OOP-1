@@ -28,12 +28,8 @@ private:
     QVBoxLayout vLayout;
     QHBoxLayout hLayout;
     QLabel label;
-    bool closable;
 public:
     InitDialog(QMainWindow* window, State &state, ResourceFactory &factory);
-
-    void setClosable(bool closable);
-    void closeEvent(QCloseEvent *event);
 };
 
 

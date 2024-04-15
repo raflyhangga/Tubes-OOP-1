@@ -44,10 +44,3 @@ InitDialog::InitDialog(QMainWindow* window, State &state, ResourceFactory &facto
         }
     });
 }
-
-void InitDialog::setClosable(bool closable){
-    this->closable = closable;
-}
-void InitDialog::closeEvent(QCloseEvent *event) {
-    if(!closable) event->ignore();
-}
