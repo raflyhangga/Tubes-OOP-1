@@ -97,7 +97,7 @@ void Shop::buy(int idxItem, int quantity){
 
 void Shop::cancelBuy(int idxItem, int quantity){
     Quantifiable<Resource*>* itemShop = &stock[idxItem];
-    if(itemShop->getQuantity() != -1){
+    if(!itemShop->isInfinite()){
         *itemShop+=quantity;
     }
 }
@@ -198,4 +198,14 @@ vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Walikota*){
     }
 
     return temp;
+}
+
+int Shop::countFiniteStock(){
+    int count = 0;
+    for(Quantifiable<Resource*> rsc: stock){
+        if(!rsc.isInfinite()){
+            count++;
+        }
+    }
+    return count;
 }

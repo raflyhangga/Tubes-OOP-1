@@ -113,6 +113,7 @@ public:
      */
     bool isInfinite() const;
     static bool isInfinite(Quantifiable<T> q);
+    static int infinite;
 };
 
 #endif

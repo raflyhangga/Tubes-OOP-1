@@ -59,6 +59,7 @@ void Panen::execute(Petani *petani) {
     ChoiceDialog choiceDialog = ChoiceDialog(&dialogInventory, choices, "Panen", "Daftar Tanaman siap panen", "Pilih tanaman yang ingin dipanen");
 
     choiceDialog.connect(&choiceDialog, &ChoiceDialog::choiceMade, [&](int chosenPlantIdx){
+        Plant* chosenPlant = (*allHarvestablePlant)[chosenPlantIdx].getValue();
         string chosenPlantCode = (*allHarvestablePlant)[chosenPlantIdx].getValue()->getCode();
         int harvestableAmount = (*allHarvestablePlant)[chosenPlantIdx].getQuantity();
         int inventoryCapacity = petani->getInventory().getCountNotFilled();
@@ -80,8 +81,9 @@ void Panen::execute(Petani *petani) {
                 MessageBox(&window, "Panen", "Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki!\nJumlah tanaman yang dimiliki: " + to_string(harvestableAmount) + "\n").exec();
                 ok = false; continue;
             }
-            if(amountOfSquareToHarvest > inventoryCapacity) {
-                MessageBox(&window, "Panen", "Jumlah petak yang ingin dipanen tidak boleh lebih dari kapasitas penyimpanan!\nKapasitas penyimpanan: " + to_string(inventoryCapacity) + "\n").exec(); return;
+            int panenAmount = amountOfSquareToHarvest * chosenPlant->harvest().size();
+            if(panenAmount > inventoryCapacity) {
+                MessageBox(&window, "Panen", "Jumlah penyimpanan tidak cukup!\nPetak kosong di penyimpanan: " + to_string(inventoryCapacity) + "\nHasil panen (Jumlah petak x banyak hasil panen): " + to_string(panenAmount)).exec();
                 ok = false; continue;
             }
         }
@@ -195,6 +197,7 @@ void Panen::execute(Peternak *peternak) {
     ChoiceDialog choiceDialog = ChoiceDialog(&dialogInventory, choices, "Panen", "Daftar Hewan siap panen", "Pilih hewan yang ingin dipanen");
 
     choiceDialog.connect(&choiceDialog, &ChoiceDialog::choiceMade, [&](int chosenAnimalIdx){
+        Animal* chosenAnimal = (*allHarvestableAnimal)[chosenAnimalIdx].getValue();
         string chosenAnimalCode = (*allHarvestableAnimal)[chosenAnimalIdx].getValue()->getCode();
         int harvestableAmount = (*allHarvestableAnimal)[chosenAnimalIdx].getQuantity();
         int inventoryCapacity = peternak->getInventory().getCountNotFilled();
@@ -216,8 +219,9 @@ void Panen::execute(Peternak *peternak) {
                 MessageBox(&window, "Panen", "Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah hewan yang dimiliki!\nJumlah hewan yang dimiliki: " + to_string(harvestableAmount) + "\n").exec();
                 ok = false; continue;
             }
-            if(amountOfSquareToHarvest > inventoryCapacity) {
-                MessageBox(&window, "Panen", "Jumlah petak yang ingin dipanen tidak boleh lebih dari kapasitas penyimpanan!\nKapasitas penyimpanan: " + to_string(inventoryCapacity) + "\n").exec(); return;
+            int panenAmount = amountOfSquareToHarvest * chosenAnimal->harvest().size();
+            if(panenAmount > inventoryCapacity) {
+                MessageBox(&window, "Panen", "Jumlah penyimpanan tidak cukup!\nPetak kosong di penyimpanan: " + to_string(inventoryCapacity) + "\nHasil panen (Jumlah petak x banyak hasil panen): " + to_string(panenAmount)).exec();
                 ok = false; continue;
             }
         }

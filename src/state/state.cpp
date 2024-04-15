@@ -28,7 +28,7 @@ void State::loadNew(ResourceFactory &factory){
     playerList.push_back(walikota);
 
     for(Resource* rsc:factory.getResources()){
-        Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, -1);
+        Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, Quantifiable<Resource*>::infinite);
         shop.addItem(qr);
     }
 
@@ -111,7 +111,7 @@ void State::load(string statePath, ResourceFactory &factory){
     }
 
     for(Resource* rsc:factory.getResources()){
-        Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, -1);
+        Quantifiable<Resource*> qr = Quantifiable<Resource*>(rsc, Quantifiable<Resource*>::infinite);
         shop.addItem(qr);
     }
 
@@ -178,9 +178,10 @@ void State::save(string statePath){
     }
 
     int shopStockCount = shop.getstock().size();
-    file << shopStockCount << endl;
+    file << shop.countFiniteStock() << endl;
     vector<Quantifiable<Resource*>> stock = shop.getstock();
-    for(int i = 0; i < shopStockCount; i++) {
+    for(int i = 0; i < shop.getstock().size(); i++) {
+        if(stock[i].isInfinite()) continue; // Skip infinite stock
         string itemName = stock[i].getValue()->getName();
         int itemAmount = stock[i].getQuantity();
         file << itemName << " " << itemAmount << endl;

@@ -105,6 +105,7 @@
         "qhboxlayout": "cpp",
         "qwidget": "cpp",
         "qobject": "cpp",
-        "qscrollarea": "cpp"
+        "qscrollarea": "cpp",
+        "qlabel": "cpp"
     }
 }

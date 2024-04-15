@@ -11,15 +11,16 @@
 #include <tubesoop1/gui/components/mainwindow.h>
 #include <tubesoop1/gui/components/dialog.h>
 #include <tubesoop1/gui/components/gridview.hpp>
+#include <functional>
 
 class Jual: public Command {
     private:
         /**
-         * @brief if user close the dialog without choosing any location, it will return empty vector. if confirming when no location is chosen, it will stay inside and show a messagebox.
+         * @brief if user close the dialog without choosing any location, it will return empty vector. if confirming when no location is chosen, it will stay inside and show a messagebox. Second parameter is for validation function. If it returns false, it will return empty vector.
          * 
          * @return vector<Location> 
          */
-        vector<Location> promptChoosenLocation(Player*);
+        vector<Location> promptChoosenLocation(Player*, function<bool(Location)>);
         
         /**
          * @brief pop the resource and add the price based on value from promptChoosenLocation

@@ -35,8 +35,8 @@ void Panen::execute(Petani *petani) {
 
     int chosenPlantIdx;
     cout << "\nNomor tanaman yang ingin dipanen: ";
-    cin >> chosenPlantIdx;
-    if(chosenPlantIdx > allHarvestablePlant->size() || chosenPlantIdx < 1) 
+    cin >> chosenPlantIdx; chosenPlantIdx--;
+    if(chosenPlantIdx > allHarvestablePlant->size()-1 || chosenPlantIdx < 0) 
         throw out_of_range("Index di luar batas.");
 
     int amountOfSquareToHarvest;
@@ -45,18 +45,19 @@ void Panen::execute(Petani *petani) {
     cin >> amountOfSquareToHarvest;
     if(amountOfSquareToHarvest < 1) 
         throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh kurang dari 1.");
-    if(amountOfSquareToHarvest > (*allHarvestablePlant)[chosenPlantIdx-1].getQuantity()){
-        throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki!\nJumlah tanaman yang dimiliki: " + to_string((*allHarvestablePlant)[chosenPlantIdx-1].getQuantity()) + "\n");
+    if(amountOfSquareToHarvest > (*allHarvestablePlant)[chosenPlantIdx].getQuantity()){
+        throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki!\nJumlah tanaman yang dimiliki: " + to_string((*allHarvestablePlant)[chosenPlantIdx].getQuantity()) + "\n");
     }
 
     int notFilledAmount = ladang.getCountNotFilled();
-    if(amountOfSquareToHarvest > notFilledAmount) {
-        throw out_of_range("Jumlah penyimpanan tidak cukup!\nJumlah penyimpanan yang tidak terisi: " + to_string(notFilledAmount));
+    int panenAmount = amountOfSquareToHarvest * (*allHarvestablePlant)[chosenPlantIdx].getValue()->harvest().size();
+    if(panenAmount > notFilledAmount) {
+        throw out_of_range("Jumlah penyimpanan tidak cukup!\nPetak kosong di penyimpanan: " + to_string(notFilledAmount) + "\nHasil panen (Jumlah petak x banyak hasil panen): " + to_string(panenAmount) + "\n");
     }
 
     cout << "Pilih petak yang ingin dipanen:" << endl;
 
-    Plant *chosenPlant = (*allHarvestablePlant)[chosenPlantIdx-1].getValue();
+    Plant *chosenPlant = (*allHarvestablePlant)[chosenPlantIdx].getValue();
     vector<Location> chosenPlantLocation;
     for(int i = 0; i < amountOfSquareToHarvest; i++){
         cout << "Petak ke-" << i+1 << ": ";
@@ -112,8 +113,8 @@ void Panen::execute(Peternak *peternak) {
 
     int chosenAnimalIdx;
     cout << "\nNomor tanaman yang ingin dipanen: ";
-    cin >> chosenAnimalIdx;
-    if(chosenAnimalIdx > allHarvestableAnimal->size() || chosenAnimalIdx < 1) 
+    cin >> chosenAnimalIdx; chosenAnimalIdx--;
+    if(chosenAnimalIdx >= allHarvestableAnimal->size() || chosenAnimalIdx < 0) 
         throw out_of_range("Index di luar batas.");
 
     int amountOfSquareToHarvest;
@@ -122,18 +123,19 @@ void Panen::execute(Peternak *peternak) {
     cin >> amountOfSquareToHarvest;
     if(amountOfSquareToHarvest < 1) 
         throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh kurang dari 1.");
-    if(amountOfSquareToHarvest > (*allHarvestableAnimal)[chosenAnimalIdx-1].getQuantity()){
-        throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki!\nJumlah tanaman yang dimiliki: " + to_string((*allHarvestableAnimal)[chosenAnimalIdx-1].getQuantity()) + "\n");
+    if(amountOfSquareToHarvest > (*allHarvestableAnimal)[chosenAnimalIdx].getQuantity()){
+        throw out_of_range("Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki!\nJumlah tanaman yang dimiliki: " + to_string((*allHarvestableAnimal)[chosenAnimalIdx].getQuantity()) + "\n");
     }
 
     int notFilledAmount = peternakan.getCountNotFilled();
-    if(amountOfSquareToHarvest > notFilledAmount) {
-        throw out_of_range("Jumlah penyimpanan tidak cukup!\nJumlah penyimpanan yang tidak terisi: " + to_string(notFilledAmount));
+    int panenAmount = amountOfSquareToHarvest * (*allHarvestableAnimal)[chosenAnimalIdx].getValue()->harvest().size();
+    if(panenAmount > notFilledAmount) {
+        throw out_of_range("Jumlah penyimpanan tidak cukup!\nPetak kosong di penyimpanan: " + to_string(notFilledAmount) + "\nHasil panen (Jumlah petak x banyak hasil panen): " + to_string(panenAmount) + "\n");
     }
 
     cout << "Pilih petak yang ingin dipanen:" << endl;
 
-    Animal *chosenAnimal = (*allHarvestableAnimal)[chosenAnimalIdx-1].getValue();
+    Animal *chosenAnimal = (*allHarvestableAnimal)[chosenAnimalIdx].getValue();
     vector<Location> chosenAnimalLocation;
     for(int i = 0; i < amountOfSquareToHarvest; i++){
         cout << "Petak ke-" << i+1 << ": ";
