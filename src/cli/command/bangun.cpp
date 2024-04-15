@@ -42,8 +42,6 @@ void Bangun::execute(Walikota* walikota) {
     try {
         building->build(*walikota);
         cout << "Bangunan berhasil dibangun dan telah menjadi hak milik walikota!" << endl;
-    } catch (logic_error &e) {
-        cout << "Bangunan gagal dibangun karena walikota tidak mempunyai inventory yang kosong." << endl;
     } catch (MissingResourcesException &e) {
         map<string, int> &missingResources = e.getMissingResources();
         cout << "Bangunan gagal dibangun, karena sumber daya kurang: " << endl;

@@ -2,6 +2,11 @@
 #include "tubesoop1/player/walikota.h"
 #include <algorithm>
 
+const char *LadangPenuhException::what() const throw()
+{
+    return "Ladang sudah penuh";
+}
+
 vector<Petani*> Petani::listPetani;
 Petani::Petani(string &_username) : Player(_username) {
     listPetani.push_back(this);

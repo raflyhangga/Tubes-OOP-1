@@ -9,6 +9,10 @@
 #include <set>
 using namespace std;
 
+class LadangPenuhException : public exception {
+    const char* what() const throw();
+};
+
 class Petani : public Player
 {
 private:

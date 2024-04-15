@@ -23,15 +23,15 @@ Tanam::Tanam(State &state) : Command(state) {}
 
 */
 void Tanam::execute(Petani *petani) {
-    vector<Plant*> list = petani->takeAllFromInventory<Plant>();
-    if(list.size()==0){
-        cout << "Tidak ada tanaman di penyimpanan!\n";
+    vector<Plant*> list;
+    try {
+        list = petani->takeAllFromInventory<Plant>();
+    } catch (EmptyInventoryException& e){
+        cout << "Kalau gak punya tanaman, apa yang mau ditanam? (Inventory tidak berisi tanaman apapun).\n";
         return;
     }
-    if(petani->getLadang().isFull()){
-        cout << "Ladang penuh!\n";
-        return;
-    }
+
+    if (petani->getLadang().isFull()) throw LadangPenuhException();
 
     cout << "Pilih tanaman dari penyimpanan\n\n";
 

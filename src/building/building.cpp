@@ -10,7 +10,7 @@ Building::Building(string code, string name, int price, const vector<Quantifiabl
 
 void Building::printBuildingInfo() const
 {
-    cout << name << " (" << price << " gulden, ";
+    cout << name << " ("; 
     for (const auto &quantifiableProduct : recipe)
     {
         const ProductMaterial &product = *quantifiableProduct.getValue();
@@ -71,12 +71,7 @@ void Building::build(Player &p)
         throw SlotNotAvailableException();
     }
 
-    // Check if the player has enough money to build the building
     map<string, int> missingResources;
-    if (p.getMoney() < price)
-    {
-        missingResources["gulden"] = price - p.getMoney();
-    }
 
 
     // Check if the player has enough resources and money to build the building
@@ -114,9 +109,6 @@ void Building::build(Player &p)
     {
         throw MissingResourcesException(missingResources);
     }
-
-    // Deduct the player's money
-    p.setMoney(p.getMoney() - price);
 
     // Remove resources used for building from player's inventory
     for (const auto &quantifiableProduct : recipe)
