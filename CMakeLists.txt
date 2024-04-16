@@ -59,6 +59,7 @@ set(SOURCES
   src/player/peternak_test.cpp
   src/player/walikota_test.cpp
   src/product/product_test.cpp
+  src/shop/shop_exception.cpp
   src/shop/shop_test.cpp
   src/quantifiable/quantifiable_test.cpp
   src/grid/grid_test.cpp
@@ -117,6 +118,8 @@ set(GUISOURCES
   
   src/animal/animal.cpp src/animal/animal_exception.cpp src/animal/carnivore.cpp src/animal/herbivore.cpp src/animal/omnivore.cpp src/building/building.cpp src/building/bangunan_exception.cpp src/grid/grid.cpp src/grid/griddrawer.cpp src/grid/location.cpp src/grid/location_exception.cpp src/icosihexastring/icosihexastring.cpp src/plant/plant.cpp src/player/petani.cpp src/player/peternak.cpp src/player/player.cpp src/player/player_partial.cpp src/player/taxreport.cpp src/player/walikota.cpp src/product/product.cpp src/quantifiable/quantifiable.cpp src/resource/creature.cpp src/resource/creature_exception.cpp src/resource/resource.cpp src/resource/resourcefactory.cpp src/resource/resourcefactory_exception.cpp src/resourcevisitorpattern/resource_exception.cpp src/resourcevisitorpattern/resourcevisitorpattern.cpp src/resourcevisitorpattern/taker.cpp src/shop/shop.cpp src/shop/shop_exception.cpp src/state/state.cpp src/state/state_exception.cpp include/tubesoop1/grid/grid.hpp include/tubesoop1/grid/griddrawer.hpp include/tubesoop1/grid/location_exception.h include/tubesoop1/player/player_partial.hpp include/tubesoop1/quantifiable/quantifiable.hpp include/tubesoop1/resourcevisitorpattern/taker.hpp
   src/pcolor/pcolor.cpp
+  src/shop/shop_exception.cpp
+  include/tubesoop1/shop/shop_exception.h
 )
 add_executable(gui ${GUISOURCES})
 target_link_libraries(gui Qt5::Widgets)
