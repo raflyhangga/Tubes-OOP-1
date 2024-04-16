@@ -149,7 +149,7 @@ void Shop::sell(Resource& rsc){
 vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Petani* pl){
     vector<pair<Quantifiable<Resource*>,bool>> temp;
     for(Quantifiable<Resource*> rsc: stock){
-        pair<Quantifiable<Resource*>,bool> tempPair(rsc,false);
+        pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);
         temp.push_back(tempPair);
     }
 
@@ -173,8 +173,10 @@ vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Walikota*){
             Taker<Building> taker;
             Resource* item = rsc.getValue();
             taker.take(item)->get();
-        } catch(exception& err){
             pair<Quantifiable<Resource*>,bool> tempPair(rsc,false);
+            temp.push_back(tempPair);
+        } catch(exception& err){
+            pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);
             temp.push_back(tempPair);
         }
     }
