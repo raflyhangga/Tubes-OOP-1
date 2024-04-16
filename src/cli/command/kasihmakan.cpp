@@ -45,11 +45,12 @@ void KasihMakan::execute(Peternak* peternak){
         vector<Product*> productList = peternak->takeAllFromInventory<Product>();
         // If there exist a product that can be given to the animal, then the player can give food to the animal
         bool canEat = false;
+        // cout << "\n berat animal: "<< animal->getWeight() << endl;
         for(Product* product : productList){
             try{
                 animal->eat(*product);
-                animal->setWeight(animal->getWeight() - product->getAddedWeight());
                 canEat = true;
+                animal->setWeight(animal->getWeight() - product->getAddedWeight());
                 break;
             } catch (CannotEatException &e) {}
         }
@@ -73,7 +74,9 @@ void KasihMakan::execute(Peternak* peternak){
         
 
         animal->eat(*p);
-        cout << animal->getName() << " sudah diberi makan dan beratnya menjadi " << animal->getWeight() << endl;
+   
+
+        cout << animal->getName() << " sudah diberi makan dan beratnya menjadi meningkat dari " << animal->getWeight() - p->getAddedWeight() <<" menjadi " <<  animal->getWeight() << endl;
         
         inventory.pop(loc2);
         
