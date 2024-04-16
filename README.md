@@ -46,6 +46,16 @@ Finally, to run the program in GUI mode, execute:
 ```
 make rungui
 ```
+#### Run Pre built CLI
+You can also run the program in CLI mode without building it.
+```
+./executable/cli
+```
+#### Run Pre built GUI
+You can also run the program in GUI mode without building it. Its also possible to just run it without installing dependency
+```
+./executable/gui
+```
 ### 📋 Build and Run Test
 After any file modifications, rebuild the tests with:
 ```
