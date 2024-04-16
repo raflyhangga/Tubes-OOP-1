@@ -81,13 +81,9 @@ void KasihMakan::execute(Peternak* peternak){
         inventory.pop(loc2);
         
     
-    } catch (LocationException &e){
-        cout << e.what() << endl;
-    } catch (NotTakableException &e){
-        cout << e.what() << endl;
-    } catch (CannotEatException &e) {
-        cout << e.what() << endl;
-    } 
+    }  catch (NotTakableException &e){
+        cout << "Item ini tidak bisa dimakan oleh hewan!" << endl;
+    }
 
     
     
