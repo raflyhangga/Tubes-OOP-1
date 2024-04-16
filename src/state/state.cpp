@@ -279,7 +279,7 @@ map<string, Building*>& State::getRecipeMap(){
 Shop& State::getShop() {
     return shop; 
 }
-bool State::tryGetWinningPlayer(Player* player){
+bool State::tryGetWinningPlayer(Player*& player){
     for(Player* p : playerList){
         if(p->isWin()){
             player = p;

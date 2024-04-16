@@ -133,7 +133,7 @@ class State {
         /**
          * @brief Get the Winning Player object. If there is no winning player, return false
          */
-        bool tryGetWinningPlayer(Player* player);
+        bool tryGetWinningPlayer(Player* &player);
 };
 
 #endif
