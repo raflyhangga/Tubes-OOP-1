@@ -2,19 +2,25 @@
 #include <tubesoop1/gui/components/messagebox.h>
 #include <tubesoop1/resource/resource.h>
 #include <set>
+#include <QString>
 
 CetakPeternakan::CetakPeternakan(State& state, MainWindow &window) : Command(state, window) {}
 
 void CetakPeternakan::execute(Peternak *player) {
     window.getTabPeternakan().setGrid(&player->getPeternakan());
+    window.getTabPeternakanLabel().setText(
+        QString::fromStdString(getInfo(player->getPeternakan()))
+    );
 }
 
 void CetakPeternakan::execute(Petani *player) {
     window.getTabPeternakan().showError("Hanya peternak yang bisa melihat peternakan!");
-}
+    window.getTabPeternakanLabel().setText("");
+}    
 
 void CetakPeternakan::execute(Walikota *player) {
     window.getTabPeternakan().showError("Hanya peternak yang bisa melihat peternakan!");
+    window.getTabPeternakanLabel().setText("");
 }
 
 

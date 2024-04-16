@@ -78,7 +78,7 @@ void ChoiceDialog::prevPage(){
 }
 
 int ChoiceDialog::totalPage(){
-    return choices.size() / ChoiceDialog::maxItemsPerPage + 1;
+    return choices.size() / ChoiceDialog::maxItemsPerPage + ((choices.size() % ChoiceDialog::maxItemsPerPage) != 0);
 }
 
 void ChoiceDialog::refreshPage(){

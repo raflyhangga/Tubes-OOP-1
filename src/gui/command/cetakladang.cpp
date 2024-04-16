@@ -7,14 +7,19 @@ CetakLadang::CetakLadang(State& state, MainWindow &window) : Command(state, wind
 
 void CetakLadang::execute(Peternak *player) {
     window.getTabLadang().showError("Hanya petani yang bisa melihat ladang!");
+    window.getTabLadangLabel().setText("");
 }
 
 void CetakLadang::execute(Petani *player) {
     window.getTabLadang().setGrid(&player->getLadang());
+    window.getTabLadangLabel().setText(
+        QString::fromStdString(getInfo(player->getLadang()))
+    );
 }
 
 void CetakLadang::execute(Walikota *player) {
     window.getTabLadang().showError("Hanya petani yang bisa melihat ladang!");
+    window.getTabLadangLabel().setText("");
 }
 
 string CetakLadang::getInfo(Grid<Plant *> &ladang){

@@ -54,6 +54,7 @@ buildcli: $(OUTPUT_DIR)/$(OBJ_MAIN) $(OBJS)
 	$(info [Build Program])
 	@echo -n ">> "
 	$(CC) $(CFLAGS) -o $(OUTPUT_DIR)/$(MAIN) $^
+	cp $(OUTPUT_DIR)/$(MAIN) $(EXECUTABLE_DIR)/cli
 
 runcli:
 	$(info )
@@ -88,6 +89,7 @@ runtest:
 	./$(BUILD_DIR)/$(UNIT_TEST_TARGET)
 
 
+EXECUTABLE_DIR = executable
 
 # GUI
 GUI_TARGET = gui
@@ -96,6 +98,7 @@ buildgui: $(OUTPUT_DIR)/$(OBJ_MAIN) $(OBJS)
 	$(info [Build GUI])
 	@echo -n ">> "
 	cmake --build $(BUILD_DIR) --target $(GUI_TARGET)
+	cp $(BUILD_DIR)/$(GUI_TARGET) $(EXECUTABLE_DIR)/$(GUI_TARGET)
 
 rungui:
 	$(info )
@@ -109,6 +112,7 @@ buildrungui: $(OUTPUT_DIR)/$(OBJ_MAIN) $(OBJS)
 	@echo -n ">> "
 	cmake --build $(BUILD_DIR) --target $(GUI_TARGET)
 	@echo -n ">> "
+	cp $(BUILD_DIR)/$(GUI_TARGET) $(EXECUTABLE_DIR)/$(GUI_TARGET)
 	./$(BUILD_DIR)/$(GUI_TARGET)
 
 generatemoc:

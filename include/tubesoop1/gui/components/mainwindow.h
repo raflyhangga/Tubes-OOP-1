@@ -24,10 +24,10 @@ private:
     // CetakPenyimpanan, CetakPeternakan, CetakLadang
     QTabWidget tabWidget;
     QWidget tabPerintah;    QGridLayout tabPerintahLayout;
-    GridView<Resource*> tabPenyimpanan;
-    GridView<Animal*> tabPeternakan; 
-    GridView<Plant*> tabLadang;     
-
+    GridView<Resource*> gridPenyimpanan;    QWidget tabPenyimpanan;      QLabel tabPenyimpananLabel;     QVBoxLayout tabPenyimpananVLayout;
+    GridView<Animal*> gridPeternakan;       QWidget tabPeternakan;       QLabel tabPeternakanLabel;      QVBoxLayout tabPeternakanVLayout;
+    GridView<Plant*> gridLadang;            QWidget tabLadang;           QLabel tabLadangLabel;          QVBoxLayout tabLadangVLayout;
+    
     QVBoxLayout vPendudukLayout;
     QVBoxLayout vWalikotaLayout;
     QVBoxLayout vPlayerLayout;
@@ -67,9 +67,9 @@ public:
     NiceButton helpButton;
     // NiceButton exitButton;
 
-    GridView<Resource*> &getTabPenyimpanan();
-    GridView<Animal*> &getTabPeternakan(); 
-    GridView<Plant*> &getTabLadang();   
+    GridView<Resource*> &getTabPenyimpanan();   QLabel &getTabPenyimpananLabel();
+    GridView<Animal*> &getTabPeternakan();      QLabel &getTabPeternakanLabel();
+    GridView<Plant*> &getTabLadang();           QLabel &getTabLadangLabel();
     StatusBar &getStatusBar();   
 };
 
