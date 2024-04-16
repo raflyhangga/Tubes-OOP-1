@@ -15,9 +15,9 @@ class Bangun : public Command { // visitor pattern
         Bangun(State&, MainWindow&);
 
         // visitor pattern
-        virtual void execute(Petani*);
-        virtual void execute(Peternak*);
-        virtual void execute(Walikota*);
+        void execute(Petani*);
+        void execute(Peternak*);
+        void execute(Walikota*);
 
 };
 
