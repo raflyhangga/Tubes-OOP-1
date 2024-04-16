@@ -6,15 +6,15 @@
 template <class T>
 class GridDrawer {
     protected:
-        Grid<T> grid;
+        Grid<T> &grid;
     public:
+        GridDrawer(Grid<T> &grid);
         virtual void draw() = 0;
 };
 
 template <class T>
 class GridDrawerCLI: public GridDrawer<T> {
     private:
-        Grid<T> &grid;
         void drawRowLine();
         void drawContents(int row);
     public:

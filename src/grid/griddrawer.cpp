@@ -7,7 +7,10 @@
 using namespace std;
 
 template <class T>
-inline GridDrawerCLI<T>::GridDrawerCLI(Grid<T> &grid) : grid(grid){}
+inline GridDrawer<T>::GridDrawer(Grid<T> &grid) : grid(grid) {}
+
+template <class T>
+inline GridDrawerCLI<T>::GridDrawerCLI(Grid<T> &grid) : GridDrawer<T>(grid){}
 
 template <class T>
 inline void GridDrawerCLI<T>::drawRowLine() {
