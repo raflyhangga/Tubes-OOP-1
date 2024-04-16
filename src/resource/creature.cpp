@@ -15,9 +15,9 @@ Creature::Creature(Creature& other):
 }
 
 Creature::~Creature(){
-    for (int i = 0; i < drops.size(); i++){
-        delete drops[i];
-    }
+    // for (int i = 0; i < drops.size(); i++){
+    //     delete drops[i];
+    // }
 }
 
 Creature& Creature::operator=(const Creature &other){
