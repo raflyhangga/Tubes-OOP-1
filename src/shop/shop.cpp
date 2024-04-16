@@ -149,26 +149,8 @@ void Shop::sell(Resource& rsc){
 vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Petani* pl){
     vector<pair<Quantifiable<Resource*>,bool>> temp;
     for(Quantifiable<Resource*> rsc: stock){
-        try{
-            try{
-                Taker<Plant> taker;
-                Resource* item = rsc.getValue();
-                taker.take(item)->get();
-                pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);
-                temp.push_back(tempPair);
-            } 
-            catch(NotTakableException& err){
-                Taker<Product> taker;
-                Resource* item = rsc.getValue();
-                taker.take(item)->get();
-                pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);
-                temp.push_back(tempPair);
-            }
-        }
-        catch(exception & err){
-            pair<Quantifiable<Resource*>,bool> tempPair(rsc,false);
-            temp.push_back(tempPair);
-        }
+        pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);
+        temp.push_back(tempPair);
     }
 
     return temp;
@@ -177,26 +159,8 @@ vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Petani* pl){
 vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Peternak* pl){
     vector<pair<Quantifiable<Resource*>,bool>> temp;
     for(Quantifiable<Resource*> rsc: stock){
-        try{
-            try{
-                Taker<Animal> taker;
-                Resource* item = rsc.getValue();
-                taker.take(item)->get();
-                pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);
-                temp.push_back(tempPair);
-            } 
-            catch(NotTakableException& err){
-                Taker<Product> taker;
-                Resource* item = rsc.getValue();
-                taker.take(item)->get();
-                pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);
-                temp.push_back(tempPair);
-            }
-        }
-        catch(exception & err){
-            pair<Quantifiable<Resource*>,bool> tempPair(rsc,false);
-            temp.push_back(tempPair);
-        }
+        pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);
+        temp.push_back(tempPair);
     }
 
     return temp;
@@ -205,8 +169,16 @@ vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Peternak* pl){
 vector<pair<Quantifiable<Resource*>,bool>> Shop::getStock(Walikota*){
     vector<pair<Quantifiable<Resource*>,bool>> temp;
     for(Quantifiable<Resource*> rsc: stock){
-        pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);
-        temp.push_back(tempPair);
+        try{
+            Taker<Building> taker;
+            Resource* item = rsc.getValue();
+            taker.take(item)->get();
+            pair<Quantifiable<Resource*>,bool> tempPair(rsc,false);
+            temp.push_back(tempPair);
+        } catch(exception& err){
+            pair<Quantifiable<Resource*>,bool> tempPair(rsc,true);
+            temp.push_back(tempPair);
+        }
     }
 
     return temp;

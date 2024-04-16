@@ -80,6 +80,10 @@ void Jual::popAndAddMoneyFromInventory(Player* p, vector<Location>& ansLoc){
 }
 
 vector<Location> Jual::promptChoosenLocation(Player *player, function<bool(Location)> validator) {
+    if(player->getInventory().getCountFilled() == 0){
+        MessageBox(&window, "Jual", "Penyimpanan Anda kosong!").exec(); return vector<Location>();
+    }
+
     Dialog dialogInventory(&window);
     QVBoxLayout vLayout;
     dialogInventory.setLayout(&vLayout); dialogInventory.setWindowTitle("Jual");
@@ -124,7 +128,7 @@ vector<Location> Jual::promptChoosenLocation(Player *player, function<bool(Locat
         }
         labelBottom.setText(locationListText);
     });
-    dialogInventory.connect(&dialogInventory, &QDialog::rejected, [&]() {
+    dialogInventory.connect(&dialogInventory, &Dialog::rejected, [&]() {
         locationList.clear();
     });
 
@@ -137,6 +141,7 @@ vector<Location> Jual::promptChoosenLocation(Player *player, function<bool(Locat
     });
 
     dialogInventory.exec();
+    if(dialogInventory.result() == QDialog::Rejected) return vector<Location>();
 
     return locationList;
 }

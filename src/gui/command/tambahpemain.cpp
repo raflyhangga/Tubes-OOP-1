@@ -52,7 +52,7 @@ void TambahPemain::execute(Walikota *walikota) {
         string name = lineEdit.text().toStdString();
 
         if(state.isPlayerExist(name)){
-            MessageBox(&window, "Tambah Pemain", "Nama pemain sudah pernah ada!").exec();
+            MessageBox(&dialog, "Tambah Pemain", "Nama pemain sudah pernah ada!").exec();
             return;
         }
         
