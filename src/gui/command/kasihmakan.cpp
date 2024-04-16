@@ -48,7 +48,7 @@ void KasihMakan::execute(Peternak* peternak){
         try{
             animal = peternak->getPeternakan()[slot];
         } catch(logic_error& e){
-            MessageBox(&window, "Kasih Makan", "Petak kandang yang dipilih kosong!").exec(); return;
+            MessageBox(&dialogPeternakan, "Kasih Makan", "Petak kandang yang dipilih kosong!").exec(); return;
         }
 
         // Check if there's no food that can be given to the animal
@@ -64,7 +64,7 @@ void KasihMakan::execute(Peternak* peternak){
             } catch (CannotEatException &e) {}
         }
         if(!canEat){
-            MessageBox(&window, "Kasih Makan", "Makanan yang bisa diberikan kepada "+formatName(animal->getName())+" tidak tersedia!").exec(); return;
+            MessageBox(&dialogPeternakan, "Kasih Makan", "Makanan yang bisa diberikan kepada "+formatName(animal->getName())+" tidak tersedia!").exec(); return;
         }
 
         dialogPeternakan.close();
@@ -90,19 +90,19 @@ void KasihMakan::execute(Peternak* peternak){
                 product = peternak->takeInventory<Product>(loc);
                 animal->eat(*product);
             } catch (NotTakableException &e) {
-                MessageBox(&window, "Kasih Makan", "Benda tersebut tidak dapat dimakan oleh hewan!").exec(); return;
+                MessageBox(&dialogInventory, "Kasih Makan", "Benda tersebut tidak dapat dimakan oleh hewan!").exec(); return;
             } catch (CannotEatException &e) {
-                MessageBox(&window, "Kasih Makan", formatName(e.what())).exec(); return;
+                MessageBox(&dialogInventory, "Kasih Makan", formatName(e.what())).exec(); return;
             } catch (logic_error &e) {
-                MessageBox(&window, "Kasih Makan", "Petak tersebut kosong!").exec(); return;
+                MessageBox(&dialogInventory, "Kasih Makan", "Petak tersebut kosong!").exec(); return;
             } catch (exception &e) {
-                MessageBox(&window, "Kasih Makan", e.what()).exec(); return;
+                MessageBox(&dialogInventory, "Kasih Makan", e.what()).exec(); return;
             }
 
 
             peternak->getInventory().pop(loc);
             inventoryButtonGrid.refresh();
-            MessageBox(&window, "Kasih Makan", formatName(animal->getName()) + " telah diberi makan "+ formatName(product->getName()) +" !\nBeratnya menjadi " + to_string(animal->getWeight()) + ".").exec();
+            MessageBox(&dialogInventory, "Kasih Makan", formatName(animal->getName()) + " telah diberi makan "+ formatName(product->getName()) +" !\nBeratnya menjadi " + to_string(animal->getWeight()) + ".").exec();
 
             dialogInventory.close();
         });

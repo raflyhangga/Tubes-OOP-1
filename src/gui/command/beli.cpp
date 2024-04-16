@@ -78,7 +78,7 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
 
     choiceDialog.connect(&choiceDialog, &ChoiceDialog::choiceMade, [&](int choosenIndex){
         if(stockList[choosenIndex].first.getQuantity() == 0) {
-            MessageBox(&window, "Beli", "Stok barang yang dipilih sedang kosong!").exec(); return;
+            MessageBox(&choiceDialog, "Beli", "Stok barang yang dipilih sedang kosong!").exec(); return;
         }
         
 
@@ -95,11 +95,11 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
             try{
                 validityChecking(stockList, player, choosenIndex, quantityToBuy);
                 if(!isBuyable(stockList[choosenIndex])){
-                    MessageBox(&window, "Beli", "Anda tidak bisa membeli barang ini!").exec();
+                    MessageBox(&choiceDialog, "Beli", "Anda tidak bisa membeli barang ini!").exec();
                 }
                 ok = true;
             } catch (exception &e){
-                MessageBox(&window, "Beli", e.what()).exec();
+                MessageBox(&choiceDialog, "Beli", e.what()).exec();
                 ok = false;
             }
         }

@@ -48,16 +48,16 @@ void Makan::execute(Player* player){
             player->eat(*food);
             player->getInventory().pop(loc);
             inventoryButtonGrid.refresh();
-            MessageBox(&window, "Makan", "Kenyang gan, berat badan naik " + to_string(food->getAddedWeight()) + " kg jadi " + to_string(player->getWeight())).exec();
+            MessageBox(&dialogInventory, "Makan", "Kenyang gan, berat badan naik " + to_string(food->getAddedWeight()) + " kg jadi " + to_string(player->getWeight())).exec();
             dialogInventory.close();
         } catch (logic_error& e){
-            MessageBox(&window, "Makan", "Kamu mengambil harapan kosong dari penyimpanan.\nSilahkan masukan slot yang berisi makanan.").exec();
+            MessageBox(&dialogInventory, "Makan", "Kamu mengambil harapan kosong dari penyimpanan.\nSilahkan masukan slot yang berisi makanan.").exec();
         } catch (NotTakableException& e){
-            MessageBox(&window, "Makan", "Apa yang kamu lakukan? Kamu mencoba untuk memakan itu? Silahkan masukan slot yang berisi makanan.").exec();
+            MessageBox(&dialogInventory, "Makan", "Apa yang kamu lakukan? Kamu mencoba untuk memakan itu? Silahkan masukan slot yang berisi makanan.").exec();
         } catch (CannotEatException& e){
-            MessageBox(&window, "Makan", "Keras, makanannya ga bisa digigit.").exec();
+            MessageBox(&dialogInventory, "Makan", "Keras, makanannya ga bisa digigit.").exec();
         } catch (exception& e){
-            MessageBox(&window, "Makan", e.what()).exec();
+            MessageBox(&dialogInventory, "Makan", e.what()).exec();
         }
         
     });

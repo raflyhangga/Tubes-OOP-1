@@ -54,12 +54,12 @@ void Tanam::execute(Petani *petani) {
         try {
             plant = petani->takeInventory<Plant>(slot);
         } catch (NotTakableException &e) {
-            MessageBox(&window, "Tanam", "Lokasi yang dipilih bukan berisi tanaman.\nPerintah tidak dilanjutkan.").exec(); return;
+            MessageBox(&dialogInventory, "Tanam", "Lokasi yang dipilih bukan berisi tanaman.\nPerintah tidak dilanjutkan.").exec(); return;
         } catch (logic_error &e) {
-            MessageBox(&window, "Tanam", "Lokasi yang dipilih kosong.\nPerintah tidak dilanjutkan.").exec(); return;
+            MessageBox(&dialogInventory, "Tanam", "Lokasi yang dipilih kosong.\nPerintah tidak dilanjutkan.").exec(); return;
         }
         // // Sukses mengambil tanaman dari penyimpanan
-        MessageBox(&window, "Tanam", "Kamu memilih " + formatName(plant->getName()) + " dari penyimpanan.\n\n").exec();
+        MessageBox(&dialogInventory, "Tanam", "Kamu memilih " + formatName(plant->getName()) + " dari penyimpanan.\n\n").exec();
         dialogInventory.close();
 
         // // print label and grid ladang
@@ -83,13 +83,13 @@ void Tanam::execute(Petani *petani) {
             try {
                 petani->getLadang().setElement(loc, plant);
             } catch (logic_error &e) {
-                MessageBox(&window, "Tanam", "Petak tanah yang dipilih sudah terisi.\nPerintah gagal dieksekusi.").exec(); return;
+                MessageBox(&dialogLadang, "Tanam", "Petak tanah yang dipilih sudah terisi.\nPerintah gagal dieksekusi.").exec(); return;
             }
 
             // // Berhasil menanam tanaman
             petani->getInventory().pop(slot);
             ladangButtonGrid.refresh();
-            MessageBox(&window, "Tanam", "Cangkul, cangkul, cangkul yang dalam~!\nKamu telah menanam " + formatName(plant->getName()) + " di petak tanah " + loc.toStdString() + ".").exec();
+            MessageBox(&dialogLadang, "Tanam", "Cangkul, cangkul, cangkul yang dalam~!\nKamu telah menanam " + formatName(plant->getName()) + " di petak tanah " + loc.toStdString() + ".").exec();
 
             dialogLadang.close();
         });
