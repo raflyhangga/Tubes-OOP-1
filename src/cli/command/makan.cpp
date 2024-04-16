@@ -44,20 +44,20 @@ void Makan::execute(Player* player){
             inputNotCorrect = false;
         }
         catch(logic_error& e){
-            cout << "Itu slot kosong gan.\n" << endl;
-            cout << "Masukkan slot lagi brok." << endl;
+            cout << "Itu slot kosong gan." << endl;
+            cout << "Masukkan slot lagi brok." << endl << endl;
         }
         catch(NotTakableException& e){
-            cout << e.what() << endl;
-            cout << "Masukkan slot lagi brok." << endl;
+            cout <<  "Item ini gabisa dimakan." << endl;
+            cout << "Masukkan slot lagi brok." << endl << endl;
         }
         catch(CannotEatException& e){
             cout << "Keras, makanannya ga bisa digigit." << endl;
-            cout << "Masukkan slot lagi brok." << endl;
+            cout << "Masukkan slot lagi brok." << endl << endl;
         }
         catch(exception& e){
             cout << e.what() << endl;
-            cout << "Masukkan slot lagi brok." << endl;
+            cout << "Masukkan slot lagi brok." << endl << endl;
         }
     } while(inputNotCorrect);
         
@@ -68,10 +68,7 @@ void Makan::execute(Player* player){
     
 
     
-    
-    // validasi dll bloman
 
-    // to do, check if location is valid (is food, is not empty, etc)
 
 
 
