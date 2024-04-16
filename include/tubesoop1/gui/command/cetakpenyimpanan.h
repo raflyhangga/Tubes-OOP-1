@@ -16,7 +16,7 @@ class CetakPenyimpanan : public Command { // visitor pattern
         CetakPenyimpanan(State&, MainWindow&);
 
         // visitor pattern
-        virtual void execute(Player*);
+        void execute(Player*);
 
 };
 

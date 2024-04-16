@@ -18,9 +18,9 @@ class Next : public Command { // visitor pattern
         Next(State&, MainWindow&);
 
         // visitor pattern
-        virtual void execute(Petani*);
-        virtual void execute(Peternak*);
-        virtual void execute(Walikota*);
+        void execute(Petani*);
+        void execute(Peternak*);
+        void execute(Walikota*);
 
 };
 

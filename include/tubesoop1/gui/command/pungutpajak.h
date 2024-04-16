@@ -16,9 +16,9 @@ class PungutPajak : public Command { // visitor pattern
         PungutPajak(State&, MainWindow&);
 
         // visitor pattern
-        virtual void execute(Walikota*);
-        virtual void execute(Petani*);
-        virtual void execute(Peternak*);
+        void execute(Walikota*);
+        void execute(Petani*);
+        void execute(Peternak*);
 
 };
 

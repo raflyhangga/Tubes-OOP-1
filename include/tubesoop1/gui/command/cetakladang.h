@@ -16,9 +16,9 @@ class CetakLadang : public Command { // visitor pattern
         CetakLadang(State&, MainWindow&);
 
         // visitor pattern
-        virtual void execute(Petani*);
-        virtual void execute(Peternak*);
-        virtual void execute(Walikota*);
+        void execute(Petani*);
+        void execute(Peternak*);
+        void execute(Walikota*);
 
         string getInfo(Grid<Plant *> &ladang);
 
