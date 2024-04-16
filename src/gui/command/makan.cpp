@@ -17,17 +17,9 @@ void Makan::execute(Player* player){
     }
 
     // its fine if empty
-    vector<ProductFruit*> fruitList;
-    vector<ProductAnimal*> animalList;
-    try{
-        fruitList = player->takeAllFromInventory<ProductFruit>();
-    } catch (EmptyInventoryException& e){}
+    vector<ProductFruit*> fruitList = player->takeAllFromInventory<ProductFruit>();
+    vector<ProductAnimal*> animalList = player->takeAllFromInventory<ProductAnimal>();
     
-    try{
-        animalList = player->takeAllFromInventory<ProductAnimal>();
-    } catch (EmptyInventoryException& e){}
-
-
     // Combine the two lists
     vector<Product*> productList;
     productList.insert(productList.end(), fruitList.begin(), fruitList.end());
