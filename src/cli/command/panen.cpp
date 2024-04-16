@@ -41,7 +41,7 @@ void Panen::execute(Petani *petani) {
         throw out_of_range("Index di luar batas.");
 
     int amountOfSquareToHarvest;
-    cout << "\nBerapa petak yang ingin dipanen: " << endl << endl;
+    cout << "\nBerapa petak yang ingin dipanen: ";
 
     cin >> checker;
     amountOfSquareToHarvest = Command::stringToInt(checker);
@@ -59,7 +59,7 @@ void Panen::execute(Petani *petani) {
 
     cout << "Pilih petak yang ingin dipanen:" << endl;
 
-    set<Location> chosenPlantLocationSet;
+
 
     Plant *chosenPlant = (*allHarvestablePlant)[chosenPlantIdx].getValue();
     vector<Location> chosenPlantLocation;
@@ -71,10 +71,9 @@ void Panen::execute(Petani *petani) {
             throw invalid_argument("Tanaman yang dipilih tidak sesuai.\nSeharusnya: " + chosenPlant->getCode() + "\nDitemukan: " + ladang[l]->getCode());
         }
         
-        if(chosenPlantLocationSet.find(l) != chosenPlantLocationSet.end()) {
+        if(find(chosenPlantLocation.begin(), chosenPlantLocation.end(), l) != chosenPlantLocation.end()) {
             throw invalid_argument("Duplicate location!");
         }
-        chosenPlantLocationSet.insert(l);
 
         chosenPlantLocation.push_back(l);
     }
@@ -148,7 +147,7 @@ void Panen::execute(Peternak *peternak) {
 
     cout << "Pilih petak yang ingin dipanen:" << endl;
 
-    set<Location> chosenAnimalLocationSet;
+    
 
     Animal *chosenAnimal = (*allHarvestableAnimal)[chosenAnimalIdx].getValue();
     vector<Location> chosenAnimalLocation;
@@ -161,10 +160,10 @@ void Panen::execute(Peternak *peternak) {
         }
 
         // check if the same coordinate already inputted
-        if(chosenAnimalLocationSet.find(l) != chosenAnimalLocationSet.end()) {
+        if(find(chosenAnimalLocation.begin(), chosenAnimalLocation.end(), l) != chosenAnimalLocation.end()) {
             throw invalid_argument("Duplicate location!");
         }
-        chosenAnimalLocationSet.insert(l);
+        
         chosenAnimalLocation.push_back(l);
     }
     

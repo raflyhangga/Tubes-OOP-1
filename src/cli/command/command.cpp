@@ -26,9 +26,15 @@ vector<Location> Command::inputListLocation(const string &line) {
     auto words_begin = sregex_iterator(line.begin(), line.end(), pattern);
     auto words_end = sregex_iterator();
 
+
     for (sregex_iterator it = words_begin; it != words_end; ++it) {
         istringstream iss(it->str());
         Location l; iss >> l;
+
+        if(find(result.begin(), result.end(), l) != result.end()) {
+            throw invalid_argument("Duplicate location!");
+        }
+        
         result.push_back(l);
     }
 
