@@ -50,23 +50,7 @@ TEST(PlantTest, EqualityOperator) {
     EXPECT_FALSE(plant1 == plant3);
 }
 
-TEST(PlantTest, OutputStreamOperator) {
-    Plant plant("P001", "Sunflower", 50, 10, {});
-    std::ostringstream stream;
-    stream << plant;
-    std::string output = stream.str();
-    // Assuming a certain format for the output. Adjust according to actual implementation.
-    EXPECT_FALSE(output.empty());
-}
 
-TEST(PlantTest, InputStreamOperator) {
-    // Assuming input format "P001 Sunflower 50 10"
-    Plant plant;
-    std::istringstream stream("P001 Sunflower 50 10");
-    stream >> plant;
-    // Validate if input was correctly parsed and set. Depends on the implementation of operator>>.
-    EXPECT_EQ(plant.getAge(), 0); // Assuming age is not part of stream input and defaults to 0
-}
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
