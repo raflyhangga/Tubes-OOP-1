@@ -79,3 +79,19 @@ ostream &operator<<(ostream &os, const Location &location) {
     os << setfill('0') << setw(2) << location.getRow() + 1;
     return os;
 }
+
+bool Location::operator<(const Location &other) const{
+    if (first == other.first) {
+        return second < other.second;
+    } else {
+        return first < other.first;
+    }
+}
+
+bool Location::operator>(const Location &other) const{
+    if (first == other.first) {
+        return second > other.second;
+    } else {
+        return first > other.first;
+    }
+}

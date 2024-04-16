@@ -14,12 +14,15 @@ class Location: pair<int, int> {
         int getCol() const;
 
         bool operator==(const Location& location) const;
-
+        bool operator<(const Location& location) const;
+        bool operator>(const Location& location) const;
         string toStdString() const;
 
         friend istream& operator>>(istream& is, Location& location);
         friend ostream& operator<<(ostream& os, Location& location);
         friend ostream &operator<<(ostream &os, const Location &location);
+
+
 };
 
 #endif

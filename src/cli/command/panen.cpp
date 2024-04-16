@@ -4,7 +4,7 @@
 #include <tubesoop1/cli/command/command_exception.h>
 #include <tubesoop1/quantifiable/quantifiable.h>
 #include <iostream>
-
+#include <unordered_set>
 using namespace std;
 
 Panen::Panen(State &state) : Command(state) {}
@@ -59,14 +59,23 @@ void Panen::execute(Petani *petani) {
 
     cout << "Pilih petak yang ingin dipanen:" << endl;
 
+    set<Location> chosenPlantLocationSet;
+
     Plant *chosenPlant = (*allHarvestablePlant)[chosenPlantIdx].getValue();
     vector<Location> chosenPlantLocation;
     for(int i = 0; i < amountOfSquareToHarvest; i++){
         cout << "Petak ke-" << i+1 << ": ";
         Location l; cin >> l;
+        
         if(ladang[l]->getCode() != chosenPlant->getCode()) {
             throw invalid_argument("Tanaman yang dipilih tidak sesuai.\nSeharusnya: " + chosenPlant->getCode() + "\nDitemukan: " + ladang[l]->getCode());
         }
+        
+        if(chosenPlantLocationSet.find(l) != chosenPlantLocationSet.end()) {
+            throw invalid_argument("Duplicate location!");
+        }
+        chosenPlantLocationSet.insert(l);
+
         chosenPlantLocation.push_back(l);
     }
 
@@ -79,7 +88,7 @@ void Panen::execute(Petani *petani) {
         }
         // delete p;
     }
-
+    
 
     cout << chosenPlantLocation.size() << " petak tanaman " << chosenPlant->getCode() << " pada petak ";
     cout << chosenPlantLocation[0];
@@ -139,14 +148,23 @@ void Panen::execute(Peternak *peternak) {
 
     cout << "Pilih petak yang ingin dipanen:" << endl;
 
+    set<Location> chosenAnimalLocationSet;
+
     Animal *chosenAnimal = (*allHarvestableAnimal)[chosenAnimalIdx].getValue();
     vector<Location> chosenAnimalLocation;
     for(int i = 0; i < amountOfSquareToHarvest; i++){
         cout << "Petak ke-" << i+1 << ": ";
         Location l; cin >> l;
+        
         if(peternakan[l]->getCode() != chosenAnimal->getCode()) {
             throw invalid_argument("Tanaman yang dipilih tidak sesuai.\n Seharusnya: " + chosenAnimal->getCode() + "\nDitemukan: " + peternakan[l]->getCode());
         }
+
+        // check if the same coordinate already inputted
+        if(chosenAnimalLocationSet.find(l) != chosenAnimalLocationSet.end()) {
+            throw invalid_argument("Duplicate location!");
+        }
+        chosenAnimalLocationSet.insert(l);
         chosenAnimalLocation.push_back(l);
     }
     
