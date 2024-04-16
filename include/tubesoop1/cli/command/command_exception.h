@@ -97,4 +97,12 @@ class NoHarvestableAnimalException : public exception {
         NoHarvestableAnimalException();
         const char* what() const throw();
 };
+
+class NotFoundException : public exception {
+    private:
+        string message;
+    public:
+        NotFoundException(string message);
+        const char* what() const throw();
+};
 #endif

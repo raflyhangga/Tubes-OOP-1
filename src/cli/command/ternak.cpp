@@ -17,6 +17,7 @@ void Ternak::execute(Peternak *peternak) {
     
     vector<Animal*> list = player->takeAllFromInventory<Animal>();
     
+    
     if(list.size()==0){
         throw(NoAnimalInInventoryException());
     }

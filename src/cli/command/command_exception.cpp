@@ -73,3 +73,9 @@ NoHarvestableAnimalException::NoHarvestableAnimalException() : message("Tidak ad
 const char* NoHarvestableAnimalException::what() const throw()  {
     return message.c_str();
 }
+
+NotFoundException::NotFoundException(string message) : message(message) {}
+
+const char* NotFoundException::what() const throw() {
+    return message.c_str();
+}
