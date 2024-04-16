@@ -47,10 +47,10 @@ void Bangun::execute(Walikota* walikota) {
         // Build the building
         try {
             building->build(*walikota);
-            MessageBox(&window, "Bangun", "Bangunan berhasil dibangun dan telah menjadi hak milik walikota!").exec();
+            MessageBox(&choiceDialog, "Bangun", "Bangunan berhasil dibangun dan telah menjadi hak milik walikota!").exec();
             choiceDialog.close();
         } catch (logic_error &e) {
-            MessageBox(&window, "Bangun", "Bangunan gagal dibangun karena walikota tidak mempunyai inventory yang kosong.").exec();
+            MessageBox(&choiceDialog, "Bangun", "Bangunan gagal dibangun karena walikota tidak mempunyai inventory yang kosong.").exec();
         } catch (MissingResourcesException &e) {
             map<string, int> &missingResources = e.getMissingResources();
             string message = "Bangunan gagal dibangun, karena sumber daya kurang: \n";
@@ -59,7 +59,7 @@ void Bangun::execute(Walikota* walikota) {
                 message += "   " + to_string(i) + ". " + to_string(quantity) + " " + formatName(resource) + " \n";
                 ++i;
             }
-            MessageBox(&window, "Bangun", message).exec();
+            MessageBox(&choiceDialog, "Bangun", message).exec();
         }
 
     });

@@ -74,16 +74,16 @@ void Panen::execute(Petani *petani) {
                                         );
             if(!ok) return; // if cancel (close button)
             if(amountOfSquareToHarvest < 1) {
-                MessageBox(&window, "Panen", "Jumlah petak yang ingin dipanen tidak boleh kurang dari 1!").exec(); 
+                MessageBox(&choiceDialog, "Panen", "Jumlah petak yang ingin dipanen tidak boleh kurang dari 1!").exec(); 
                 ok = false; continue;
             }
             if(amountOfSquareToHarvest > harvestableAmount){
-                MessageBox(&window, "Panen", "Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki!\nJumlah tanaman yang dimiliki: " + to_string(harvestableAmount) + "\n").exec();
+                MessageBox(&choiceDialog, "Panen", "Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah tanaman yang dimiliki!\nJumlah tanaman yang dimiliki: " + to_string(harvestableAmount) + "\n").exec();
                 ok = false; continue;
             }
             int panenAmount = amountOfSquareToHarvest * chosenPlant->harvest().size();
             if(panenAmount > inventoryCapacity) {
-                MessageBox(&window, "Panen", "Jumlah penyimpanan tidak cukup!\nPetak kosong di penyimpanan: " + to_string(inventoryCapacity) + "\nHasil panen (Jumlah petak x banyak hasil panen): " + to_string(panenAmount)).exec();
+                MessageBox(&choiceDialog, "Panen", "Jumlah penyimpanan tidak cukup!\nPetak kosong di penyimpanan: " + to_string(inventoryCapacity) + "\nHasil panen (Jumlah petak x banyak hasil panen): " + to_string(panenAmount)).exec();
                 ok = false; continue;
             }
         }
@@ -99,18 +99,18 @@ void Panen::execute(Petani *petani) {
             try{
                 chosenPlant = petani->getLadang()[slot];
             } catch (exception &e) {
-                MessageBox(&window, "Panen", "Petak yang dipilih kosong!").exec();
+                MessageBox(&dialogInventory, "Panen", "Petak yang dipilih kosong!").exec();
                 ladangButtonGrid.setButtonChecked(slot, false); return;
             }
             
             // Check if different plant than the chosen one
             if(chosenPlantCode != chosenPlant->getCode()) {
-                MessageBox(&window, "Panen", "Tanaman yang dipilih tidak sesuai.\nSeharusnya: " + chosenPlantCode + "\nDitemukan: " + chosenPlant->getCode()).exec();
+                MessageBox(&dialogInventory, "Panen", "Tanaman yang dipilih tidak sesuai.\nSeharusnya: " + chosenPlantCode + "\nDitemukan: " + chosenPlant->getCode()).exec();
                 ladangButtonGrid.setButtonChecked(slot, false); return;
             }
 
             if(!chosenPlant->isHarvestable()){
-                MessageBox(&window, "Panen", "Tanaman yang dipilih belum siap dipanen!").exec();
+                MessageBox(&dialogInventory, "Panen", "Tanaman yang dipilih belum siap dipanen!").exec();
                 ladangButtonGrid.setButtonChecked(slot, false); return;
             }
 
@@ -145,7 +145,7 @@ void Panen::execute(Petani *petani) {
                 message += " telah dipanen!";
 
                 ladangButtonGrid.refresh();
-                MessageBox(&window, "Panen", message).exec();
+                MessageBox(&dialogInventory, "Panen", message).exec();
 
                 dialogInventory.close();
                 delete allHarvestablePlant; 
@@ -213,16 +213,16 @@ void Panen::execute(Peternak *peternak) {
                                         );
             if(!ok) return; // if cancel (close button)
             if(amountOfSquareToHarvest < 1) {
-                MessageBox(&window, "Panen", "Jumlah petak yang ingin dipanen tidak boleh kurang dari 1!").exec(); 
+                MessageBox(&dialogInventory, "Panen", "Jumlah petak yang ingin dipanen tidak boleh kurang dari 1!").exec(); 
                 ok = false; continue;
             }
             if(amountOfSquareToHarvest > harvestableAmount){
-                MessageBox(&window, "Panen", "Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah hewan yang dimiliki!\nJumlah hewan yang dimiliki: " + to_string(harvestableAmount) + "\n").exec();
+                MessageBox(&dialogInventory, "Panen", "Jumlah petak yang ingin dipanen tidak boleh lebih dari jumlah hewan yang dimiliki!\nJumlah hewan yang dimiliki: " + to_string(harvestableAmount) + "\n").exec();
                 ok = false; continue;
             }
             int panenAmount = amountOfSquareToHarvest * chosenAnimal->harvest().size();
             if(panenAmount > inventoryCapacity) {
-                MessageBox(&window, "Panen", "Jumlah penyimpanan tidak cukup!\nPetak kosong di penyimpanan: " + to_string(inventoryCapacity) + "\nHasil panen (Jumlah petak x banyak hasil panen): " + to_string(panenAmount)).exec();
+                MessageBox(&dialogInventory, "Panen", "Jumlah penyimpanan tidak cukup!\nPetak kosong di penyimpanan: " + to_string(inventoryCapacity) + "\nHasil panen (Jumlah petak x banyak hasil panen): " + to_string(panenAmount)).exec();
                 ok = false; continue;
             }
         }
@@ -238,17 +238,17 @@ void Panen::execute(Peternak *peternak) {
             try{
                 chosenAnimal = peternak->getPeternakan()[slot];
             } catch (exception &e) {
-                MessageBox(&window, "Panen", "Petak yang dipilih kosong!").exec();
+                MessageBox(&dialogInventory, "Panen", "Petak yang dipilih kosong!").exec();
                 peternakanButtonGrid.setButtonChecked(slot, false); return;
             }
             
             // Check if different animal than the chosen one
             if(chosenAnimalCode != chosenAnimal->getCode()) {
-                MessageBox(&window, "Panen", "Hewan yang dipilih tidak sesuai.\nSeharusnya: " + chosenAnimalCode + "\nDitemukan: " + chosenAnimal->getCode()).exec();
+                MessageBox(&dialogInventory, "Panen", "Hewan yang dipilih tidak sesuai.\nSeharusnya: " + chosenAnimalCode + "\nDitemukan: " + chosenAnimal->getCode()).exec();
                 peternakanButtonGrid.setButtonChecked(slot, false); return;
             }
             if(!chosenAnimal->isHarvestable()){
-                MessageBox(&window, "Panen", "Hewan yang dipilih belum siap dipanen!").exec();
+                MessageBox(&dialogInventory, "Panen", "Hewan yang dipilih belum siap dipanen!").exec();
                 peternakanButtonGrid.setButtonChecked(slot, false); return;
             }
 
@@ -283,7 +283,7 @@ void Panen::execute(Peternak *peternak) {
                 message += " telah dipanen!";
 
                 peternakanButtonGrid.refresh();
-                MessageBox(&window, "Panen", message).exec();
+                MessageBox(&dialogInventory, "Panen", message).exec();
 
                 dialogInventory.close();
                 delete allHarvestableAnimal; 

@@ -38,13 +38,13 @@ void Ternak::execute(Peternak *peternak) {
         try {
             animal = peternak->takeInventory<Animal>(slot);
         } catch (NotTakableException &e) {
-            MessageBox(&window, "Ternak", "HEY HEY HEY APA ITU YG MAU ANDA MASUKKAN KE KANDANG!\nMasukkan slot lagi brok.").exec();
+            MessageBox(&dialogInventory, "Ternak", "HEY HEY HEY APA ITU YG MAU ANDA MASUKKAN KE KANDANG!\nMasukkan slot lagi brok.").exec();
             return;
         } catch (logic_error &e) {
-            MessageBox(&window, "Ternak", "Lokasi yang dipilih kosong.\nPerintah tidak dilanjutkan.").exec(); return;
+            MessageBox(&dialogInventory, "Ternak", "Lokasi yang dipilih kosong.\nPerintah tidak dilanjutkan.").exec(); return;
         }
         // // Sukses mengambil tanaman dari penyimpanan
-        MessageBox(&window, "Ternak", "Kamu memilih " + formatName(animal->getName()) + " dari penyimpanan.\n\n").exec();
+        MessageBox(&dialogInventory, "Ternak", "Kamu memilih " + formatName(animal->getName()) + " dari penyimpanan.\n\n").exec();
         dialogInventory.close();
 
         // // print label and grid ladang
@@ -68,14 +68,14 @@ void Ternak::execute(Peternak *peternak) {
             try {
                 peternak->getPeternakan().setElement(loc, animal);
             } catch (logic_error &e) {
-                MessageBox(&window, "Ternak", "Petak tanah yang dipilih sudah terisi.\nPerintah gagal dieksekusi.").exec();
+                MessageBox(&dialogPeternakan, "Ternak", "Petak tanah yang dipilih sudah terisi.\nPerintah gagal dieksekusi.").exec();
                 return;
             }
 
             // // Berhasil menanam tanaman
             peternak->getInventory().pop(slot);
             peternakanButtonGrid.refresh();
-            MessageBox(&window, "Ternak", "Dengan hati-hati, kamu meletakkan seekor " + formatName(animal->getName()) + " di petak tanah " + loc.toStdString() + ".\n" + formatName(animal->getName()) + " telah menjadi peliharaanmu sekarang!").exec();
+            MessageBox(&dialogPeternakan, "Ternak", "Dengan hati-hati, kamu meletakkan seekor " + formatName(animal->getName()) + " di petak tanah " + loc.toStdString() + ".\n" + formatName(animal->getName()) + " telah menjadi peliharaanmu sekarang!").exec();
 
             dialogPeternakan.close();
         });
