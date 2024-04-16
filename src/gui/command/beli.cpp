@@ -57,8 +57,6 @@ void Beli::validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stock, Pl
 QVector<pair<string, string>> Beli::getChoices(vector<pair<Quantifiable<Resource*>,bool>>& stockList){
     QVector<pair<string, string>> choices;
     for (auto stock: stockList) {
-        if(!stock.second) continue;
-
         string productName = stock.first.getValue()->getName();
         int productPrice = stock.first.getValue()->getPrice();
         string info = "Price: " + to_string(productPrice);
@@ -77,6 +75,10 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
     ChoiceDialog choiceDialog = ChoiceDialog(&window, choices, "Beli", QString::fromStdString("Selamat datang di toko!\nBerikut merupakan hal yang dapat Anda Beli"), QString::fromStdString("Uang Anda: " + to_string(player->getMoney()) + "\nSlot penyimpanan tersedia: " + to_string(player->getInventory().getCountNotFilled())) );
 
     choiceDialog.connect(&choiceDialog, &ChoiceDialog::choiceMade, [&](int choosenIndex){
+        if(!stockList[choosenIndex].second){
+            MessageBox(&choiceDialog, "Beli", "Anda tidak bisa membeli "+ formatName(stockList[choosenIndex].first.getValue()->getName()) +" !").exec(); return;
+        }
+
         if(stockList[choosenIndex].first.getQuantity() == 0) {
             MessageBox(&choiceDialog, "Beli", "Stok barang yang dipilih sedang kosong!").exec(); return;
         }
@@ -87,7 +89,7 @@ void Beli::handleCurrentPlayer(Player *player, vector<pair<Quantifiable<Resource
         int quantityToBuy;
         while(!ok){
             quantityToBuy = InputDialog::getInt(
-                                                &window, 
+                                                &choiceDialog, 
                                                 QString::fromStdString("Beli"),
                                                 QString::fromStdString("Berapa yang ingin dibeli: "), 1, numeric_limits<int>::min(), numeric_limits<int>::max(), 1, &ok
                                         );
