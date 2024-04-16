@@ -18,8 +18,16 @@ void Makan::execute(Player* player){
        throw(EmptyInventoryException());
     }
     
-    vector<ProductFruit*> fruitList = player->takeAllFromInventory<ProductFruit>();
-    vector<ProductAnimal*> animalList = player->takeAllFromInventory<ProductAnimal>();
+    // its fine if empty
+    vector<ProductFruit*> fruitList;
+    vector<ProductAnimal*> animalList;
+    try{
+        fruitList = player->takeAllFromInventory<ProductFruit>();
+    } catch (EmptyInventoryException& e){}
+    
+    try{
+        animalList = player->takeAllFromInventory<ProductAnimal>();
+    } catch (EmptyInventoryException& e){}
 
     if(fruitList.size() == 0 && animalList.size() == 0){
         throw(NoFoodException());
