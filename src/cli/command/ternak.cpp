@@ -48,46 +48,19 @@ void Ternak::execute(Peternak *peternak) {
             inputNotValid = false;
         }
         catch(const NotTakableException &e){
-            cout << e.what() << endl;
-            cout << "HEY HEY HEY APA ITU YG MAU ANDA MASUKKAN KE KANDANG!!" << endl;
-            cout << "Masukkan slot lagi brok." << endl;
+            // cout << e.what() << endl;
+            cout << "\nHEY HEY HEY APA ITU YG MAU ANDA MASUKKAN KE KANDANG!!" << endl;
+            cout << "Masukkan slot lagi brok." << endl << endl;
 
         }
 
         catch(const exception& e){
             cout << e.what() << endl;
-            cout << "Masukkan slot lagi brok." << endl;
+            cout << "Masukkan slot lagi brok." << endl << endl;
         }
 
     }
     while(inputNotValid);
-    // Animal *animal = dynamic_cast<Animal*>(inventory.getElement(loc));
-    // while(animal ==nullptr){
-    //     cout << "Slot tidak berisi hewan, silahkan pilih slot lain" << endl;
-    //     cout << "Slot: ";
-    //     cin >> loc;
-    //     animal = dynamic_cast<Animal*>(inventory.getElement(loc));
-    // }
-    
-    // inventory.pop(loc);
-
-    // TO DO, CHECK IF LOCATION IS VALID (is animal, is not empty, etc)
-
-    // cout << "Pilih petak tanah yang akan ditinggali" << endl;
-    // CetakPeternakan(state).printGrid(peternakan);
-    // inputNotValid = true;
-    // do{
-    //     cout << "Petak tanah: ";
-    //     Location loc2;
-    //     cin >> loc2;
-    //     peternakan.setElement(loc2, animal);
-
-    // } while();
-    // cout << "Petak tanah: ";
-    // Location loc2;
-    // cin >> loc2;
-    // peternakan.setElement(loc2, animal);
-    // cout << "Success" << endl;
     
 }
 
