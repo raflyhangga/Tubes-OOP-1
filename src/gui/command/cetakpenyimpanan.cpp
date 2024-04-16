@@ -6,4 +6,7 @@ CetakPenyimpanan::CetakPenyimpanan(State& state, MainWindow &window) : Command(s
 
 void CetakPenyimpanan::execute(Player *player) {
     window.getTabPenyimpanan().setGrid(&player->getInventory());
+    window.getTabPenyimpananLabel().setText(
+        QString::fromStdString("Total slot kosong: " + to_string(player->getInventory().getCountNotFilled()))
+    );
 }

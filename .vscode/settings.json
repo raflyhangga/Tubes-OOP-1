@@ -106,6 +106,7 @@
         "qwidget": "cpp",
         "qobject": "cpp",
         "qscrollarea": "cpp",
-        "qlabel": "cpp"
+        "qlabel": "cpp",
+        "qstring": "cpp"
     }
 }

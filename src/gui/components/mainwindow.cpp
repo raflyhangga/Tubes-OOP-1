@@ -51,27 +51,28 @@ void MainWindow::initializeMenu(){
     centralWidget.setLayout(&vLayout);
 
     // Divide 3 section: header, body, footer
-    vLayout.addWidget(&headerWidget); headerWidget.setLayout(&headerLayout);
-    vLayout.addWidget(&bodyWidget);   bodyWidget.setLayout(&bodyLayout);
+    vLayout.addWidget(&headerWidget, 0); headerWidget.setLayout(&headerLayout);
+    vLayout.addWidget(&bodyWidget, 1);   bodyWidget.setLayout(&bodyLayout);
     vLayout.addStretch();
-    vLayout.addWidget(&footerWidget); footerWidget.setLayout(&footerLayout);
+    vLayout.addWidget(&footerWidget, 0); footerWidget.setLayout(&footerLayout);
     vLayout.setSpacing(0);
 
     // header
-    headerLayout.addWidget(&statusBar);
+    headerLayout.addWidget(&statusBar, 0);
     headerWidget.setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     headerWidget.setContentsMargins(0, 0, 0, 0);
 
     // body
     int m = 15;
-    bodyLayout.addWidget(&tabWidget); 
+    bodyLayout.addWidget(&tabWidget, 1); 
     tabWidget.addTab(&tabPerintah, "Perintah");
-    tabWidget.addTab(&tabPenyimpanan, "Penyimpanan");
+    tabWidget.addTab(&tabPenyimpanan, "Penyimpanan");   tabPenyimpanan.setLayout(&tabPenyimpananVLayout);    tabPenyimpananVLayout.addWidget(&gridPenyimpanan, 1);    tabPenyimpananVLayout.addWidget(&tabPenyimpananLabel, 0);     tabPenyimpananLabel.setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);      gridPenyimpanan.setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     tabPenyimpanan.setContentsMargins(m,m,m,m);
-    tabWidget.addTab(&tabPeternakan, "Peternakan");
+    tabWidget.addTab(&tabPeternakan, "Peternakan");     tabPeternakan.setLayout(&tabPeternakanVLayout);      tabPeternakanVLayout.addWidget(&gridPeternakan, 1);      tabPeternakanVLayout.addWidget(&tabPeternakanLabel, 0);       tabPeternakanLabel.setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);       gridPeternakan.setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     tabPeternakan.setContentsMargins(m,m,m,m);
-    tabWidget.addTab(&tabLadang, "Ladang");
+    tabWidget.addTab(&tabLadang, "Ladang");             tabLadang.setLayout(&tabLadangVLayout);              tabLadangVLayout.addWidget(&gridLadang, 1);              tabLadangVLayout.addWidget(&tabLadangLabel, 0);               tabLadangLabel.setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);           gridLadang.setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     tabLadang.setContentsMargins(m,m,m,m);
+
     tabWidget.setContentsMargins(0, 0, 0, 0);
     bodyLayout.setContentsMargins(0, 0, 0, 0);
 
@@ -100,11 +101,11 @@ void MainWindow::initializeMenu(){
     vPlayerLayout.addStretch();
 
     // footer
-    footerLayout.addWidget(&helpButton);                
+    footerLayout.addWidget(&helpButton, 0);                
     // footerLayout.addStretch();
-    footerLayout.addWidget(&simpanButton);
+    footerLayout.addWidget(&simpanButton, 0);
     // footerLayout.addStretch();
-    footerLayout.addWidget(&nextButton);
+    footerLayout.addWidget(&nextButton, 0);
     
 }
 
@@ -113,11 +114,23 @@ StatusBar& MainWindow::getStatusBar(){
 }
 
 GridView<Resource*>& MainWindow::getTabPenyimpanan(){
-    return tabPenyimpanan;
+    return gridPenyimpanan;
 }
 GridView<Animal*>& MainWindow::getTabPeternakan(){
-    return tabPeternakan;
+    return gridPeternakan;
 } 
 GridView<Plant*>& MainWindow::getTabLadang(){
-    return tabLadang;
+    return gridLadang;
+}
+
+QLabel& MainWindow::getTabPenyimpananLabel(){
+    return tabPenyimpananLabel;
+}
+
+QLabel& MainWindow::getTabPeternakanLabel(){
+    return tabPeternakanLabel;
+}
+
+QLabel& MainWindow::getTabLadangLabel(){
+    return tabLadangLabel;
 }
