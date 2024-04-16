@@ -184,7 +184,7 @@ void Panen::execute(Peternak *peternak) {
     }
     cout << " telah dipanen!" << endl; 
 
-    delete allHarvestableAnimal;
+    // delete allHarvestableAnimal;
 }
 void Panen::execute(Walikota *walikota) {
     throw CommandNotAllowedException("PANEN");

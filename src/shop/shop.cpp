@@ -80,7 +80,7 @@ void Shop::addItem(Quantifiable<Resource*> otherquant){
         int idx = getItem(otherquant);
         stock[idx] += otherquant.getQuantity();
 
-        delete otherquant.getValue();
+        // delete otherquant.getValue();
     }
     catch(ItemShopNotFoundException& e){
         stock.push_back(otherquant);
