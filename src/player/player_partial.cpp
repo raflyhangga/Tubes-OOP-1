@@ -2,7 +2,6 @@
 #include "tubesoop1/grid/location.h"
 #include "tubesoop1/resourcevisitorpattern/taker.h"
 #include "tubesoop1/resourcevisitorpattern/resourcevisitorpattern_exception.h"
-#include <tubesoop1/cli/command/command_exception.h>
 
 // exist for the compiler 
 
@@ -25,8 +24,6 @@ inline vector<T*> Player::takeAllFromInventory()
         } catch(exception &e) {
         }
     }
-
-    if (v.size() == 0) throw EmptyInventoryException();
 
     return v;
 }
