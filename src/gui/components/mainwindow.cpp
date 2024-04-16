@@ -39,7 +39,7 @@ MainWindow::MainWindow(State &state) :
     );
     int margin = 10; setContentsMargins(margin, margin, margin, margin);
     setGeometry(100, 100, 400, 200);
-    setMinimumSize(QSize(1280, 720));
+    setMinimumSize(QSize(1280, 840));
 }
 
 void MainWindow::initializeMenu(){

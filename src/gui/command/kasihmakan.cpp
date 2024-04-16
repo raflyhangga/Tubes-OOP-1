@@ -74,7 +74,7 @@ void KasihMakan::execute(Peternak* peternak){
 
         QVBoxLayout vLayout;
         dialogInventory.setLayout(&vLayout);
-        QLabel label("Kamu memilih sapi untuk diberi makan.\nPilih pangan yang akan diberikan:");
+        QLabel label(QString::fromStdString("Kamu memilih " + formatName(animal->getName()) + " untuk diberi makan.\nPilih pangan yang akan diberikan:"));
         QLabel gridTitle("Penyimpanan"); gridTitle.setAlignment(Qt::AlignCenter);
         vLayout.addWidget(&label); vLayout.addWidget(&gridTitle);
 
@@ -85,14 +85,16 @@ void KasihMakan::execute(Peternak* peternak){
         vLayout.addWidget(&inventoryButtonGrid);
 
         inventoryButtonGrid.connect(&inventoryButtonGrid, &GridView<Resource*>::cellClicked, [this, &peternak, &animal, &slot, &dialogInventory, &inventoryButtonGrid](Location loc) {
-
+            Product* product;
             try {
-                Product* product = peternak->takeInventory<Product>(loc);
+                product = peternak->takeInventory<Product>(loc);
                 animal->eat(*product);
             } catch (NotTakableException &e) {
                 MessageBox(&window, "Kasih Makan", "Benda tersebut tidak dapat dimakan oleh hewan!").exec(); return;
             } catch (CannotEatException &e) {
                 MessageBox(&window, "Kasih Makan", formatName(e.what())).exec(); return;
+            } catch (logic_error &e) {
+                MessageBox(&window, "Kasih Makan", "Petak tersebut kosong!").exec(); return;
             } catch (exception &e) {
                 MessageBox(&window, "Kasih Makan", e.what()).exec(); return;
             }
@@ -100,7 +102,7 @@ void KasihMakan::execute(Peternak* peternak){
 
             peternak->getInventory().pop(loc);
             inventoryButtonGrid.refresh();
-            MessageBox(&window, "Kasih Makan", animal->getName() + " telah diberi makan!\nBeratnya menjadi " + to_string(animal->getWeight()) + ".").exec();
+            MessageBox(&window, "Kasih Makan", formatName(animal->getName()) + " telah diberi makan "+ formatName(product->getName()) +" !\nBeratnya menjadi " + to_string(animal->getWeight()) + ".").exec();
 
             dialogInventory.close();
         });
