@@ -47,11 +47,8 @@ void Petani::incrementAllPlantAge(){
 TaxReport* Petani::bayarPajak(Walikota &walikota)
 {
     int tax = calculateTax(); 
+    tax = min(tax, money);
     money -= tax;
-    if(money < 0) {
-        tax += money;
-        money = 0; // Bayar sesuai kemampuan
-    }
     walikota.addMoney(tax);
     return new TaxReport(username, "Petani", tax);
 }
