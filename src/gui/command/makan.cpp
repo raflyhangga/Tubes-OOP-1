@@ -13,11 +13,21 @@ Makan::Makan(State &state, MainWindow& window) : Command(state, window) {}
 
 void Makan::execute(Player* player){
     if(player->getInventory().getCountFilled() == 0){
-        MessageBox(&window, "Makan", "Tidak ada makanan di penyimpanan!").exec(); return;
+        MessageBox(&window, "Makan", "Penyimpanan kosong!").exec(); return;
     }
+
+    // its fine if empty
+    vector<ProductFruit*> fruitList;
+    vector<ProductAnimal*> animalList;
+    try{
+        fruitList = player->takeAllFromInventory<ProductFruit>();
+    } catch (EmptyInventoryException& e){}
     
-    vector<ProductFruit*> fruitList = player->takeAllFromInventory<ProductFruit>();
-    vector<ProductAnimal*> animalList = player->takeAllFromInventory<ProductAnimal>();
+    try{
+        animalList = player->takeAllFromInventory<ProductAnimal>();
+    } catch (EmptyInventoryException& e){}
+
+
     // Combine the two lists
     vector<Product*> productList;
     productList.insert(productList.end(), fruitList.begin(), fruitList.end());
