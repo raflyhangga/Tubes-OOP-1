@@ -34,14 +34,15 @@ void Beli::validityChecking(vector<pair<Quantifiable<Resource*>,bool>> stock, Pl
     {
         throw out_of_range("Indeks barang tidak valid"); // Should be impossible because its handled by GUI
     }
-    // input quantity more than stock
-
-    if (quantity > shop.getstock()[idxItem].getQuantity())
-    {
-        throw out_of_range("Jumlah barang yang dibeli lebih dari stok yang ada");
-    }
+    
     if( quantity <= 0){
         throw out_of_range("Jumlah barang harus lebih dari 0");
+    }
+    // input quantity more than stock
+    vector<Quantifiable<Resource *>> &stockList = shop.getstock();
+    if (!stockList[idxItem].isInfinite() && quantity > stockList[idxItem].getQuantity())
+    {
+        throw out_of_range("Jumlah barang yang dibeli lebih dari stok yang ada");
     }
     if(p->getInventory().getCountNotFilled() < quantity){
         throw out_of_range("Penyimpanan tidak cukup");
